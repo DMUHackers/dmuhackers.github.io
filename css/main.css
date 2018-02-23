@@ -472,7 +472,7 @@ button:focus {
 }
 
 .top-nav-collapse {
-  background: #fff;
+  background: #333;
   z-index: 999999;
   top: 0px !important;
   padding: 0;
@@ -483,7 +483,7 @@ button:focus {
   animation-fill-mode: both;
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
-  background: #fff !important;
+  background: #333 !important;
 }
 
 .top-nav-collapse .navbar-brand {
@@ -491,7 +491,7 @@ button:focus {
 }
 
 .top-nav-collapse .navbar-nav .nav-link {
-  color: #333 !important;
+  color: #fff !important;
   margin-top: 0px !important;
   margin-bottom: 0px !important;
 }
@@ -501,7 +501,7 @@ button:focus {
 }
 
 .top-nav-collapse .navbar-nav .nav-link.active {
-  color: #fff !important;
+  color: #000 !important;
 }
 
 .indigo {
