@@ -98,6 +98,9 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 }
 
 #logo {
+  height:80px;
+  width:80px;
+  margin: 0 auto;
   padding:5px;
 }
 
