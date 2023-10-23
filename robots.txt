@@ -14,8 +14,8 @@ User-agent: *
 #With Halloween's ghostly mask, the secret's kept from prying eyes,
 #Unlock it now, complete the task, and claim your spooky prize...
 #
-So, fellow sleuth of cyber lore, decode the message, don't delay,
-For in the world of Halloween's roar, secrets in the dark display.
+#So, fellow sleuth of cyber lore, decode the message, don't delay,
+#For in the world of Halloween's roar, secrets in the dark display.
 #
 # DMU-Hackers
 #                                                                                                   
