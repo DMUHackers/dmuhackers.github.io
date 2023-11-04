@@ -1,22 +1,4 @@
 User-agent: *
-#In the realm where witches brew, and ghosts and goblins come to play,
-#A secret message hides from view, on this spooky, dark array.
-#
-#Within the pixels, dark and deep, a ghostly whisper takes its keep,
-#It's hidden well, for eyes to seek, a cryptic enigma, yours to reap.
-#
-#Beneath the moon's eerie glow, and the pumpkins' spectral light,
-#In bytes and bits, it's time to know, the secret hidden out of sight.
-#
-#A ciphered treat or mystery trick, can you unveil what's not in plain?
-#The cryptic image does the trick, revealing secrets of the cyber domain.
-#
-#With Halloween's ghostly mask, the secret's kept from prying eyes,
-#Unlock it now, complete the task, and claim your spooky prize...
-#
-#So, fellow sleuth of cyber lore, decode the message, don't delay,
-#For in the world of Halloween's roar, secrets in the dark display.
-#
 # DMU-Hackers
 #                                                                                                   
 #                                  @@@                         @@@                                  
