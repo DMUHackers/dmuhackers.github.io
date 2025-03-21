@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/slideshow.css">
+    <link rel="stylesheet" href="css/discordInvite.css">
 
   </head>
   <body>
@@ -71,7 +72,7 @@
           <hr class="lines wow zoomIn" data-wow-delay="0.3s">
           <p class="section-subtitle wow fadeIn" data-wow-duration="1000ms" data-wow-delay="0.3s">Pwn2Play, a jeopardy style CTF designed to test everything you know about hacking. Teams will have a single day to solve a range of challenge categories proving just how much they know. Face other universities and work alongside industry professionals to rise to the top claiming the P2P crown and prize. Are you ready?</p>
           <p class="section-subtitle wow fadeIn" data-wow-duration="1000ms" data-wow-delay="0.3s">Sign up now: <a href="https://forms.gle/KjFYJSL64TbEM4H27">Sign Up Form</a></p>
-          <p class="section-subtitle wow fadeIn" data-wow-duration="1000ms" data-wow-delay="0.3s">Join the Discord server: <a href="https://discord.gg/bb89Tj9P6g">Discord Server</a></p>
+          <div id="discordInviteBox"></div>
         </div>
       </div>
     </section>
@@ -240,6 +241,18 @@
     <script src="js/contact-form-script.js"></script>
     <script src="js/main.js"></script>
     <script src="js/slideshow.js"></script>
+    
+    <!-- Discord Render Script -->
+     <script src="js/discordInvite.js"></script>
+     <script>
+      discordInvite.init({
+        hideIntro: true,
+        inviteCode: 'bb89Tj9P6g',
+        title:'Pwn2Play',
+        width:'400px'
+      });
+      discordInvite.render();
+     </script>
 
   </body>
 </html>
