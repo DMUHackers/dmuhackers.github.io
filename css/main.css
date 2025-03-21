@@ -598,6 +598,22 @@ button:focus {
 /* ==========================================================================
   5. What section
    ========================================================================== */
+#what {
+  background: url(../img/bg1.jpg) fixed no-repeat;
+  background-size: cover;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+#what .section-title {
+  color: #fff;
+}
+
+#what .section-subtitle {
+  color: #fff;
+}
+
 .item-boxes {
   text-align: center;
   padding: 0px 15px;
@@ -643,7 +659,7 @@ button:focus {
 /* ==========================================================================
   6. How Section Style
    ========================================================================== */
-#how {
+/* #how {
   background: url(../img/bg1.jpg) fixed no-repeat;
   background-size: cover;
   color: #fff;
@@ -657,7 +673,7 @@ button:focus {
 
 #how .section-subtitle {
   color: #fff;
-}
+} */
 
 #how .icon {
   display: inline-block;
@@ -1274,4 +1290,61 @@ footer {
 
 .copyright p a:hover {
   color: #969696;
+}
+
+/* ==========================================================================
+5. P2P section
+  ========================================================================== */
+
+  #P2P {
+  background-color:#ffffff ;
+  background-size: cover;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+#P2P .section-title {
+  color: #000000;
+}
+
+#P2P .section-subtitle {
+  color: #000000;
+}
+
+/* ==========================================================================
+6. pwn2play section
+  ========================================================================== */
+
+#pwn2play_keyinfo {
+  background: url(../img/bg1.jpg) fixed no-repeat;
+  background-size: cover;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+#pwn2play_keyinfo .section-title {
+  color: #fff;
+}
+
+#pwn2play_keyinfo .section-subtitle {
+  color: #fff;
+}
+
+
+#pwn2play_sponsors {
+  background: url(../img/testimonial-bg.jpg) fixed no-repeat;
+  background-size: cover;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+#pwn2play_sponsors .section-title {
+  color: #fff;
+}
+
+#pwn2play_sponsors .section-subtitle {
+  color: #fff;
 }
