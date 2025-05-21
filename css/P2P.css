@@ -1,0 +1,259 @@
+/* =============================================
+
+-- Content: P2P CSS --
+1. Global Styles
+============================================== */
+.section>.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+:root {
+  --bg: #DFD0B8;
+  --interface: #948979;
+  --primary-text: #222831;
+  --accent: #940d2d;
+  --secondary-text: #393E46;
+}
+
+/* ============================================= 
+1. P2P Page Styles 
+============================================= */
+/* Light mode (default) */
+
+
+.card {
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border: none;
+  background: var(--bg);
+  color: var(--interface);
+}
+
+.event-card {
+  background: var(--interface) !important;
+  color: var(--primary-text) !important;
+}
+
+.event-info-box {
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 16px;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.event-info-icon {
+  font-size: 2rem;
+  color: var(--bg);
+}
+
+.connect-card {
+  background: var(--interface) !important;
+  color: var(--primary-text) !important;
+  border: none;
+}
+
+.connect-card .social-btn {
+  width: 60px;
+  height: 60px;
+  font-size: 2rem;
+  background: var(--accent);
+  color: var(--bg);
+  margin-bottom: 0.5rem;
+}
+
+.connect-card .social-btn:hover {
+  background: var(--bg);
+  color: var(--primary-text);
+}
+
+/* Timeline Styles (unique to P2P) */
+.timeline-container {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  padding-left: 30px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.timeline-event {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.timeline-time {
+  width: 70px;
+  text-align: right;
+  font-weight: bold;
+  color: var(--accent);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.timeline-dot {
+  width: 40px;
+  height: 40px;
+  background: var(--bg);
+  color: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 20px;
+  font-size: 1.3rem;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.timeline-content {
+  background: var(--interface);
+  color: var(--primary-text);
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  font-size: 1.1rem;
+  min-width: 120px;
+}
+
+@media (max-width: 600px) {
+  .timeline {
+    padding-left: 0;
+  }
+
+  .timeline-event {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .timeline-time {
+    text-align: left;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-dot {
+    margin: 0 0 0.5rem 0;
+  }
+
+  .timeline-content {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #222831;
+    --interface: #393E46;
+    --primary-text: #DFD0B8;
+    --accent: #940d2d;
+    --secondary-text: #948979;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--secondary-text);
+  }
+
+  .splash-widget,
+  .sidebar-widget,
+  footer,
+  .universal-navbar {
+    background: var(--interface) !important;
+    color: var(--primary-text) !important;
+  }
+
+  .splash-widget,
+  .splash-widget-rightlong,
+  .splash-widget-topleft,
+  .splash-widget-bottomleft {
+    background: var(--interface) !important;
+    color: var(--primary-text) !important;
+  }
+
+  .stepper-link,
+  .stepper-label {
+    color: var(--primary-text) !important;
+  }
+
+  .stepper-circle {
+    background: var(--interface) !important;
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+  }
+
+  .stepper-link.active .stepper-circle,
+  .stepper-link:hover .stepper-circle {
+    background: var(--accent) !important;
+    color: var(--primary-text) !important;
+    border-color: var(--primary-text) !important;
+  }
+
+  .stepper-link.active .stepper-label,
+  .stepper-link:hover .stepper-label {
+    color: var(--accent) !important;
+  }
+
+  .link-text,
+  .footer-links li a {
+    color: var(--primary-text);
+  }
+
+  .link-text:hover,
+  .footer-links li a:hover {
+    color: var(--accent);
+  }
+}
+
+
+.event-card {
+  background: var(--interface) !important;
+  color: var(--primary-text) !important;
+  border: none !important;
+}
+
+.event-info-box {
+  background: var(--interface) !important;
+  color: var(--primary-text) !important;
+  border-radius: 16px !important;
+}
+
+.event-info-icon {
+  font-size: 2rem;
+  color: var(--primary-text) !important;
+}
+
+.event-info-accent {
+  color: var(--accent) !important;
+}
+
+.event-social-btn {
+  background: var(--interface) !important;
+  color: var(--primary-text) !important;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 2rem;
+}
