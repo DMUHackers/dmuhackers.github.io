@@ -1,0 +1,19 @@
+.committee-accordion-shadow {
+  border-radius: 16px;
+}
+
+.accordion-theme {
+  background: var(--interface);
+  color: var(--primary-text);
+  border-radius: 16px;
+  transition: background 0.2s, color 0.2s;
+}
+
+@media (prefers-color-scheme: dark) {
+  .accordion-theme {
+    background: var(--interface);
+    color: var(--primary-text);
+    border: 1px solid rgba(205, 70, 49, 0.18);
+    /* accent border for dark */
+  }
+}

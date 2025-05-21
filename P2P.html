@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DMU Hackers - Pwn2Play</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/P2P.css">
+</head>
+
+<body>
+
+  <!-- Sidebar Start -->
+  <nav id="sidebarMenu" class="d-none d-md-block sidebar-widget">
+    <div class="sidebar-stepper pt-4">
+      <div class="stepper">
+        <a href="#hero-area" class="stepper-link active" data-section="hero-area">
+          <span class="stepper-circle"><i class="fas fa-home"></i></span>
+          <span class="stepper-label">Home</span>
+        </a>
+        <a href="#description" class="stepper-link" data-section="description">
+          <span class="stepper-circle"><i class="fas fa-align-left"></i></span>
+          <span class="stepper-label">Description</span>
+        </a>
+        <a href="#key-info" class="stepper-link" data-section="key-info">
+          <span class="stepper-circle"><i class="fas fa-info-circle"></i></span>
+          <span class="stepper-label">Key Info</span>
+        </a>
+        <a href="#schedule" class="stepper-link" data-section="schedule">
+          <span class="stepper-circle"><i class="fas fa-calendar-alt"></i></span>
+          <span class="stepper-label">Schedule</span>
+        </a>
+        <a href="#sponsors" class="stepper-link" data-section="sponsors">
+          <span class="stepper-circle"><i class="fas fa-handshake"></i></span>
+          <span class="stepper-label">Sponsors</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar End -->
+
+  <div class="main-content">
+
+    <!-- Header Section Start -->
+    <header id="hero-area" class="py-5">
+      <nav class="navbar navbar-expand-lg navbar fixed-top universal-navbar">
+        <div class="container justify-content-end">
+          <!-- Burger menu button -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <!-- Collapsible nav links -->
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto gap-4">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="P2P.html">P2P</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="gallery.html">Gallery</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="legacy.html">Legacy Committee</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="splash-widgets-3col">
+          <div class="splash-widgets-leftcol">
+            <div class="splash-widget splash-widget-topleft">
+              <h2 class="section-title">Pwn2Play: Silicon Siege <br>Capture the Flag (CTF)</br></h2>
+            </div>
+            <div class="splash-widget splash-widget-bottomleft">
+              <img id="p2p-img" src="img/pwn2play/P2P_FirstBlood.png" alt="P2P" class="img-fluid"
+                style="max-width:210px; height:auto;" />
+            </div>
+          </div>
+          <div class="splash-widget splash-widget-rightlong">
+            <div class="social-widget-vertical">
+              <div class="social-row">
+                <a href="https://twitter.com/dmuhackers" class="social-btn twitter" target="_blank"
+                  aria-label="Twitter">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://twitter.com/dmuhackers" class="twitter" target="_blank" aria-label="Twitter">
+                  <span class="link-text">Follow us on Twitter</span>
+                </a>
+              </div>
+              <div class="social-row">
+                <a href="https://discord.gg/Vvrk4kK" class="social-btn discord" target="_blank" aria-label="Discord">
+                  <i class="fab fa-discord"></i>
+                </a>
+                <a href="https://discord.gg/Vvrk4kK" class="discord" target="_blank" aria-label="Discord">
+                  <span class="link-text">Join our Discord community</span>
+                </a>
+              </div>
+              <div class="social-row">
+                <a href="https://github.com/DMUHackers" class="social-btn github" target="_blank" aria-label="GitHub">
+                  <i class="fab fa-github"></i>
+                </a>
+                <a href="https://github.com/DMUHackers" class="github" target="_blank" aria-label="GitHub">
+                  <span class="link-text">Explore our GitHub</span>
+                </a>
+              </div>
+              <div class="social-row">
+                <a href="https://www.instagram.com/hackers.dmu" class="social-btn instagram" target="_blank"
+                  aria-label="Instagram">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.instagram.com/hackers.dmu" class="instagram" target="_blank"
+                  aria-label="Instagram">
+                  <span class="link-text">See us on Instagram</span>
+                </a>
+              </div>
+              <div class="social-row">
+                <a href="https://www.linkedin.com/company/dmu-hackers/" class="social-btn linkedin" target="_blank"
+                  aria-label="LinkedIn">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://www.linkedin.com/company/dmu-hackers/" class="linkedin" target="_blank"
+                  aria-label="LinkedIn">
+                  <span class="link-text">Find us on LinkedIn</span>
+                </a>
+              </div>
+              <div class="social-row">
+                <a href="https://www.demontfortsu.com/organisation/dmuhackers/" class="social-btn dsu" target="_blank"
+                  aria-label="DSU">
+                  <i class="fas fa-calendar-check"></i>
+                </a>
+                <a href="https://www.demontfortsu.com/organisation/dmuhackers/" class="dsu" target="_blank"
+                  aria-label="DSU">
+                  <span class="link-text">DSU Website</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- Header Section End -->
+
+    <!-- description Section Start -->
+    <section id="description" class="section">
+      <div class="container">
+        <!-- Top box with 3 mini-boxes -->
+        <div class="card mb-4 event-card">
+          <div class="card-body py-5">
+            <h2 class="fw-bold text-center">The Event</h2>
+            <hr class="lines">
+            <div class="row justify-content-center text-center mb-4">
+              <!-- Date -->
+              <div class="col-12 col-md-4 mb-3 mb-md-0">
+                <div class="d-flex flex-column align-items-center p-3 event-info-box">
+                  <span class="event-info-icon"><i class="fas fa-calendar-alt"></i></span>
+                  <div class="fw-bold mt-2">Date</div>
+                  <div>31st May 2025</div>
+                </div>
+              </div>
+              <!-- Time -->
+              <div class="col-12 col-md-4 mb-3 mb-md-0">
+                <div class="d-flex flex-column align-items-center p-3 event-info-box">
+                  <span class="event-info-icon"><i class="fas fa-clock"></i></span>
+                  <div class="fw-bold mt-2">Time</div>
+                  <div>09:00am till 21:00pm</div>
+                </div>
+              </div>
+              <!-- Location -->
+              <div class="col-12 col-md-4">
+                <div class="d-flex flex-column align-items-center p-3 event-info-box">
+                  <span class="event-info-icon"><i class="fas fa-map-marker-alt"></i></span>
+                  <div class="fw-bold mt-2">Location</div>
+                  <div>Virtual &amp; DMU Campus</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom box with icons/links -->
+        <div class="card event-card">
+          <div class="card-body py-5">
+            <h4 class="mb-4 text-center">Connect with us</h4>
+            <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-5">
+              <!-- Discord Widget -->
+              <div class="d-flex flex-column align-items-center">
+                <a href="https://discord.gg/Vvrk4kK" target="_blank" class="social-btn mb-2 event-social-btn">
+                  <i class="fab fa-discord"></i>
+                </a>
+                <span>Discord</span>
+              </div>
+              <!-- Registration Widget -->
+              <div class="d-flex flex-column align-items-center">
+                <a href="https://forms.gle/beGNHJHHCHWYbhEU7" target="_blank" class="social-btn mb-2 event-social-btn">
+                  <i class="fas fa-user-plus"></i>
+                </a>
+                <span>Registration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- description Section End -->
+
+    <hr class="section-divider">
+
+    <!-- About us Section start -->
+    <section id="key-info" class="section">
+      <div class="container">
+        <div class="section-header">
+          <hr class="lines">
+          <div class="key-info-box my-4 p-4 rounded event-card">
+            <h3 class="mb-3 text-center">
+              <i class="fas fa-info-circle me-2 event-info-accent"></i>Key Info
+            </h3>
+            <p class="text-center mb-4 fs-5">Important Information</p>
+            <div class="row g-4">
+              <!-- Silicon Siege Location -->
+              <div class="col-md-6">
+                <div class="d-flex align-items-center p-4 h-100 rounded event-info-box">
+                  <span class="me-4 d-flex align-items-center event-info-icon">
+                    <i class="fas fa-shield-alt"></i>
+                  </span>
+                  <div>
+                    <div class="fw-bold fs-5">Silicon Siege<br><span class="fs-6">Location</span></div>
+                    <div>Gateway House Floor 5<br>De Montfort University<br>The Gateway Leicester, LE1 9BH</div>
+                  </div>
+                </div>
+              </div>
+              <!-- WiFi -->
+              <div class="col-md-6">
+                <div class="d-flex align-items-center p-4 h-100 rounded event-info-box">
+                  <span class="me-4 d-flex align-items-center event-info-icon">
+                    <i class="fas fa-wifi"></i>
+                  </span>
+                  <div>
+                    <div class="fw-bold fs-5">WiFi</div>
+                    <div>Student &amp; Guest WiFi will be available on the day.<br>
+                      Please bring your own machine to participate in the event as machines will not be provided.*</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Awards Event Location -->
+              <div class="col-md-6">
+                <div class="d-flex align-items-center p-4 h-100 rounded event-info-box">
+                  <span class="me-4 d-flex align-items-center event-info-icon">
+                    <i class="fas fa-trophy"></i>
+                  </span>
+                  <div>
+                    <div class="fw-bold fs-5">Awards Event<br><span class="fs-6">Location</span></div>
+                    <div>De Montfort Students' Union<br>Campus Centre Building<br>Mill Ln, Leicester LE2 7DR</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Food & Drink -->
+              <div class="col-md-6">
+                <div class="d-flex align-items-center p-4 h-100 rounded event-info-box">
+                  <span class="me-4 d-flex align-items-center event-info-icon">
+                    <i class="fas fa-utensils"></i>
+                  </span>
+                  <div>
+                    <div class="fw-bold fs-5">Food &amp; Drink</div>
+                    <div>The bar will be open after the event for you to purchase drinks, this is 6pm onwards.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About us Section End -->
+
+    <hr class="section-divider">
+
+    <!-- schedule Section Start -->
+    <section id="schedule" class="section">
+      <div class="container">
+        <div class="row g-4 align-items-stretch">
+          <!-- Schedule Timeline Card (Left) -->
+          <div class="col-12 col-md-6">
+            <div class="card h-100">
+              <div class="card-body d-flex flex-column justify-content-center">
+                <div class="timeline-container">
+                  <div class="timeline">
+                    <div class="timeline-event">
+                      <div class="timeline-time">08:30</div>
+                      <div class="timeline-dot"><i class="fas fa-door-open"></i></div>
+                      <div class="timeline-content">Doors Open</div>
+                    </div>
+                    <div class="timeline-event">
+                      <div class="timeline-time">09:00</div>
+                      <div class="timeline-dot"><i class="fas fa-flag-checkered"></i></div>
+                      <div class="timeline-content">CTF Start</div>
+                    </div>
+                    <div class="timeline-event">
+                      <div class="timeline-time">12:00</div>
+                      <div class="timeline-dot"><i class="fas fa-utensils"></i></div>
+                      <div class="timeline-content">Lunch Break</div>
+                    </div>
+                    <div class="timeline-event">
+                      <div class="timeline-time">13:00</div>
+                      <div class="timeline-dot"><i class="fas fa-play"></i></div>
+                      <div class="timeline-content">CTF Resumed</div>
+                    </div>
+                    <div class="timeline-event">
+                      <div class="timeline-time">16:00</div>
+                      <div class="timeline-dot"><i class="fas fa-eye-slash"></i></div>
+                      <div class="timeline-content">Scoreboard Hidden</div>
+                    </div>
+                    <div class="timeline-event">
+                      <div class="timeline-time">18:00</div>
+                      <div class="timeline-dot"><i class="fas fa-flag"></i></div>
+                      <div class="timeline-content">CTF End</div>
+                    </div>
+                    <div class="timeline-event">
+                      <div class="timeline-time">19:00</div>
+                      <div class="timeline-dot"><i class="fas fa-trophy"></i></div>
+                      <div class="timeline-content">Awards Event</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Title & Description Card (Right) -->
+          <div class="col-12 col-md-6">
+            <div class="card h-100 d-flex flex-column justify-content-center">
+              <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
+                <h2 class="section-title mb-2">Schedule</h2>
+                <p class="section-subtitle mb-0">Schedule of events for Pwn2Play</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Schedule Section End -->
+
+    <hr class="section-divider">
+
+    <!-- sponsors section Start -->
+    <section id="sponsors" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Sponsors</h2>
+          <hr class="lines">
+          <p class="section-subtitle">Are you a company that doesn't only want to take part in Pwn2Play but also wants
+            to sponsor the event?
+            <br>Reach out to dmuhackers@gmail.com.</br>
+          </p>
+        </div>
+      </div>
+  </div>
+  </div>
+  </section>
+  <!-- sponsors section End -->
+  <!-- Footer Section Start -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-sm-6">
+          <ul class="footer-links">
+            <li><a href="#hero-area">Homepage</a></li>
+            <li><a href="P2P.html">Pwn2Play</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+          <div class="copyright">
+            <p>DMU Hackers - Pwning since 2015 ©</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  </div>
+  <!-- Footer Section End -->
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/sidebar.js"></script>
+  <script src="js/P2P.js"></script>
+</body>
+
+</html>
