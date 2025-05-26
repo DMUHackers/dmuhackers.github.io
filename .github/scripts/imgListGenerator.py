@@ -1,6 +1,7 @@
 import os
 import json
 
+# Generate a list of files to put into the JSON file
 def pullFiles(path):
     file_list = []
     for _, _, files in os.walk(path):
