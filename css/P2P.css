@@ -1,7 +1,5 @@
 /* =============================================
-
 -- Content: P2P CSS --
-1. Global Styles
 ============================================== */
 .section>.container {
   max-width: 900px;
@@ -10,6 +8,9 @@
   width: 100%;
 }
 
+/* ============================================= 
+1. Light Mode Style Variables
+============================================= */
 :root {
   --bg: #DFD0B8;
   --interface: #948979;
@@ -19,9 +20,8 @@
 }
 
 /* ============================================= 
-1. P2P Page Styles 
+2. P2P Page Styles 
 ============================================= */
-/* Light mode (default) */
 
 
 .card {
@@ -69,105 +69,6 @@
   background: var(--bg);
   color: var(--primary-text);
 }
-
-/* Timeline Styles (unique to P2P) */
-.timeline-container {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  position: relative;
-  padding-left: 30px;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 24px;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: var(--accent);
-  border-radius: 2px;
-}
-
-.timeline-event {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.timeline-time {
-  width: 70px;
-  text-align: right;
-  font-weight: bold;
-  color: var(--accent);
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-.timeline-dot {
-  width: 40px;
-  height: 40px;
-  background: var(--bg);
-  color: var(--accent);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 20px;
-  font-size: 1.3rem;
-  z-index: 1;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
-}
-
-.timeline-content {
-  background: var(--interface);
-  color: var(--primary-text);
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  font-size: 1.1rem;
-  min-width: 120px;
-}
-
-@media (max-width: 600px) {
-  .timeline {
-    padding-left: 0;
-  }
-
-  .timeline-event {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .timeline-time {
-    text-align: left;
-    margin-bottom: 0.5rem;
-  }
-
-  .timeline-dot {
-    margin: 0 0 0.5rem 0;
-  }
-
-  .timeline-content {
-    min-width: 0;
-    width: 100%;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #222831;
-    --interface: #393E46;
-    --primary-text: #DFD0B8;
-    --accent: #940d2d;
-    --secondary-text: #948979;
-  }
 
   body {
     background: var(--bg);
@@ -222,7 +123,7 @@
   .footer-links li a:hover {
     color: var(--accent);
   }
-}
+
 
 
 .event-card {
@@ -256,4 +157,132 @@
   justify-content: center;
   border-radius: 50%;
   font-size: 2rem;
+}
+
+/* ============================================= 
+3. Timeline Section Styles
+============================================= */
+.timeline-snaking {
+  position: relative;
+  margin: 2rem 0;
+  padding-left: 0;
+}
+
+.timeline-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 2rem;
+  position: relative;
+  width: 100%;
+}
+
+.timeline-item.right {
+  justify-content: flex-end;
+}
+
+.timeline-content {
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border-radius: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  min-width: 260px;      
+  max-width: 360px;     
+  width: 100%;          
+  position: relative;
+  box-sizing: border-box;
+}
+
+.timeline-dot {
+  width: 2.2rem;
+  height: 2.2rem;
+  background: var(--bg);
+  border: 3px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 1rem;
+  font-size: 1.2rem;
+  color: var(--accent);
+  z-index: 1;
+}
+
+.timeline-time {
+  font-weight: bold;
+  color: var(--accent);
+  margin-right: 0.5rem;
+  min-width: 3.5rem;
+}
+
+.timeline-desc {
+  margin-left: 0.5rem;
+  font-size: 1rem;
+}
+
+.timeline-snaking::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--accent);
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.timeline-item.left .timeline-content {
+  margin-right: auto;
+}
+
+.timeline-item.right .timeline-content {
+  margin-left: auto;
+}
+
+@media (max-width: 767px) {
+  .timeline-item,
+  .timeline-item.right,
+  .timeline-item.left {
+    justify-content: flex-start !important;
+  }
+  .timeline-content {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+  .timeline-snaking::before {
+    display: none; /* Hide the vertical bar */
+  }
+
+  #key-info .event-info-box {
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 100% !important;
+  }
+  #key-info .event-info-icon {
+    margin-right: 0 !important;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* ============================================= 
+4. Dark Mode Style Variables
+============================================= */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #222831;
+    --interface: #393E46;
+    --primary-text: #DFD0B8;
+    --accent: #940d2d;
+    --secondary-text: #948979;
+  }
 }
