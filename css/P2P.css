@@ -252,22 +252,141 @@
 }
 
 @media (max-width: 767px) {
+  /* Fix main content margin on mobile */
+  .main-content {
+    margin-left: 0 !important;
+    margin-top: 70px !important; /* Add top margin to account for fixed navbar */
+  }
+  
+  /* Mobile sections targeting all P2P sections */
+  section,
+  header#hero-area,
+  #description,
+  #key-info,
+  #schedule,
+  #sponsors {
+    min-height: auto !important;
+    padding: 2rem 0 !important;
+  }
+  
+  /* Fix navbar spacing for P2P page */
+  header#hero-area {
+    padding-top: 2rem !important; /* Reduce since main-content now has margin-top */
+    padding-bottom: 2rem !important;
+  }
+  
+  /* Other P2P sections spacing */
+  #description,
+  #key-info,
+  #schedule,
+  #sponsors {
+    padding: 3rem 1rem !important;
+  }
+  
+  .section > .container {
+    padding: 0 1rem;
+  }
+  
+  /* Mobile navbar improvements */
+  .universal-navbar {
+    padding: 0.5rem 1rem;
+  }
+  
+  .universal-navbar .navbar-nav {
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .universal-navbar .nav-link {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+  
+  /* Mobile splash widget improvements */
+  .splash-widgets-3col {
+    margin: 16px auto;
+    padding: 0 1rem;
+    gap: 16px;
+    flex-direction: column;
+  }
+  
+  .splash-widget {
+    padding: 24px 16px;
+    margin-bottom: 1rem;
+  }
+  
+  /* Mobile typography */
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .section-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  /* Mobile social buttons */
+  .social-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+  
+  .social-row span {
+    font-size: 0.9rem;
+  }
+  
+  /* Timeline improvements */
   .timeline-item,
   .timeline-item.right,
   .timeline-item.left {
     justify-content: flex-start !important;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
   }
+  
   .timeline-content {
     margin-left: 0 !important;
     margin-right: 0 !important;
     min-width: 0;
     max-width: 100%;
     width: 100%;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    padding: 1rem;
+    margin-bottom: 1rem;
   }
+  
+  .timeline-dot {
+    margin: 0.5rem 0;
+    order: 1;
+  }
+  
+  .timeline-time {
+    margin: 0 0 0.5rem 0;
+    order: 0;
+    font-size: 1.1rem;
+  }
+  
+  .timeline-desc {
+    margin: 0;
+    order: 2;
+    font-size: 0.9rem;
+  }
+  
   .timeline-snaking::before {
     display: none; /* Hide the vertical bar */
   }
-
+  
+  /* Event social buttons mobile optimization */
+  .event-social-btn {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 1.5rem !important;
+  }
+  
+  /* Key info section improvements */
   #key-info .event-info-box {
     align-items: center !important;
     text-align: center !important;
@@ -276,10 +395,115 @@
     margin-left: auto !important;
     margin-right: auto !important;
     width: 100% !important;
+    margin-bottom: 1rem !important;
   }
+  
   #key-info .event-info-icon {
     margin-right: 0 !important;
     margin-bottom: 0.5rem;
+  }
+  
+  /* Mobile card improvements */
+  .card {
+    margin: 1rem 0;
+  }
+  
+  .card-body {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  /* Mobile container improvements */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Mobile section headers */
+  .section-header {
+    margin-bottom: 1.5rem !important;
+    padding: 0 1rem;
+  }
+  
+  .section-divider {
+    width: 90%;
+    margin: 2rem auto;
+  }
+  
+  /* Hero section improvements */
+  .splash-widgets-leftcol {
+    min-width: unset;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .splash-widget-rightlong {
+    width: 100%;
+    min-width: unset;
+    max-width: 500px;
+  }
+  
+  /* Social widget improvements */
+  .social-widget-vertical {
+    padding: 1rem;
+    gap: 16px;
+  }
+  
+  .social-row {
+    margin-bottom: 0.75rem;
+    gap: 12px;
+  }
+  
+  /* Mobile footer improvements */
+  footer {
+    padding: 1rem 0;
+  }
+  
+  .footer-links {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-links li {
+    display: block;
+    margin: 0.5rem 0;
+  }
+  
+  .copyright {
+    text-align: center;
+  }
+}
+
+/* Tablet breakpoint improvements */
+@media (max-width: 991.98px) {
+  .splash-widgets-3col {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    margin: 24px auto;
+  }
+
+  .splash-widgets-leftcol {
+    min-width: unset;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .splash-widget-rightlong {
+    width: 100%;
+    min-width: unset;
+    max-width: 500px;
+  }
+
+  .splash-widget {
+    padding: 32px 24px;
+  }
+  
+  .social-widget-vertical {
+    gap: 16px;
+  }
+  
+  .social-row {
+    gap: 12px;
   }
 }
 

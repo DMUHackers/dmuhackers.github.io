@@ -352,11 +352,32 @@ footer,
   .splash-widgets-3col {
     flex-direction: column;
     align-items: center;
+    gap: 24px;
+    margin: 24px auto;
+  }
+
+  .splash-widgets-leftcol {
+    min-width: unset;
+    width: 100%;
+    max-width: 500px;
   }
 
   .splash-widget-rightlong {
     width: 100%;
     min-width: unset;
+    max-width: 500px;
+  }
+
+  .splash-widget {
+    padding: 32px 24px;
+  }
+  
+  .social-widget-vertical {
+    gap: 16px;
+  }
+  
+  .social-row {
+    gap: 12px;
   }
 }
 
@@ -728,7 +749,136 @@ header#hero-area {
 
   .main-content {
     margin-left: 0 !important;
+    margin-top: 70px !important; /* Add top margin to account for fixed navbar */
   }
+  
+  /* Mobile section improvements */
+  section,
+  header#hero-area,
+  #P2P,
+  #about-us,
+  #facilities,
+  #committee,
+  #other {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+  
+  /* Fix navbar spacing */
+  header#hero-area {
+    padding-top: 2rem !important; /* Reduce since main-content now has margin-top */
+    padding-bottom: 2rem;
+  }
+  
+  /* Other sections spacing */
+  #P2P,
+  #about-us,
+  #facilities,
+  #committee,
+  #other {
+    padding: 3rem 1rem;
+  }
+  
+  /* Mobile navbar improvements */
+  .universal-navbar {
+    padding: 0.5rem 1rem;
+  }
+  
+  .universal-navbar .navbar-nav {
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .universal-navbar .nav-link {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+  
+  /* Mobile splash widget improvements */
+  .splash-widgets-3col {
+    margin: 16px auto;
+    padding: 0 1rem;
+    gap: 16px;
+  }
+  
+  .splash-widget {
+    padding: 24px 16px;
+    margin-bottom: 0;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .section-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  /* Mobile social buttons */
+  .social-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+  
+  .social-row span {
+    font-size: 0.9rem;
+  }
+  
+  /* Mobile card improvements */
+  .card {
+    margin: 1rem 0;
+  }
+  
+  .card-body {
+    padding: 1.5rem 1rem;
+  }
+  
+  /* Mobile container improvements */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Mobile P2P button improvements */
+  .p2p-btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    margin: 1rem 0;
+  }
+  
+  /* Mobile about us section improvements */
+  #about-us .card {
+    margin: 1rem;
+    padding: 0;
+  }
+  
+  #about-us .card-body {
+    padding: 1.5rem 1rem;
+  }
+  
+  /* Mobile facilities section improvements */
+  #facilities .card {
+    margin: 1rem;
+    padding: 0;
+  }
+  
+  #facilities .card-body {
+    padding: 1.5rem 1rem;
+  }
+  
+  /* Mobile section headers */
+  .section-header {
+    margin-bottom: 1.5rem !important;
+    padding: 0 1rem;
+  }
+  
+  .section-divider {
+    width: 90%;
+    margin: 2rem auto;
+  }
+  
+  /* Committee card mobile improvements */
   .committee-card {
     flex-direction: column !important;
     align-items: center !important;
@@ -738,10 +888,13 @@ header#hero-area {
     min-height: unset;
     height: auto;
     padding: 2rem 1rem;
+    margin: 1rem auto;
   }
+  
   .committee-img-wrapper {
     display: none !important;
   }
+  
   .committee-info {
     width: 100% !important;
     padding: 0 !important;
@@ -750,11 +903,31 @@ header#hero-area {
     justify-content: center !important;
     text-align: center !important;
   }
+  
   .committee-info .social-list {
     justify-content: center !important;
     display: flex !important;
     width: 100%;
     margin-top: 1rem;
+  }
+  
+  /* Mobile footer improvements */
+  footer {
+    padding: 1rem 0;
+  }
+  
+  .footer-links {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-links li {
+    display: block;
+    margin: 0.5rem 0;
+  }
+  
+  .copyright {
+    text-align: center;
   }
 }
 
