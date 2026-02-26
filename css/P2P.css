@@ -3,7 +3,7 @@
    ========================================================================== */
 
 /* ---------- P2P Hero gradient ---------- */
-.hero_bg--p2p {
+.hero__bg--p2p {
   background:
     radial-gradient(ellipse 70% 55% at 50% 0%, rgba(200,16,46,.18) 0%, transparent 55%),
     radial-gradient(ellipse 50% 45% at 20% 100%, rgba(200,16,46,.08) 0%, transparent 50%),
@@ -14,17 +14,17 @@
 .p2p-meta-card {
   text-align: center;
 }
-.p2p-meta-card .card_icon {
+.p2p-meta-card .card__icon {
   margin: 0 auto 20px;
 }
-.p2p-meta-card .card_title {
+.p2p-meta-card .card__title {
   font-size: .85rem;
   text-transform: uppercase;
   letter-spacing: .08em;
   color: var(--text-muted);
   margin-bottom: 4px;
 }
-.p2p-meta-card .card_text {
+.p2p-meta-card .card__text {
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--text);
@@ -35,19 +35,19 @@
   margin-top: 48px;
   text-align: center;
 }
-.p2p-connect_title {
+.p2p-connect__title {
   font-size: 1rem;
   font-weight: 600;
   color: var(--text);
   margin-bottom: 20px;
 }
-.p2p-connect_links {
+.p2p-connect__links {
   display: flex;
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
 }
-.p2p-connect_btn {
+.p2p-connect__btn {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -60,8 +60,8 @@
   font-weight: 500;
   transition: all .25s;
 }
-.p2p-connect_btn i { font-size: 1.15rem; }
-.p2p-connect_btn:hover {
+.p2p-connect__btn i { font-size: 1.15rem; }
+.p2p-connect__btn:hover {
   border-color: var(--accent);
   color: var(--text);
   background: rgba(200,16,46,.08);
@@ -106,7 +106,7 @@
   background: var(--surface);
 }
 
-.schedule-card_time {
+.schedule-card__time {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
@@ -115,7 +115,7 @@
   margin-bottom: 12px;
 }
 
-.schedule-card_line {
+.schedule-card__line {
   width: 32px;
   height: 2px;
   background: var(--accent);
@@ -123,13 +123,13 @@
   margin-bottom: 16px;
 }
 
-.schedule-card_icon {
+.schedule-card__icon {
   font-size: 1.1rem;
   color: var(--accent);
   margin-bottom: 10px;
 }
 
-.schedule-card_label {
+.schedule-card__label {
   font-size: .85rem;
   font-weight: 500;
   color: var(--text-muted);
@@ -147,7 +147,7 @@
     flex: 0 0 calc(50% - 5px);
     padding: 20px 12px 18px;
   }
-  .schedule-card_time {
+  .schedule-card__time {
     font-size: 1.25rem;
   }
 }
@@ -171,31 +171,31 @@
   max-width: 640px;
   margin: 0 auto;
 }
-.afterparty_icon {
+.afterparty__icon {
   font-size: 3rem;
   color: var(--accent);
   margin-bottom: 20px;
 }
-.afterparty_heading {
+.afterparty__heading {
   font-family: 'Space Grotesk', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 16px;
 }
-.afterparty_text {
+.afterparty__text {
   font-size: 1.05rem;
   color: var(--text-muted);
   line-height: 1.7;
   margin-bottom: 32px;
 }
-.afterparty_details {
+.afterparty__details {
   display: flex;
   justify-content: center;
   gap: 32px;
   flex-wrap: wrap;
 }
-.afterparty_detail {
+.afterparty__detail {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -207,10 +207,10 @@
   color: var(--text);
   transition: border-color .3s;
 }
-.afterparty_detail:hover {
+.afterparty__detail:hover {
   border-color: var(--accent);
 }
-.afterparty_detail i {
+.afterparty__detail i {
   color: var(--accent);
   font-size: 1.1rem;
 }
@@ -225,7 +225,7 @@
   margin: 0 auto;
 }
 
-.podium_place {
+.podium__place {
   flex: 1;
   text-align: center;
   display: flex;
@@ -233,16 +233,16 @@
   align-items: center;
 }
 
-.podium_icon {
+.podium__icon {
   font-size: 1.4rem;
   margin-bottom: 12px;
 }
 
-.podium_place--1 .podium_icon { color: #ffd700; }
-.podium_place--2 .podium_icon { color: #c0c0c0; }
-.podium_place--3 .podium_icon { color: #cd7f32; }
+.podium__place--1 .podium__icon { color: #ffd700; }
+.podium__place--2 .podium__icon { color: #c0c0c0; }
+.podium__place--3 .podium__icon { color: #cd7f32; }
 
-.podium_rank {
+.podium__rank {
   font-family: 'Space Grotesk', sans-serif;
   font-size: .75rem;
   font-weight: 700;
@@ -252,7 +252,7 @@
   margin-bottom: 6px;
 }
 
-.podium_team {
+.podium__team {
   font-size: .95rem;
   font-weight: 700;
   color: var(--text);
@@ -260,7 +260,7 @@
   line-height: 1.3;
 }
 
-.podium_bar {
+.podium__bar {
   width: 100%;
   border-radius: 8px 8px 0 0;
   background: var(--surface);
@@ -269,23 +269,23 @@
   transition: border-color .3s;
 }
 
-.podium_place--1 .podium_bar {
+.podium__place--1 .podium__bar {
   height: 140px;
   border-color: rgba(255, 215, 0, .3);
   background: linear-gradient(to top, var(--surface) 40%, rgba(255,215,0,.06) 100%);
 }
-.podium_place--2 .podium_bar {
+.podium__place--2 .podium__bar {
   height: 100px;
   border-color: rgba(192,192,192,.25);
   background: linear-gradient(to top, var(--surface) 40%, rgba(192,192,192,.05) 100%);
 }
-.podium_place--3 .podium_bar {
+.podium__place--3 .podium__bar {
   height: 72px;
   border-color: rgba(205,127,50,.25);
   background: linear-gradient(to top, var(--surface) 40%, rgba(205,127,50,.05) 100%);
 }
 
-.podium_place:hover .podium_bar {
+.podium__place:hover .podium__bar {
   border-color: var(--accent);
 }
 
@@ -298,10 +298,10 @@
   .podium {
     gap: 10px;
   }
-  .podium_team {
+  .podium__team {
     font-size: .85rem;
   }
-  .podium_place--1 .podium_bar { height: 110px; }
-  .podium_place--2 .podium_bar { height: 80px; }
-  .podium_place--3 .podium_bar { height: 56px; }
+  .podium__place--1 .podium__bar { height: 110px; }
+  .podium__place--2 .podium__bar { height: 80px; }
+  .podium__place--3 .podium__bar { height: 56px; }
 }
