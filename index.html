@@ -4,440 +4,234 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DMU Hackers - Home</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <title>DMU Hackers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
 
-  <!-- Sidebar -->
-  <nav id="sidebarMenu" class="d-none d-md-block sidebar-widget">
-    <div class="sidebar-stepper pt-4">
-      <div class="stepper">
-        <a href="#hero-area" class="stepper-link active" data-section="hero-area">
-          <span class="stepper-circle"><i class="fas fa-home"></i></span>
-          <span class="stepper-label">Home</span>
-        </a>
-        <a href="#P2P" class="stepper-link" data-section="P2P">
-          <span class="stepper-circle"><i class="fas fa-align-left"></i></span>
-          <span class="stepper-label">Pwn2Play</span>
-        </a>
-        <a href="#about-us" class="stepper-link" data-section="about-us">
-          <span class="stepper-circle"><i class="fas fa-info-circle"></i></span>
-          <span class="stepper-label">About</span>
-        </a>
-        <a href="#facilities" class="stepper-link" data-section="facilities">
-          <span class="stepper-circle"><i class="fas fa-calendar-alt"></i></span>
-          <span class="stepper-label">Facilities</span>
-        </a>
-        <a href="#committee" class="stepper-link" data-section="committee">
-          <span class="stepper-circle"><i class="fas fa-handshake"></i></span>
-          <span class="stepper-label">Committee</span>
-        </a>
-      </div>
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="nav_inner">
+      <a href="#" class="nav_logo">
+        <span class="nav_logo-text">DMU Hackers</span>
+      </a>
+      <button class="nav_toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav_links" id="navLinks">
+        <li><a href="#hero" class="nav_link active" data-section="hero">Home</a></li>
+        <li><a href="#about" class="nav_link" data-section="about">About</a></li>
+        <li><a href="#pwn2play" class="nav_link" data-section="pwn2play">Pwn2Play</a></li>
+        <li><a href="#facilities" class="nav_link" data-section="facilities">Facilities</a></li>
+        <li><a href="#committee" class="nav_link" data-section="committee">Committee</a></li>
+        <li><a href="P2P.html" class="nav_link nav_link--cta">Enter CTF &rarr;</a></li>
+      </ul>
     </div>
   </nav>
-  <div class="main-content">
-    <header id="hero-area" class="py-5">
 
-      <!-- Navigation Bar -->
-      <nav class="navbar navbar-expand-lg navbar fixed-top universal-navbar">
-        <div class="container justify-content-end">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-            aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="mainNavbar">
-            <ul class="navbar-nav ms-auto gap-4">
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="P2P.html">P2P</a>
-              </li>
-            </ul>
+  <!-- Hero -->
+  <section id="hero" class="hero">
+    <div class="hero_bg"></div>
+    <div class="hero_content">
+      <p class="hero_tag">De Montfort University Hacking Society</p>
+      <h1 class="hero_title">DMU<br><span class="hero_accent">Hackers</span></h1>
+      <p class="hero_sub">Cyber security, CTF competitions, and hands-on hacking. Every Thursday at 18:00.</p>
+      <div class="hero_actions">
+        <a href="https://discord.gg/Vvrk4kK" class="btn btn--primary" target="_blank"><i class="fab fa-discord"></i> Join Discord</a>
+        <a href="#about" class="btn btn--ghost">Learn more &darr;</a>
+      </div>
+      <div class="hero_socials">
+        <a href="https://twitter.com/dmuhackers" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://github.com/DMUHackers" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/hackers.dmu" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/dmu-hackers/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.demontfortsu.com/organisation/dmuhackers/" target="_blank" aria-label="DSU"><i class="fas fa-graduation-cap"></i></a>
+      </div>
+    </div>
+    <div class="hero_scroll">
+      <span>Scroll</span>
+      <div class="hero_scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section_header">
+        <span class="section_tag">Who we are</span>
+        <h2 class="section_title">About the Society</h2>
+      </div>
+      <div class="cards cards--three">
+        <div class="card">
+          <div class="card_icon"><i class="fas fa-flag"></i></div>
+          <h3 class="card_title">Competitions</h3>
+          <p class="card_text">We take part in capture the flag challenges and face-to-face events, competing as individuals and teams. A perfect way to gain experience and knowledge.</p>
+        </div>
+        <div class="card">
+          <div class="card_icon"><i class="fas fa-calendar-week"></i></div>
+          <h3 class="card_title">Weekly Meetups</h3>
+          <p class="card_text">We meet weekly to practice and share cyber security skills: web app hacking, lock picking, binary exploitation and reverse engineering. Everything legal.</p>
+        </div>
+        <div class="card">
+          <div class="card_icon"><i class="fas fa-users"></i></div>
+          <h3 class="card_title">Networking</h3>
+          <p class="card_text">Meet people with similar aspirations. Competitions and events provide valuable experience and a chance to impress industry players.</p>
+        </div>
+      </div>
+      <div class="info-bar">
+        <div class="info-bar_item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Gateway House 5.53</span>
+        </div>
+        <div class="info-bar_item">
+          <i class="fas fa-clock"></i>
+          <span>Thursday at 18:00</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pwn2Play -->
+  <section id="pwn2play" class="section section--alt">
+    <div class="container">
+      <div class="p2p-split">
+        <div class="p2p-split_img">
+          <img src="img/pwn2play/P2P_FirstBlood.png" alt="Pwn2Play Logo">
+        </div>
+        <div class="p2p-split_content">
+          <span class="section_tag">Capture The Flag</span>
+          <h2 class="section_title">Pwn2Play</h2>
+          <p>Our flagship CTF competition. Test your skills against challenges in web exploitation, cryptography, reverse engineering and more.</p>
+          <a href="P2P.html" class="btn btn--primary">Enter Pwn2Play &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Facilities -->
+  <section id="facilities" class="section">
+    <div class="container">
+      <div class="section_header">
+        <span class="section_tag">Resources</span>
+        <h2 class="section_title">Facilities</h2>
+      </div>
+      <div class="cards cards--two">
+        <div class="card card--horizontal">
+          <div class="card_icon"><i class="fas fa-server"></i></div>
+          <div>
+            <h3 class="card_title">Dedicated Server</h3>
+            <p class="card_text">Our Dual Xeon, 24GB memory server hosts vulnerable VMs and CTF challenges for hands-on practice.</p>
           </div>
         </div>
-      </nav>
-      <div class="container">
-        <div class="splash-widgets-3col">
-          <div class="splash-widgets-leftcol">
-            <div class="splash-widget splash-widget-topleft">
-              <h2 class="section-title">Welcome to DMU Hacking Society</h2>
-            </div>
-            <div class="splash-widget splash-widget-bottomleft">
-              <img src="img/site-content/logo.png" alt="DMU Hackers Logo" class="splash-logo">
-            </div>
+        <div class="card card--horizontal">
+          <div class="card_icon"><i class="fas fa-building"></i></div>
+          <div>
+            <h3 class="card_title">Dedicated Lab</h3>
+            <p class="card_text">The Cyber Security Center at De Montfort trusts us with one of their labs every week.</p>
           </div>
-          <div class="splash-widget splash-widget-rightlong">
-            <div class="social-widget-vertical">
-              <div class="social-row">
-                <a href="https://twitter.com/dmuhackers" class="social-btn twitter" target="_blank"
-                  aria-label="Twitter">
-                  <i class="fab fa-twitter"></i>
-                </a>
-                <a href="https://twitter.com/dmuhackers" class="twitter" target="_blank" aria-label="Twitter">
-                  <span class="link-text">Follow us on Twitter</span>
-                </a>
-              </div>
-              <div class="social-row">
-                <a href="https://discord.gg/Vvrk4kK" class="social-btn discord" target="_blank" aria-label="Discord">
-                  <i class="fab fa-discord"></i>
-                </a>
-                <a href="https://discord.gg/Vvrk4kK" class="discord" target="_blank" aria-label="Discord">
-                  <span class="link-text">Join our Discord community</span>
-                </a>
-              </div>
-              <div class="social-row">
-                <a href="https://github.com/DMUHackers" class="social-btn github" target="_blank" aria-label="GitHub">
-                  <i class="fab fa-github"></i>
-                </a>
-                <a href="https://github.com/DMUHackers" class="github" target="_blank" aria-label="GitHub">
-                  <span class="link-text">Explore our GitHub</span>
-                </a>
-              </div>
-              <div class="social-row">
-                <a href="https://www.instagram.com/hackers.dmu" class="social-btn instagram" target="_blank"
-                  aria-label="Instagram">
-                  <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.instagram.com/hackers.dmu" class="instagram" target="_blank"
-                  aria-label="Instagram">
-                  <span class="link-text">See us on Instagram</span>
-                </a>
-              </div>
-              <div class="social-row">
-                <a href="https://www.linkedin.com/company/dmu-hackers/" class="social-btn linkedin" target="_blank"
-                  aria-label="LinkedIn">
-                  <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://www.linkedin.com/company/dmu-hackers/" class="linkedin" target="_blank"
-                  aria-label="LinkedIn">
-                  <span class="link-text">Find us on LinkedIn</span>
-                </a>
-              </div>
-              <div class="social-row">
-                <a href="https://www.demontfortsu.com/organisation/dmuhackers/" class="social-btn dsu" target="_blank"
-                  aria-label="DSU">
-                  <i class="fas fa-calendar-check"></i>
-                </a>
-                <a href="https://www.demontfortsu.com/organisation/dmuhackers/" class="dsu" target="_blank"
-                  aria-label="DSU">
-                  <span class="link-text">DSU Website</span>
-                </a>
-              </div>
-            </div>
+        </div>
+        <div class="card card--horizontal">
+          <div class="card_icon"><i class="fas fa-people-group"></i></div>
+          <div>
+            <h3 class="card_title">Like-minded People</h3>
+            <p class="card_text">Share ideas and learn from each other in a community of security enthusiasts.</p>
+          </div>
+        </div>
+        <div class="card card--horizontal">
+          <div class="card_icon"><i class="fas fa-chalkboard-user"></i></div>
+          <div>
+            <h3 class="card_title">Industry Experts</h3>
+            <p class="card_text">We organise talks from industry professionals. Learn from real experience and grow your network.</p>
           </div>
         </div>
       </div>
-    </header>
-    <!-- Header Section End -->
+    </div>
+  </section>
 
-    <hr class="section-divider">
-
-    <!-- Pwn2Play Section -->
-    <section id="P2P" class="section">
-      <div class="container">
-        <div class="section-header">
-          <img id="p2p-section-img" src="img/pwn2play/P2P_FirstBlood.png" alt="Pwn2Play Logo"
-            style="max-width:300px; margin-bottom:24px; display:block; margin-left:auto; margin-right:auto;">
-          <h2 class="section-title">Pwn2Play</h2>
-          <hr class="lines">
-          <p class="section-subtitle">Heard about our CTF competition Pwn2Play? Why not check it out?</p>
-          <a href="P2P.html" class="btn p2p-btn">Pwn2Play</a>
+  <!-- Committee -->
+  <section id="committee" class="section section--alt">
+    <div class="container">
+      <div class="section_header">
+        <span class="section_tag">25/26 Committee</span>
+        <h2 class="section_title">The Team</h2>
+      </div>
+      <div class="committee-grid">
+        <div class="member">
+          <div class="member_img member_img--placeholder">
+            <i class="fas fa-user"></i>
+          </div>
+          <h4 class="member_name">Adam</h4>
+          <p class="member_role">Chairman</p>
+          <a href="#" class="member_social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="member">
+          <div class="member_img member_img--placeholder">
+            <i class="fas fa-user"></i>
+          </div>
+          <h4 class="member_name">Josh</h4>
+          <p class="member_role">Secretary</p>
+          <a href="https://www.linkedin.com/in/josh-lloyd-227583366/" class="member_social" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="member">
+          <div class="member_img member_img--placeholder">
+            <i class="fas fa-user"></i>
+          </div>
+          <h4 class="member_name">Amara</h4>
+          <p class="member_role">Treasurer</p>
+          <a href="https://www.linkedin.com/in/amara-g-98ab2a270/" class="member_social" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="member">
+          <div class="member_img member_img--placeholder">
+            <i class="fas fa-user"></i>
+          </div>
+          <h4 class="member_name">Abbey</h4>
+          <p class="member_role">Health &amp; Safety</p>
+          <a href="https://www.linkedin.com/in/abigailvr/" class="member_social" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="member">
+          <div class="member_img member_img--placeholder">
+            <i class="fas fa-user"></i>
+          </div>
+          <h4 class="member_name">Charlie</h4>
+          <p class="member_role">CTF Officer</p>
+          <a href="https://www.linkedin.com/in/charlie-burrows-07108a336" class="member_social" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <div class="member">
+          <div class="member_img member_img--placeholder">
+            <i class="fas fa-user"></i>
+          </div>
+          <h4 class="member_name">Ethan</h4>
+          <p class="member_role">CTF Mentor</p>
+          <a href="https://www.linkedin.com/in/ethan-bauer-842124368/" class="member_social" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
-    </section>
-    <hr class="section-divider">
-    <section id="about-us" class="section">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">About the Society</h2>
-          <hr class="lines">
-        </div>
-        <div class="row mb-4">
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card h-100">
-              <div class="card-body text-center">
-                <div class="icon mb-3"><i class="lnr lnr-laptop fa-2x"></i></div>
-                <h4 class="card-title">Competitions</h4>
-                <p class="card-text">As a society we take part in an array of competitions including capture the flag
-                  challenges and face-to-face events. We compete as individuals and in teams depending on the
-                  event/competition. It's a perfect way to gain experience and knowledge.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card h-100">
-              <div class="card-body text-center">
-                <div class="icon mb-3"><i class="lnr lnr-calendar-full fa-2x"></i></div>
-                <h4 class="card-title">Weekly Meetups</h4>
-                <p class="card-text">We meet weekly to practice and share cyber security skills. It's a great chance to
-                  get practical experience, as we cover skills such as web application hacking, lock picking, binary
-                  exploitation and reverse engineering. Everything we do is legal.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6 mb-4">
-            <div class="card h-100">
-              <div class="card-body text-center">
-                <div class="icon mb-3"><i class="lnr lnr-users fa-2x"></i></div>
-                <h4 class="card-title">Networking</h4>
-                <p class="card-text">If you're interested in a career in cyber security, DMU Hackers is a great
-                  opportunity to meet people with similar aspirations. Competitions and events will not only provide
-                  valuable experience, but are also great for networking and leaving a lasting impression on some of the
-                  big players in industry.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <div class="card h-100">
-              <div class="card-body text-center py-4">
-                <h4 class="card-title mb-4">Where and when?</h4>
-                <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-4">
-                  <div
-                    class="d-flex align-items-center justify-content-center mini-info-card px-4 py-3 mb-3 mb-md-0 bg-secondary-custom rounded-4 min-width-220">
-                    <span class="me-3 fs-2 text-primary-custom">
-                      <i class="fas fa-map-marker-alt"></i>
-                    </span>
-                    <span class="fs-5">Gateway House 5.53</span>
-                  </div>
-                  <div
-                    class="d-flex align-items-center justify-content-center mini-info-card px-4 py-3 bg-secondary-custom rounded-4 min-width-220">
-                    <span class="me-3 fs-2 text-primary-custom">
-                      <i class="fas fa-clock"></i>
-                    </span>
-                    <span class="fs-5">Thursday at 18:00</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-    </section>
-    <!-- About Us Section End -->
-
-    <hr class="section-divider">
-
-    <!-- Facilities Section -->
-    <section id="facilities" class="section">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Facilities</h2>
-          <hr class="lines">
-          <p class="section-subtitle">Here are some of the resources we have access to.</p>
-        </div>
-        <div class="row g-4">
-          <div class="col-lg-6 col-sm-6">
-            <div class="card h-100">
-              <div class="card-body d-flex align-items-center">
-                <span class="icon me-3"><i class="lnr lnr-smartphone fa-2x"></i></span>
-                <div>
-                  <h4>Dedicated Server</h4>
-                  <p>We have our very own Dual Xeon, 24GB memory server to play with. This allows us to host vulnerable
-                    virtual machines and capture the flag challenges to let you loose on.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-sm-6">
-            <div class="card h-100">
-              <div class="card-body d-flex align-items-center">
-                <span class="icon me-3"><i class="lnr lnr-map-marker fa-2x"></i></span>
-                <div>
-                  <h4>Dedicated Location</h4>
-                  <p>The Cyber Security Center at De Montfort kindly trust us to use one of their labs to host DMU
-                    Hackers every week. They're keen for us to get people involved.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-sm-6">
-            <div class="card h-100">
-              <div class="card-body d-flex align-items-center">
-                <span class="icon me-3"><i class="lnr lnr-user fa-2x"></i></span>
-                <div>
-                  <h4>Like-minded People</h4>
-                  <p>It's important to be surrounded by people that have the same interests as you. It gives you an
-                    opportunity to share ideas and learn from one and another.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-sm-6">
-            <div class="card h-100">
-              <div class="card-body d-flex align-items-center">
-                <span class="icon me-3"><i class="lnr lnr-graduation-hat fa-2x"></i></span>
-                <div>
-                  <h4>Industry Experts</h4>
-                  <p>We organise visits from industry experts to come and give talks to the society; a great way to
-                    learn from people with real experience and also network with them too.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Facilities Section End -->
-
-    <hr class="section-divider">
-
-    <!-- Committee Section -->
-    <section id="committee" class="section">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Committee</h2>
-          <hr class="lines">
-          <p class="section-subtitle">The people who make the magic happen. This is your 25/26 DMU Hackers Committee.
-        </div>
-        <div id="committeeCarousel" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="d-flex justify-content-center">
-                <div class="committee-card d-flex flex-row align-items-stretch">
-                  <div class="committee-img-wrapper">
-                    <img src="img/committee/adam.png" alt="Adam">
-                  </div>
-                  <div class="committee-info">
-                    <h4 class="team-title mb-2">Adam</h4>
-                    <p class="mb-3">Chairman</p>
-                    <ul class="social-list list-inline mb-0">
-                      <li class="list-inline-item linkedin">
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="d-flex justify-content-center">
-                <div class="committee-card d-flex flex-row align-items-stretch">
-                  <div class="committee-img-wrapper">
-                    <img src="img/committee/josh.png" alt="Josh Lloyd">
-                  </div>
-                  <div class="committee-info">
-                    <h4 class="team-title mb-2">Josh Lloyd</h4>
-                    <p class="mb-3">Secretary</p>
-                    <ul class="social-list list-inline mb-0">
-                      <li class="list-inline-item linkedin">
-                        <a href="https://www.linkedin.com/in/josh-lloyd-227583366/"><i class="fab fa-linkedin"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="d-flex justify-content-center">
-                <div class="committee-card d-flex flex-row align-items-stretch">
-                  <div class="committee-img-wrapper">
-                    <img src="img/committee/amara.png" alt="Amara Gouldbourne-Beckford">
-                  </div>
-                  <div class="committee-info">
-                    <h4 class="team-title mb-2">Amara Gouldbourne-Beckford</h4>
-                    <p class="mb-3">Treasurer</p>
-                    <ul class="social-list list-inline mb-0">
-                      <li class="list-inline-item linkedin">
-                        <a href="https://www.linkedin.com/in/amara-g-98ab2a270/"><i class="fab fa-linkedin"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="d-flex justify-content-center">
-                <div class="committee-card d-flex flex-row align-items-stretch">
-                  <div class="committee-img-wrapper">
-                    <img src="img/committee/abbey.png" alt="Abbey Rhodes">
-                  </div>
-                  <div class="committee-info">
-                    <h4 class="team-title mb-2">Abbey Rhodes</h4>
-                    <p class="mb-3">Health & Safety Officer</p>
-                    <ul class="social-list list-inline mb-0">
-                      <li class="list-inline-item linkedin">
-                        <a href="https://www.linkedin.com/in/abigailvr/"><i class="fab fa-linkedin"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item">
-              <div class="d-flex justify-content-center">
-                <div class="committee-card d-flex flex-row align-items-stretch">
-                  <div class="committee-img-wrapper">
-                    <img src="img/committee/charlie.png" alt="Charlie Burrows">
-                  </div>
-                  <div class="committee-info">
-                    <h4 class="team-title mb-2">Charlie Burrows</h4>
-                    <p class="mb-3">CTF & Events Officer</p>
-                    <ul class="social-list list-inline mb-0">
-                      <li class="list-inline-item linkedin">
-                        <a href="https://www.linkedin.com/in/charlie-burrows-07108a336"><i
-                            class="fab fa-linkedin"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#committeeCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#committeeCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#committeeCarousel" data-bs-slide-to="0" class="active"
-              aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#committeeCarousel" data-bs-slide-to="1"
-              aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#committeeCarousel" data-bs-slide-to="2"
-              aria-label="Slide 3"></button>
-            <button type="button" data-bs-target="#committeeCarousel" data-bs-slide-to="3"
-              aria-label="Slide 4"></button>
-            <button type="button" data-bs-target="#committeeCarousel" data-bs-slide-to="4"
-              aria-label="Slide 5"></button>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Committee Section End -->
-
-  </div>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer>
+  <footer class="footer">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-6 col-sm-6">
-          <ul class="footer-links">
-            <li><a href="#hero-area">Homepage</a></li>
-            <li><a href="P2P.html">Pwn2Play</a></li>
-          </ul>
+      <div class="footer_inner">
+        <div class="footer_brand">
+          <img src="img/site-content/logo.png" alt="DMU Hackers" class="footer_logo">
+          <span>DMU Hackers</span>
         </div>
-        <div class="col-lg-6 col-sm-6">
-          <div class="copyright">
-            <p>DMU Hackers - Pwning since 2015 ©</p>
-          </div>
-        </div>
+        <nav class="footer_links">
+          <a href="#hero">Home</a>
+          <a href="#about">About</a>
+          <a href="P2P.html">Pwn2Play</a>
+          <a href="https://discord.gg/Vvrk4kK" target="_blank">Discord</a>
+        </nav>
+        <p class="footer_copy">&copy; DMU Hackers | Pwning since 2015</p>
       </div>
     </div>
   </footer>
-  <!-- Footer End -->
 
-  <!-- JS Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/sidebar.js"></script>
 </body>
 

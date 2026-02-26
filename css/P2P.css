@@ -1,521 +1,307 @@
-/* =============================================
--- Content: P2P CSS --
-============================================== */
-.section>.container {
+/* ==========================================================================
+   Pwn2Play — Page-specific styles (extends main.css dark theme)
+   ========================================================================== */
+
+/* ---------- P2P Hero gradient ---------- */
+.hero_bg--p2p {
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 0%, rgba(200,16,46,.18) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 45% at 20% 100%, rgba(200,16,46,.08) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(120,0,200,.06) 0%, transparent 50%);
+}
+
+/* ---------- P2P Meta Cards (date / time / location) ---------- */
+.p2p-meta-card {
+  text-align: center;
+}
+.p2p-meta-card .card_icon {
+  margin: 0 auto 20px;
+}
+.p2p-meta-card .card_title {
+  font-size: .85rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.p2p-meta-card .card_text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ---------- Connect strip ---------- */
+.p2p-connect {
+  margin-top: 48px;
+  text-align: center;
+}
+.p2p-connect_title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+.p2p-connect_links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.p2p-connect_btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: .9rem;
+  font-weight: 500;
+  transition: all .25s;
+}
+.p2p-connect_btn i { font-size: 1.15rem; }
+.p2p-connect_btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: rgba(200,16,46,.08);
+  transform: translateY(-2px);
+}
+
+/* ---------- Schedule Grid ---------- */
+.schedule-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
   max-width: 900px;
   margin: 0 auto;
-  padding: 0 1rem;
-  width: 100%;
 }
 
-/* ============================================= 
-1. Light Mode Style Variables
-============================================= */
-:root {
-  --bg: #DFD0B8;
-  --interface: #948979;
-  --primary-text: #222831;
-  --accent: #940d2d;
-  --secondary-text: #393E46;
-}
-
-/* ============================================= 
-2. P2P Page Styles 
-============================================= */
-
-
-.card {
-  border-radius: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  border: none;
-  background: var(--bg);
-  color: var(--interface);
-}
-
-.event-card {
-  background: var(--interface) !important;
-  color: var(--primary-text) !important;
-}
-
-.event-info-box {
-  background: var(--accent);
-  color: var(--bg);
-  border-radius: 16px;
-  margin-bottom: 0.5rem;
-  width: 100%;
-}
-
-.event-info-icon {
-  font-size: 2rem;
-  color: var(--bg);
-}
-
-.connect-card {
-  background: var(--interface) !important;
-  color: var(--primary-text) !important;
-  border: none;
-}
-
-.connect-card .social-btn {
-  width: 60px;
-  height: 60px;
-  font-size: 2rem;
-  background: var(--accent);
-  color: var(--bg);
-  margin-bottom: 0.5rem;
-}
-
-.connect-card .social-btn:hover {
-  background: var(--bg);
-  color: var(--primary-text);
-}
-
-  body {
-    background: var(--bg);
-    color: var(--secondary-text);
-  }
-
-  .splash-widget,
-  .sidebar-widget,
-  footer,
-  .universal-navbar {
-    background: var(--interface) !important;
-    color: var(--primary-text) !important;
-  }
-
-  .splash-widget,
-  .splash-widget-rightlong,
-  .splash-widget-topleft,
-  .splash-widget-bottomleft {
-    background: var(--interface) !important;
-    color: var(--primary-text) !important;
-  }
-
-  .stepper-link,
-  .stepper-label {
-    color: var(--primary-text) !important;
-  }
-
-  .stepper-circle {
-    background: var(--interface) !important;
-    border-color: var(--accent) !important;
-    color: var(--accent) !important;
-  }
-
-  .stepper-link.active .stepper-circle,
-  .stepper-link:hover .stepper-circle {
-    background: var(--accent) !important;
-    color: var(--primary-text) !important;
-    border-color: var(--primary-text) !important;
-  }
-
-  .stepper-link.active .stepper-label,
-  .stepper-link:hover .stepper-label {
-    color: var(--accent) !important;
-  }
-
-  .link-text,
-  .footer-links li a {
-    color: var(--primary-text);
-  }
-
-  .link-text:hover,
-  .footer-links li a:hover {
-    color: var(--accent);
-  }
-
-
-
-.event-card {
-  background: var(--interface) !important;
-  color: var(--primary-text) !important;
-  border: none !important;
-}
-
-.event-info-box {
-  background: var(--interface) !important;
-  color: var(--primary-text) !important;
-  border-radius: 16px !important;
-}
-
-.event-info-icon {
-  font-size: 2rem;
-  color: var(--primary-text) !important;
-}
-
-.event-info-accent {
-  color: var(--accent) !important;
-}
-
-.event-social-btn {
-  background: var(--interface) !important;
-  color: var(--primary-text) !important;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: 2rem;
-  transition: all 0.3s ease;
-}
-
-.event-social-btn:hover {
-  background: var(--accent) !important;
-  color: var(--bg) !important;
-  transform: scale(1.05);
-}
-
-/* ============================================= 
-3. Timeline Section Styles
-============================================= */
-.timeline-snaking {
-  position: relative;
-  margin: 2rem 0;
-  padding-left: 0;
-}
-
-.timeline-item {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 2rem;
-  position: relative;
-  width: 100%;
-}
-
-.timeline-item.right {
-  justify-content: flex-end;
-}
-
-.timeline-content {
-  display: flex;
-  align-items: center;
-  background: var(--bg);
-  border-radius: 1.5rem;
-  padding: 0.75rem 1.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  min-width: 260px;      
-  max-width: 360px;     
-  width: 100%;          
-  position: relative;
-  box-sizing: border-box;
+.schedule-card {
+  flex: 0 0 calc(25% - 12px);
+  min-width: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 16px 24px;
   text-align: center;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  transition: border-color .3s, transform .3s;
+  position: relative;
+  overflow: hidden;
+}
+.schedule-card:hover {
+  border-color: rgba(200,16,46,.4);
+  transform: translateY(-3px);
 }
 
-.timeline-dot {
-  width: 2.2rem;
-  height: 2.2rem;
+.schedule-card:nth-child(even) {
   background: var(--bg);
-  border: 3px solid var(--accent);
-  border-radius: 50%;
+}
+.schedule-card:nth-child(odd) {
+  background: var(--surface);
+}
+
+.schedule-card_time {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.02em;
+  margin-bottom: 12px;
+}
+
+.schedule-card_line {
+  width: 32px;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+  margin-bottom: 16px;
+}
+
+.schedule-card_icon {
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.schedule-card_label {
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .schedule-card {
+    flex: 0 0 calc(50% - 8px);
+  }
+}
+
+@media (max-width: 420px) {
+  .schedule-card {
+    flex: 0 0 calc(50% - 5px);
+    padding: 20px 12px 18px;
+  }
+  .schedule-card_time {
+    font-size: 1.25rem;
+  }
+}
+
+/* ---------- Sponsors CTA ---------- */
+.sponsors-cta {
+  text-align: center;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.sponsors-cta p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+/* ---------- After Party ---------- */
+.afterparty {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.afterparty_icon {
+  font-size: 3rem;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.afterparty_heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+.afterparty_text {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+.afterparty_details {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.afterparty_detail {
   display: flex;
   align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 22px;
+  font-size: .95rem;
+  color: var(--text);
+  transition: border-color .3s;
+}
+.afterparty_detail:hover {
+  border-color: var(--accent);
+}
+.afterparty_detail i {
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+/* ---------- Podium ---------- */
+.podium {
+  display: flex;
+  align-items: flex-end;
   justify-content: center;
-  margin: 0 1rem;
-  font-size: 1.2rem;
-  color: var(--accent);
-  z-index: 1;
+  gap: 16px;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
-.timeline-time {
-  font-weight: bold;
-  color: var(--accent);
-  margin-right: 0.5rem;
-  min-width: 3.5rem;
+.podium_place {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.timeline-desc {
-  margin-left: 0.5rem;
-  font-size: 1rem;
+.podium_icon {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
 }
 
-.timeline-snaking::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--accent);
-  transform: translateX(-50%);
-  z-index: 0;
+.podium_place--1 .podium_icon { color: #ffd700; }
+.podium_place--2 .podium_icon { color: #c0c0c0; }
+.podium_place--3 .podium_icon { color: #cd7f32; }
+
+.podium_rank {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
 }
 
-.timeline-item.left .timeline-content {
-  margin-right: auto;
+.podium_team {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 1.3;
 }
 
-.timeline-item.right .timeline-content {
-  margin-left: auto;
+.podium_bar {
+  width: 100%;
+  border-radius: 8px 8px 0 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  transition: border-color .3s;
 }
 
-@media (max-width: 767px) {
-  /* Fix main content margin on mobile */
-  .main-content {
-    margin-left: 0 !important;
-    margin-top: 70px !important; /* Add top margin to account for fixed navbar */
-  }
-  
-  /* Mobile sections targeting all P2P sections */
-  section,
-  header#hero-area,
-  #description,
-  #key-info,
-  #schedule,
-  #sponsors {
-    min-height: auto !important;
-    padding: 2rem 0 !important;
-  }
-  
-  /* Fix navbar spacing for P2P page */
-  header#hero-area {
-    padding-top: 2rem !important; /* Reduce since main-content now has margin-top */
-    padding-bottom: 2rem !important;
-  }
-  
-  /* Other P2P sections spacing */
-  #description,
-  #key-info,
-  #schedule,
-  #sponsors {
-    padding: 3rem 1rem !important;
-  }
-  
-  .section > .container {
-    padding: 0 1rem;
-  }
-  
-  /* Mobile navbar improvements */
-  .universal-navbar {
-    padding: 0.5rem 1rem;
-  }
-  
-  .universal-navbar .navbar-nav {
-    gap: 1rem;
-    text-align: center;
-  }
-  
-  .universal-navbar .nav-link {
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-  }
-  
-  /* Mobile splash widget improvements */
-  .splash-widgets-3col {
-    margin: 16px auto;
-    padding: 0 1rem;
-    gap: 16px;
-    flex-direction: column;
-  }
-  
-  .splash-widget {
-    padding: 24px 16px;
-    margin-bottom: 1rem;
-  }
-  
-  /* Mobile typography */
-  .section-title {
-    font-size: 1.75rem;
-  }
-  
-  .section-subtitle {
-    font-size: 0.9rem;
-  }
-  
-  /* Mobile social buttons */
-  .social-btn {
-    width: 40px;
-    height: 40px;
-    font-size: 1.4rem;
-  }
-  
-  .social-row span {
-    font-size: 0.9rem;
-  }
-  
-  /* Timeline improvements */
-  .timeline-item,
-  .timeline-item.right,
-  .timeline-item.left {
-    justify-content: flex-start !important;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
-  }
-  
-  .timeline-content {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    min-width: 0;
-    max-width: 100%;
-    width: 100%;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    padding: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .timeline-dot {
-    margin: 0.5rem 0;
-    order: 1;
-  }
-  
-  .timeline-time {
-    margin: 0 0 0.5rem 0;
-    order: 0;
-    font-size: 1.1rem;
-  }
-  
-  .timeline-desc {
-    margin: 0;
-    order: 2;
-    font-size: 0.9rem;
-  }
-  
-  .timeline-snaking::before {
-    display: none; /* Hide the vertical bar */
-  }
-  
-  /* Event social buttons mobile optimization */
-  .event-social-btn {
-    width: 50px !important;
-    height: 50px !important;
-    font-size: 1.5rem !important;
-  }
-  
-  /* Key info section improvements */
-  #key-info .event-info-box {
-    align-items: center !important;
-    text-align: center !important;
-    justify-content: center !important;
-    flex-direction: column !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: 100% !important;
-    margin-bottom: 1rem !important;
-  }
-  
-  #key-info .event-info-icon {
-    margin-right: 0 !important;
-    margin-bottom: 0.5rem;
-  }
-  
-  /* Mobile card improvements */
-  .card {
-    margin: 1rem 0;
-  }
-  
-  .card-body {
-    padding: 1.5rem 1rem !important;
-  }
-  
-  /* Mobile container improvements */
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  
-  /* Mobile section headers */
-  .section-header {
-    margin-bottom: 1.5rem !important;
-    padding: 0 1rem;
-  }
-  
-  .section-divider {
-    width: 90%;
-    margin: 2rem auto;
-  }
-  
-  /* Hero section improvements */
-  .splash-widgets-leftcol {
-    min-width: unset;
-    width: 100%;
-    max-width: 500px;
-  }
-  
-  .splash-widget-rightlong {
-    width: 100%;
-    min-width: unset;
-    max-width: 500px;
-  }
-  
-  /* Social widget improvements */
-  .social-widget-vertical {
-    padding: 1rem;
-    gap: 16px;
-  }
-  
-  .social-row {
-    margin-bottom: 0.75rem;
-    gap: 12px;
-  }
-  
-  /* Mobile footer improvements */
-  footer {
-    padding: 1rem 0;
-  }
-  
-  .footer-links {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  .footer-links li {
-    display: block;
-    margin: 0.5rem 0;
-  }
-  
-  .copyright {
-    text-align: center;
-  }
+.podium_place--1 .podium_bar {
+  height: 140px;
+  border-color: rgba(255, 215, 0, .3);
+  background: linear-gradient(to top, var(--surface) 40%, rgba(255,215,0,.06) 100%);
+}
+.podium_place--2 .podium_bar {
+  height: 100px;
+  border-color: rgba(192,192,192,.25);
+  background: linear-gradient(to top, var(--surface) 40%, rgba(192,192,192,.05) 100%);
+}
+.podium_place--3 .podium_bar {
+  height: 72px;
+  border-color: rgba(205,127,50,.25);
+  background: linear-gradient(to top, var(--surface) 40%, rgba(205,127,50,.05) 100%);
 }
 
-/* Tablet breakpoint improvements */
-@media (max-width: 991.98px) {
-  .splash-widgets-3col {
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-    margin: 24px auto;
-  }
-
-  .splash-widgets-leftcol {
-    min-width: unset;
-    width: 100%;
-    max-width: 500px;
-  }
-
-  .splash-widget-rightlong {
-    width: 100%;
-    min-width: unset;
-    max-width: 500px;
-  }
-
-  .splash-widget {
-    padding: 32px 24px;
-  }
-  
-  .social-widget-vertical {
-    gap: 16px;
-  }
-  
-  .social-row {
-    gap: 12px;
-  }
+.podium_place:hover .podium_bar {
+  border-color: var(--accent);
 }
 
-/* ============================================= 
-4. Dark Mode Style Variables
-============================================= */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #222831;
-    --interface: #393E46;
-    --primary-text: #DFD0B8;
-    --accent: #940d2d;
-    --secondary-text: #948979;
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .p2p-meta-cards.cards--three {
+    grid-template-columns: 1fr;
   }
+
+  .podium {
+    gap: 10px;
+  }
+  .podium_team {
+    font-size: .85rem;
+  }
+  .podium_place--1 .podium_bar { height: 110px; }
+  .podium_place--2 .podium_bar { height: 80px; }
+  .podium_place--3 .podium_bar { height: 56px; }
 }

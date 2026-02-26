@@ -1,41 +1,84 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const links = document.querySelectorAll('.stepper-link[data-section]');
-  const sections = Array.from(links)
-    .map(link => link.getAttribute('data-section'))
-    .filter(id => document.getElementById(id));
+/* ==========================================================================
+   DMU Hackers — Navigation, scroll-spy & scroll-reveal
+   ========================================================================== */
 
-  function onScroll() {
-    let scrollPos = window.scrollY || window.pageYOffset;
-    let found = false;
-    for (let i = sections.length - 1; i >= 0; i--) {
-      const section = document.getElementById(sections[i]);
-      if (section && section.offsetTop - 80 <= scrollPos) {
-        links.forEach(link => link.classList.remove('active'));
-        const activeLink = document.querySelector('.stepper-link[data-section="' + sections[i] + '"]');
-        if (activeLink) activeLink.classList.add('active');
-        found = true;
-        break;
-      }
-    }
-    if (!found) links.forEach(link => link.classList.remove('active'));
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ---------- Mobile nav toggle ---------- */
+  const toggle  = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navLinks');
+
+  if (toggle && navMenu) {
+    toggle.addEventListener('click', () => {
+      toggle.classList.toggle('open');
+      navMenu.classList.toggle('open');
+    });
+
+    // Close menu when a link is clicked
+    navMenu.querySelectorAll('.nav_link').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.classList.remove('open');
+        navMenu.classList.remove('open');
+      });
+    });
   }
 
-  window.addEventListener('scroll', onScroll);
+  /* ---------- Scroll-spy for nav links ---------- */
+  const navLinks = document.querySelectorAll('.nav_link[data-section]');
+  const sections = [...navLinks]
+    .map(l => document.getElementById(l.dataset.section))
+    .filter(Boolean);
 
-  // Smooth scroll for sidebar links
-  links.forEach(link => {
-    link.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href').replace('#', '');
-      const target = document.getElementById(targetId);
+  function updateActiveLink() {
+    const scrollY = window.scrollY + 120;
+    let current = sections[0];
+    for (const sec of sections) {
+      if (sec.offsetTop <= scrollY) current = sec;
+    }
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.dataset.section === current?.id);
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink();
+
+  /* ---------- Scroll reveal (IntersectionObserver) ---------- */
+  const revealEls = document.querySelectorAll(
+    '.section_header, .card, .member, .info-bar, .p2p-split_img, .p2p-split_content'
+  );
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    revealEls.forEach(el => observer.observe(el));
+  } else {
+    // Fallback: just show everything
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  /* ---------- Smooth scroll for anchor links ---------- */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      const id = anchor.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
       if (target) {
         e.preventDefault();
         window.scrollTo({
-          top: target.offsetTop - 70,
+          top: target.offsetTop - 64,
           behavior: 'smooth'
         });
       }
     });
   });
-
-  onScroll();
 });
