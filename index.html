@@ -4,15 +4,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DMU Hackers</title>
+  <title>DMU Hackers - De Montfort University Cyber Security Society</title>
+  <meta name="description" content="DMU Hackers is De Montfort University's cyber security society. Weekly meetups, CTF competitions, hands-on hacking, and networking. All skill levels welcome. Thursdays at 18:00.">
+  <meta name="keywords" content="DMU Hackers, De Montfort University, cyber security society, CTF, capture the flag, hacking, Leicester, Pwn2Play">
+  <meta property="og:title" content="DMU Hackers - De Montfort University Cyber Security Society">
+  <meta property="og:description" content="Cyber security, CTF competitions, and hands-on hacking. All skill levels welcome. Every Thursday at 18:00.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dmuhackers.com">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@dmuhackers">
+  <meta name="twitter:title" content="DMU Hackers - De Montfort University Cyber Security Society">
+  <meta name="twitter:description" content="Cyber security, CTF competitions, and hands-on hacking. All skill levels welcome.">
+  <link rel="canonical" href="https://dmuhackers.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/main.css">
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "StudentOrganization",
+    "name": "DMU Hackers",
+    "url": "https://dmuhackers.com",
+    "description": "De Montfort University's cyber security and ethical hacking society. Weekly meetups, CTF competitions, and hands-on learning.",
+    "foundingDate": "2015",
+    "parentOrganization": {
+      "@type": "CollegeOrUniversity",
+      "name": "De Montfort University"
+    },
+    "sameAs": [
+      "https://twitter.com/dmuhackers",
+      "https://github.com/DMUHackers",
+      "https://www.instagram.com/hackers.dmu",
+      "https://www.linkedin.com/company/dmu-hackers/"
+    ]
+  }
+  </script>
 </head>
 
 <body>
+
+  <!-- Skip to content -->
+  <a href="#about" class="skip-link">Skip to content</a>
 
   <!-- Navigation -->
   <nav class="nav" id="navbar">
@@ -26,31 +60,57 @@
       <ul class="nav__links" id="navLinks">
         <li><a href="#hero" class="nav__link active" data-section="hero">Home</a></li>
         <li><a href="#about" class="nav__link" data-section="about">About</a></li>
+        <li><a href="#getting-started" class="nav__link" data-section="getting-started">Get Started</a></li>
         <li><a href="#pwn2play" class="nav__link" data-section="pwn2play">Pwn2Play</a></li>
-        <li><a href="#facilities" class="nav__link" data-section="facilities">Facilities</a></li>
         <li><a href="#committee" class="nav__link" data-section="committee">Committee</a></li>
-        <li><a href="P2P.html" class="nav__link nav__link--cta">Enter CTF &rarr;</a></li>
+        <li><a href="https://discord.gg/Vvrk4kK" class="nav__link nav__link--cta" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Join Us</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- Hero -->
   <section id="hero" class="hero">
+    <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
     <div class="hero__bg"></div>
     <div class="hero__content">
       <p class="hero__tag">De Montfort University Hacking Society</p>
-      <h1 class="hero__title">DMU<br><span class="hero__accent">Hackers</span></h1>
-      <p class="hero__sub">Cyber security, CTF competitions, and hands-on hacking. Every Thursday at 18:00.</p>
+
+      <!-- Terminal hero -->
+      <div class="hero-term" aria-label="DMU Hackers">
+        <div class="hero-term__bar">
+          <span class="hero-term__dot hero-term__dot--red"></span>
+          <span class="hero-term__dot hero-term__dot--yellow"></span>
+          <span class="hero-term__dot hero-term__dot--green"></span>
+          <span class="hero-term__title">hackers@dmu:~</span>
+        </div>
+        <div class="hero-term__body">
+          <div class="hero-term__line hero-term__line--cmd">
+            <span class="hero-term__prompt">$</span>
+            <span class="hero-term__typed" id="heroCmd"></span>
+            <span class="hero-term__cursor" id="heroCursor">_</span>
+          </div>
+          <div class="hero-term__line hero-term__line--output" id="heroOutput">
+            <span class="hero-term__result">DMU Hackers</span>
+          </div>
+          <div class="hero-term__line hero-term__line--sub" id="heroSubLine">
+            <span class="hero-term__prompt">$</span>
+            <span class="hero-term__sub-typed" id="heroSubCmd"></span>
+            <span class="hero-term__cursor hero-term__cursor--sub" id="heroSubCursor">_</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="hero__sub">Cyber security, CTF competitions, and hands-on hacking.<br>Every Thursday at 18:00. All skill levels welcome.</p>
       <div class="hero__actions">
-        <a href="https://discord.gg/Vvrk4kK" class="btn btn--primary" target="_blank"><i class="fab fa-discord"></i> Join Discord</a>
+        <a href="https://discord.gg/Vvrk4kK" class="btn btn--primary" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Join Discord</a>
         <a href="#about" class="btn btn--ghost">Learn more &darr;</a>
       </div>
       <div class="hero__socials">
-        <a href="https://twitter.com/dmuhackers" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://github.com/DMUHackers" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://www.instagram.com/hackers.dmu" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.linkedin.com/company/dmu-hackers/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://www.demontfortsu.com/organisation/dmuhackers/" target="_blank" aria-label="DSU"><i class="fas fa-graduation-cap"></i></a>
+        <a href="https://twitter.com/dmuhackers" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://github.com/DMUHackers" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/hackers.dmu" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/dmu-hackers/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.demontfortsu.com/organisation/dmuhackers/" target="_blank" rel="noopener noreferrer" aria-label="DSU"><i class="fas fa-graduation-cap"></i></a>
       </div>
     </div>
     <div class="hero__scroll">
@@ -83,6 +143,18 @@
           <p class="card__text">Meet people with similar aspirations. Competitions and events provide valuable experience and a chance to impress industry players.</p>
         </div>
       </div>
+
+      <!-- Skill category badges -->
+      <div class="skill-badges">
+        <span class="skill-badge"><i class="fas fa-globe"></i> Web Exploitation</span>
+        <span class="skill-badge"><i class="fas fa-lock"></i> Cryptography</span>
+        <span class="skill-badge"><i class="fas fa-microchip"></i> Reverse Engineering</span>
+        <span class="skill-badge"><i class="fas fa-bug"></i> Binary Exploitation</span>
+        <span class="skill-badge"><i class="fas fa-magnifying-glass"></i> OSINT</span>
+        <span class="skill-badge"><i class="fas fa-network-wired"></i> Networking</span>
+        <span class="skill-badge"><i class="fas fa-key"></i> Lock Picking</span>
+        <span class="skill-badge"><i class="fas fa-file-code"></i> Forensics</span>
+      </div>
       <div class="info-bar">
         <div class="info-bar__item">
           <i class="fas fa-map-marker-alt"></i>
@@ -96,17 +168,86 @@
     </div>
   </section>
 
+  <!-- Getting Started -->
+  <section id="getting-started" class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">New here?</span>
+        <h2 class="section__title">Getting Started</h2>
+        <p class="section__subtitle">No experience required. Seriously. Here's what to expect.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step__marker">
+            <div class="step__number">1</div>
+            <div class="step__connector"></div>
+          </div>
+          <div class="step__content">
+            <h3 class="step__title">Join our Discord</h3>
+            <p class="step__text">Our Discord server is where everything happens - session announcements, challenge hints, memes, and banter. Introduce yourself and say hello.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__marker">
+            <div class="step__number">2</div>
+            <div class="step__connector"></div>
+          </div>
+          <div class="step__content">
+            <h3 class="step__title">Turn up on Thursday</h3>
+            <p class="step__text">Rock up to Gateway House 5.53 at 18:00 any Thursday. No prep needed. We'll have something for you to hack whether it's your first day or your fiftieth.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__marker">
+            <div class="step__number">3</div>
+          </div>
+          <div class="step__content">
+            <h3 class="step__title">Start hacking</h3>
+            <p class="step__text">We run beginner-friendly challenges alongside advanced ones. Pair up with a mentor, pick a challenge, and learn by doing. You'll be capturing flags in no time.</p>
+          </div>
+        </div>
+      </div>
+      <div class="faq">
+        <h3 class="faq__heading">Common Questions</h3>
+        <details class="faq__item">
+          <summary class="faq__question">Do I need to know how to code?</summary>
+          <p class="faq__answer">Nope. Some challenges involve code, but many don't. We cover everything from lock picking to network analysis. You'll pick things up as you go.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">What should I bring?</summary>
+          <p class="faq__answer">Just yourself! We provide PCs at sessions, but you're welcome to bring your own laptop if you prefer. We recommend having a Linux VM (Kali or Parrot) set up if you do, but it's not essential - we'll help you get sorted.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">Is it only for Computer Science students?</summary>
+          <p class="faq__answer">Absolutely not. We've had members from forensics, business, and engineering. If you're curious about security, you're welcome here.</p>
+        </details>
+        <details class="faq__item">
+          <summary class="faq__question">What's a CTF?</summary>
+          <p class="faq__answer">Capture The Flag - a cyber security competition where you solve challenges (cracking passwords, exploiting websites, reverse engineering binaries) to find hidden "flags". Think of it as puzzle-solving for hackers.</p>
+        </details>
+      </div>
+      <div class="getting-started__cta">
+        <a href="https://discord.gg/Vvrk4kK" class="btn btn--primary" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Join Discord</a>
+        <a href="https://www.demontfortsu.com/organisation/dmuhackers/" class="btn btn--ghost" target="_blank" rel="noopener noreferrer"><i class="fas fa-graduation-cap"></i> DSU Page</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Pwn2Play -->
-  <section id="pwn2play" class="section section--alt">
+  <section id="pwn2play" class="section">
     <div class="container">
       <div class="p2p-split">
         <div class="p2p-split__img">
-          <img src="img/pwn2play/P2P_FirstBlood.png" alt="Pwn2Play Logo">
+          <img src="img/pwn2play/P2P_FirstBlood.png" alt="Pwn2Play: First Blood - DMU Hackers flagship CTF competition logo">
         </div>
         <div class="p2p-split__content">
           <span class="section__tag">Capture The Flag</span>
           <h2 class="section__title">Pwn2Play</h2>
-          <p>Our flagship CTF competition. Test your skills against challenges in web exploitation, cryptography, reverse engineering and more.</p>
+          <p>Our flagship CTF competition. Test your skills against challenges in web exploitation, cryptography, reverse engineering and more. Open to all universities.</p>
+          <div class="p2p-split__stats">
+            <div class="stat"><span class="stat__number" data-count="8">0</span><span class="stat__label">Categories</span></div>
+            <div class="stat"><span class="stat__number" data-count="2">0</span><span class="stat__label">Events</span></div>
+          </div>
           <a href="P2P.html" class="btn btn--primary">Enter Pwn2Play &rarr;</a>
         </div>
       </div>
@@ -114,7 +255,7 @@
   </section>
 
   <!-- Facilities -->
-  <section id="facilities" class="section">
+  <section id="facilities" class="section section--alt">
     <div class="container">
       <div class="section__header">
         <span class="section__tag">Resources</span>
@@ -154,60 +295,67 @@
   </section>
 
   <!-- Committee -->
-  <section id="committee" class="section section--alt">
+  <section id="committee" class="section">
     <div class="container">
       <div class="section__header">
         <span class="section__tag">25/26 Committee</span>
         <h2 class="section__title">The Team</h2>
+        <p class="section__subtitle">The people keeping the lights on (and the shells popping).</p>
       </div>
       <div class="committee-grid">
         <div class="member">
-          <div class="member__img">
-            <img src="img/site-content/fill.png" alt="Adam">
+          <div class="member__img member__img--placeholder">
+            <i class="fas fa-user-secret"></i>
           </div>
           <h4 class="member__name">Adam</h4>
           <p class="member__role">Chairman</p>
-          <a href="#" class="member__social" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+
+          <a href="#" class="member__social" aria-label="Adam's LinkedIn profile"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="member">
-          <div class="member__img">
-            <img src="img/site-content/fill.png" alt="Josh">
+          <div class="member__img member__img--placeholder">
+            <i class="fas fa-terminal"></i>
           </div>
           <h4 class="member__name">Josh</h4>
           <p class="member__role">Secretary</p>
-          <a href="https://www.linkedin.com/in/josh-lloyd-227583366/" class="member__social" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+
+          <a href="https://www.linkedin.com/in/josh-lloyd-227583366/" class="member__social" target="_blank" rel="noopener noreferrer" aria-label="Josh's LinkedIn profile"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="member">
-          <div class="member__img">
-            <img src="img/site-content/fill.png" alt="Amara">
+          <div class="member__img member__img--placeholder">
+            <i class="fas fa-coins"></i>
           </div>
           <h4 class="member__name">Amara</h4>
           <p class="member__role">Treasurer</p>
-          <a href="https://www.linkedin.com/in/amara-g-98ab2a270/" class="member__social" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+
+          <a href="https://www.linkedin.com/in/amara-g-98ab2a270/" class="member__social" target="_blank" rel="noopener noreferrer" aria-label="Amara's LinkedIn profile"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="member">
-          <div class="member__img">
-            <img src="img/site-content/fill.png" alt="Abbey">
+          <div class="member__img member__img--placeholder">
+            <i class="fas fa-shield-halved"></i>
           </div>
           <h4 class="member__name">Abbey</h4>
           <p class="member__role">Health &amp; Safety</p>
-          <a href="https://www.linkedin.com/in/abigailvr/" class="member__social" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+
+          <a href="https://www.linkedin.com/in/abigailvr/" class="member__social" target="_blank" rel="noopener noreferrer" aria-label="Abbey's LinkedIn profile"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="member">
-          <div class="member__img">
-            <img src="img/site-content/fill.png" alt="Charlie">
+          <div class="member__img member__img--placeholder">
+            <i class="fas fa-flag"></i>
           </div>
           <h4 class="member__name">Charlie</h4>
           <p class="member__role">CTF Officer</p>
-          <a href="https://www.linkedin.com/in/charlie-burrows-07108a336" class="member__social" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+
+          <a href="https://www.linkedin.com/in/charlie-burrows-07108a336" class="member__social" target="_blank" rel="noopener noreferrer" aria-label="Charlie's LinkedIn profile"><i class="fab fa-linkedin-in"></i></a>
         </div>
         <div class="member">
-          <div class="member__img">
-            <img src="img/site-content/fill.png" alt="Ethan">
+          <div class="member__img member__img--placeholder">
+            <i class="fas fa-chalkboard-user"></i>
           </div>
           <h4 class="member__name">Ethan</h4>
           <p class="member__role">CTF Mentor</p>
-          <a href="https://www.linkedin.com/in/ethan-bauer-842124368/" class="member__social" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+
+          <a href="https://www.linkedin.com/in/ethan-bauer-842124368/" class="member__social" target="_blank" rel="noopener noreferrer" aria-label="Ethan's LinkedIn profile"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
     </div>
@@ -216,21 +364,58 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer__inner">
-        <div class="footer__brand">
-          <img src="img/site-content/logo.png" alt="DMU Hackers" class="footer__logo">
-          <span>DMU Hackers</span>
+      <div class="footer__top">
+        <div class="footer__col">
+          <div class="footer__brand">
+            <img src="img/site-content/logo.png" alt="DMU Hackers logo" class="footer__logo">
+            <span>DMU Hackers</span>
+          </div>
+          <p class="footer__desc">De Montfort University's cyber security society. Hacking, learning, and competing since 2015.</p>
+          <div class="footer__socials">
+            <a href="https://twitter.com/dmuhackers" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://github.com/DMUHackers" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/hackers.dmu" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/dmu-hackers/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://discord.gg/Vvrk4kK" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+          </div>
         </div>
-        <nav class="footer__links">
-          <a href="#hero">Home</a>
-          <a href="#about">About</a>
-          <a href="P2P.html">Pwn2Play</a>
-          <a href="https://discord.gg/Vvrk4kK" target="_blank">Discord</a>
-        </nav>
+        <div class="footer__col">
+          <h4 class="footer__heading">Navigate</h4>
+          <nav class="footer__nav" aria-label="Footer navigation">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#getting-started">Get Started</a>
+            <a href="#committee">Committee</a>
+          </nav>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Events</h4>
+          <nav class="footer__nav" aria-label="Events navigation">
+            <a href="P2P.html">Pwn2Play CTF</a>
+            <a href="#pwn2play">About P2P</a>
+            <a href="#facilities">Facilities</a>
+          </nav>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Join</h4>
+          <nav class="footer__nav" aria-label="Join navigation">
+            <a href="https://discord.gg/Vvrk4kK" target="_blank" rel="noopener noreferrer">Discord Server</a>
+            <a href="https://www.demontfortsu.com/organisation/dmuhackers/" target="_blank" rel="noopener noreferrer">DSU Page</a>
+            <a href="mailto:dmuhackers@gmail.com">Email Us</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer__bottom">
         <p class="footer__copy">&copy; DMU Hackers | Pwning since 2015</p>
+        <p class="footer__copy footer__copy--subtle">Made with <span class="footer__heart">&lt;3</span> by the committee</p>
       </div>
     </div>
   </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
 
   <script src="js/main.js"></script>
 </body>
