@@ -4,16 +4,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DMU Hackers | Pwn2Play</title>
+  <title>Pwn2Play CTF - DMU Hackers Capture The Flag Competition</title>
+  <meta name="description" content="Pwn2Play is DMU Hackers' flagship Capture The Flag competition. Web exploitation, cryptography, reverse engineering and more. Open to all universities.">
+  <meta property="og:title" content="Pwn2Play CTF - DMU Hackers">
+  <meta property="og:description" content="DMU Hackers' flagship CTF competition. Exploit, decrypt, reverse-engineer. Prove you've got what it takes.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dmuhackers.com/P2P.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://dmuhackers.com/P2P.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/P2P.css">
 </head>
 
 <body>
+
+  <!-- Skip to content -->
+  <a href="#event" class="skip-link">Skip to content</a>
 
   <!-- Navigation -->
   <nav class="nav" id="navbar">
@@ -27,11 +36,11 @@
       <ul class="nav__links" id="navLinks">
         <li><a href="index.html" class="nav__link">Home</a></li>
         <li><a href="#p2p-hero" class="nav__link active" data-section="p2p-hero">Pwn2Play</a></li>
-        <li><a href="#event" class="nav__link" data-section="event">Event</a></li>
+        <li><a href="#categories" class="nav__link" data-section="categories">Categories</a></li>
         <li><a href="#key-info" class="nav__link" data-section="key-info">Key Info</a></li>
         <li><a href="#schedule" class="nav__link" data-section="schedule">Schedule</a></li>
-        <li><a href="#afterparty" class="nav__link" data-section="afterparty">After Party</a></li>
-        <li><a href="#sponsors" class="nav__link" data-section="sponsors">Sponsors</a></li>
+        <li><a href="#podium" class="nav__link" data-section="podium">2025 Results</a></li>
+        <li><a href="https://discord.gg/Vvrk4kK" class="nav__link nav__link--cta" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Join Us</a></li>
       </ul>
     </div>
   </nav>
@@ -44,8 +53,8 @@
       <h1 class="hero__title">Pwn<span class="hero__accent">2</span>Play</h1>
       <p class="hero__sub">Our flagship Capture The Flag competition. Exploit, decrypt, reverse-engineer. Prove you've got what it takes.</p>
       <div class="hero__actions">
-        <a href="https://forms.gle/YPQaL6gwLK24S6ms8" class="btn btn--primary" target="_blank"><i class="fas fa-user-plus"></i> Register Now</a>
-        <a href="https://discord.gg/ZUqTWNy7c9" class="btn btn--ghost" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+        <a href="https://forms.gle/YPQaL6gwLK24S6ms8" class="btn btn--primary" target="_blank" rel="noopener noreferrer"><i class="fas fa-user-plus"></i> Register Now</a>
+        <a href="https://discord.gg/ZUqTWNy7c9" class="btn btn--ghost" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Discord</a>
       </div>
     </div>
   </section>
@@ -77,11 +86,11 @@
       <div class="p2p-connect">
         <h3 class="p2p-connect__title">Connect with us</h3>
         <div class="p2p-connect__links">
-          <a href="https://discord.gg/Vvrk4kK" class="p2p-connect__btn" target="_blank">
+          <a href="https://discord.gg/Vvrk4kK" class="p2p-connect__btn" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-discord"></i>
             <span>Discord</span>
           </a>
-          <a href="https://forms.gle/1L8gkR7xMxNDo9hB6" class="p2p-connect__btn" target="_blank">
+          <a href="https://forms.gle/1L8gkR7xMxNDo9hB6" class="p2p-connect__btn" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-user-plus"></i>
             <span>Register</span>
           </a>
@@ -90,8 +99,61 @@
     </div>
   </section>
 
+  <!-- Challenge Categories -->
+  <section id="categories" class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">8 Categories</span>
+        <h2 class="section__title">Challenge Categories</h2>
+        <p class="section__subtitle">Something for every skill set. From binary exploitation to open-source intelligence.</p>
+      </div>
+      <div class="cards cards--four p2p-cat-cards">
+        <div class="card p2p-cat-card">
+          <div class="card__icon"><i class="fas fa-skull-crossbones"></i></div>
+          <h3 class="card__title">Full Pwn</h3>
+          <p class="card__text">Complete system takeover. Combine multiple attack vectors to go from zero to root.</p>
+        </div>
+        <div class="card p2p-cat-card">
+          <div class="card__icon"><i class="fas fa-terminal"></i></div>
+          <h3 class="card__title">Pwn</h3>
+          <p class="card__text">Binary exploitation. Buffer overflows, format strings, ROP chains - break the binary, get the flag.</p>
+        </div>
+        <div class="card p2p-cat-card">
+          <div class="card__icon"><i class="fas fa-microchip"></i></div>
+          <h3 class="card__title">Rev</h3>
+          <p class="card__text">Reverse engineering. Disassemble, decompile, and decode binaries to uncover hidden logic.</p>
+        </div>
+        <div class="card p2p-cat-card">
+          <div class="card__icon"><i class="fas fa-puzzle-piece"></i></div>
+          <h3 class="card__title">Misc</h3>
+          <p class="card__text">Anything goes. Steganography, forensics, encoding schemes, or something completely unexpected.</p>
+        </div>
+        <div class="card p2p-cat-card">
+          <div class="card__icon"><i class="fas fa-magnifying-glass"></i></div>
+          <h3 class="card__title">OSINT</h3>
+          <p class="card__text">Open-source intelligence. Track down information using publicly available data and digital footprints.</p>
+        </div>
+        <div class="card p2p-cat-card">
+          <div class="card__icon"><i class="fas fa-code"></i></div>
+          <h3 class="card__title">Code</h3>
+          <p class="card__text">Programming challenges. Solve algorithmic problems or write scripts under time pressure.</p>
+        </div>
+        <div class="card p2p-cat-card">
+          <div class="card__icon"><i class="fas fa-globe"></i></div>
+          <h3 class="card__title">Web</h3>
+          <p class="card__text">Web exploitation. SQL injection, XSS, SSRF, authentication bypasses - hack the web app.</p>
+        </div>
+        <div class="card p2p-cat-card">
+          <div class="card__icon"><i class="fas fa-lock"></i></div>
+          <h3 class="card__title">Crypto</h3>
+          <p class="card__text">Cryptography. Break ciphers, exploit weak implementations, and crack the code.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Key Info -->
-  <section id="key-info" class="section section--alt">
+  <section id="key-info" class="section">
     <div class="container">
       <div class="section__header">
         <span class="section__tag">Important</span>
@@ -282,20 +344,58 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <div class="footer__inner">
-        <div class="footer__brand">
-          <img src="img/site-content/logo.png" alt="DMU Hackers" class="footer__logo">
-          <span>DMU Hackers</span>
+      <div class="footer__top">
+        <div class="footer__col">
+          <div class="footer__brand">
+            <img src="img/site-content/logo.png" alt="DMU Hackers logo" class="footer__logo">
+            <span>DMU Hackers</span>
+          </div>
+          <p class="footer__desc">De Montfort University's cyber security society. Hacking, learning, and competing since 2015.</p>
+          <div class="footer__socials">
+            <a href="https://twitter.com/dmuhackers" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://github.com/DMUHackers" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/hackers.dmu" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/dmu-hackers/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://discord.gg/Vvrk4kK" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+          </div>
         </div>
-        <nav class="footer__links">
-          <a href="index.html">Home</a>
-          <a href="#p2p-hero">Pwn2Play</a>
-          <a href="https://discord.gg/Vvrk4kK" target="_blank">Discord</a>
-        </nav>
+        <div class="footer__col">
+          <h4 class="footer__heading">Navigate</h4>
+          <nav class="footer__nav" aria-label="Footer navigation">
+            <a href="index.html">Home</a>
+            <a href="#p2p-hero">Pwn2Play</a>
+            <a href="#key-info">Key Info</a>
+            <a href="#schedule">Schedule</a>
+          </nav>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Events</h4>
+          <nav class="footer__nav" aria-label="Events navigation">
+            <a href="#podium">2025 Results</a>
+            <a href="#sponsors">Sponsors</a>
+            <a href="#afterparty">After Party</a>
+          </nav>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Join</h4>
+          <nav class="footer__nav" aria-label="Join navigation">
+            <a href="https://discord.gg/Vvrk4kK" target="_blank" rel="noopener noreferrer">Discord Server</a>
+            <a href="https://www.demontfortsu.com/organisation/dmuhackers/" target="_blank" rel="noopener noreferrer">DSU Page</a>
+            <a href="mailto:dmuhackers@gmail.com">Email Us</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer__bottom">
         <p class="footer__copy">&copy; DMU Hackers | Pwning since 2015</p>
+        <p class="footer__copy footer__copy--subtle">Made with <span class="footer__heart">&lt;3</span> by the committee</p>
       </div>
     </div>
   </footer>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
 
   <script src="js/main.js"></script>
 </body>

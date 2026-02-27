@@ -30,6 +30,17 @@
   color: var(--text);
 }
 
+/* ---------- Challenge Category Cards ---------- */
+.p2p-cat-card {
+  text-align: center;
+}
+.p2p-cat-card .card__icon {
+  margin: 0 auto 20px;
+}
+.p2p-cat-card .card__text {
+  font-size: .85rem;
+}
+
 /* ---------- Connect strip ---------- */
 .p2p-connect {
   margin-top: 48px;
