@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 — DMU Hackers</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <style>
+    body { overflow: hidden; }
+
+    .error-page {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .error-page__bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(200, 16, 46, .1) 0%, transparent 60%),
+        linear-gradient(rgba(200, 16, 46, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 16, 46, 0.025) 1px, transparent 1px);
+      background-size: 100% 100%, 48px 48px, 48px 48px;
+      pointer-events: none;
+      animation: heroBreathe 10s ease-in-out infinite;
+    }
+
+    .error-page__content {
+      position: relative;
+      text-align: center;
+      padding: 24px;
+      max-width: 600px;
+    }
+
+    /* Glitch 404 */
+    .error-page__code {
+      position: relative;
+      font-family: var(--font-display);
+      font-size: clamp(7rem, 22vw, 14rem);
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: .1em;
+      line-height: 1;
+      margin-bottom: 24px;
+      text-shadow: 0 0 40px var(--accent-glow);
+    }
+
+    .error-page__code::before,
+    .error-page__code::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .error-page__code::before {
+      color: var(--accent);
+      z-index: -1;
+      animation: glitch-1 5s infinite linear;
+    }
+
+    .error-page__code::after {
+      color: var(--cyan);
+      z-index: -1;
+      animation: glitch-2 5s infinite linear;
+    }
+
+    @keyframes glitch-1 {
+      0%, 82%, 100% { clip-path: inset(0); transform: translate(0); }
+      84% { clip-path: inset(20% 0 60% 0); transform: translate(-4px, -2px); }
+      86% { clip-path: inset(60% 0 10% 0); transform: translate(3px, 1px); }
+      88% { clip-path: inset(40% 0 30% 0); transform: translate(-2px, 2px); }
+      90% { clip-path: inset(0); transform: translate(0); }
+    }
+
+    @keyframes glitch-2 {
+      0%, 86%, 100% { clip-path: inset(0); transform: translate(0); }
+      88% { clip-path: inset(70% 0 5% 0); transform: translate(4px, 2px); }
+      90% { clip-path: inset(10% 0 70% 0); transform: translate(-3px, -1px); }
+      92% { clip-path: inset(30% 0 40% 0); transform: translate(2px, -2px); }
+      94% { clip-path: inset(0); transform: translate(0); }
+    }
+
+    /* Terminal lines */
+    .error-page__terminal {
+      margin-bottom: 40px;
+    }
+
+    .error-page__terminal p {
+      font-family: var(--font-mono);
+      font-size: .82rem;
+      color: var(--text-muted);
+      line-height: 2;
+      letter-spacing: .02em;
+      opacity: 0;
+      animation: terminalReveal .4s ease forwards;
+    }
+
+    .error-page__terminal p span {
+      color: var(--accent);
+    }
+
+    .error-page__terminal p:nth-child(1) { animation-delay: .4s; }
+    .error-page__terminal p:nth-child(2) { animation-delay: .8s; }
+    .error-page__terminal p:nth-child(3) { animation-delay: 1.3s; }
+    .error-page__terminal p:nth-child(4) { animation-delay: 1.7s; }
+
+    @keyframes terminalReveal {
+      from { opacity: 0; transform: translateX(-8px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Buttons */
+    .error-page__actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: terminalReveal .4s ease 2.2s forwards;
+    }
+
+    /* Blinking cursor */
+    .error-page__cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1em;
+      background: var(--accent);
+      margin-left: 4px;
+      vertical-align: text-bottom;
+      animation: cursorBlink .8s step-end infinite;
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .error-page__code::before,
+      .error-page__code::after { animation: none; clip-path: none; transform: none; opacity: 0; }
+      .error-page__terminal p { opacity: 1; animation: none; }
+      .error-page__actions { opacity: 1; animation: none; }
+      .error-page__cursor { animation: none; }
+      .error-page__bg { animation: none; }
+    }
+
+    @media (max-width: 480px) {
+      .error-page__terminal p { font-size: .72rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="error-page">
+    <div class="error-page__bg"></div>
+    <div class="error-page__content">
+      <h1 class="error-page__code" data-text="404">404</h1>
+      <div class="error-page__terminal">
+        <p><span>&gt;</span> INTRUSION DETECTED</p>
+        <p><span>&gt;</span> ERROR 0x194: RESOURCE NOT FOUND</p>
+        <p><span>&gt;</span> The page you requested has been pwned.</p>
+        <p><span>&gt;</span> Or maybe it never existed.<span class="error-page__cursor"></span></p>
+      </div>
+      <div class="error-page__actions">
+        <a href="/" class="btn btn--primary"><i class="fas fa-terminal"></i> Return to Base</a>
+        <a href="https://discord.gg/Vvrk4kK" class="btn btn--ghost" target="_blank"><i class="fab fa-discord"></i> Report to Discord</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
