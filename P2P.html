@@ -39,7 +39,8 @@
         <li><a href="#categories" class="nav__link" data-section="categories">Categories</a></li>
         <li><a href="#key-info" class="nav__link" data-section="key-info">Key Info</a></li>
         <li><a href="#schedule" class="nav__link" data-section="schedule">Schedule</a></li>
-        <li><a href="#podium" class="nav__link" data-section="podium">2025 Results</a></li>
+        <li><a href="#rules" class="nav__link" data-section="rules">Rules</a></li>
+        <li><a href="#podium" class="nav__link" data-section="podium">Results</a></li>
         <li><a href="https://discord.gg/Vvrk4kK" class="nav__link nav__link--cta" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Join Us</a></li>
       </ul>
     </div>
@@ -48,6 +49,7 @@
   <!-- Hero -->
   <section id="p2p-hero" class="hero">
     <div class="hero__bg hero__bg--p2p"></div>
+    <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
     <div class="hero__content">
       <p class="hero__tag">DMU Hackers presents</p>
       <h1 class="hero__title">Pwn<span class="hero__accent">2</span>Play</h1>
@@ -58,6 +60,20 @@
       </div>
     </div>
   </section>
+
+  <!-- Countdown -->
+  <div class="countdown-strip">
+    <div class="countdown" id="countdown">
+      <div class="countdown__block"><span class="countdown__num" id="cdDays">--</span><span class="countdown__label">Days</span></div>
+      <span class="countdown__sep">:</span>
+      <div class="countdown__block"><span class="countdown__num" id="cdHours">--</span><span class="countdown__label">Hours</span></div>
+      <span class="countdown__sep">:</span>
+      <div class="countdown__block"><span class="countdown__num" id="cdMins">--</span><span class="countdown__label">Mins</span></div>
+      <span class="countdown__sep">:</span>
+      <div class="countdown__block"><span class="countdown__num" id="cdSecs">--</span><span class="countdown__label">Secs</span></div>
+    </div>
+    <p class="countdown__until">until Pwn2Play: Core Incursion</p>
+  </div>
 
   <!-- Event Overview -->
   <section id="event" class="section">
@@ -268,6 +284,149 @@
     </div>
   </section>
 
+  <!-- Server Rules -->
+  <section id="rules" class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Read the Rules</span>
+        <h2 class="section__title">CTF Server Rules</h2>
+      </div>
+      <div class="rules-accordion">
+        <details class="rules-item" open>
+          <summary class="rules-item__header">
+            <span class="rules-item__num">01</span>
+            <i class="fas fa-handshake rules-item__icon"></i>
+            <span class="rules-item__title">General Conduct</span>
+            <i class="fas fa-chevron-down rules-item__chevron"></i>
+          </summary>
+          <div class="rules-item__body">
+            <ul class="rules-list">
+              <li>Respect all participants, organisers, and the integrity of the competition.</li>
+              <li>No harassment, discrimination, or toxic behaviour will be tolerated.</li>
+              <li>Follow all university IT policies and legal regulations.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="rules-item">
+          <summary class="rules-item__header">
+            <span class="rules-item__num">02</span>
+            <i class="fas fa-server rules-item__icon"></i>
+            <span class="rules-item__title">Server &amp; Network Use</span>
+            <i class="fas fa-chevron-down rules-item__chevron"></i>
+          </summary>
+          <div class="rules-item__body">
+            <ul class="rules-list">
+              <li>Only interact with CTF challenges and infrastructure &mdash; do not target other participants or university systems.</li>
+              <li>Denial of Service (DoS/DDoS) attacks against the server, network, or participants are strictly prohibited.</li>
+              <li>Scanning outside the designated CTF scope is forbidden.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="rules-item">
+          <summary class="rules-item__header">
+            <span class="rules-item__num">03</span>
+            <i class="fas fa-scale-balanced rules-item__icon"></i>
+            <span class="rules-item__title">Fair Play &amp; Ethics</span>
+            <i class="fas fa-chevron-down rules-item__chevron"></i>
+          </summary>
+          <div class="rules-item__body">
+            <ul class="rules-list">
+              <li>No brute-forcing challenge platforms, flag submission forms, or administrative panels unless explicitly part of a challenge.</li>
+              <li>Do not share, trade, or leak flags, solutions, or hints to other participants.</li>
+              <li>No automated tools/scripts that degrade server performance (e.g., aggressive scanning, spamming requests).</li>
+            </ul>
+          </div>
+        </details>
+        <details class="rules-item">
+          <summary class="rules-item__header">
+            <span class="rules-item__num">04</span>
+            <i class="fas fa-laptop rules-item__icon"></i>
+            <span class="rules-item__title">Virtual Participants</span>
+            <i class="fas fa-chevron-down rules-item__chevron"></i>
+          </summary>
+          <div class="rules-item__body">
+            <ul class="rules-list">
+              <li>Maintain a stable internet connection and avoid using VPNs/proxies unless required for a challenge.</li>
+              <li>Keep your credentials secure &mdash; do not share your access keys or login information.</li>
+              <li>Follow organiser instructions in the event of technical issues.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="rules-item">
+          <summary class="rules-item__header">
+            <span class="rules-item__num">05</span>
+            <i class="fas fa-flag rules-item__icon"></i>
+            <span class="rules-item__title">Challenge &amp; Flag Submission</span>
+            <i class="fas fa-chevron-down rules-item__chevron"></i>
+          </summary>
+          <div class="rules-item__body">
+            <ul class="rules-list">
+              <li>Flags must be submitted exactly as retrieved, in the expected format.</li>
+              <li>If a challenge is broken, report it to an admin instead of exploiting it.</li>
+              <li>The organisers' decisions on challenge validity, scoring, and disputes are final.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="rules-item">
+          <summary class="rules-item__header">
+            <span class="rules-item__num">06</span>
+            <i class="fas fa-ban rules-item__icon"></i>
+            <span class="rules-item__title">Prohibited Actions</span>
+            <i class="fas fa-chevron-down rules-item__chevron"></i>
+          </summary>
+          <div class="rules-item__body">
+            <ul class="rules-list">
+              <li>No social engineering, phishing, or attacking other teams' setups.</li>
+              <li>No modifying, deleting, or tampering with challenge infrastructure.</li>
+              <li>No use of AI-generated solutions unless explicitly allowed.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="rules-item">
+          <summary class="rules-item__header">
+            <span class="rules-item__num">07</span>
+            <i class="fas fa-gavel rules-item__icon"></i>
+            <span class="rules-item__title">Penalties &amp; Disqualification</span>
+            <i class="fas fa-chevron-down rules-item__chevron"></i>
+          </summary>
+          <div class="rules-item__body">
+            <ul class="rules-list">
+              <li>Violating these rules may result in a warning, score reduction, or disqualification.</li>
+              <li>Severe infractions (e.g., damaging university systems, disrupting the event) may be reported to university authorities.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="rules-item">
+          <summary class="rules-item__header">
+            <span class="rules-item__num">08</span>
+            <i class="fas fa-life-ring rules-item__icon"></i>
+            <span class="rules-item__title">Support &amp; Reporting Issues</span>
+            <i class="fas fa-chevron-down rules-item__chevron"></i>
+          </summary>
+          <div class="rules-item__body">
+            <ul class="rules-list">
+              <li>Contact event staff on the designated CTF Discord/Slack channel or help-desk for any issues.</li>
+              <li>If you encounter a security issue affecting the event, report it responsibly to the organisers.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="rules-item">
+          <summary class="rules-item__header">
+            <span class="rules-item__num">09</span>
+            <i class="fab fa-discord rules-item__icon"></i>
+            <span class="rules-item__title">Discord ToS</span>
+            <i class="fas fa-chevron-down rules-item__chevron"></i>
+          </summary>
+          <div class="rules-item__body">
+            <ul class="rules-list">
+              <li>Follow the Discord Terms of Service (ToS) at all times when using the CTF Discord server.</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <!-- After Party -->
   <section id="afterparty" class="section section--alt">
     <div class="container">
@@ -311,33 +470,15 @@
     </div>
   </section>
 
-  <!-- 2025 Podium -->
+  <!-- Past Results -->
   <section id="podium" class="section">
     <div class="container">
       <div class="section__header">
-        <span class="section__tag">2025 Results</span>
-        <h2 class="section__title">Silicon Siege Podium</h2>
+        <span class="section__tag" id="podiumTag">Results</span>
+        <h2 class="section__title" id="podiumTitle">Loading...</h2>
       </div>
-      <div class="podium">
-        <div class="podium__place podium__place--2">
-          <div class="podium__icon"><i class="fas fa-medal"></i></div>
-          <span class="podium__rank">2nd</span>
-          <h3 class="podium__team">AFNOM</h3>
-          <div class="podium__bar"></div>
-        </div>
-        <div class="podium__place podium__place--1">
-          <div class="podium__icon"><i class="fas fa-crown"></i></div>
-          <span class="podium__rank">1st</span>
-          <h3 class="podium__team">UK Lawnmowing Team</h3>
-          <div class="podium__bar"></div>
-        </div>
-        <div class="podium__place podium__place--3">
-          <div class="podium__icon"><i class="fas fa-medal"></i></div>
-          <span class="podium__rank">3rd</span>
-          <h3 class="podium__team">Cheese</h3>
-          <div class="podium__bar"></div>
-        </div>
-      </div>
+      <nav class="podium-nav" id="podiumNav" aria-label="Event results navigation"></nav>
+      <div class="podium" id="podiumContainer"></div>
     </div>
   </section>
 
@@ -371,7 +512,7 @@
         <div class="footer__col">
           <h4 class="footer__heading">Events</h4>
           <nav class="footer__nav" aria-label="Events navigation">
-            <a href="#podium">2025 Results</a>
+            <a href="#podium">Results</a>
             <a href="#sponsors">Sponsors</a>
             <a href="#afterparty">After Party</a>
           </nav>
