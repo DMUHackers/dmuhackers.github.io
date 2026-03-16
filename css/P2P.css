@@ -5,69 +5,113 @@
 /* ---------- P2P Hero gradient ---------- */
 .hero__bg--p2p {
   background:
-    radial-gradient(ellipse 65% 50% at 50% 0%, rgba(200,16,46,.24) 0%, transparent 55%),
-    radial-gradient(ellipse 45% 40% at 20% 100%, rgba(200,16,46,.1) 0%, transparent 50%),
-    radial-gradient(ellipse 30% 30% at 85% 75%, rgba(0,240,255,.05) 0%, transparent 50%);
+    radial-gradient(ellipse 75% 55% at 50% -5%, rgba(200,16,46,.3) 0%, transparent 50%),
+    radial-gradient(ellipse 45% 40% at 20% 100%, rgba(200,16,46,.12) 0%, transparent 50%),
+    radial-gradient(ellipse 35% 35% at 85% 75%, rgba(0,228,255,.06) 0%, transparent 50%),
+    radial-gradient(ellipse 25% 20% at 65% 25%, rgba(200,16,46,.06) 0%, transparent 50%);
+  animation: heroBreathe 12s ease-in-out infinite;
 }
 
-/* ---------- Countdown Strip ---------- */
-.countdown-strip {
-  background: rgba(10, 10, 11, .8);
-  border-bottom: 1px solid rgba(255,255,255,.04);
-  padding: 32px 0;
+/* ---------- Hero Countdown ---------- */
+.hero-countdown {
+  margin-bottom: 40px;
   text-align: center;
+  transition: opacity .4s ease;
 }
 
-.countdown {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+.hero-countdown__until {
+  font-family: var(--font-display);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
 }
 
-.countdown__block {
+.hero-countdown__timer {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.hero-countdown__unit {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 72px;
-  padding: 12px 16px;
-  background: rgba(24, 24, 27, .6);
+  justify-content: center;
+  min-width: 80px;
+  padding: 20px 12px 16px;
+  border-radius: 14px;
+  background: rgba(10, 10, 14, .6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255,255,255,.06);
-  border-radius: var(--radius);
+  position: relative;
+  transition: border-color .3s, box-shadow .3s;
+}
+.hero-countdown__unit:hover {
+  border-color: rgba(200,16,46,.25);
+  box-shadow: 0 0 24px rgba(200,16,46,.08);
 }
 
-.countdown__num {
-  font-family: var(--font-display);
-  font-size: 2rem;
+.hero-countdown__num {
+  font-family: var(--font-mono);
+  font-size: 2.4rem;
   font-weight: 700;
   color: var(--text);
-  letter-spacing: -.02em;
   line-height: 1;
+  letter-spacing: -.02em;
 }
 
-.countdown__label {
-  font-size: .65rem;
+.hero-countdown__label {
+  font-family: var(--font-display);
+  font-size: .6rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: .1em;
+  letter-spacing: .14em;
   color: var(--text-muted);
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
-.countdown__sep {
+.hero-countdown__sep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding-bottom: 14px;
+}
+.hero-countdown__sep::before,
+.hero-countdown__sep::after {
+  content: '';
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px rgba(200,16,46,.5);
+}
+
+/* Countdown message states (live / ended) */
+.hero-countdown__timer--message {
+  justify-content: center;
+  padding: 16px 32px;
+  background: rgba(10, 10, 14, .6);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 14px;
+}
+.hero-countdown__msg {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--accent);
-  padding: 0 2px;
-  margin-bottom: 16px;
-}
-
-.countdown__until {
-  font-size: .8rem;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: var(--text-muted);
-  margin-top: 16px;
-  letter-spacing: .04em;
+  letter-spacing: .02em;
+}
+.hero-countdown__msg--accent {
+  color: var(--accent);
+  text-shadow: 0 0 20px rgba(200,16,46,.4);
 }
 
 /* ---------- P2P Meta Cards (date / time / location) ---------- */
@@ -167,8 +211,8 @@
 .schedule-card {
   flex: 0 0 calc(25% - 9px);
   min-width: 0;
-  background: rgba(24, 24, 27, .6);
-  border: 1px solid rgba(255,255,255,.06);
+  background: rgba(20, 20, 24, .7);
+  border: 1px solid rgba(255,255,255,.05);
   border-radius: var(--radius);
   padding: 28px 16px 24px;
   text-align: center;
@@ -176,13 +220,14 @@
   flex-direction: column;
   align-items: center;
   gap: 0;
-  transition: border-color .3s, transform .3s;
+  transition: all .4s cubic-bezier(.4,0,.2,1);
   position: relative;
   overflow: hidden;
 }
 .schedule-card:hover {
-  border-color: rgba(200,16,46,.3);
-  transform: translateY(-2px);
+  border-color: rgba(200,16,46,.25);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
 }
 
 .schedule-card:nth-child(even) {
@@ -285,121 +330,137 @@
   font-size: 1rem;
 }
 
-/* ---------- Rules Accordion ---------- */
-.rules-accordion {
-  max-width: 720px;
+/* ---------- Rules Stack ---------- */
+.rules-stack {
+  max-width: 680px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 0;
 }
 
-.rules-item {
-  background: rgba(24, 24, 27, .6);
-  border: 1px solid rgba(255,255,255,.06);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: border-color .3s;
-}
-.rules-item:hover {
-  border-color: rgba(200,16,46,.25);
-}
-.rules-item[open] {
-  border-color: rgba(200,16,46,.3);
-}
-
-.rules-item__header {
+.rule {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 18px 24px;
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
-  transition: background .2s;
-}
-.rules-item__header::-webkit-details-marker { display: none; }
-.rules-item__header::marker { content: ''; }
-.rules-item__header:hover {
-  background: rgba(200,16,46,.04);
+  gap: 24px;
+  padding: 0 0 0 0;
 }
 
-.rules-item__num {
+.rule__marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.rule__num {
   font-family: var(--font-display);
-  font-size: .7rem;
+  font-size: .68rem;
   font-weight: 700;
   letter-spacing: .08em;
   color: var(--accent);
   background: rgba(200,16,46,.1);
-  border: 1px solid rgba(200,16,46,.2);
-  border-radius: 6px;
-  padding: 4px 8px;
-  min-width: 32px;
-  text-align: center;
+  border: 1px solid rgba(200,16,46,.15);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  transition: all .3s;
+}
+.rule:hover .rule__num {
+  background: rgba(200,16,46,.18);
+  border-color: rgba(200,16,46,.35);
+  box-shadow: 0 0 16px rgba(200,16,46,.12);
 }
 
-.rules-item__icon {
-  font-size: 1rem;
+.rule__line {
+  width: 1px;
+  flex: 1;
+  min-height: 20px;
+  background: linear-gradient(to bottom, rgba(200,16,46,.25), rgba(200,16,46,.05));
+}
+
+.rule__body {
+  flex: 1;
+  padding-bottom: 32px;
+}
+
+.rule__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.rule__icon {
+  font-size: .95rem;
   color: var(--text-muted);
-  flex-shrink: 0;
   width: 20px;
   text-align: center;
+  flex-shrink: 0;
+  transition: color .3s;
 }
-.rules-item[open] .rules-item__icon {
+.rule:hover .rule__icon {
   color: var(--accent);
 }
 
-.rules-item__title {
-  flex: 1;
+.rule__title {
   font-family: var(--font-display);
   font-size: .95rem;
   font-weight: 600;
   color: var(--text);
-  letter-spacing: -.01em;
+  letter-spacing: .01em;
 }
 
-.rules-item__chevron {
-  font-size: .7rem;
-  color: var(--text-muted);
-  transition: transform .3s ease;
-  flex-shrink: 0;
-}
-.rules-item[open] .rules-item__chevron {
-  transform: rotate(180deg);
-  color: var(--accent);
-}
-
-.rules-item__body {
-  padding: 0 24px 20px 78px;
-}
-
-.rules-list {
+.rule__list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
-.rules-list li {
+.rule__list li {
   position: relative;
-  padding-left: 18px;
-  font-size: .88rem;
+  padding-left: 16px;
+  font-size: .86rem;
   color: var(--text-muted);
   line-height: 1.65;
 }
-.rules-list li::before {
+.rule__list li::before {
   content: '';
   position: absolute;
   left: 0;
   top: 10px;
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: var(--accent);
-  opacity: .6;
+  opacity: .5;
 }
+
+/* Scroll-reveal for rules */
+.rule {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.rule.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.rule:nth-child(1) { transition-delay: 0s; }
+.rule:nth-child(2) { transition-delay: .06s; }
+.rule:nth-child(3) { transition-delay: .12s; }
+.rule:nth-child(4) { transition-delay: .18s; }
+.rule:nth-child(5) { transition-delay: .24s; }
+.rule:nth-child(6) { transition-delay: .30s; }
+.rule:nth-child(7) { transition-delay: .36s; }
+.rule:nth-child(8) { transition-delay: .42s; }
+.rule:nth-child(9) { transition-delay: .48s; }
 
 /* ---------- Podium ---------- */
 .podium {
@@ -424,7 +485,7 @@
   margin-bottom: 12px;
 }
 
-.podium__place--1 .podium__icon { color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,.35); }
+.podium__place--1 .podium__icon { color: #ffd700; text-shadow: 0 0 24px rgba(255,215,0,.4); filter: drop-shadow(0 0 8px rgba(255,215,0,.2)); }
 .podium__place--2 .podium__icon { color: #c0c0c0; }
 .podium__place--3 .podium__icon { color: #cd7f32; }
 
@@ -525,27 +586,33 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
+  .schedule-card {
+    flex: 0 0 calc(50% - 6px);
+  }
+
   .p2p-meta-cards.cards--three {
     grid-template-columns: 1fr;
   }
 
-  .countdown__block {
-    min-width: 56px;
-    padding: 10px 12px;
+  .hero-countdown__timer { gap: 8px; }
+  .hero-countdown__unit {
+    min-width: 64px;
+    padding: 14px 8px 12px;
   }
-  .countdown__num {
-    font-size: 1.5rem;
-  }
-  .countdown__sep {
-    font-size: 1.2rem;
+  .hero-countdown__num {
+    font-size: 1.8rem;
   }
 
-  .rules-item__body {
-    padding-left: 24px;
+  .rule {
+    gap: 16px;
   }
-  .rules-item__header {
-    padding: 14px 16px;
-    gap: 10px;
+  .rule__num {
+    width: 30px;
+    height: 30px;
+    font-size: .6rem;
+  }
+  .rule__body {
+    padding-bottom: 24px;
   }
 
   .podium-nav {
@@ -564,25 +631,23 @@
 
 @media (max-width: 480px) {
   .schedule-card {
-    flex: 0 0 calc(50% - 6px);
+    flex: 0 0 100%;
     padding: 20px 12px 18px;
   }
   .schedule-card__time {
     font-size: 1.25rem;
   }
 
-  .countdown__block {
-    min-width: 48px;
-    padding: 8px 10px;
+  .hero-countdown__timer { gap: 6px; }
+  .hero-countdown__unit {
+    min-width: 54px;
+    padding: 10px 6px 8px;
   }
-  .countdown__num {
-    font-size: 1.25rem;
+  .hero-countdown__num {
+    font-size: 1.4rem;
   }
-  .countdown__label {
-    font-size: .6rem;
-  }
-  .countdown__sep {
-    font-size: 1rem;
+  .hero-countdown__label {
+    font-size: .5rem;
   }
 
   .afterparty__details {

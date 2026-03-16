@@ -1,0 +1,16 @@
+{
+  "name": "DMU Hackers",
+  "short_name": "DMU Hackers",
+  "description": "De Montfort University's cyber security society. Hacking, learning, and competing since 2015.",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#c8102e",
+  "background_color": "#08080a",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ]
+}

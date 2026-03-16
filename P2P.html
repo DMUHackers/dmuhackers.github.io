@@ -11,12 +11,40 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dmuhackers.com/P2P.html">
   <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@dmuhackers">
+  <meta name="twitter:title" content="Pwn2Play CTF - DMU Hackers">
+  <meta name="twitter:description" content="DMU Hackers' flagship CTF competition. Exploit, decrypt, reverse-engineer. Prove you've got what it takes.">
   <link rel="canonical" href="https://dmuhackers.com/P2P.html">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/P2P.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Pwn2Play — Core Incursion",
+    "description": "DMU Hackers' flagship Capture The Flag competition. Web exploitation, cryptography, reverse engineering and more.",
+    "startDate": "2026-05-30T09:00:00+01:00",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "location": {
+      "@type": "Place",
+      "name": "De Montfort University — Gateway House",
+      "address": { "@type": "PostalAddress", "addressLocality": "Leicester", "addressCountry": "GB" }
+    },
+    "organizer": {
+      "@type": "Organization",
+      "name": "DMU Hackers",
+      "url": "https://dmuhackers.com"
+    },
+    "isAccessibleForFree": true
+  }
+  </script>
 </head>
 
 <body>
@@ -48,32 +76,49 @@
 
   <!-- Hero -->
   <section id="p2p-hero" class="hero">
-    <div class="hero__bg hero__bg--p2p"></div>
     <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
+    <div class="hero__bg hero__bg--p2p"></div>
     <div class="hero__content">
       <p class="hero__tag">DMU Hackers presents</p>
       <h1 class="hero__title">Pwn<span class="hero__accent">2</span>Play</h1>
       <p class="hero__sub">Our flagship Capture The Flag competition. Exploit, decrypt, reverse-engineer. Prove you've got what it takes.</p>
+
+      <!-- Countdown -->
+      <div class="hero-countdown" id="countdown">
+        <p class="hero-countdown__until">Core Incursion begins in</p>
+        <div class="hero-countdown__timer">
+          <div class="hero-countdown__unit">
+            <span class="hero-countdown__num" id="cdDays">--</span>
+            <span class="hero-countdown__label">Days</span>
+          </div>
+          <span class="hero-countdown__sep"></span>
+          <div class="hero-countdown__unit">
+            <span class="hero-countdown__num" id="cdHours">--</span>
+            <span class="hero-countdown__label">Hours</span>
+          </div>
+          <span class="hero-countdown__sep"></span>
+          <div class="hero-countdown__unit">
+            <span class="hero-countdown__num" id="cdMins">--</span>
+            <span class="hero-countdown__label">Mins</span>
+          </div>
+          <span class="hero-countdown__sep"></span>
+          <div class="hero-countdown__unit">
+            <span class="hero-countdown__num" id="cdSecs">--</span>
+            <span class="hero-countdown__label">Secs</span>
+          </div>
+        </div>
+      </div>
+
       <div class="hero__actions">
         <a href="https://forms.gle/YPQaL6gwLK24S6ms8" class="btn btn--primary" target="_blank" rel="noopener noreferrer"><i class="fas fa-user-plus"></i> Register Now</a>
         <a href="https://discord.gg/ZUqTWNy7c9" class="btn btn--ghost" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Discord</a>
       </div>
     </div>
-  </section>
-
-  <!-- Countdown -->
-  <div class="countdown-strip">
-    <div class="countdown" id="countdown">
-      <div class="countdown__block"><span class="countdown__num" id="cdDays">--</span><span class="countdown__label">Days</span></div>
-      <span class="countdown__sep">:</span>
-      <div class="countdown__block"><span class="countdown__num" id="cdHours">--</span><span class="countdown__label">Hours</span></div>
-      <span class="countdown__sep">:</span>
-      <div class="countdown__block"><span class="countdown__num" id="cdMins">--</span><span class="countdown__label">Mins</span></div>
-      <span class="countdown__sep">:</span>
-      <div class="countdown__block"><span class="countdown__num" id="cdSecs">--</span><span class="countdown__label">Secs</span></div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
     </div>
-    <p class="countdown__until">until Pwn2Play: Core Incursion</p>
-  </div>
+  </section>
 
   <!-- Event Overview -->
   <section id="event" class="section">
@@ -106,7 +151,7 @@
             <i class="fab fa-discord"></i>
             <span>Discord</span>
           </a>
-          <a href="https://forms.gle/1L8gkR7xMxNDo9hB6" class="p2p-connect__btn" target="_blank" rel="noopener noreferrer">
+          <a href="https://forms.gle/YPQaL6gwLK24S6ms8" class="p2p-connect__btn" target="_blank" rel="noopener noreferrer">
             <i class="fas fa-user-plus"></i>
             <span>Register</span>
           </a>
@@ -291,138 +336,155 @@
         <span class="section__tag">Read the Rules</span>
         <h2 class="section__title">CTF Server Rules</h2>
       </div>
-      <div class="rules-accordion">
-        <details class="rules-item" open>
-          <summary class="rules-item__header">
-            <span class="rules-item__num">01</span>
-            <i class="fas fa-handshake rules-item__icon"></i>
-            <span class="rules-item__title">General Conduct</span>
-            <i class="fas fa-chevron-down rules-item__chevron"></i>
-          </summary>
-          <div class="rules-item__body">
-            <ul class="rules-list">
+      <div class="rules-stack">
+        <div class="rule">
+          <div class="rule__marker">
+            <span class="rule__num">01</span>
+            <div class="rule__line"></div>
+          </div>
+          <div class="rule__body">
+            <div class="rule__header">
+              <i class="fas fa-handshake rule__icon"></i>
+              <h3 class="rule__title">General Conduct</h3>
+            </div>
+            <ul class="rule__list">
               <li>Respect all participants, organisers, and the integrity of the competition.</li>
               <li>No harassment, discrimination, or toxic behaviour will be tolerated.</li>
               <li>Follow all university IT policies and legal regulations.</li>
             </ul>
           </div>
-        </details>
-        <details class="rules-item">
-          <summary class="rules-item__header">
-            <span class="rules-item__num">02</span>
-            <i class="fas fa-server rules-item__icon"></i>
-            <span class="rules-item__title">Server &amp; Network Use</span>
-            <i class="fas fa-chevron-down rules-item__chevron"></i>
-          </summary>
-          <div class="rules-item__body">
-            <ul class="rules-list">
+        </div>
+        <div class="rule">
+          <div class="rule__marker">
+            <span class="rule__num">02</span>
+            <div class="rule__line"></div>
+          </div>
+          <div class="rule__body">
+            <div class="rule__header">
+              <i class="fas fa-server rule__icon"></i>
+              <h3 class="rule__title">Server &amp; Network Use</h3>
+            </div>
+            <ul class="rule__list">
               <li>Only interact with CTF challenges and infrastructure &mdash; do not target other participants or university systems.</li>
               <li>Denial of Service (DoS/DDoS) attacks against the server, network, or participants are strictly prohibited.</li>
               <li>Scanning outside the designated CTF scope is forbidden.</li>
             </ul>
           </div>
-        </details>
-        <details class="rules-item">
-          <summary class="rules-item__header">
-            <span class="rules-item__num">03</span>
-            <i class="fas fa-scale-balanced rules-item__icon"></i>
-            <span class="rules-item__title">Fair Play &amp; Ethics</span>
-            <i class="fas fa-chevron-down rules-item__chevron"></i>
-          </summary>
-          <div class="rules-item__body">
-            <ul class="rules-list">
+        </div>
+        <div class="rule">
+          <div class="rule__marker">
+            <span class="rule__num">03</span>
+            <div class="rule__line"></div>
+          </div>
+          <div class="rule__body">
+            <div class="rule__header">
+              <i class="fas fa-scale-balanced rule__icon"></i>
+              <h3 class="rule__title">Fair Play &amp; Ethics</h3>
+            </div>
+            <ul class="rule__list">
               <li>No brute-forcing challenge platforms, flag submission forms, or administrative panels unless explicitly part of a challenge.</li>
               <li>Do not share, trade, or leak flags, solutions, or hints to other participants.</li>
               <li>No automated tools/scripts that degrade server performance (e.g., aggressive scanning, spamming requests).</li>
             </ul>
           </div>
-        </details>
-        <details class="rules-item">
-          <summary class="rules-item__header">
-            <span class="rules-item__num">04</span>
-            <i class="fas fa-laptop rules-item__icon"></i>
-            <span class="rules-item__title">Virtual Participants</span>
-            <i class="fas fa-chevron-down rules-item__chevron"></i>
-          </summary>
-          <div class="rules-item__body">
-            <ul class="rules-list">
+        </div>
+        <div class="rule">
+          <div class="rule__marker">
+            <span class="rule__num">04</span>
+            <div class="rule__line"></div>
+          </div>
+          <div class="rule__body">
+            <div class="rule__header">
+              <i class="fas fa-laptop rule__icon"></i>
+              <h3 class="rule__title">Virtual Participants</h3>
+            </div>
+            <ul class="rule__list">
               <li>Maintain a stable internet connection and avoid using VPNs/proxies unless required for a challenge.</li>
               <li>Keep your credentials secure &mdash; do not share your access keys or login information.</li>
               <li>Follow organiser instructions in the event of technical issues.</li>
             </ul>
           </div>
-        </details>
-        <details class="rules-item">
-          <summary class="rules-item__header">
-            <span class="rules-item__num">05</span>
-            <i class="fas fa-flag rules-item__icon"></i>
-            <span class="rules-item__title">Challenge &amp; Flag Submission</span>
-            <i class="fas fa-chevron-down rules-item__chevron"></i>
-          </summary>
-          <div class="rules-item__body">
-            <ul class="rules-list">
+        </div>
+        <div class="rule">
+          <div class="rule__marker">
+            <span class="rule__num">05</span>
+            <div class="rule__line"></div>
+          </div>
+          <div class="rule__body">
+            <div class="rule__header">
+              <i class="fas fa-flag rule__icon"></i>
+              <h3 class="rule__title">Challenge &amp; Flag Submission</h3>
+            </div>
+            <ul class="rule__list">
               <li>Flags must be submitted exactly as retrieved, in the expected format.</li>
               <li>If a challenge is broken, report it to an admin instead of exploiting it.</li>
               <li>The organisers' decisions on challenge validity, scoring, and disputes are final.</li>
             </ul>
           </div>
-        </details>
-        <details class="rules-item">
-          <summary class="rules-item__header">
-            <span class="rules-item__num">06</span>
-            <i class="fas fa-ban rules-item__icon"></i>
-            <span class="rules-item__title">Prohibited Actions</span>
-            <i class="fas fa-chevron-down rules-item__chevron"></i>
-          </summary>
-          <div class="rules-item__body">
-            <ul class="rules-list">
+        </div>
+        <div class="rule">
+          <div class="rule__marker">
+            <span class="rule__num">06</span>
+            <div class="rule__line"></div>
+          </div>
+          <div class="rule__body">
+            <div class="rule__header">
+              <i class="fas fa-ban rule__icon"></i>
+              <h3 class="rule__title">Prohibited Actions</h3>
+            </div>
+            <ul class="rule__list">
               <li>No social engineering, phishing, or attacking other teams' setups.</li>
               <li>No modifying, deleting, or tampering with challenge infrastructure.</li>
               <li>No use of AI-generated solutions unless explicitly allowed.</li>
             </ul>
           </div>
-        </details>
-        <details class="rules-item">
-          <summary class="rules-item__header">
-            <span class="rules-item__num">07</span>
-            <i class="fas fa-gavel rules-item__icon"></i>
-            <span class="rules-item__title">Penalties &amp; Disqualification</span>
-            <i class="fas fa-chevron-down rules-item__chevron"></i>
-          </summary>
-          <div class="rules-item__body">
-            <ul class="rules-list">
+        </div>
+        <div class="rule">
+          <div class="rule__marker">
+            <span class="rule__num">07</span>
+            <div class="rule__line"></div>
+          </div>
+          <div class="rule__body">
+            <div class="rule__header">
+              <i class="fas fa-gavel rule__icon"></i>
+              <h3 class="rule__title">Penalties &amp; Disqualification</h3>
+            </div>
+            <ul class="rule__list">
               <li>Violating these rules may result in a warning, score reduction, or disqualification.</li>
               <li>Severe infractions (e.g., damaging university systems, disrupting the event) may be reported to university authorities.</li>
             </ul>
           </div>
-        </details>
-        <details class="rules-item">
-          <summary class="rules-item__header">
-            <span class="rules-item__num">08</span>
-            <i class="fas fa-life-ring rules-item__icon"></i>
-            <span class="rules-item__title">Support &amp; Reporting Issues</span>
-            <i class="fas fa-chevron-down rules-item__chevron"></i>
-          </summary>
-          <div class="rules-item__body">
-            <ul class="rules-list">
+        </div>
+        <div class="rule">
+          <div class="rule__marker">
+            <span class="rule__num">08</span>
+            <div class="rule__line"></div>
+          </div>
+          <div class="rule__body">
+            <div class="rule__header">
+              <i class="fas fa-life-ring rule__icon"></i>
+              <h3 class="rule__title">Support &amp; Reporting Issues</h3>
+            </div>
+            <ul class="rule__list">
               <li>Contact event staff on the designated CTF Discord/Slack channel or help-desk for any issues.</li>
               <li>If you encounter a security issue affecting the event, report it responsibly to the organisers.</li>
             </ul>
           </div>
-        </details>
-        <details class="rules-item">
-          <summary class="rules-item__header">
-            <span class="rules-item__num">09</span>
-            <i class="fab fa-discord rules-item__icon"></i>
-            <span class="rules-item__title">Discord ToS</span>
-            <i class="fas fa-chevron-down rules-item__chevron"></i>
-          </summary>
-          <div class="rules-item__body">
-            <ul class="rules-list">
+        </div>
+        <div class="rule">
+          <div class="rule__marker">
+            <span class="rule__num">09</span>
+          </div>
+          <div class="rule__body">
+            <div class="rule__header">
+              <i class="fab fa-discord rule__icon"></i>
+              <h3 class="rule__title">Discord ToS</h3>
+            </div>
+            <ul class="rule__list">
               <li>Follow the Discord Terms of Service (ToS) at all times when using the CTF Discord server.</li>
             </ul>
           </div>
-        </details>
+        </div>
       </div>
     </div>
   </section>
@@ -475,7 +537,7 @@
     <div class="container">
       <div class="section__header">
         <span class="section__tag" id="podiumTag">Results</span>
-        <h2 class="section__title" id="podiumTitle">Loading...</h2>
+        <h2 class="section__title" id="podiumTitle">Pwn2Play Results</h2>
       </div>
       <nav class="podium-nav" id="podiumNav" aria-label="Event results navigation"></nav>
       <div class="podium" id="podiumContainer"></div>
@@ -527,7 +589,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <p class="footer__copy">&copy; DMU Hackers | Pwning since 2015</p>
+        <p class="footer__copy">&copy; 2015&ndash;<span id="footerYear"></span> DMU Hackers | Pwning since 2015</p>
         <p class="footer__copy footer__copy--subtle">Made with <span class="footer__heart">&lt;3</span> by the committee</p>
       </div>
     </div>

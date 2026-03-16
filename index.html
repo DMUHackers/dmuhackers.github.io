@@ -16,8 +16,11 @@
   <meta name="twitter:title" content="DMU Hackers - De Montfort University Cyber Security Society">
   <meta name="twitter:description" content="Cyber security, CTF competitions, and hands-on hacking. All skill levels welcome.">
   <link rel="canonical" href="https://dmuhackers.com">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="css/main.css">
   <!-- Structured Data -->
@@ -75,30 +78,32 @@
     <div class="hero__content">
       <p class="hero__tag">De Montfort University Hacking Society</p>
 
-      <!-- Terminal hero -->
-      <div class="hero-term" aria-label="DMU Hackers">
+      <!-- Interactive terminal -->
+      <div class="hero-term" id="heroTerm" role="application" aria-label="Interactive terminal">
         <div class="hero-term__bar">
           <span class="hero-term__dot hero-term__dot--red"></span>
           <span class="hero-term__dot hero-term__dot--yellow"></span>
           <span class="hero-term__dot hero-term__dot--green"></span>
           <span class="hero-term__title">hackers@dmu:~</span>
         </div>
-        <div class="hero-term__body">
-          <div class="hero-term__line hero-term__line--cmd">
+        <div class="hero-term__body" id="heroTermBody">
+          <div class="hero-term__history" id="heroTermHistory" aria-live="polite"></div>
+          <div class="hero-term__input-line" id="heroInputLine" style="display:none;">
             <span class="hero-term__prompt">$</span>
-            <span class="hero-term__typed" id="heroCmd"></span>
-            <span class="hero-term__cursor" id="heroCursor">_</span>
-          </div>
-          <div class="hero-term__line hero-term__line--output" id="heroOutput">
-            <span class="hero-term__result">DMU Hackers</span>
-          </div>
-          <div class="hero-term__line hero-term__line--sub" id="heroSubLine">
-            <span class="hero-term__prompt">$</span>
-            <span class="hero-term__sub-typed" id="heroSubCmd"></span>
-            <span class="hero-term__cursor hero-term__cursor--sub" id="heroSubCursor">_</span>
+            <span class="hero-term__input-text" id="heroInputText"></span>
+            <span class="hero-term__cursor">_</span>
           </div>
         </div>
+        <input type="text" id="heroTermInput" class="hero-term__hidden-input"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+               aria-label="Terminal input">
       </div>
+
+      <a href="P2P.html" class="hero-featured">
+        <span class="hero-featured__badge">Featured Event</span>
+        <span class="hero-featured__text">Pwn<span class="hero__accent">2</span>Play &mdash; Our Flagship CTF</span>
+        <span class="hero-featured__arrow"><i class="fas fa-arrow-right"></i></span>
+      </a>
 
       <p class="hero__sub">Cyber security, CTF competitions, and hands-on hacking.<br>Every Thursday at 18:00. All skill levels welcome.</p>
       <div class="hero__actions">
@@ -144,16 +149,27 @@
         </div>
       </div>
 
-      <!-- Skill category badges -->
-      <div class="skill-badges">
-        <span class="skill-badge"><i class="fas fa-globe"></i> Web Exploitation</span>
-        <span class="skill-badge"><i class="fas fa-lock"></i> Cryptography</span>
-        <span class="skill-badge"><i class="fas fa-microchip"></i> Reverse Engineering</span>
-        <span class="skill-badge"><i class="fas fa-bug"></i> Binary Exploitation</span>
-        <span class="skill-badge"><i class="fas fa-magnifying-glass"></i> OSINT</span>
-        <span class="skill-badge"><i class="fas fa-network-wired"></i> Networking</span>
-        <span class="skill-badge"><i class="fas fa-key"></i> Lock Picking</span>
-        <span class="skill-badge"><i class="fas fa-file-code"></i> Forensics</span>
+      <!-- Skill category badges (marquee) -->
+      <div class="skill-badges-track">
+        <div class="skill-badges">
+          <span class="skill-badge"><i class="fas fa-globe"></i> Web Exploitation</span>
+          <span class="skill-badge"><i class="fas fa-lock"></i> Cryptography</span>
+          <span class="skill-badge"><i class="fas fa-microchip"></i> Reverse Engineering</span>
+          <span class="skill-badge"><i class="fas fa-bug"></i> Binary Exploitation</span>
+          <span class="skill-badge"><i class="fas fa-magnifying-glass"></i> OSINT</span>
+          <span class="skill-badge"><i class="fas fa-network-wired"></i> Networking</span>
+          <span class="skill-badge"><i class="fas fa-key"></i> Lock Picking</span>
+          <span class="skill-badge"><i class="fas fa-file-code"></i> Forensics</span>
+          <!-- Duplicate for seamless loop -->
+          <span class="skill-badge"><i class="fas fa-globe"></i> Web Exploitation</span>
+          <span class="skill-badge"><i class="fas fa-lock"></i> Cryptography</span>
+          <span class="skill-badge"><i class="fas fa-microchip"></i> Reverse Engineering</span>
+          <span class="skill-badge"><i class="fas fa-bug"></i> Binary Exploitation</span>
+          <span class="skill-badge"><i class="fas fa-magnifying-glass"></i> OSINT</span>
+          <span class="skill-badge"><i class="fas fa-network-wired"></i> Networking</span>
+          <span class="skill-badge"><i class="fas fa-key"></i> Lock Picking</span>
+          <span class="skill-badge"><i class="fas fa-file-code"></i> Forensics</span>
+        </div>
       </div>
       <div class="info-bar">
         <div class="info-bar__item">
@@ -211,19 +227,19 @@
         <h3 class="faq__heading">Common Questions</h3>
         <details class="faq__item">
           <summary class="faq__question">Do I need to know how to code?</summary>
-          <p class="faq__answer">Nope. Some challenges involve code, but many don't. We cover everything from lock picking to network analysis. You'll pick things up as you go.</p>
+          <div class="faq__answer-wrap"><p class="faq__answer">Nope. Some challenges involve code, but many don't. We cover everything from lock picking to network analysis. You'll pick things up as you go.</p></div>
         </details>
         <details class="faq__item">
           <summary class="faq__question">What should I bring?</summary>
-          <p class="faq__answer">Just yourself! We provide PCs at sessions, but you're welcome to bring your own laptop if you prefer. We recommend having a Linux VM (Kali or Parrot) set up if you do, but it's not essential - we'll help you get sorted.</p>
+          <div class="faq__answer-wrap"><p class="faq__answer">Just yourself! We provide PCs at sessions, but you're welcome to bring your own laptop if you prefer. We recommend having a Linux VM (Kali or Parrot) set up if you do, but it's not essential - we'll help you get sorted.</p></div>
         </details>
         <details class="faq__item">
           <summary class="faq__question">Is it only for Computer Science students?</summary>
-          <p class="faq__answer">Absolutely not. We've had members from forensics, business, and engineering. If you're curious about security, you're welcome here.</p>
+          <div class="faq__answer-wrap"><p class="faq__answer">Absolutely not. We've had members from forensics, business, and engineering. If you're curious about security, you're welcome here.</p></div>
         </details>
         <details class="faq__item">
           <summary class="faq__question">What's a CTF?</summary>
-          <p class="faq__answer">Capture The Flag - a cyber security competition where you solve challenges (cracking passwords, exploiting websites, reverse engineering binaries) to find hidden "flags". Think of it as puzzle-solving for hackers.</p>
+          <div class="faq__answer-wrap"><p class="faq__answer">Capture The Flag - a cyber security competition where you solve challenges (cracking passwords, exploiting websites, reverse engineering binaries) to find hidden "flags". Think of it as puzzle-solving for hackers.</p></div>
         </details>
       </div>
       <div class="getting-started__cta">
@@ -310,7 +326,7 @@
           <h4 class="member__name">Adam</h4>
           <p class="member__role">Chairman</p>
 
-          <a href="#" class="member__social" aria-label="Adam's LinkedIn profile"><i class="fab fa-linkedin-in"></i></a>
+          <span class="member__social member__social--disabled" aria-label="LinkedIn coming soon"><i class="fab fa-linkedin-in"></i></span>
         </div>
         <div class="member">
           <div class="member__img member__img--placeholder">
@@ -406,7 +422,7 @@
         </div>
       </div>
       <div class="footer__bottom">
-        <p class="footer__copy">&copy; DMU Hackers | Pwning since 2015</p>
+        <p class="footer__copy">&copy; 2015&ndash;<span id="footerYear"></span> DMU Hackers | Pwning since 2015</p>
         <p class="footer__copy footer__copy--subtle">Made with <span class="footer__heart">&lt;3</span> by the committee</p>
       </div>
     </div>

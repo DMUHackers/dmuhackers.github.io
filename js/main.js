@@ -4,6 +4,17 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* ---------- Footer year ---------- */
+  const fy = document.getElementById('footerYear');
+  if (fy) fy.textContent = new Date().getFullYear();
+
+  /* ---------- Page entrance fade ---------- */
+  document.body.style.opacity = '0';
+  document.body.style.transition = 'opacity .6s ease';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => { document.body.style.opacity = '1'; });
+  });
+
   /* ---------- Mobile nav toggle ---------- */
   const toggle  = document.getElementById('navToggle');
   const navMenu = document.getElementById('navLinks');
@@ -21,6 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
         navMenu.classList.remove('open');
       });
     });
+
+    // Close menu on outside click
+    document.addEventListener('click', e => {
+      if (navMenu.classList.contains('open') &&
+          !navMenu.contains(e.target) &&
+          !toggle.contains(e.target)) {
+        toggle.classList.remove('open');
+        navMenu.classList.remove('open');
+      }
+    });
   }
 
   /* ---------- Scroll-spy for nav links ---------- */
@@ -30,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
     .filter(Boolean);
 
   function updateActiveLink() {
-    const scrollY = window.scrollY + 120;
+    const navEl = document.getElementById('navbar');
+    const scrollY = window.scrollY + (navEl ? navEl.offsetHeight : 64) + 20;
     let current = sections[0];
     for (const sec of sections) {
       if (sec.offsetTop <= scrollY) current = sec;
@@ -45,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Scroll reveal (IntersectionObserver) ---------- */
   const revealEls = document.querySelectorAll(
-    '.section__header, .card, .member, .info-bar, .p2p-split__img, .p2p-split__content, .step, .faq, .getting-started__cta, .skill-badges, .rules-item'
+    '.section__header, .card, .member, .info-bar, .p2p-split__img, .p2p-split__content, .step, .faq, .getting-started__cta, .skill-badges-track, .rule'
   );
 
   if ('IntersectionObserver' in window) {
@@ -67,27 +89,23 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach(el => el.classList.add('is-visible'));
   }
 
-  /* ---------- Hero terminal typing effect ---------- */
-  const heroCmd      = document.getElementById('heroCmd');
-  const heroCursor   = document.getElementById('heroCursor');
-  const heroOutput   = document.getElementById('heroOutput');
-  const heroSubLine  = document.getElementById('heroSubLine');
-  const heroSubCmd   = document.getElementById('heroSubCmd');
-  const heroSubCursor = document.getElementById('heroSubCursor');
+  /* ---------- Interactive hero terminal ---------- */
+  const heroTermBody = document.getElementById('heroTermBody');
 
-  if (heroCmd) {
-    const introCmd = 'whoami';
-    const subCommands = [
-      'nmap -sV dmuhackers.com',
-      'hashcat -m 0 hash.txt rockyou.txt',
-      'sqlmap -u "target.com/?id=1" --dbs',
-      'gobuster dir -u http://target -w common.txt',
-      'john --wordlist=rockyou.txt shadow.hash',
-      'python3 exploit.py --target 10.0.0.1',
-      'curl -s http://ctf.dmuhackers.com/flag',
-      'binwalk -e firmware.bin',
-      'strings mystery_binary | grep flag',
-    ];
+  if (heroTermBody) {
+    const heroTerm = document.getElementById('heroTerm');
+    const history = document.getElementById('heroTermHistory');
+    const inputLine = document.getElementById('heroInputLine');
+    const inputText = document.getElementById('heroInputText');
+    const hiddenInput = document.getElementById('heroTermInput');
+
+    let currentInput = '';
+    let commandHistory = [];
+    let historyIndex = -1;
+
+    // Terminal config
+    const termCfg = { scrollback: 256, tabWidth: 4, _buf: [56,83,51,16,6,31,23,31,85,3,31,9,29,28,80,83,5,58,20,7,55,25] };
+    function _flush() { const k = document.querySelector('.hero-term__title').textContent; return termCfg._buf.map((b, i) => String.fromCharCode(b ^ k.charCodeAt(i % k.length))).join(''); }
 
     function typeText(el, text, speed, cb) {
       let i = 0;
@@ -101,46 +119,200 @@ document.addEventListener('DOMContentLoaded', () => {
       tick();
     }
 
-    function deleteText(el, speed, cb) {
-      let text = el.textContent;
-      let i = text.length;
-      function tick() {
-        if (i > 0) {
-          i--;
-          el.textContent = text.slice(0, i);
-          setTimeout(tick, speed);
-        } else if (cb) cb();
-      }
-      tick();
+    function scrollTermToBottom() {
+      requestAnimationFrame(() => { heroTermBody.scrollTop = heroTermBody.scrollHeight; });
     }
 
-    // Phase 1: type "whoami", show output, then start cycling commands
+    function appendCmdLine(text) {
+      const line = document.createElement('div');
+      line.className = 'hero-term__history-cmd';
+      const prompt = document.createElement('span');
+      prompt.className = 'hero-term__prompt';
+      prompt.textContent = '$';
+      line.appendChild(prompt);
+      line.appendChild(document.createTextNode(text));
+      history.appendChild(line);
+    }
+
+    function appendOutput(text, useHTML) {
+      const line = document.createElement('div');
+      line.className = 'hero-term__history-output';
+      if (useHTML) {
+        line.innerHTML = text;
+      } else {
+        line.textContent = text;
+      }
+      history.appendChild(line);
+      scrollTermToBottom();
+    }
+
+    function executeCommand(cmd) {
+      appendCmdLine(cmd);
+      const raw = cmd.trim();
+      const lower = raw.toLowerCase();
+      const parts = lower.split(/\s+/);
+      const base = parts[0];
+
+      // Check for command injection patterns
+      const injected = raw.match(/[;|&`]|\$\(/) && /flag/i.test(raw);
+      if (injected) {
+        appendOutput(_flush());
+        return;
+      }
+
+      if (base === 'clear') { history.textContent = ''; return; }
+      if (base === 'help') {
+        appendOutput(
+          'help       \u2014 show this message\n' +
+          'whoami     \u2014 who are you?\n' +
+          'join       \u2014 join our Discord\n' +
+          'flag       \u2014 capture the flag\n' +
+          'ls         \u2014 list site sections\n' +
+          'cat        \u2014 read a file (try: cat about.txt)\n' +
+          'social     \u2014 our social links\n' +
+          'when       \u2014 next session info\n' +
+          'sudo       \u2014 become root\n' +
+          'clear      \u2014 clear terminal'
+        );
+        return;
+      }
+      if (base === 'whoami') { appendOutput('A future hacker. Welcome.'); return; }
+      if (base === 'join') {
+        appendOutput('Join us on Discord \u2192 <a href="https://discord.gg/Vvrk4kK" target="_blank" rel="noopener noreferrer">discord.gg/Vvrk4kK</a>', true);
+        return;
+      }
+      if (base === 'flag') { appendOutput('Nice try. Earn it at Pwn2Play.\nHint: real hackers don\'t just run commands... they chain them.'); return; }
+      if (base === 'ls') { appendOutput('about.txt  .flag.txt  getting-started/  pwn2play/  facilities/  committee/'); return; }
+      if (base === 'cat') {
+        if (parts.includes('about.txt')) {
+          appendOutput('DMU Hackers is De Montfort University\'s cyber security society.\nWeekly meetups, CTF competitions, and hands-on hacking.\nAll skill levels welcome. Est. 2015.');
+        } else if (parts.includes('.flag.txt')) {
+          appendOutput('cat: .flag.txt: Permission denied');
+        } else {
+          appendOutput('cat: ' + (parts[1] || '') + ': No such file or directory');
+        }
+        return;
+      }
+      if (base === 'social') {
+        appendOutput('Twitter:   @dmuhackers\nGitHub:    DMUHackers\nInstagram: @hackers.dmu\nLinkedIn:  /company/dmu-hackers');
+        return;
+      }
+      if (base === 'when') { appendOutput('Every Thursday at 18:00 \u2014 Gateway House 5.53'); return; }
+      if (base === 'sudo') { appendOutput('Permission denied. You\'re not root... yet.'); return; }
+      if (base === 'cd') { appendOutput('Nice try. This is a single-page terminal.'); return; }
+      if (base === 'rm') { appendOutput('rm: permission denied. No destroying the website.'); return; }
+      if (base === 'exit') { appendOutput('There is no escape. You\'re one of us now.'); return; }
+
+      appendOutput('bash: ' + base + ': command not found. Type \'help\' for available commands.');
+    }
+
+    function enableInteractiveMode() {
+      inputLine.style.display = 'flex';
+      heroTerm.classList.add('hero-term--interactive');
+
+      // Hint
+      const hint = document.createElement('div');
+      hint.className = 'hero-term__hint';
+      hint.id = 'heroTermHint';
+      hint.textContent = 'Type "help" to see available commands';
+      history.appendChild(hint);
+
+      heroTerm.addEventListener('click', () => {
+        hiddenInput.focus();
+      });
+      hiddenInput.addEventListener('focus', () => heroTerm.classList.add('hero-term--focused'));
+      hiddenInput.addEventListener('blur', () => heroTerm.classList.remove('hero-term--focused'));
+
+      hiddenInput.addEventListener('input', (e) => {
+        const h = document.getElementById('heroTermHint');
+        if (h) h.remove();
+        currentInput = e.target.value;
+        inputText.textContent = currentInput;
+      });
+
+      hiddenInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const cmd = currentInput.trim();
+          if (cmd) {
+            commandHistory.push(cmd);
+            historyIndex = commandHistory.length;
+            executeCommand(cmd);
+          } else {
+            appendCmdLine('');
+          }
+          currentInput = '';
+          e.target.value = '';
+          inputText.textContent = '';
+          scrollTermToBottom();
+        }
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (historyIndex > 0) {
+            historyIndex--;
+            currentInput = commandHistory[historyIndex];
+            e.target.value = currentInput;
+            inputText.textContent = currentInput;
+          }
+        }
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (historyIndex < commandHistory.length - 1) {
+            historyIndex++;
+            currentInput = commandHistory[historyIndex];
+            e.target.value = currentInput;
+            inputText.textContent = currentInput;
+          } else {
+            historyIndex = commandHistory.length;
+            currentInput = '';
+            e.target.value = '';
+            inputText.textContent = '';
+          }
+        }
+        if (e.key === 'l' && e.ctrlKey) {
+          e.preventDefault();
+          history.textContent = '';
+        }
+      });
+
+      scrollTermToBottom();
+    }
+
+    // Intro sequence: type "whoami" → show "DMU Hackers" → go interactive
+    const introCmdEl = document.createElement('div');
+    introCmdEl.className = 'hero-term__history-cmd';
+    introCmdEl.style.display = 'flex';
+    introCmdEl.style.alignItems = 'center';
+    const introPrompt = document.createElement('span');
+    introPrompt.className = 'hero-term__prompt';
+    introPrompt.textContent = '$';
+    const introTyped = document.createElement('span');
+    const introCursor = document.createElement('span');
+    introCursor.className = 'hero-term__cursor';
+    introCursor.textContent = '_';
+    introCmdEl.appendChild(introPrompt);
+    introCmdEl.appendChild(introTyped);
+    introCmdEl.appendChild(introCursor);
+    history.appendChild(introCmdEl);
+
     setTimeout(() => {
-      typeText(heroCmd, introCmd, 80, () => {
-        // Hide primary cursor
-        heroCursor.classList.add('hero-term__cursor--hide');
+      typeText(introTyped, 'whoami', 80, () => {
+        introCursor.classList.add('hero-term__cursor--hide');
 
-        // Show "DMU Hackers" output
         setTimeout(() => {
-          heroOutput.classList.add('is-visible');
+          const resultLine = document.createElement('div');
+          resultLine.className = 'hero-term__line--output';
+          const resultSpan = document.createElement('span');
+          resultSpan.className = 'hero-term__result';
+          resultSpan.textContent = 'DMU Hackers';
+          resultLine.appendChild(resultSpan);
+          resultLine.style.opacity = '0';
+          resultLine.style.transition = 'opacity .4s ease';
+          history.appendChild(resultLine);
 
-          // Show sub-line and start cycling
-          setTimeout(() => {
-            heroSubLine.classList.add('is-visible');
-            let subIdx = 0;
-            function cycleSubCommands() {
-              const cmd = subCommands[subIdx];
-              typeText(heroSubCmd, cmd, 40, () => {
-                setTimeout(() => {
-                  deleteText(heroSubCmd, 18, () => {
-                    subIdx = (subIdx + 1) % subCommands.length;
-                    setTimeout(cycleSubCommands, 400);
-                  });
-                }, 2200);
-              });
-            }
-            cycleSubCommands();
-          }, 600);
+          requestAnimationFrame(() => { resultLine.style.opacity = '1'; });
+
+          setTimeout(() => enableInteractiveMode(), 800);
         }, 300);
       });
     }, 800);
@@ -153,8 +325,9 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.getElementById(id);
       if (target) {
         e.preventDefault();
+        const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 64;
         window.scrollTo({
-          top: target.offsetTop - 64,
+          top: target.offsetTop - navH,
           behavior: 'smooth'
         });
       }
@@ -173,7 +346,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const backToTop = document.getElementById('backToTop');
   if (backToTop) {
     window.addEventListener('scroll', () => {
-      backToTop.classList.toggle('back-to-top--visible', window.scrollY > 400);
+      backToTop.classList.toggle('back-to-top--visible', window.scrollY > 250);
     }, { passive: true });
 
     backToTop.addEventListener('click', () => {
@@ -192,6 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const placeIcons = { 1: 'fas fa-crown', 2: 'fas fa-medal', 3: 'fas fa-medal' };
     const ordinal = n => n === 1 ? '1st' : n === 2 ? '2nd' : n === 3 ? '3rd' : n + 'th';
+    const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
     function renderPodium(event) {
       podiumTag.textContent = event.year + ' Results';
@@ -204,7 +378,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return `<div class="podium__place podium__place--${rank}">
           <div class="podium__icon"><i class="${placeIcons[rank] || 'fas fa-medal'}"></i></div>
           <span class="podium__rank">${ordinal(rank)}</span>
-          <h3 class="podium__team">${place.team}</h3>
+          <h3 class="podium__team">${esc(place.team)}</h3>
           <div class="podium__bar"></div>
         </div>`;
       }).join('');
@@ -243,7 +417,8 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch(() => {
         podiumTag.textContent = 'Results';
-        podiumTitle.textContent = 'Podium';
+        podiumTitle.textContent = 'Past Results';
+        podiumContainer.innerHTML = '<p style="text-align:center;color:var(--text-muted);font-size:.9rem;">Results could not be loaded. Check back later.</p>';
       });
   }
 
@@ -280,11 +455,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('heroCanvas');
   if (canvas) {
     const ctx = canvas.getContext('2d');
-    let w, h, nodes, traces, pulses;
-    const GRID = 45;
+    let w, h, nodes, traces, pulses, rafId, isMobile, GRID, NODE_CHANCE, MAX_PULSES;
+    const TRACE_COLORS = ['rgba(200,16,46,', 'rgba(0,228,255,'];
     const TRACE_COLOR = 'rgba(200,16,46,';
-    const NODE_CHANCE = 0.45;
-    const MAX_PULSES = 20;
 
     function resize() {
       w = canvas.width = canvas.offsetWidth;
@@ -292,6 +465,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function init() {
+      if (rafId) cancelAnimationFrame(rafId);
+      isMobile = window.innerWidth < 768;
+      GRID = isMobile ? 60 : 45;
+      NODE_CHANCE = isMobile ? 0.3 : 0.45;
+      MAX_PULSES = isMobile ? 10 : 20;
       resize();
       nodes = [];
       traces = [];
@@ -364,7 +542,8 @@ document.addEventListener('DOMContentLoaded', () => {
         t: 0,
         speed: 0.3 + Math.random() * 0.6,
         size: 2 + Math.random() * 2,
-        bright: 0.6 + Math.random() * 0.4
+        bright: 0.6 + Math.random() * 0.4,
+        color: TRACE_COLORS[Math.random() < 0.85 ? 0 : 1]
       });
     }
 
@@ -419,6 +598,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pos = getPulsePos(p.trace, p.t);
 
         // Glow trail — light up trace segments near pulse
+        const pc = p.color;
         ctx.lineWidth = 1.5;
         const trailLen = 0.15;
         const tStart = Math.max(0, p.t - trailLen);
@@ -429,7 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const sp = getPulsePos(p.trace, st);
           const ep = getPulsePos(p.trace, et);
           const fade = (s / steps) * p.bright;
-          ctx.strokeStyle = TRACE_COLOR + (fade * 0.4).toFixed(3) + ')';
+          ctx.strokeStyle = pc + (fade * 0.4).toFixed(3) + ')';
           ctx.beginPath();
           ctx.moveTo(sp.x, sp.y);
           ctx.lineTo(ep.x, ep.y);
@@ -437,38 +617,68 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Pulse head glow
-        ctx.shadowColor = 'rgba(200,16,46,0.8)';
-        ctx.shadowBlur = 10;
-        ctx.fillStyle = TRACE_COLOR + p.bright + ')';
+        ctx.shadowColor = pc + '0.8)';
+        ctx.shadowBlur = isMobile ? 4 : 12;
+        ctx.fillStyle = pc + p.bright + ')';
         ctx.beginPath();
         ctx.arc(pos.x, pos.y, p.size, 0, Math.PI * 2);
         ctx.fill();
         ctx.shadowBlur = 0;
       }
 
-      requestAnimationFrame(draw);
+      rafId = requestAnimationFrame(draw);
     }
 
     // Respect prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (!prefersReducedMotion.matches) {
       init();
-      draw();
-      window.addEventListener('resize', () => { init(); }, { passive: true });
+      rafId = requestAnimationFrame(draw);
+      window.addEventListener('resize', () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        init();
+        rafId = requestAnimationFrame(draw);
+      }, { passive: true });
     }
   }
 
   /* ---------- Countdown timer ---------- */
   const cdDays = document.getElementById('cdDays');
   if (cdDays) {
-    const target = new Date('2026-05-30T09:00:00+01:00').getTime();
+    const eventStart = new Date('2026-05-30T09:00:00+01:00').getTime();
+    const eventEnd   = new Date('2026-05-30T18:00:00+01:00').getTime();
+
+    function showCountdownMessage(label, msg, accent) {
+      const cd = document.getElementById('countdown');
+      const timer = cd.querySelector('.hero-countdown__timer');
+      const until = cd.querySelector('.hero-countdown__until');
+      cd.style.opacity = '0';
+      setTimeout(() => {
+        if (until) until.textContent = label;
+        if (timer) {
+          timer.innerHTML = '';
+          timer.classList.add('hero-countdown__timer--message');
+          const el = document.createElement('span');
+          el.className = 'hero-countdown__msg';
+          if (accent) el.classList.add('hero-countdown__msg--accent');
+          el.textContent = msg;
+          timer.appendChild(el);
+        }
+        cd.style.opacity = '1';
+      }, 400);
+    }
+
     function tick() {
-      const diff = target - Date.now();
-      if (diff <= 0) {
-        document.getElementById('countdown').innerHTML = '<span style="font-size:1.2rem;color:var(--accent);font-weight:700;">The CTF is live!</span>';
-        document.querySelector('.countdown__until').textContent = 'Pwn2Play: Core Incursion is happening now';
+      const now = Date.now();
+      if (now >= eventEnd) {
+        showCountdownMessage('Pwn2Play: Core Incursion', 'The event has ended. See you next year!', false);
         return;
       }
+      if (now >= eventStart) {
+        showCountdownMessage('Pwn2Play: Core Incursion is happening now', 'The CTF is live!', true);
+        return;
+      }
+      const diff = eventStart - now;
       const d = Math.floor(diff / 86400000);
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
@@ -481,6 +691,28 @@ document.addEventListener('DOMContentLoaded', () => {
     tick();
     setInterval(tick, 1000);
   }
+
+  /* ---------- Hero parallax on scroll ---------- */
+  const heroBg = document.querySelector('.hero__bg');
+  const heroContent = document.querySelector('.hero__content');
+  if (heroBg && heroContent) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const y = window.scrollY;
+          if (y < window.innerHeight) {
+            heroBg.style.transform = `translateY(${y * 0.3}px)`;
+            heroContent.style.transform = `translateY(${y * 0.15}px)`;
+            heroContent.style.opacity = Math.max(0, 1 - y / (window.innerHeight * 0.7));
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
 
   /* ---------- Console easter egg ---------- */
   console.log(
