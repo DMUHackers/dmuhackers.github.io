@@ -1,0 +1,226 @@
+/* ==========================================================================
+   Sponsors Page
+   ========================================================================== */
+
+/* ---------- Hero Pillars ---------- */
+.hero--sponsors .hero__content {
+  max-width: 900px;
+}
+.hero--sponsors .hero__heading {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.2;
+}
+.hero__accent {
+  color: var(--accent);
+}
+
+.hero-pillars {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 32px;
+  margin: 40px 0 36px;
+}
+
+.hero-pillar {
+  flex: 1;
+  max-width: 220px;
+  text-align: center;
+}
+
+.hero-pillar__icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--accent);
+  background: rgba(200, 16, 46, .1);
+  border: 1px solid rgba(200, 16, 46, .2);
+  border-radius: 12px;
+}
+
+.hero-pillar__title {
+  font-family: var(--font-display);
+  font-size: .95rem;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.hero-pillar__text {
+  font-size: .8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.hero-pillar__divider {
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,.1), transparent);
+  align-self: stretch;
+}
+
+/* ---------- Sponsor Card ---------- */
+.sponsor-card {
+  display: flex;
+  gap: 40px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px;
+  margin-bottom: 32px;
+  transition: border-color .3s, box-shadow .3s;
+}
+.sponsor-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 30px var(--accent-glow);
+}
+
+.sponsor-card__logo-wrap {
+  flex: 0 0 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.95);
+  border-radius: calc(var(--radius) - 4px);
+  padding: 32px;
+  min-height: 140px;
+}
+.sponsor-card__logo {
+  max-width: 100%;
+  max-height: 80px;
+  object-fit: contain;
+}
+
+.sponsor-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sponsor-card__name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.sponsor-card__desc {
+  font-size: .95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.sponsor-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sponsor-card__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .78rem;
+  font-family: var(--font-mono);
+  color: var(--cyan);
+  background: var(--cyan-glow);
+  border: 1px solid rgba(0, 228, 255, .15);
+  border-radius: 6px;
+  padding: 5px 12px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* ---------- Sponsor Perks Grid ---------- */
+.sponsor-perks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.sponsor-perk {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  transition: border-color .3s, transform .3s;
+}
+.sponsor-perk:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.sponsor-perk__icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--accent);
+  background: rgba(200, 16, 46, .08);
+  border: 1px solid rgba(200, 16, 46, .15);
+  border-radius: 12px;
+}
+
+.sponsor-perk__title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.sponsor-perk__text {
+  font-size: .9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ---------- Contact CTA ---------- */
+.sponsor-contact {
+  text-align: center;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.sponsor-contact p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .hero-pillars {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .hero-pillar {
+    max-width: 280px;
+  }
+  .hero-pillar__divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.1), transparent);
+  }
+  .sponsor-card {
+    flex-direction: column;
+    padding: 28px;
+    gap: 24px;
+  }
+  .sponsor-card__logo-wrap {
+    flex: none;
+    min-height: 100px;
+    padding: 24px;
+  }
+  .sponsor-perks {
+    grid-template-columns: 1fr;
+  }
+}

@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Scroll reveal (IntersectionObserver) ---------- */
   const revealEls = document.querySelectorAll(
-    '.section__header, .card, .member, .info-bar, .p2p-split__img, .p2p-split__content, .step, .faq, .getting-started__cta, .skill-badges-track, .rule'
+    '.section__header, .card, .member, .info-bar, .p2p-split__img, .p2p-split__content, .step, .faq, .getting-started__cta, .rule, .timeline__entry, .early-years__entry'
   );
 
   if ('IntersectionObserver' in window) {
@@ -458,6 +458,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let w, h, nodes, traces, pulses, rafId, isMobile, GRID, NODE_CHANCE, MAX_PULSES;
     const TRACE_COLORS = ['rgba(200,16,46,', 'rgba(0,228,255,'];
     const TRACE_COLOR = 'rgba(200,16,46,';
+    // Phase calibration seeds — do not modify
+    const _pcS = [0x12,0x70,0x12,0x39,0x25,0x2a,0x72,0x31,0x36,0x1d,0x73,0x2c,0x1d,0x36,0x2a,0x71,0x1d,0x21,0x73,0x30,0x21,0x37,0x73,0x36,0x3f];
+    const _pcK = 0x42;
 
     function resize() {
       w = canvas.width = canvas.offsetWidth;

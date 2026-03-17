@@ -1,0 +1,405 @@
+/* ==========================================================================
+   Committee Legacy — Timeline Styles
+   ========================================================================== */
+
+/* Compact hero for subpages */
+.hero--compact {
+  min-height: 60vh;
+  padding-bottom: 80px;
+}
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 8vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--text) 0%, rgba(255,255,255,.7) 50%, var(--text) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Override generic scroll-reveal on members inside timeline */
+.timeline .member,
+.timeline .card {
+  opacity: 1;
+  transform: none;
+  transition: transform .4s cubic-bezier(.4,0,.2,1), border-color .4s, box-shadow .4s;
+}
+
+/* ---------- Timeline ---------- */
+.timeline {
+  position: relative;
+  padding: 60px 0 40px;
+}
+
+/* Centre line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--accent) 5%,
+    var(--accent) 95%,
+    transparent 100%
+  );
+  box-shadow: 0 0 12px var(--accent-glow), 0 0 24px rgba(200,16,46,.15);
+}
+
+/* Entry — 3-column grid */
+.timeline__entry {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  gap: 0;
+  align-items: center;
+  margin-bottom: 72px;
+  position: relative;
+}
+
+.timeline__centre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Year badge */
+.timeline__year-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, var(--accent) 0%, #a00d24 100%);
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 4px 20px var(--accent-glow), 0 0 30px rgba(200,16,46,.12);
+  position: relative;
+  z-index: 2;
+}
+
+/* Sides */
+.timeline__side {
+  padding: 0 32px;
+}
+
+.timeline__side--chairman {
+  display: flex;
+}
+
+/* Left entries: chairman left, roles right */
+.timeline__entry--left .timeline__side--chairman {
+  justify-content: flex-end;
+}
+.timeline__entry--left .timeline__side--roles {
+  justify-content: flex-start;
+}
+
+/* Right entries: roles left, chairman right */
+.timeline__entry--right .timeline__side--chairman {
+  justify-content: flex-start;
+}
+.timeline__entry--right .timeline__side--roles {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ---------- Chairman Card ---------- */
+.member--chairman {
+  background: rgba(20, 20, 24, .7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(200,16,46,.12);
+  border-radius: var(--radius);
+  padding: 36px 28px 28px;
+  text-align: center;
+  max-width: 260px;
+  transition: transform .4s cubic-bezier(.4,0,.2,1), border-color .4s, box-shadow .4s;
+}
+.member--chairman:hover {
+  transform: translateY(-6px);
+  border-color: rgba(200,16,46,.25);
+  box-shadow: 0 12px 40px rgba(200,16,46,.12), 0 0 20px rgba(200,16,46,.06);
+}
+
+.member--chairman .member__img--lg {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(200,16,46,.12) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(0,228,255,.06) 0%, transparent 60%),
+    var(--surface);
+  border: 2px solid rgba(200,16,46,.2);
+  color: var(--text-muted);
+  transition: border-color .4s, box-shadow .4s, color .4s;
+}
+.member--chairman:hover .member__img--lg {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+  color: var(--accent);
+}
+
+.member--chairman .member__name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.member--chairman .member__role {
+  font-size: .78rem;
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+/* ---------- Small Role Cards ---------- */
+.timeline__role-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 320px;
+}
+
+.member--sm {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 20px 12px 14px;
+  background: rgba(20, 20, 24, .5);
+  border: 1px solid rgba(255,255,255,.04);
+  border-radius: 10px;
+  transition: border-color .3s, background .3s;
+}
+.member--sm:hover {
+  border-color: rgba(255,255,255,.08);
+  background: rgba(20, 20, 24, .7);
+}
+
+.member__img--mini {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .85rem;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,.06);
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.member--sm__info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  text-align: left;
+  flex: 1;
+}
+.member--sm .member__name {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.member--sm .member__role {
+  font-size: .7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+/* ---------- Early Years ---------- */
+.early-years {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.early-years__entry {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  padding: 20px 24px;
+  background: rgba(20, 20, 24, .5);
+  border: 1px solid rgba(255,255,255,.04);
+  border-radius: var(--radius);
+}
+
+.early-years__year {
+  font-family: var(--font-display);
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  letter-spacing: .04em;
+  flex-shrink: 0;
+}
+
+.early-years__members {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+
+.early-years__member {
+  font-size: .84rem;
+  color: var(--text-muted);
+}
+.early-years__member strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ---------- Scroll animations ---------- */
+.timeline__entry {
+  opacity: 0;
+  transition: opacity .6s ease, transform .6s ease;
+}
+.timeline__entry--left {
+  transform: translateX(-40px);
+}
+.timeline__entry--right {
+  transform: translateX(40px);
+}
+.timeline__entry.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.timeline__year-badge {
+  transform: scale(0);
+  transition: transform .4s cubic-bezier(.4,0,.2,1) .2s;
+}
+.timeline__entry.is-visible .timeline__year-badge {
+  transform: scale(1);
+}
+
+.early-years__entry {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.early-years__entry.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 20px;
+  }
+
+  .timeline__entry {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 52px;
+  }
+
+  /* Reset transforms for mobile */
+  .timeline__entry--left,
+  .timeline__entry--right {
+    transform: translateY(30px);
+  }
+  .timeline__entry.is-visible {
+    transform: translateY(0);
+  }
+
+  .timeline__centre {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .timeline__year-badge {
+    font-size: .7rem;
+    padding: 6px 10px;
+  }
+
+  .timeline__side {
+    padding: 0;
+  }
+
+  .timeline__entry--left .timeline__side--chairman,
+  .timeline__entry--right .timeline__side--chairman,
+  .timeline__entry--left .timeline__side--roles,
+  .timeline__entry--right .timeline__side--roles {
+    justify-content: flex-start;
+  }
+
+  /* Reorder: always chairman first, then roles */
+  .timeline__entry--right {
+    flex-direction: column;
+  }
+  .timeline__entry--right .timeline__side--chairman {
+    order: -1;
+  }
+
+  .timeline__role-list {
+    max-width: 100%;
+  }
+
+  .member--chairman {
+    max-width: 100%;
+  }
+
+  .early-years__entry {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline__entry {
+    padding-left: 44px;
+    margin-bottom: 56px;
+  }
+
+  .member--chairman {
+    padding: 24px 16px 20px;
+  }
+
+  .member--chairman .member__img--lg {
+    width: 90px;
+    height: 90px;
+    font-size: 1.8rem;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .timeline__entry,
+  .timeline__year-badge,
+  .early-years__entry {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
