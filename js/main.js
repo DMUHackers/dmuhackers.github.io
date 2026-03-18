@@ -8,13 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const fy = document.getElementById('footerYear');
   if (fy) fy.textContent = new Date().getFullYear();
 
-  /* ---------- Page entrance fade ---------- */
-  document.body.style.opacity = '0';
-  document.body.style.transition = 'opacity .6s ease';
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => { document.body.style.opacity = '1'; });
-  });
-
   /* ---------- Mobile nav toggle ---------- */
   const toggle  = document.getElementById('navToggle');
   const navMenu = document.getElementById('navLinks');
@@ -52,10 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateActiveLink() {
     const navEl = document.getElementById('navbar');
-    const scrollY = window.scrollY + (navEl ? navEl.offsetHeight : 64) + 20;
+    const offset = (navEl ? navEl.offsetHeight : 64) + 20;
     let current = sections[0];
     for (const sec of sections) {
-      if (sec.offsetTop <= scrollY) current = sec;
+      const top = sec.getBoundingClientRect().top + window.scrollY;
+      if (top <= window.scrollY + offset) current = sec;
     }
     navLinks.forEach(link => {
       link.classList.toggle('active', link.dataset.section === current?.id);
@@ -99,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Scroll reveal (IntersectionObserver) ---------- */
   const revealEls = document.querySelectorAll(
-    '.section__header, .card, .member, .info-bar, .p2p-split__img, .p2p-split__content, .step, .faq, .getting-started__cta, .section-cta, .rule, .timeline__entry, .early-years__entry'
+    '.section__header, .card, .member:not(.timeline .member), .info-bar, .p2p-split__img, .p2p-split__content, .step, .faq, .getting-started__cta, .section-cta, .rule, .timeline__entry'
   );
 
   if ('IntersectionObserver' in window) {
@@ -419,7 +413,9 @@ document.addEventListener('DOMContentLoaded', () => {
           resultLine.style.transition = 'opacity .4s ease';
           history.appendChild(resultLine);
 
-          requestAnimationFrame(() => { resultLine.style.opacity = '1'; });
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => { resultLine.style.opacity = '1'; });
+          });
 
           setTimeout(() => enableInteractiveMode(), 800);
         }, 300);
@@ -746,10 +742,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!prefersReducedMotion.matches) {
       init();
       rafId = requestAnimationFrame(draw);
+      let resizeTimer;
       window.addEventListener('resize', () => {
-        if (rafId) cancelAnimationFrame(rafId);
-        init();
-        rafId = requestAnimationFrame(draw);
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (rafId) cancelAnimationFrame(rafId);
+          init();
+          rafId = requestAnimationFrame(draw);
+        }, 150);
       }, { passive: true });
     }
   }
@@ -760,8 +760,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const eventStart = new Date('2026-05-30T09:00:00+01:00').getTime();
     const eventEnd   = new Date('2026-05-30T18:00:00+01:00').getTime();
 
+    const cdHours = document.getElementById('cdHours');
+    const cdMins  = document.getElementById('cdMins');
+    const cdSecs  = document.getElementById('cdSecs');
+
     function showCountdownMessage(label, msg, accent) {
       const cd = document.getElementById('countdown');
+      if (!cd) return;
       const timer = cd.querySelector('.hero-countdown__timer');
       const until = cd.querySelector('.hero-countdown__until');
       cd.style.opacity = '0';
@@ -795,10 +800,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
       const s = Math.floor((diff % 60000) / 1000);
-      cdDays.textContent = String(d).padStart(2, '0');
-      document.getElementById('cdHours').textContent = String(h).padStart(2, '0');
-      document.getElementById('cdMins').textContent = String(m).padStart(2, '0');
-      document.getElementById('cdSecs').textContent = String(s).padStart(2, '0');
+      if (cdDays)  cdDays.textContent  = String(d).padStart(2, '0');
+      if (cdHours) cdHours.textContent = String(h).padStart(2, '0');
+      if (cdMins)  cdMins.textContent  = String(m).padStart(2, '0');
+      if (cdSecs)  cdSecs.textContent  = String(s).padStart(2, '0');
     }
     tick();
     setInterval(tick, 1000);

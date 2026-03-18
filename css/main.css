@@ -1681,6 +1681,7 @@ a.card--link:hover .card__arrow {
   .step,
   .faq,
   .getting-started__cta,
+  .section-cta,
   .rule {
     opacity: 1;
     transform: none;
@@ -1812,10 +1813,10 @@ a.card--link:hover .card__arrow {
 }
 
 ::view-transition-old(root) {
-  animation: fadeOut .2s ease-out;
+  animation: fadeOut .25s ease-out forwards;
 }
 ::view-transition-new(root) {
-  animation: fadeIn .3s ease-in;
+  animation: fadeIn .25s ease-in forwards;
 }
 
 @keyframes fadeOut {
