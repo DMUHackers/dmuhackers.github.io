@@ -102,6 +102,18 @@ ul  { list-style: none; }
   top: 0;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .container {
   width: 100%;
   max-width: var(--max-w);
@@ -1170,6 +1182,13 @@ a.card--link:hover .card__arrow {
   animation-play-state: paused;
 }
 
+.logo-marquee__track a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
 .logo-marquee__img {
   height: 36px;
   width: auto;
@@ -1193,6 +1212,36 @@ a.card--link:hover .card__arrow {
 
 .logo-marquee__img--tall {
   height: 48px;
+}
+
+/* ---------- Hero Stats ---------- */
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 48px;
+  padding: 32px 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.hero-stat__number {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+.hero-stat__label {
+  font-size: .82rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
 }
 
 /* ---------- Info Bar ---------- */
@@ -1237,6 +1286,13 @@ a.card--link:hover .card__arrow {
   font-size: 1.15rem;
   text-shadow: 0 0 12px rgba(0,228,255,.3);
 }
+.info-bar__item a {
+  color: inherit;
+  text-decoration: none;
+}
+.info-bar__item a:hover {
+  color: var(--cyan);
+}
 
 /* ---------- P2P Split ---------- */
 .p2p-split {
@@ -1278,6 +1334,18 @@ a.card--link:hover .card__arrow {
 .committee-cta {
   text-align: center;
   margin-top: 48px;
+}
+
+.section-cta {
+  text-align: center;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.section-cta p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  line-height: 1.7;
 }
 
 .committee-grid .member {
@@ -1554,6 +1622,7 @@ a.card--link:hover .card__arrow {
 .step,
 .faq,
 .getting-started__cta,
+.section-cta,
 .rule {
   opacity: 0;
   transform: translateY(28px);
@@ -1727,8 +1796,139 @@ a.card--link:hover .card__arrow {
 
 @media (max-width: 480px) {
   .committee-grid .member { flex: 0 0 calc(50% - 12px); }
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
+  .hero-stat__number { font-size: 1.6rem; }
   .info-bar { flex-direction: column; align-items: center; }
   .hero__actions { flex-direction: column; align-items: center; }
   .footer__top { grid-template-columns: 1fr; }
   .hero-term__body { max-height: 200px; }
+}
+
+/* ==========================================================================
+   View Transitions (cross-page)
+   ========================================================================== */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: fadeOut .2s ease-out;
+}
+::view-transition-new(root) {
+  animation: fadeIn .3s ease-in;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ==========================================================================
+   Keyboard Focus Indicators
+   ========================================================================== */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  box-shadow: 0 0 16px var(--cyan-glow);
+}
+
+.nav__link:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+}
+
+.card:focus-visible,
+.resource-card:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Print Stylesheet
+   ========================================================================== */
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  .nav,
+  .hero__canvas,
+  .hero__bg,
+  .hero__scroll,
+  .back-to-top,
+  .hero-term,
+  .hero-featured,
+  .hero__socials,
+  .hero__actions,
+  .logo-marquee,
+  .hero-countdown,
+  .info-bar__item--countdown,
+  .footer__socials {
+    display: none !important;
+  }
+
+  .hero {
+    min-height: auto !important;
+    padding: 24pt 0 !important;
+  }
+
+  .section {
+    padding: 24pt 0 !important;
+    break-inside: avoid;
+  }
+
+  .cards,
+  .bento,
+  .tools-grid,
+  .resource-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .card,
+  .resource-card,
+  .tool-card {
+    border: 1px solid #ccc !important;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: .8em;
+    color: #555 !important;
+  }
+
+  .nav__link::after,
+  .btn::after,
+  .footer__nav a::after,
+  .hero-featured::after,
+  .logo-marquee__track a::after,
+  .info-bar__item a::after {
+    content: none !important;
+  }
+
+  .footer {
+    border-top: 1px solid #ccc;
+    padding-top: 12pt;
+  }
 }

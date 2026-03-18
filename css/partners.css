@@ -1,0 +1,129 @@
+/* ==========================================================================
+   Partners Page
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+.hero--partners .hero__content {
+  max-width: 780px;
+}
+
+/* ---------- Partner Card ---------- */
+.partner-card {
+  display: flex;
+  gap: 36px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 36px;
+  margin-bottom: 28px;
+  transition: border-color .3s, box-shadow .3s;
+}
+.partner-card:hover {
+  border-color: var(--cyan);
+  box-shadow: 0 0 30px var(--cyan-glow);
+}
+
+.partner-card__icon-wrap {
+  flex: 0 0 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  color: var(--cyan);
+  background: var(--cyan-glow);
+  border: 1px solid rgba(0, 228, 255, .12);
+  border-radius: calc(var(--radius) - 4px);
+  min-height: 120px;
+}
+
+.partner-card__logo-wrap {
+  flex: 0 0 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,.95);
+  border-radius: calc(var(--radius) - 4px);
+  padding: 20px;
+  min-height: 120px;
+}
+.partner-card__logo {
+  max-width: 100%;
+  max-height: 80px;
+  object-fit: contain;
+}
+
+.partner-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.partner-card__name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.partner-card__desc {
+  font-size: .95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.partner-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.partner-card__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .78rem;
+  font-family: var(--font-mono);
+  color: var(--cyan);
+  background: var(--cyan-glow);
+  border: 1px solid rgba(0, 228, 255, .15);
+  border-radius: 6px;
+  padding: 5px 12px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.partner-card__links {
+  display: flex;
+  gap: 12px;
+}
+
+.btn--sm {
+  font-size: .82rem;
+  padding: 8px 18px;
+}
+
+/* ---------- Contact CTA ---------- */
+.partner-contact {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .partner-card {
+    flex-direction: column;
+    padding: 28px;
+    gap: 24px;
+  }
+  .partner-card__icon-wrap,
+  .partner-card__logo-wrap {
+    flex: none;
+    min-height: 80px;
+    font-size: 2rem;
+  }
+}

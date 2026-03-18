@@ -65,9 +65,41 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', updateActiveLink, { passive: true });
   updateActiveLink();
 
+  /* ---------- Next Session Countdown ---------- */
+  var nextSessionEl = document.getElementById('nextSession');
+  if (nextSessionEl) {
+    function updateNextSession() {
+      var now = new Date();
+      var target = new Date(now);
+      target.setHours(18, 0, 0, 0);
+      // Find next Thursday (4 = Thursday)
+      var day = now.getDay();
+      var daysUntil = (4 - day + 7) % 7;
+      // If it's Thursday but past 18:00, go to next week
+      if (daysUntil === 0 && now >= target) daysUntil = 7;
+      target.setDate(target.getDate() + daysUntil);
+      var diff = target - now;
+      var h = Math.floor(diff / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var isToday = now.getDate() === target.getDate() && now.getMonth() === target.getMonth();
+      var isTomorrow = daysUntil === 1 || (daysUntil === 0 && !isToday);
+      if (isToday && h === 0 && m <= 0) {
+        nextSessionEl.textContent = 'Happening now!';
+      } else if (isToday) {
+        nextSessionEl.textContent = 'Today in ' + h + 'h ' + m + 'm';
+      } else if (isTomorrow) {
+        nextSessionEl.textContent = 'Tomorrow at 18:00';
+      } else {
+        nextSessionEl.textContent = 'Next session in ' + daysUntil + 'd ' + h % 24 + 'h';
+      }
+    }
+    updateNextSession();
+    setInterval(updateNextSession, 60000);
+  }
+
   /* ---------- Scroll reveal (IntersectionObserver) ---------- */
   const revealEls = document.querySelectorAll(
-    '.section__header, .card, .member, .info-bar, .p2p-split__img, .p2p-split__content, .step, .faq, .getting-started__cta, .rule, .timeline__entry, .early-years__entry'
+    '.section__header, .card, .member, .info-bar, .p2p-split__img, .p2p-split__content, .step, .faq, .getting-started__cta, .section-cta, .rule, .timeline__entry, .early-years__entry'
   );
 
   if ('IntersectionObserver' in window) {
@@ -171,8 +203,10 @@ document.addEventListener('DOMContentLoaded', () => {
           'cat        \u2014 read a file (try: cat about.txt)\n' +
           'social     \u2014 our social links\n' +
           'when       \u2014 next session info\n' +
+          'resources  \u2014 learning resources\n' +
           'sudo       \u2014 become root\n' +
-          'clear      \u2014 clear terminal'
+          'clear      \u2014 clear terminal\n\n' +
+          '...and a few hidden ones. Can you find them all?'
         );
         return;
       }
@@ -202,6 +236,81 @@ document.addEventListener('DOMContentLoaded', () => {
       if (base === 'cd') { appendOutput('Nice try. This is a single-page terminal.'); return; }
       if (base === 'rm') { appendOutput('rm: permission denied. No destroying the website.'); return; }
       if (base === 'exit') { appendOutput('There is no escape. You\'re one of us now.'); return; }
+      if (base === 'matrix') {
+        var matrixChars = '';
+        for (var mi = 0; mi < 8; mi++) {
+          var line = '';
+          for (var mj = 0; mj < 42; mj++) line += String.fromCharCode(0x30A0 + Math.floor(Math.random() * 96));
+          matrixChars += line + '\n';
+        }
+        appendOutput(matrixChars + 'Wake up, Neo...');
+        return;
+      }
+      if (base === 'hack') {
+        appendOutput('[*] Initialising exploit framework...\n[*] Scanning target: dmuhackers.com\n[*] Port 1337 open\n[*] Injecting payload...\n[!] ACCESS DENIED \u2014 Nice try. Join a session to learn how it\'s really done.');
+        return;
+      }
+      if (base === 'rickroll' || base === 'rick') {
+        appendOutput('Never gonna give you up \u266b\nNever gonna let you down \u266b\nNever gonna run around and desert you \u266b\n\n...you just got rickrolled in a terminal.');
+        return;
+      }
+      if (base === 'ping') {
+        appendOutput('PING dmuhackers.com (1.3.3.7): 56 data bytes\n64 bytes from 1.3.3.7: icmp_seq=0 ttl=64 time=0.042ms\n64 bytes from 1.3.3.7: icmp_seq=1 ttl=64 time=0.031ms\n--- dmuhackers.com ping statistics ---\n2 packets transmitted, 2 received, 0% packet loss');
+        return;
+      }
+      if (base === 'cowsay' || base === 'cow') {
+        var cowMsg = parts.slice(1).join(' ') || 'moo';
+        var border = ' ' + '_'.repeat(cowMsg.length + 2);
+        appendOutput(border + '\n< ' + cowMsg + ' >\n ' + '-'.repeat(cowMsg.length + 2) + '\n        \\   ^__^\n         \\  (oo)\\_______\n            (__)\\       )\\/\\\n                ||----w |\n                ||     ||');
+        return;
+      }
+      if (base === 'fortune' || base === 'quote') {
+        var fortunes = [
+          '"The quieter you become, the more you are able to hear." \u2014 Kali Linux',
+          '"There are only two types of companies: those that have been hacked, and those that will be." \u2014 Robert Mueller',
+          '"Hacking is not about breaking things. It\'s about understanding how things work." \u2014 Unknown',
+          '"In the beginner\'s mind there are many possibilities, in the expert\'s mind there are few." \u2014 Shunryu Suzuki',
+          '"The best way to predict the future is to invent it." \u2014 Alan Kay',
+          '"rm -rf / \u2014 the ultimate penetration test." \u2014 Nobody ever'
+        ];
+        appendOutput(fortunes[Math.floor(Math.random() * fortunes.length)]);
+        return;
+      }
+      if (base === 'ascii') {
+        appendOutput('  ____  __  __ _   _   _   _            _\n |  _ \\|  \\/  | | | | | | | | __ _  ___| | _____ _ __ ___\n | | | | |\\/| | | | | | |_| |/ _` |/ __| |/ / _ \\ \'__/ __|\n | |_| | |  | | |_| | |  _  | (_| | (__|   <  __/ |  \\__ \\\n |____/|_|  |_|\\___/  |_| |_|\\__,_|\\___|_|\\_\\___|_|  |___/');
+        return;
+      }
+      if (base === 'credits') {
+        appendOutput(
+          '============================================\n' +
+          '  DMU Hackers \u2014 dmuhackers.com\n' +
+          '============================================\n\n' +
+          '  Designed & built by:\n' +
+          '  Adam Welbourne \u2014 Chairman 2025/26\n\n' +
+          '  "Leave it better than you found it."\n\n' +
+          '  Built with love, late nights, and\n' +
+          '  too much caffeine.\n\n' +
+          '============================================\n' +
+          '  Est. 2015 | Pwning since day one\n' +
+          '============================================'
+        );
+        return;
+      }
+      if (base === 'date') {
+        appendOutput(new Date().toString());
+        return;
+      }
+      if (base === 'uptime') {
+        var ms = performance.now();
+        var secs = Math.floor(ms / 1000);
+        var mins = Math.floor(secs / 60);
+        appendOutput('up ' + mins + ' min, ' + (secs % 60) + ' sec | load average: 1.33, 0.37, 0.07');
+        return;
+      }
+      if (base === 'resources') {
+        appendOutput('Check out our curated resources \u2192 <a href="resources.html">resources.html</a>', true);
+        return;
+      }
 
       appendOutput('bash: ' + base + ': command not found. Type \'help\' for available commands.');
     }

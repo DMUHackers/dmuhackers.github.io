@@ -160,6 +160,13 @@
 }
 
 /* ---------- Connect strip ---------- */
+.calendar-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
 .p2p-connect {
   margin-top: 48px;
   text-align: center;
