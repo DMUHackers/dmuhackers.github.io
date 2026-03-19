@@ -13,17 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const navMenu = document.getElementById('navLinks');
 
   if (toggle && navMenu) {
+    toggle.setAttribute('aria-expanded', 'false');
+
+    function setMenuOpen(open) {
+      toggle.classList.toggle('open', open);
+      navMenu.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    }
+
     toggle.addEventListener('click', () => {
-      toggle.classList.toggle('open');
-      navMenu.classList.toggle('open');
+      setMenuOpen(!navMenu.classList.contains('open'));
     });
 
     // Close menu when a link is clicked
     navMenu.querySelectorAll('.nav__link').forEach(link => {
-      link.addEventListener('click', () => {
-        toggle.classList.remove('open');
-        navMenu.classList.remove('open');
-      });
+      link.addEventListener('click', () => setMenuOpen(false));
     });
 
     // Close menu on outside click
@@ -31,8 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (navMenu.classList.contains('open') &&
           !navMenu.contains(e.target) &&
           !toggle.contains(e.target)) {
-        toggle.classList.remove('open');
-        navMenu.classList.remove('open');
+        setMenuOpen(false);
       }
     });
   }
@@ -64,27 +67,36 @@ document.addEventListener('DOMContentLoaded', () => {
   if (nextSessionEl) {
     function updateNextSession() {
       var now = new Date();
+      var day = now.getDay();
+      var hour = now.getHours();
+      var sessionDuration = 2; // sessions last ~2 hours
+
+      // Check if it's Thursday during the session window (18:00–20:00)
+      if (day === 4 && hour >= 18 && hour < 18 + sessionDuration) {
+        nextSessionEl.textContent = 'Happening now!';
+        return;
+      }
+
+      // Find next Thursday 18:00
       var target = new Date(now);
       target.setHours(18, 0, 0, 0);
-      // Find next Thursday (4 = Thursday)
-      var day = now.getDay();
       var daysUntil = (4 - day + 7) % 7;
-      // If it's Thursday but past 18:00, go to next week
-      if (daysUntil === 0 && now >= target) daysUntil = 7;
+      // If it's Thursday but session is over, go to next week
+      if (daysUntil === 0 && hour >= 18 + sessionDuration) daysUntil = 7;
       target.setDate(target.getDate() + daysUntil);
+
       var diff = target - now;
-      var h = Math.floor(diff / 3600000);
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
       var m = Math.floor((diff % 3600000) / 60000);
-      var isToday = now.getDate() === target.getDate() && now.getMonth() === target.getMonth();
-      var isTomorrow = daysUntil === 1 || (daysUntil === 0 && !isToday);
-      if (isToday && h === 0 && m <= 0) {
-        nextSessionEl.textContent = 'Happening now!';
-      } else if (isToday) {
+
+      var isToday = now.toDateString() === target.toDateString();
+      if (isToday) {
         nextSessionEl.textContent = 'Today in ' + h + 'h ' + m + 'm';
-      } else if (isTomorrow) {
+      } else if (daysUntil === 1) {
         nextSessionEl.textContent = 'Tomorrow at 18:00';
       } else {
-        nextSessionEl.textContent = 'Next session in ' + daysUntil + 'd ' + h % 24 + 'h';
+        nextSessionEl.textContent = 'Next session in ' + d + 'd ' + h + 'h';
       }
     }
     updateNextSession();
@@ -560,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('heroCanvas');
   if (canvas) {
     const ctx = canvas.getContext('2d');
-    let w, h, nodes, traces, pulses, rafId, isMobile, GRID, NODE_CHANCE, MAX_PULSES;
+    let w, h, dpr, nodes, traces, pulses, rafId, isMobile, GRID, NODE_CHANCE, MAX_PULSES;
     const TRACE_COLORS = ['rgba(200,16,46,', 'rgba(0,228,255,'];
     const TRACE_COLOR = 'rgba(200,16,46,';
     // Phase calibration seeds — do not modify
@@ -568,8 +580,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const _pcK = 0x42;
 
     function resize() {
-      w = canvas.width = canvas.offsetWidth;
-      h = canvas.height = canvas.offsetHeight;
+      dpr = window.devicePixelRatio || 1;
+      w = canvas.offsetWidth;
+      h = canvas.offsetHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
     function init() {
@@ -755,10 +771,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------- Countdown timer ---------- */
+  // Event config — update these dates each year instead of hunting through code
+  const EVENT_CONFIG = {
+    name: 'Pwn2Play: Core Incursion',
+    start: '2026-05-30T09:00:00+01:00',
+    end:   '2026-05-30T18:00:00+01:00',
+  };
+
   const cdDays = document.getElementById('cdDays');
   if (cdDays) {
-    const eventStart = new Date('2026-05-30T09:00:00+01:00').getTime();
-    const eventEnd   = new Date('2026-05-30T18:00:00+01:00').getTime();
+    const eventStart = new Date(EVENT_CONFIG.start).getTime();
+    const eventEnd   = new Date(EVENT_CONFIG.end).getTime();
 
     const cdHours = document.getElementById('cdHours');
     const cdMins  = document.getElementById('cdMins');
@@ -788,11 +811,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function tick() {
       const now = Date.now();
       if (now >= eventEnd) {
-        showCountdownMessage('Pwn2Play: Core Incursion', 'The event has ended. See you next year!', false);
+        showCountdownMessage(EVENT_CONFIG.name, 'The event has ended. See you next year!', false);
         return;
       }
       if (now >= eventStart) {
-        showCountdownMessage('Pwn2Play: Core Incursion is happening now', 'The CTF is live!', true);
+        showCountdownMessage(EVENT_CONFIG.name + ' is happening now', 'The CTF is live!', true);
         return;
       }
       const diff = eventStart - now;
@@ -831,12 +854,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ---------- Console easter egg ---------- */
   console.log(
-    '%c🏴 DMU Hackers %c\n' +
+    '%c\ud83c\udff4 DMU Hackers %c\n' +
     'Nice, you found the console. Curious minds are always welcome.\n' +
     'Join us: https://discord.gg/Vvrk4kK\n' +
-    'flag{y0u_f0und_th3_c0ns0le}',
+    [80,50,80,123,121,48,117,95,102,48,117,110,100,95,116,104,51,95,99,48,110,115,48,108,101,125].map(function(c){return String.fromCharCode(c)}).join(''),
     'font-size:1.5rem;font-weight:bold;color:#c8102e;',
     'font-size:.9rem;color:#a1a1aa;'
   );

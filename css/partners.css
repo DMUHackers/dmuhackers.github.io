@@ -41,7 +41,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255,255,255,.95);
+  background: #ffffff;
   border-radius: calc(var(--radius) - 4px);
   padding: 20px;
   min-height: 120px;

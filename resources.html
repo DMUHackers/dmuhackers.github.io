@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha384-t1nt8BQoYMLFN5p42tRAtuAAFQaCQODekUVeKKZrEnEyp4H2R0RHFz0KWpmj7i8g" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/resources.css">
 </head>
@@ -127,6 +127,25 @@
           </div>
           <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
         </a>
+
+        <a href="https://www.vulnhub.com/" class="resource-card" target="_blank" rel="noopener noreferrer">
+          <div class="resource-card__icon"><i class="fas fa-server"></i></div>
+          <div class="resource-card__body">
+            <h3 class="resource-card__name">VulnHub</h3>
+            <p class="resource-card__desc">Downloadable vulnerable VMs to practice on your own machine. Great for offline practice and building your home lab.</p>
+            <span class="resource-card__tag">Intermediate</span>
+          </div>
+          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
+        </a>
+        <a href="https://pwn.college/" class="resource-card" target="_blank" rel="noopener noreferrer">
+          <div class="resource-card__icon"><i class="fas fa-microchip"></i></div>
+          <div class="resource-card__body">
+            <h3 class="resource-card__name">pwn.college</h3>
+            <p class="resource-card__desc">Free education platform from Arizona State University. Structured courses on binary exploitation, reverse engineering and program security.</p>
+            <span class="resource-card__tag">Binary Exploitation</span>
+          </div>
+          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
+        </a>
       </div>
     </div>
   </section>
@@ -170,6 +189,31 @@
           <p class="tool-card__desc">GCHQ's "Cyber Swiss Army Knife". Encode, decode, encrypt, hash and analyse data in the browser. A CTF essential.</p>
           <a href="https://gchq.github.io/CyberChef/" class="tool-card__link" target="_blank" rel="noopener noreferrer">CyberChef <i class="fas fa-external-link-alt"></i></a>
         </div>
+        <div class="tool-card">
+          <h3 class="tool-card__name"><i class="fas fa-satellite-dish"></i> Nmap</h3>
+          <p class="tool-card__desc">The gold standard network scanner. Discover hosts, open ports and running services. The first step in almost every pentest.</p>
+          <a href="https://nmap.org/" class="tool-card__link" target="_blank" rel="noopener noreferrer">nmap.org <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="tool-card">
+          <h3 class="tool-card__name"><i class="fas fa-crosshairs"></i> Metasploit</h3>
+          <p class="tool-card__desc">The world's most used penetration testing framework. Exploit development, post-exploitation, and payload generation in one toolkit.</p>
+          <a href="https://www.metasploit.com/" class="tool-card__link" target="_blank" rel="noopener noreferrer">metasploit.com <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="tool-card">
+          <h3 class="tool-card__name"><i class="fas fa-bolt"></i> Hashcat</h3>
+          <p class="tool-card__desc">GPU-accelerated password recovery tool. Supports 300+ hash types with advanced rule-based and mask attacks.</p>
+          <a href="https://hashcat.net/hashcat/" class="tool-card__link" target="_blank" rel="noopener noreferrer">hashcat.net <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="tool-card">
+          <h3 class="tool-card__name"><i class="fas fa-magnifying-glass"></i> Gobuster</h3>
+          <p class="tool-card__desc">Fast directory and DNS brute-forcing tool written in Go. Essential for web enumeration and finding hidden paths on targets.</p>
+          <a href="https://github.com/OJ/gobuster" class="tool-card__link" target="_blank" rel="noopener noreferrer">GitHub <i class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="tool-card">
+          <h3 class="tool-card__name"><i class="fas fa-code"></i> pwntools</h3>
+          <p class="tool-card__desc">Python library for writing exploits. Makes binary exploitation, shellcode crafting and CTF scripting much easier.</p>
+          <a href="https://docs.pwntools.com/" class="tool-card__link" target="_blank" rel="noopener noreferrer">docs.pwntools.com <i class="fas fa-external-link-alt"></i></a>
+        </div>
       </div>
     </div>
   </section>
@@ -201,21 +245,116 @@
           </div>
           <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
         </a>
-        <a href="https://www.youtube.com/@ipaborhot" class="resource-card" target="_blank" rel="noopener noreferrer">
-          <div class="resource-card__icon"><i class="fab fa-youtube"></i></div>
-          <div class="resource-card__body">
-            <h3 class="resource-card__name">IppSec</h3>
-            <p class="resource-card__desc">Detailed Hack The Box walkthroughs. Watch these after attempting a box yourself to learn new techniques and approaches.</p>
-            <span class="resource-card__tag">YouTube</span>
-          </div>
-          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
-        </a>
+
         <a href="https://owasp.org/www-project-top-ten/" class="resource-card" target="_blank" rel="noopener noreferrer">
           <div class="resource-card__icon"><i class="fas fa-shield-halved"></i></div>
           <div class="resource-card__body">
             <h3 class="resource-card__name">OWASP Top 10</h3>
             <p class="resource-card__desc">The definitive list of the most critical web application security risks. Essential reading for anyone interested in web security.</p>
             <span class="resource-card__tag">Reference</span>
+          </div>
+          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.youtube.com/@NetworkChuck" class="resource-card" target="_blank" rel="noopener noreferrer">
+          <div class="resource-card__icon"><i class="fab fa-youtube"></i></div>
+          <div class="resource-card__body">
+            <h3 class="resource-card__name">NetworkChuck</h3>
+            <p class="resource-card__desc">Engaging tutorials on networking, Linux, hacking and IT careers. Great for beginners wanting an energetic introduction to cyber security.</p>
+            <span class="resource-card__tag">YouTube</span>
+          </div>
+          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
+        </a>
+        <a href="https://book.hacktricks.wiki/" class="resource-card" target="_blank" rel="noopener noreferrer">
+          <div class="resource-card__icon"><i class="fas fa-book"></i></div>
+          <div class="resource-card__body">
+            <h3 class="resource-card__name">HackTricks</h3>
+            <p class="resource-card__desc">Comprehensive pentesting wiki. Cheat sheets and methodology for privilege escalation, AD attacks, web exploits and more. Bookmark this one.</p>
+            <span class="resource-card__tag">Reference</span>
+          </div>
+          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.youtube.com/@DavidBombal" class="resource-card" target="_blank" rel="noopener noreferrer">
+          <div class="resource-card__icon"><i class="fab fa-youtube"></i></div>
+          <div class="resource-card__body">
+            <h3 class="resource-card__name">David Bombal</h3>
+            <p class="resource-card__desc">Networking and ethical hacking tutorials. Covers Cisco, Python for networking, and interviews with industry professionals.</p>
+            <span class="resource-card__tag">YouTube</span>
+          </div>
+          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section id="certs" class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Career</span>
+        <h2 class="section__title">Certifications</h2>
+        <p class="section__subtitle">Industry-recognised certifications to boost your career. Many offer student discounts.</p>
+      </div>
+      <div class="resource-grid">
+        <a href="https://www.zeropointsecurity.co.uk/course/red-team-ops" class="resource-card" target="_blank" rel="noopener noreferrer">
+          <div class="resource-card__icon"><i class="fas fa-crosshairs"></i></div>
+          <div class="resource-card__body">
+            <h3 class="resource-card__name">Red Team Ops (CRTO)</h3>
+            <p class="resource-card__desc">Hands-on red team certification from Zero Point Security. Covers Cobalt Strike, Active Directory attacks, evasion and C2 infrastructure. Highly practical.</p>
+            <span class="resource-card__tag">Advanced</span>
+          </div>
+          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
+        </a>
+        <a href="https://academy.hackthebox.com/preview/certifications/htb-certified-penetration-testing-specialist" class="resource-card" target="_blank" rel="noopener noreferrer">
+          <div class="resource-card__icon"><i class="fas fa-cube"></i></div>
+          <div class="resource-card__body">
+            <h3 class="resource-card__name">HTB CPTS</h3>
+            <p class="resource-card__desc">Hack The Box Certified Penetration Testing Specialist. Hands-on exam covering the full pentest lifecycle from recon to reporting. Respected practical certification.</p>
+            <span class="resource-card__tag">Advanced</span>
+          </div>
+          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
+        </a>
+        <a href="https://learn.microsoft.com/en-us/credentials/certifications/security-operations-analyst/" class="resource-card" target="_blank" rel="noopener noreferrer">
+          <div class="resource-card__icon"><i class="fab fa-microsoft"></i></div>
+          <div class="resource-card__body">
+            <h3 class="resource-card__name">Microsoft SC-200</h3>
+            <p class="resource-card__desc">Security Operations Analyst certification. Covers Microsoft Sentinel, Defender and threat hunting. Great for SOC analyst roles and blue team careers.</p>
+            <span class="resource-card__tag">Intermediate</span>
+          </div>
+          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.securityblue.team/certifications/blue-team-level-1" class="resource-card" target="_blank" rel="noopener noreferrer">
+          <div class="resource-card__icon"><i class="fas fa-eye"></i></div>
+          <div class="resource-card__body">
+            <h3 class="resource-card__name">BTL1 - Blue Team Level 1</h3>
+            <p class="resource-card__desc">Practical blue team certification covering SIEM, incident response, threat intelligence and digital forensics. Great for defensive security roles.</p>
+            <span class="resource-card__tag">Intermediate</span>
+          </div>
+          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.isc2.org/certifications/cc" class="resource-card" target="_blank" rel="noopener noreferrer">
+          <div class="resource-card__icon"><i class="fas fa-id-badge"></i></div>
+          <div class="resource-card__body">
+            <h3 class="resource-card__name">ISC2 CC</h3>
+            <p class="resource-card__desc">Free entry-level certification from ISC2. Covers security principles, network security, and incident response. Free training and exam for the first million candidates.</p>
+            <span class="resource-card__tag">Free / Entry Level</span>
+          </div>
+          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.ibm.com/training/badge/cybersecurity-fundamentals" class="resource-card" target="_blank" rel="noopener noreferrer">
+          <div class="resource-card__icon"><i class="fas fa-shield-halved"></i></div>
+          <div class="resource-card__body">
+            <h3 class="resource-card__name">IBM Cybersecurity Fundamentals</h3>
+            <p class="resource-card__desc">Free foundational badge from IBM covering security concepts, threats, incident response and compliance. A solid starting point for your CV.</p>
+            <span class="resource-card__tag">Free / Entry Level</span>
+          </div>
+          <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.cisco.com/site/us/en/learn/training-certifications/certifications/ethical-hacker/index.html" class="resource-card" target="_blank" rel="noopener noreferrer">
+          <div class="resource-card__icon"><i class="fas fa-network-wired"></i></div>
+          <div class="resource-card__body">
+            <h3 class="resource-card__name">Cisco Ethical Hacker</h3>
+            <p class="resource-card__desc">Cisco's free ethical hacking certification covering penetration testing methodology, network exploitation and vulnerability assessment with industry-recognised credentials.</p>
+            <span class="resource-card__tag">Free / Intermediate</span>
           </div>
           <i class="fas fa-arrow-right resource-card__arrow" aria-hidden="true"></i>
         </a>
@@ -294,7 +433,7 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js" defer></script>
 </body>
 
 </html>
