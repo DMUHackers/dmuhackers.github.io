@@ -67,36 +67,43 @@ document.addEventListener('DOMContentLoaded', () => {
   if (nextSessionEl) {
     function updateNextSession() {
       var now = new Date();
-      var day = now.getDay();
+      var day = now.getDay();          // 0=Sun … 4=Thu … 6=Sat
       var hour = now.getHours();
-      var sessionDuration = 2; // sessions last ~2 hours
+      var sessionStart = 18;
+      var sessionEnd   = 20;           // 18:00–20:00
 
-      // Check if it's Thursday during the session window (18:00–20:00)
-      if (day === 4 && hour >= 18 && hour < 18 + sessionDuration) {
+      // During the session window
+      if (day === 4 && hour >= sessionStart && hour < sessionEnd) {
         nextSessionEl.textContent = 'Happening now!';
         return;
       }
 
-      // Find next Thursday 18:00
+      // Build the target: next Thursday at 18:00
       var target = new Date(now);
-      target.setHours(18, 0, 0, 0);
-      var daysUntil = (4 - day + 7) % 7;
-      // If it's Thursday but session is over, go to next week
-      if (daysUntil === 0 && hour >= 18 + sessionDuration) daysUntil = 7;
+      target.setHours(sessionStart, 0, 0, 0);
+
+      var daysUntil = (4 - day + 7) % 7;        // 0 on Thursday
+      if (daysUntil === 0 && hour >= sessionEnd) {
+        daysUntil = 7;                           // session already ended today
+      }
       target.setDate(target.getDate() + daysUntil);
 
+      // Whole-millisecond difference → days / hours / minutes
       var diff = target - now;
-      var d = Math.floor(diff / 86400000);
-      var h = Math.floor((diff % 86400000) / 3600000);
+      var totalHours = Math.floor(diff / 3600000);
+      var d = Math.floor(totalHours / 24);
+      var h = totalHours % 24;
       var m = Math.floor((diff % 3600000) / 60000);
 
-      var isToday = now.toDateString() === target.toDateString();
-      if (isToday) {
+      // Pick a friendly label
+      if (d === 0) {
         nextSessionEl.textContent = 'Today in ' + h + 'h ' + m + 'm';
-      } else if (daysUntil === 1) {
-        nextSessionEl.textContent = 'Tomorrow at 18:00';
+      } else if (d === 1 && h === 0 && m === 0) {
+        nextSessionEl.textContent = 'Tomorrow at ' + sessionStart + ':00';
+      } else if (d === 1) {
+        nextSessionEl.textContent = 'Tomorrow at ' + sessionStart + ':00';
       } else {
-        nextSessionEl.textContent = 'Next session in ' + d + 'd ' + h + 'h';
+        nextSessionEl.textContent = 'Next Thursday in ' + d + 'd ' + h + 'h';
       }
     }
     updateNextSession();
