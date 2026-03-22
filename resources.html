@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha384-t1nt8BQoYMLFN5p42tRAtuAAFQaCQODekUVeKKZrEnEyp4H2R0RHFz0KWpmj7i8g" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/resources.css">
+  <link rel="stylesheet" href="css/theme-toggle.css">
 </head>
 
 <body>
@@ -36,16 +37,20 @@
       <a href="index.html" class="nav__logo">
         <span class="nav__logo-text">DMU Hackers</span>
       </a>
-      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
       <ul class="nav__links" id="navLinks">
         <li><a href="index.html" class="nav__link">Home</a></li>
         <li><a href="index.html#about" class="nav__link">About</a></li>
         <li><a href="P2P.html" class="nav__link">Pwn2Play</a></li>
         <li><a href="committee.html" class="nav__link">Committee</a></li>
-        <li><a href="https://discord.gg/Vvrk4kK" class="nav__link nav__link--cta" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Join Us</a></li>
+        <li class="nav__mobile-cta"><a href="https://discord.gg/Vvrk4kK" class="nav__link nav__link--cta" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Join Us</a></li>
       </ul>
+      <div class="nav__actions">
+        <a href="https://discord.gg/Vvrk4kK" class="nav__link nav__link--cta" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Join Us</a>
+        <button class="nav__theme-toggle" id="themeToggle" aria-label="Toggle light mode" type="button"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></button>
+        <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 

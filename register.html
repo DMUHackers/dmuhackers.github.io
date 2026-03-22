@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Register - Pwn2Play CTF - DMU Hackers</title>
+  <meta name="description" content="Step-by-step guide to registering for Pwn2Play: Core Incursion. Create an account, join the event, form or join a team on Biterra.">
+  <meta property="og:title" content="How to Register - Pwn2Play CTF">
+  <meta property="og:description" content="Step-by-step guide to registering for Pwn2Play: Core Incursion on Biterra.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://dmuhackers.com/register.html">
+  <meta property="og:image" content="https://dmuhackers.com/img/site-content/logo/1200x630.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://dmuhackers.com/img/site-content/logo/1200x628.png">
+  <meta name="twitter:site" content="@dmuhackers">
+  <link rel="canonical" href="https://dmuhackers.com/register.html">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/site-content/logo/180x180.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha384-t1nt8BQoYMLFN5p42tRAtuAAFQaCQODekUVeKKZrEnEyp4H2R0RHFz0KWpmj7i8g" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/register.css">
+  <link rel="stylesheet" href="css/theme-toggle.css">
+</head>
+
+<body>
+
+  <a href="#register-flow" class="skip-link">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav class="nav" id="navbar">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <span class="nav__logo-text">DMU Hackers</span>
+      </a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="index.html" class="nav__link">Home</a></li>
+        <li><a href="P2P.html" class="nav__link">Pwn2Play</a></li>
+        <li><a href="P2P.html#schedule" class="nav__link">Schedule</a></li>
+        <li><a href="P2P.html#rules" class="nav__link">Rules</a></li>
+        <li><a href="sponsors.html" class="nav__link">Sponsors</a></li>
+        <li class="nav__mobile-cta"><a href="https://discord.gg/Vvrk4kK" class="nav__link nav__link--cta" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Join Us</a></li>
+      </ul>
+      <div class="nav__actions">
+        <a href="https://discord.gg/Vvrk4kK" class="nav__link nav__link--cta" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Join Us</a>
+        <button class="nav__theme-toggle" id="themeToggle" aria-label="Toggle light mode" type="button"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></button>
+        <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero hero--compact hero--register">
+    <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
+    <div class="hero__bg"></div>
+    <div class="hero__content">
+      <span class="section__tag">Get Started</span>
+      <h1 class="hero__title">How to <span class="hero__accent">Register</span></h1>
+      <p class="hero__sub">Follow these steps to get signed up for Pwn2Play: Core Incursion on Biterra.</p>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Registration Flow -->
+  <section id="register-flow" class="section">
+    <div class="container">
+
+      <!-- Shared Steps -->
+      <div class="flow">
+
+        <!-- Step 1: Register -->
+        <div class="flow__step flow__step--shared">
+          <div class="flow__marker">
+            <span class="flow__num">1</span>
+            <div class="flow__line"></div>
+          </div>
+          <div class="flow__body">
+            <div class="flow__header">
+              <i class="fas fa-user-plus flow__icon"></i>
+              <h3 class="flow__title">Create a Biterra Account</h3>
+            </div>
+            <p class="flow__text">Head to <a href="https://biterra.co" target="_blank" rel="noopener noreferrer">biterra.co</a> and register for a free account. This is the platform that hosts all Pwn2Play challenges.</p>
+            <a href="https://biterra.co" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i> Go to Biterra</a>
+          </div>
+        </div>
+
+        <!-- Step 2: Join Event -->
+        <div class="flow__step flow__step--shared">
+          <div class="flow__marker">
+            <span class="flow__num">2</span>
+            <div class="flow__line"></div>
+          </div>
+          <div class="flow__body">
+            <div class="flow__header">
+              <i class="fas fa-right-to-bracket flow__icon"></i>
+              <h3 class="flow__title">Join the Pwn2Play Event</h3>
+            </div>
+            <p class="flow__text">Once logged in, navigate to the Pwn2Play: Core Incursion event and join it. This gives you access to the competition space.</p>
+            <a href="https://pwn2play.biterra.co" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i> Pwn2Play on Biterra</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Branch Split -->
+      <div class="flow__split">
+        <div class="flow__split-line"></div>
+        <div class="flow__split-label">Choose your path</div>
+        <div class="flow__split-line"></div>
+      </div>
+
+      <!-- Two Streams -->
+      <div class="flow__branches">
+
+        <!-- Captain Stream -->
+        <div class="flow__branch flow__branch--captain">
+          <div class="flow__branch-header">
+            <div class="flow__branch-icon"><i class="fas fa-crown"></i></div>
+            <h3 class="flow__branch-title">Team Captain</h3>
+            <p class="flow__branch-sub">Create a team and recruit members</p>
+          </div>
+
+          <div class="flow__step">
+            <div class="flow__marker">
+              <span class="flow__num flow__num--captain">3</span>
+              <div class="flow__line"></div>
+            </div>
+            <div class="flow__body">
+              <div class="flow__header">
+                <i class="fas fa-people-group flow__icon"></i>
+                <h3 class="flow__title">Create Your Team</h3>
+              </div>
+              <p class="flow__text">Within the Pwn2Play event, create a new team. Choose a team name and set it up ready for your members.</p>
+            </div>
+          </div>
+
+          <div class="flow__step">
+            <div class="flow__marker">
+              <span class="flow__num flow__num--captain">4</span>
+            </div>
+            <div class="flow__body">
+              <div class="flow__header">
+                <i class="fas fa-share-nodes flow__icon"></i>
+                <h3 class="flow__title">Share the Invite Link</h3>
+              </div>
+              <p class="flow__text">Copy your team's invite link and share it with your teammates. They'll use this to join your team directly.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member Stream -->
+        <div class="flow__branch flow__branch--member">
+          <div class="flow__branch-header">
+            <div class="flow__branch-icon"><i class="fas fa-user-group"></i></div>
+            <h3 class="flow__branch-title">Team Member</h3>
+            <p class="flow__branch-sub">Join an existing team</p>
+          </div>
+
+          <div class="flow__step">
+            <div class="flow__marker">
+              <span class="flow__num flow__num--member">3</span>
+              <div class="flow__line"></div>
+            </div>
+            <div class="flow__body">
+              <div class="flow__header">
+                <i class="fas fa-link flow__icon"></i>
+                <h3 class="flow__title">Get the Invite Link</h3>
+              </div>
+              <p class="flow__text">Ask your team captain for the invite link. They'll have this ready once they've created the team.</p>
+            </div>
+          </div>
+
+          <div class="flow__step">
+            <div class="flow__marker">
+              <span class="flow__num flow__num--member">4</span>
+            </div>
+            <div class="flow__body">
+              <div class="flow__header">
+                <i class="fas fa-handshake flow__icon"></i>
+                <h3 class="flow__title">Join the Team</h3>
+              </div>
+              <p class="flow__text">Click the invite link to join your captain's team. You'll be added to the roster and ready to compete.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Merge -->
+      <div class="flow__merge">
+        <div class="flow__merge-line"></div>
+        <div class="flow__merge-label">You're all set</div>
+        <div class="flow__merge-line"></div>
+      </div>
+
+      <!-- Final Steps -->
+      <div class="flow">
+
+        <div class="flow__step flow__step--shared flow__step--final">
+          <div class="flow__marker">
+            <span class="flow__num flow__num--final">5</span>
+            <div class="flow__line"></div>
+          </div>
+          <div class="flow__body">
+            <div class="flow__header">
+              <i class="fas fa-calendar-check flow__icon"></i>
+              <h3 class="flow__title">Save the Date</h3>
+            </div>
+            <p class="flow__text">Pwn2Play: Core Incursion takes place <strong>Saturday 30th May 2026</strong>, 09:00&ndash;18:00. Add it to your calendar so you don't miss it.</p>
+            <div class="flow__actions">
+              <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Pwn2Play%3A+Core+Incursion+-+DMU+Hackers+CTF&dates=20260530T080000Z/20260530T170000Z&details=DMU+Hackers%27+flagship+Capture+The+Flag+competition.+Register%3A+https%3A%2F%2Fpwn2play.biterra.co&location=Gateway+House+Floor+5%2C+De+Montfort+University%2C+The+Gateway%2C+Leicester+LE1+9BH" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-google"></i> Google Calendar</a>
+              <a href="data/p2p-core-incursion.ics" class="btn btn--ghost btn--sm" download><i class="fas fa-calendar-plus"></i> Download .ics</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow__step flow__step--shared flow__step--final">
+          <div class="flow__marker">
+            <span class="flow__num flow__num--final">6</span>
+            <div class="flow__line"></div>
+          </div>
+          <div class="flow__body">
+            <div class="flow__header">
+              <i class="fas fa-clipboard-list flow__icon"></i>
+              <h3 class="flow__title">In-Person or Online?</h3>
+            </div>
+            <p class="flow__text">Let us know whether you'll be attending in person at DMU or competing online so we can plan accordingly.</p>
+            <a href="https://forms.gle/YPQaL6gwLK24S6ms8" class="btn btn--primary btn--sm" target="_blank" rel="noopener noreferrer"><i class="fas fa-pen-to-square"></i> Attendance Form</a>
+          </div>
+        </div>
+
+        <div class="flow__step flow__step--shared flow__step--final">
+          <div class="flow__marker">
+            <span class="flow__num flow__num--final">7</span>
+          </div>
+          <div class="flow__body">
+            <div class="flow__header">
+              <i class="fas fa-bullhorn flow__icon"></i>
+              <h3 class="flow__title">Spread the Word</h3>
+            </div>
+            <p class="flow__text">Share the event with friends and classmates. The more teams, the better the competition.</p>
+            <div class="flow__actions">
+              <a href="https://pwn2play.biterra.co" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i> pwn2play.biterra.co</a>
+              <a href="https://discord.gg/ZUqTWNy7c9" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Discord</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__col">
+          <div class="footer__brand">
+            <img src="img/site-content/logo.png" alt="DMU Hackers logo" class="footer__logo" loading="lazy">
+            <span>DMU Hackers</span>
+          </div>
+          <p class="footer__desc">De Montfort University's cyber security society. Hacking, learning, and competing since 2015.</p>
+          <div class="footer__socials">
+            <a href="https://twitter.com/dmuhackers" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://github.com/DMUHackers" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/hackers.dmu" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/dmu-hackers/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://discord.gg/Vvrk4kK" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Navigate</h4>
+          <nav class="footer__nav" aria-label="Footer navigation">
+            <a href="index.html">Home</a>
+            <a href="P2P.html">Pwn2Play</a>
+            <a href="P2P.html#schedule">Schedule</a>
+            <a href="P2P.html#rules">Rules</a>
+          </nav>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Events</h4>
+          <nav class="footer__nav" aria-label="Events navigation">
+            <a href="P2P.html#podium">Results</a>
+            <a href="sponsors.html">Sponsors</a>
+            <a href="P2P.html#afterparty">After Party</a>
+          </nav>
+        </div>
+        <div class="footer__col">
+          <h4 class="footer__heading">Join</h4>
+          <nav class="footer__nav" aria-label="Join navigation">
+            <a href="https://discord.gg/Vvrk4kK" target="_blank" rel="noopener noreferrer">Discord Server</a>
+            <a href="https://www.demontfortsu.com/organisation/dmuhackers/" target="_blank" rel="noopener noreferrer">DSU Page</a>
+            <a href="sponsors.html">Sponsors</a>
+            <a href="resources.html">Resources</a>
+          </nav>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; 2015&ndash;<span id="footerYear"></span> DMU Hackers | Pwning since 2015</p>
+        <p class="footer__copy footer__copy--subtle">Made with <span class="footer__heart">&lt;3</span> by the committee</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="js/main.js" defer></script>
+</body>
+
+</html>

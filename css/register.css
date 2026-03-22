@@ -1,0 +1,346 @@
+/* ==========================================================================
+   Registration Guide — Page-specific styles (extends main.css Terminal Noir)
+   ========================================================================== */
+
+/* ---------- Register Hero gradient ---------- */
+.hero--register .hero__bg {
+  background:
+    radial-gradient(ellipse 65% 50% at 50% -5%, rgba(0,228,255,.15) 0%, transparent 50%),
+    radial-gradient(ellipse 45% 40% at 20% 100%, rgba(200,16,46,.1) 0%, transparent 50%),
+    radial-gradient(ellipse 35% 35% at 85% 75%, rgba(0,228,255,.06) 0%, transparent 50%);
+  animation: heroBreathe 12s ease-in-out infinite;
+}
+
+/* ---------- Flow (shared vertical timeline) ---------- */
+.flow {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.flow__step {
+  display: flex;
+  gap: 24px;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.flow__step.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.flow__marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+
+.flow__num {
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  color: var(--accent);
+  background: rgba(200,16,46,.1);
+  border: 1px solid rgba(200,16,46,.15);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all .3s;
+}
+.flow__step:hover .flow__num {
+  background: rgba(200,16,46,.18);
+  border-color: rgba(200,16,46,.35);
+  box-shadow: 0 0 16px rgba(200,16,46,.12);
+}
+
+.flow__num--captain {
+  color: #ffd700;
+  background: rgba(255,215,0,.08);
+  border-color: rgba(255,215,0,.2);
+}
+.flow__step:hover .flow__num--captain {
+  background: rgba(255,215,0,.15);
+  border-color: rgba(255,215,0,.4);
+  box-shadow: 0 0 16px rgba(255,215,0,.1);
+}
+
+.flow__num--member {
+  color: var(--cyan);
+  background: rgba(0,228,255,.06);
+  border-color: rgba(0,228,255,.15);
+}
+.flow__step:hover .flow__num--member {
+  background: rgba(0,228,255,.12);
+  border-color: rgba(0,228,255,.35);
+  box-shadow: 0 0 16px rgba(0,228,255,.1);
+}
+
+.flow__num--final {
+  color: #7cfc7c;
+  background: rgba(124,252,124,.06);
+  border-color: rgba(124,252,124,.15);
+}
+.flow__step:hover .flow__num--final {
+  background: rgba(124,252,124,.12);
+  border-color: rgba(124,252,124,.35);
+  box-shadow: 0 0 16px rgba(124,252,124,.1);
+}
+
+.flow__line {
+  width: 1px;
+  flex: 1;
+  min-height: 20px;
+  background: linear-gradient(to bottom, rgba(200,16,46,.25), rgba(200,16,46,.05));
+}
+
+.flow__body {
+  flex: 1;
+  padding-bottom: 36px;
+}
+
+.flow__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.flow__icon {
+  font-size: .95rem;
+  color: var(--text-muted);
+  width: 20px;
+  text-align: center;
+  flex-shrink: 0;
+  transition: color .3s;
+}
+.flow__step:hover .flow__icon {
+  color: var(--accent);
+}
+
+.flow__title {
+  font-family: var(--font-display);
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: .01em;
+}
+
+.flow__text {
+  font-size: .88rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.flow__text a {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color .2s;
+}
+.flow__text a:hover {
+  color: #fff;
+}
+
+.flow__text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.flow__actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.flow__note {
+  font-size: .78rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  opacity: .7;
+}
+.flow__note i {
+  margin-right: 4px;
+}
+
+/* ---------- Scroll reveal states ---------- */
+.flow__split,
+.flow__merge,
+.flow__branch {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.flow__split.is-visible,
+.flow__merge.is-visible,
+.flow__branch.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Split / Merge Dividers ---------- */
+.flow__split,
+.flow__merge {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  max-width: 800px;
+  margin: 32px auto;
+}
+
+.flow__split-line,
+.flow__merge-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200,16,46,.3), transparent);
+}
+
+.flow__split-label,
+.flow__merge-label {
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--text-muted);
+  white-space: nowrap;
+  padding: 8px 20px;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 20px;
+  background: rgba(24,24,27,.6);
+}
+
+/* ---------- Branches (two-column) ---------- */
+.flow__branches {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.flow__branch {
+  border: 1px solid rgba(255,255,255,.05);
+  border-radius: var(--radius);
+  background: rgba(16,16,20,.5);
+  padding: 32px 28px;
+  transition: border-color .3s;
+}
+.flow__branch:hover {
+  border-color: rgba(255,255,255,.1);
+}
+
+.flow__branch--captain {
+  border-color: rgba(255,215,0,.12);
+}
+.flow__branch--captain:hover {
+  border-color: rgba(255,215,0,.25);
+}
+
+.flow__branch--member {
+  border-color: rgba(0,228,255,.1);
+}
+.flow__branch--member:hover {
+  border-color: rgba(0,228,255,.2);
+}
+
+.flow__branch-header {
+  text-align: center;
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+
+.flow__branch-icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+.flow__branch--captain .flow__branch-icon { color: #ffd700; }
+.flow__branch--member .flow__branch-icon { color: var(--cyan); }
+
+.flow__branch-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.flow__branch-sub {
+  font-size: .82rem;
+  color: var(--text-muted);
+}
+
+/* Branch-internal flow lines */
+.flow__branch--captain .flow__line {
+  background: linear-gradient(to bottom, rgba(255,215,0,.2), rgba(255,215,0,.04));
+}
+.flow__branch--member .flow__line {
+  background: linear-gradient(to bottom, rgba(0,228,255,.2), rgba(0,228,255,.04));
+}
+
+/* Branch-internal icon hover */
+.flow__branch--captain .flow__step:hover .flow__icon { color: #ffd700; }
+.flow__branch--member .flow__step:hover .flow__icon { color: var(--cyan); }
+
+/* ---------- Final steps green line ---------- */
+.flow__step--final .flow__line {
+  background: linear-gradient(to bottom, rgba(124,252,124,.2), rgba(124,252,124,.04));
+}
+.flow__step--final:hover .flow__icon {
+  color: #7cfc7c !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .flow__branches {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .flow__branch {
+    padding: 24px 20px;
+  }
+
+  .flow__step {
+    gap: 16px;
+  }
+
+  .flow__num {
+    width: 32px;
+    height: 32px;
+    font-size: .62rem;
+  }
+
+  .flow__body {
+    padding-bottom: 28px;
+  }
+
+  .flow__split,
+  .flow__merge {
+    margin: 24px auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .flow__branch {
+    padding: 20px 16px;
+  }
+
+  .flow__actions {
+    flex-direction: column;
+  }
+
+  .flow__actions .btn {
+    text-align: center;
+    justify-content: center;
+  }
+}

@@ -8,6 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const fy = document.getElementById('footerYear');
   if (fy) fy.textContent = new Date().getFullYear();
 
+  /* ---------- Theme toggle (dark/light) ---------- */
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const isLight = document.documentElement.classList.toggle('light');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      themeToggle.setAttribute('aria-label',
+        isLight ? 'Toggle dark mode' : 'Toggle light mode');
+    });
+  }
+
   /* ---------- Mobile nav toggle ---------- */
   const toggle  = document.getElementById('navToggle');
   const navMenu = document.getElementById('navLinks');
@@ -112,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Scroll reveal (IntersectionObserver) ---------- */
   const revealEls = document.querySelectorAll(
-    '.section__header, .card, .member:not(.timeline .member), .info-bar, .p2p-split__img, .p2p-split__content, .step, .faq, .getting-started__cta, .section-cta, .rule, .timeline__entry'
+    '.section__header, .card, .member:not(.timeline .member), .info-bar, .p2p-split__img, .p2p-split__content, .step, .faq, .getting-started__cta, .section-cta, .rule, .timeline__entry, .flow__step, .flow__split, .flow__merge, .flow__branch, .venue, .map-overview'
   );
 
   if ('IntersectionObserver' in window) {

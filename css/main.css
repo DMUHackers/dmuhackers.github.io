@@ -131,6 +131,7 @@ ul  { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .nav__logo {
@@ -150,12 +151,26 @@ ul  { list-style: none; }
 .nav__links {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
 }
 
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* Mobile CTA lives inside the dropdown — hidden on desktop */
+.nav__mobile-cta { display: none; }
+
 .nav__link {
-  padding: 6px 14px;
-  font-size: .875rem;
+  padding: 6px 10px;
+  font-size: .84rem;
   font-weight: 500;
   color: var(--text-muted);
   border-radius: 8px;
@@ -1682,6 +1697,10 @@ a.card--link:hover .card__arrow {
 /* Nav collapses earlier — 6-7 links need more room */
 @media (max-width: 960px) {
   .nav__toggle { display: flex; }
+
+  /* Hide desktop CTA, show mobile CTA in dropdown */
+  .nav__actions .nav__link--cta { display: none; }
+  .nav__mobile-cta { display: list-item; }
 
   .nav__links {
     position: fixed;

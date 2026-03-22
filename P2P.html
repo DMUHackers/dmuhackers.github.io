@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha384-t1nt8BQoYMLFN5p42tRAtuAAFQaCQODekUVeKKZrEnEyp4H2R0RHFz0KWpmj7i8g" crossorigin="anonymous">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/P2P.css">
+  <link rel="stylesheet" href="css/theme-toggle.css">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -61,21 +62,24 @@
       <a href="index.html" class="nav__logo">
         <span class="nav__logo-text">DMU Hackers</span>
       </a>
-      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
       <ul class="nav__links" id="navLinks">
         <li><a href="index.html" class="nav__link">Home</a></li>
         <li><a href="#p2p-hero" class="nav__link active" data-section="p2p-hero">Pwn2Play</a></li>
+        <li><a href="#register" class="nav__link" data-section="register">Register</a></li>
         <li><a href="#categories" class="nav__link" data-section="categories">Categories</a></li>
-        <li><a href="#key-info" class="nav__link" data-section="key-info">Key Info</a></li>
         <li><a href="#schedule" class="nav__link" data-section="schedule">Schedule</a></li>
+        <li><a href="map.html" class="nav__link">Map</a></li>
         <li><a href="#rules" class="nav__link" data-section="rules">Rules</a></li>
-        <li><a href="#afterparty" class="nav__link" data-section="afterparty">Social</a></li>
         <li><a href="#sponsors" class="nav__link" data-section="sponsors">Sponsors</a></li>
-        <li><a href="#podium" class="nav__link" data-section="podium">Results</a></li>
-        <li><a href="https://discord.gg/Vvrk4kK" class="nav__link nav__link--cta" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Join Us</a></li>
+        <li class="nav__mobile-cta"><a href="register.html" class="nav__link nav__link--cta"><i class="fas fa-user-plus"></i> Register</a></li>
       </ul>
+      <div class="nav__actions">
+        <a href="register.html" class="nav__link nav__link--cta"><i class="fas fa-user-plus"></i> Register</a>
+        <button class="nav__theme-toggle" id="themeToggle" aria-label="Toggle light mode" type="button"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></button>
+        <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -115,7 +119,7 @@
       </div>
 
       <div class="hero__actions">
-        <a href="https://forms.gle/YPQaL6gwLK24S6ms8" class="btn btn--primary" target="_blank" rel="noopener noreferrer"><i class="fas fa-user-plus"></i> Register Now</a>
+        <a href="register.html" class="btn btn--primary"><i class="fas fa-user-plus"></i> Register Now</a>
         <a href="https://discord.gg/ZUqTWNy7c9" class="btn btn--ghost" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Discord</a>
         <a href="sponsors.html" class="btn btn--ghost"><i class="fas fa-handshake"></i> Become a Sponsor</a>
       </div>
@@ -151,8 +155,9 @@
         </div>
       </div>
       <div class="calendar-actions">
-        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Pwn2Play%3A+Core+Incursion+-+DMU+Hackers+CTF&dates=20260530T080000Z/20260530T170000Z&details=DMU+Hackers%27+flagship+Capture+The+Flag+competition.+Register%3A+https%3A%2F%2Fforms.gle%2FYPQaL6gwLK24S6ms8&location=Gateway+House+Floor+5%2C+De+Montfort+University%2C+The+Gateway%2C+Leicester+LE1+9BH" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-google"></i> Google Calendar</a>
+        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Pwn2Play%3A+Core+Incursion+-+DMU+Hackers+CTF&dates=20260530T080000Z/20260530T170000Z&details=DMU+Hackers%27+flagship+Capture+The+Flag+competition.+Register%3A+https%3A%2F%2Fpwn2play.biterra.co&location=Gateway+House+Floor+5%2C+De+Montfort+University%2C+The+Gateway%2C+Leicester+LE1+9BH" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-google"></i> Google Calendar</a>
         <a href="data/p2p-core-incursion.ics" class="btn btn--ghost btn--sm" download><i class="fas fa-calendar-plus"></i> Download .ics</a>
+        <a href="map.html" class="btn btn--ghost btn--sm"><i class="fas fa-map-location-dot"></i> Campus Map</a>
       </div>
       <div class="p2p-connect">
         <h3 class="p2p-connect__title">Connect with us</h3>
@@ -161,7 +166,7 @@
             <i class="fab fa-discord"></i>
             <span>Discord</span>
           </a>
-          <a href="https://forms.gle/YPQaL6gwLK24S6ms8" class="p2p-connect__btn" target="_blank" rel="noopener noreferrer">
+          <a href="register.html" class="p2p-connect__btn">
             <i class="fas fa-user-plus"></i>
             <span>Register</span>
           </a>
@@ -170,8 +175,40 @@
     </div>
   </section>
 
+  <!-- How to Register -->
+  <section id="register" class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Sign Up</span>
+        <h2 class="section__title">How to Register</h2>
+        <p class="section__subtitle">Pwn2Play: Core Incursion is hosted on Biterra. Follow our step-by-step guide to create your account, join the event, and form or join a team.</p>
+      </div>
+      <div class="cards cards--three p2p-meta-cards">
+        <div class="card p2p-meta-card">
+          <div class="card__icon"><i class="fas fa-user-plus"></i></div>
+          <h3 class="card__title">Register</h3>
+          <p class="card__text">Create a free account on Biterra</p>
+        </div>
+        <div class="card p2p-meta-card">
+          <div class="card__icon"><i class="fas fa-people-group"></i></div>
+          <h3 class="card__title">Team Up</h3>
+          <p class="card__text">Create or join a team</p>
+        </div>
+        <div class="card p2p-meta-card">
+          <div class="card__icon"><i class="fas fa-flag-checkered"></i></div>
+          <h3 class="card__title">Compete</h3>
+          <p class="card__text">Hack your way to the top</p>
+        </div>
+      </div>
+      <div class="calendar-actions" style="margin-top: 36px;">
+        <a href="register.html" class="btn btn--primary"><i class="fas fa-arrow-right"></i> View Registration Guide</a>
+        <a href="https://pwn2play.biterra.co" class="btn btn--ghost" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i> Go to Biterra</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Challenge Categories -->
-  <section id="categories" class="section section--alt">
+  <section id="categories" class="section">
     <div class="container">
       <div class="section__header">
         <span class="section__tag">8 Categories</span>
@@ -224,7 +261,7 @@
   </section>
 
   <!-- Key Info -->
-  <section id="key-info" class="section">
+  <section id="key-info" class="section section--alt">
     <div class="container">
       <div class="section__header">
         <span class="section__tag">Important</span>
@@ -260,11 +297,14 @@
           </div>
         </div>
       </div>
+      <div class="calendar-actions" style="margin-top: 32px;">
+        <a href="map.html" class="btn btn--ghost"><i class="fas fa-map-location-dot"></i> View Campus Map</a>
+      </div>
     </div>
   </section>
 
   <!-- Schedule -->
-  <section id="schedule" class="section section--alt">
+  <section id="schedule" class="section">
     <div class="container">
       <div class="section__header">
         <span class="section__tag">The Day</span>
@@ -500,7 +540,7 @@
   </section>
 
   <!-- After Party -->
-  <section id="afterparty" class="section section--alt">
+  <section id="afterparty" class="section">
     <div class="container">
       <div class="section__header">
         <span class="section__tag">Keep the night going</span>
@@ -535,6 +575,16 @@
         <span class="section__tag">Partners</span>
         <h2 class="section__title">Sponsors</h2>
       </div>
+
+      <!-- Powered by Biterra -->
+      <div class="p2p-powered">
+        <a href="https://pwn2play.biterra.co" class="p2p-powered__badge" target="_blank" rel="noopener noreferrer">
+          <span class="p2p-powered__label">Hosted on</span>
+          <img src="img/branding/biterra/biterra-logo.png" alt="Biterra" class="p2p-powered__logo" loading="lazy">
+        </a>
+        <p class="p2p-powered__text">Pwn2Play: Core Incursion is hosted on <a href="https://pwn2play.biterra.co" target="_blank" rel="noopener noreferrer">Biterra</a> — a gamified CTF platform built by a DMU Hackers alumni.</p>
+      </div>
+
       <div class="sponsors-cta">
         <p>Want to sponsor Pwn2Play or get involved?</p>
         <a href="sponsors.html" class="btn btn--primary"><i class="fas fa-handshake"></i> Become a Sponsor</a>

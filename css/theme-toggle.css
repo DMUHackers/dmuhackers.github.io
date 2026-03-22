@@ -1,0 +1,562 @@
+/* ==========================================================================
+   Light Mode Toggle — Overrides for Terminal Noir theme
+   Loaded after main.css and page-specific styles on all pages.
+   Dark = default (no class). Light = html.light
+   ========================================================================== */
+
+/* ---------- Toggle Button ---------- */
+.nav__theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.nav__theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+  background: rgba(128,128,128,.08);
+}
+/* Show sun in dark mode, moon in light mode */
+.nav__theme-toggle .fa-moon  { display: none; }
+.nav__theme-toggle .fa-sun   { display: inline; }
+
+/* ---------- Light Mode Custom Properties ---------- */
+html.light {
+  --bg:          #f4f4f6;
+  --bg-alt:      #eaeaed;
+  --surface:     #ffffff;
+  --border:      #d4d4da;
+  --text:        #1a1a1e;
+  --text-muted:  #5a5a66;
+  --accent:      #c8102e;
+  --accent-hover:#a00d24;
+  --accent-glow: rgba(200, 16, 46, .2);
+  --cyan:        #0094a8;
+  --cyan-glow:   rgba(0, 148, 168, .1);
+}
+
+/* ---------- Light Mode Toggle Button ---------- */
+html.light .nav__theme-toggle .fa-moon  { display: inline; }
+html.light .nav__theme-toggle .fa-sun   { display: none; }
+
+/* ---------- Base & Overlays ---------- */
+html.light body::before {
+  /* Film grain — hide on light backgrounds */
+  display: none;
+}
+
+html.light .hero::after {
+  /* CRT scanlines — hide on light */
+  display: none;
+}
+
+/* ---------- Navigation ---------- */
+html.light .nav {
+  background: rgba(244,244,246,.85);
+  border-bottom-color: rgba(0,0,0,.06);
+}
+html.light .nav--scrolled {
+  background: rgba(244,244,246,.97);
+  box-shadow: 0 4px 30px rgba(0,0,0,.08), 0 1px 0 rgba(200,16,46,.06);
+}
+html.light .nav__link:hover,
+html.light .nav__link.active {
+  background: rgba(0,0,0,.05);
+}
+
+/* ---------- Hero ---------- */
+html.light .hero {
+  background: var(--bg);
+}
+html.light .hero__bg {
+  opacity: .3;
+}
+html.light .hero__canvas {
+  opacity: .3;
+}
+html.light .hero__tag {
+  border-color: rgba(0,148,168,.2);
+  background: rgba(0,148,168,.06);
+  text-shadow: none;
+}
+
+/* Hero terminal */
+html.light .hero-term {
+  background: rgba(255,255,255,.95);
+  border-color: rgba(0,0,0,.12);
+  box-shadow: 0 8px 40px rgba(0,0,0,.08);
+}
+html.light .hero-term::before {
+  /* Kill the shimmer gradient border */
+  display: none;
+}
+html.light .hero-term:hover,
+html.light .hero-term--focused {
+  box-shadow: 0 8px 40px rgba(0,0,0,.1);
+}
+html.light .hero-term__bar {
+  background: rgba(0,0,0,.04);
+  border-bottom-color: rgba(0,0,0,.08);
+}
+html.light .hero-term__body::-webkit-scrollbar-thumb { background: rgba(0,0,0,.1); }
+html.light .hero-term__body::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.2); }
+
+/* Hero featured link */
+html.light .hero-featured {
+  border-color: rgba(200,16,46,.15);
+  background: rgba(200,16,46,.04);
+}
+html.light .hero-featured:hover {
+  border-color: rgba(200,16,46,.3);
+  background: rgba(200,16,46,.06);
+}
+
+/* Hero socials */
+html.light .hero__socials a {
+  border-color: rgba(0,0,0,.1);
+}
+html.light .hero__socials a:hover {
+  border-color: rgba(0,0,0,.2);
+  background: rgba(0,0,0,.04);
+}
+html.light .hero__socials-github {
+  border-color: rgba(0,0,0,.12) !important;
+  background: rgba(0,0,0,.03) !important;
+}
+html.light .hero__socials-github:hover {
+  border-color: rgba(0,0,0,.2) !important;
+  background: rgba(0,0,0,.06) !important;
+  color: var(--text) !important;
+  box-shadow: 0 6px 24px rgba(0,0,0,.1) !important;
+}
+
+/* Hero text shadow overrides */
+html.light .hero__title {
+  text-shadow: none;
+}
+
+/* Hero stats bar */
+html.light .hero-stats {
+  border-top-color: rgba(0,0,0,.06);
+  border-bottom-color: rgba(0,0,0,.06);
+}
+
+/* Gradient text in terminal results */
+html.light .hero-term__result {
+  -webkit-text-fill-color: var(--text);
+  background: none;
+}
+
+/* ---------- Buttons ---------- */
+html.light .btn--ghost {
+  background: rgba(0,0,0,.03);
+  border-color: rgba(0,0,0,.1);
+}
+html.light .btn--ghost:hover {
+  border-color: rgba(0,0,0,.2);
+  background: rgba(0,0,0,.06);
+}
+
+/* ---------- Sections ---------- */
+html.light .section::before {
+  background: linear-gradient(90deg, transparent, rgba(200,16,46,.15), rgba(0,228,255,.1), transparent);
+}
+html.light .section::after {
+  background: radial-gradient(ellipse at center top, rgba(200,16,46,.03) 0%, transparent 100%);
+}
+
+/* ---------- Steps (Getting Started) ---------- */
+html.light .step {
+  background: rgba(255,255,255,.8);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .step:hover {
+  border-color: rgba(200,16,46,.15);
+  box-shadow: -6px 0 30px rgba(200,16,46,.04), 0 8px 24px rgba(0,0,0,.06);
+}
+html.light .step__number {
+  background: rgba(200,16,46,.08);
+  border-color: rgba(200,16,46,.15);
+}
+
+/* ---------- Cards ---------- */
+html.light .card {
+  background: rgba(255,255,255,.8);
+  border-color: rgba(0,0,0,.06);
+  box-shadow: inset 0 1px 0 rgba(0,0,0,.02);
+}
+html.light .card:hover,
+html.light .card--link:hover {
+  border-color: rgba(200,16,46,.15);
+  box-shadow:
+    inset 0 1px 0 rgba(0,0,0,.02),
+    0 12px 40px rgba(0,0,0,.06),
+    0 0 30px rgba(200,16,46,.02);
+}
+html.light .card__icon {
+  background: rgba(200,16,46,.06);
+}
+
+/* ---------- FAQ ---------- */
+html.light .faq__item {
+  background: rgba(255,255,255,.8);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .faq__item:hover {
+  border-color: rgba(200,16,46,.15);
+}
+html.light .faq__item--open {
+  border-color: rgba(200,16,46,.2);
+  box-shadow: 0 4px 20px rgba(200,16,46,.04);
+}
+
+/* ---------- Info Bar ---------- */
+html.light .info-bar__item {
+  background: rgba(255,255,255,.8);
+  border-color: rgba(0,148,168,.12);
+}
+html.light .info-bar__item:hover {
+  border-color: rgba(0,148,168,.2);
+  box-shadow: 0 0 24px rgba(0,148,168,.04);
+}
+
+/* ---------- Logo Marquee ---------- */
+html.light .logo-marquee {
+  background: rgba(0,0,0,.04);
+}
+html.light .logo-marquee__img {
+  filter: brightness(0);
+  opacity: .35;
+}
+html.light .logo-marquee__img:hover {
+  filter: none;
+  opacity: 1;
+}
+html.light .logo-marquee__img--colour {
+  filter: none;
+  opacity: .65;
+}
+html.light .logo-marquee__img--colour:hover {
+  opacity: 1;
+}
+
+/* ---------- Members ---------- */
+html.light .member {
+  background: rgba(255,255,255,.8);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .member:hover {
+  border-color: rgba(0,148,168,.15);
+  box-shadow: 0 12px 40px rgba(0,0,0,.06), 0 0 30px rgba(0,148,168,.03);
+}
+html.light .member__social {
+  border-color: rgba(0,0,0,.08);
+}
+
+/* ---------- Section CTA ---------- */
+/* .section-cta is a centering wrapper, not a card — no border/background needed */
+
+/* ---------- P2P Split Image ---------- */
+html.light .p2p-split__img img {
+  border-color: rgba(0,0,0,.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,.08);
+}
+html.light .p2p-split__img img:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,.1), 0 0 30px rgba(200,16,46,.04);
+  border-color: rgba(200,16,46,.15);
+}
+
+/* ---------- Footer ---------- */
+html.light .footer {
+  background: linear-gradient(to bottom, var(--bg-alt), #dcdce0);
+}
+html.light .footer::before {
+  background: linear-gradient(90deg, transparent 5%, rgba(200,16,46,.2) 30%, rgba(0,148,168,.15) 70%, transparent 95%);
+}
+html.light .footer::after {
+  background: radial-gradient(ellipse at center top, rgba(200,16,46,.02) 0%, transparent 100%);
+}
+html.light .footer__bottom {
+  border-top-color: rgba(0,0,0,.06);
+}
+html.light .footer__socials a {
+  background: rgba(0,0,0,.04);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .footer__socials a:hover {
+  border-color: rgba(0,0,0,.12);
+  background: rgba(0,0,0,.06);
+}
+html.light .footer__nav a:hover {
+  color: var(--text);
+}
+
+/* ---------- Back to Top ---------- */
+html.light .back-to-top {
+  box-shadow: 0 4px 20px rgba(200,16,46,.15);
+}
+
+/* ---------- Pwn2Play (P2P.css) ---------- */
+html.light .hero-countdown__unit {
+  background: rgba(255,255,255,.7);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .hero-countdown__unit:hover {
+  border-color: rgba(200,16,46,.15);
+  box-shadow: 0 0 24px rgba(200,16,46,.04);
+}
+html.light .hero-countdown__timer--message {
+  background: rgba(255,255,255,.7);
+  border-color: rgba(0,0,0,.06);
+}
+
+/* Hero results strip */
+html.light .hero-results__place {
+  background: rgba(255,255,255,.7);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .hero-results__place:hover {
+  border-color: rgba(0,0,0,.12);
+}
+html.light .hero-results__place--1 {
+  border-color: rgba(255,215,0,.3);
+  background: rgba(255,215,0,.08);
+}
+
+/* Schedule cards */
+html.light .schedule-card {
+  border-color: rgba(0,0,0,.06);
+}
+html.light .schedule-card:nth-child(even) {
+  background: rgba(255,255,255,.6);
+}
+html.light .schedule-card:nth-child(odd) {
+  background: rgba(255,255,255,.85);
+}
+html.light .schedule-card:hover {
+  border-color: rgba(200,16,46,.15);
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+
+/* Connect buttons */
+html.light .p2p-connect__btn {
+  background: rgba(255,255,255,.7);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .p2p-connect__btn:hover {
+  border-color: rgba(200,16,46,.2);
+  background: rgba(200,16,46,.04);
+}
+
+/* After party */
+html.light .afterparty__detail {
+  background: rgba(255,255,255,.7);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .afterparty__detail:hover {
+  border-color: rgba(200,16,46,.2);
+}
+
+/* Rules */
+html.light .rule__num {
+  background: rgba(200,16,46,.08);
+  border-color: rgba(200,16,46,.12);
+}
+html.light .rule:hover .rule__num {
+  background: rgba(200,16,46,.12);
+  border-color: rgba(200,16,46,.25);
+}
+html.light .rule__line {
+  background: linear-gradient(to bottom, rgba(200,16,46,.15), rgba(200,16,46,.03));
+}
+
+/* Podium */
+html.light .podium__bar {
+  background: rgba(255,255,255,.7);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .podium__place--1 .podium__bar {
+  border-color: rgba(255,215,0,.25);
+  background: linear-gradient(to top, rgba(255,255,255,.7) 20%, rgba(255,215,0,.12) 100%);
+}
+html.light .podium__place--2 .podium__bar {
+  border-color: rgba(192,192,192,.2);
+  background: linear-gradient(to top, rgba(255,255,255,.7) 30%, rgba(192,192,192,.1) 100%);
+}
+html.light .podium__place--3 .podium__bar {
+  border-color: rgba(205,127,50,.2);
+  background: linear-gradient(to top, rgba(255,255,255,.7) 30%, rgba(205,127,50,.1) 100%);
+}
+
+/* Podium nav */
+html.light .podium-nav__btn {
+  background: rgba(255,255,255,.7);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .podium-nav__btn:hover {
+  border-color: rgba(200,16,46,.2);
+  background: rgba(200,16,46,.04);
+}
+
+/* Powered by Biterra badge */
+html.light .p2p-powered__badge {
+  background: rgba(255,255,255,.8);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .p2p-powered__badge:hover {
+  border-color: rgba(200,16,46,.2);
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+
+/* P2P Sponsor cards */
+html.light .p2p-sponsor {
+  background: rgba(255,255,255,.8);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .p2p-sponsor:hover {
+  border-color: rgba(200,16,46,.15);
+  box-shadow: 0 12px 32px rgba(0,0,0,.06);
+}
+
+/* ---------- Register (register.css) ---------- */
+html.light .flow__branch {
+  background: rgba(255,255,255,.7);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .flow__branch:hover {
+  border-color: rgba(0,0,0,.1);
+}
+html.light .flow__branch--captain {
+  border-color: rgba(255,215,0,.15);
+}
+html.light .flow__branch--captain:hover {
+  border-color: rgba(255,215,0,.3);
+}
+html.light .flow__branch--member {
+  border-color: rgba(0,148,168,.12);
+}
+html.light .flow__branch--member:hover {
+  border-color: rgba(0,148,168,.25);
+}
+html.light .flow__branch-header {
+  border-bottom-color: rgba(0,0,0,.06);
+}
+
+html.light .flow__split-label,
+html.light .flow__merge-label {
+  background: rgba(255,255,255,.8);
+  border-color: rgba(0,0,0,.08);
+}
+html.light .flow__split-line,
+html.light .flow__merge-line {
+  background: linear-gradient(90deg, transparent, rgba(200,16,46,.15), transparent);
+}
+
+html.light .flow__line {
+  background: linear-gradient(to bottom, rgba(200,16,46,.15), rgba(200,16,46,.03));
+}
+html.light .flow__branch--captain .flow__line {
+  background: linear-gradient(to bottom, rgba(255,215,0,.15), rgba(255,215,0,.03));
+}
+html.light .flow__branch--member .flow__line {
+  background: linear-gradient(to bottom, rgba(0,148,168,.15), rgba(0,148,168,.03));
+}
+html.light .flow__step--final .flow__line {
+  background: linear-gradient(to bottom, rgba(40,167,69,.15), rgba(40,167,69,.03));
+}
+
+html.light .flow__text a {
+  color: var(--cyan);
+}
+html.light .flow__text a:hover {
+  color: var(--text);
+}
+
+/* ---------- Sponsors (sponsors.css) ---------- */
+html.light .sponsor-card {
+  border-color: rgba(0,0,0,.06);
+}
+html.light .sponsor-card:hover {
+  border-color: rgba(0,0,0,.1);
+}
+
+html.light .hero-pillar__icon {
+  color: var(--text);
+}
+
+html.light .sponsor-perk {
+  border-color: rgba(0,0,0,.06);
+}
+
+/* ---------- Committee (committee.css) ---------- */
+html.light .timeline__line {
+  background: linear-gradient(to bottom, rgba(200,16,46,.15), transparent);
+  box-shadow: 0 0 12px rgba(200,16,46,.04);
+}
+html.light .timeline__year-badge {
+  box-shadow: 0 0 20px rgba(200,16,46,.08);
+}
+
+/* ---------- Resources (resources.css) ---------- */
+html.light .resource-card__tag--accent {
+  background: rgba(200,16,46,.06);
+}
+
+/* ---------- Map Page (map.css) ---------- */
+html.light .map-embed {
+  border-color: rgba(0,0,0,.1);
+  box-shadow: 0 4px 24px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.04);
+}
+html.light .map-embed--large {
+  border-color: rgba(200,16,46,.1);
+  box-shadow: 0 8px 40px rgba(0,0,0,.1), 0 0 60px rgba(200,16,46,.04);
+}
+html.light .venue__tag {
+  background: rgba(200,16,46,.06);
+  border-color: rgba(200,16,46,.1);
+}
+html.light .map-pin__label {
+  background: rgba(255,255,255,.92);
+  color: #1a1a1e;
+}
+html.light .leaflet-popup-content-wrapper {
+  background: rgba(255,255,255,.95) !important;
+  color: #1a1a1e !important;
+  border-color: rgba(0,0,0,.08);
+}
+html.light .leaflet-popup-tip {
+  background: rgba(255,255,255,.95) !important;
+}
+html.light .leaflet-popup-close-button {
+  color: rgba(0,0,0,.4) !important;
+}
+html.light .leaflet-control-zoom a {
+  background: rgba(255,255,255,.9) !important;
+  color: #1a1a1e !important;
+  border-color: rgba(0,0,0,.1) !important;
+}
+html.light .leaflet-control-attribution {
+  background: rgba(255,255,255,.7) !important;
+  color: rgba(0,0,0,.4) !important;
+}
+html.light .leaflet-control-attribution a {
+  color: rgba(0,0,0,.5) !important;
+}
+
+/* ---------- Mobile Nav ---------- */
+@media (max-width: 960px) {
+  html.light .nav__links {
+    background: rgba(244,244,246,.97);
+  }
+  html.light .nav__link:hover,
+  html.light .nav__link.active {
+    background: rgba(0,0,0,.04);
+  }
+}
