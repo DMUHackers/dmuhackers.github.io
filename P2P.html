@@ -34,7 +34,7 @@
     "name": "Pwn2Play — Core Incursion",
     "description": "DMU Hackers' flagship Capture The Flag competition. Web exploitation, cryptography, reverse engineering and more.",
     "startDate": "2026-05-30T09:00:00+01:00",
-    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
     "eventStatus": "https://schema.org/EventScheduled",
     "location": {
       "@type": "Place",
@@ -67,8 +67,8 @@
         <li><a href="#p2p-hero" class="nav__link active" data-section="p2p-hero">Pwn2Play</a></li>
         <li><a href="#register" class="nav__link" data-section="register">Register</a></li>
         <li><a href="#categories" class="nav__link" data-section="categories">Categories</a></li>
-        <li><a href="#schedule" class="nav__link" data-section="schedule">Schedule</a></li>
         <li><a href="map.html" class="nav__link">Map</a></li>
+        <li><a href="#prizes" class="nav__link" data-section="prizes">Prizes</a></li>
         <li><a href="#rules" class="nav__link" data-section="rules">Rules</a></li>
         <li><a href="#sponsors" class="nav__link" data-section="sponsors">Sponsors</a></li>
         <li class="nav__mobile-cta"><a href="register.html" class="nav__link nav__link--cta"><i class="fas fa-user-plus"></i> Register</a></li>
@@ -90,7 +90,7 @@
     <div class="hero__content">
       <p class="hero__tag">DMU Hackers presents</p>
       <h1 class="hero__title">Pwn<span class="hero__accent">2</span>Play</h1>
-      <p class="hero__sub">Our flagship Capture The Flag competition. Exploit, decrypt, reverse-engineer. Prove you've got what it takes.</p>
+      <p class="hero__sub">Our flagship Capture The Flag competition. Open to everyone with teams of up to 6. Exploit, decrypt, reverse-engineer. Prove you've got what it takes.</p>
 
       <!-- Countdown -->
       <div class="hero-countdown" id="countdown">
@@ -181,7 +181,7 @@
       <div class="section__header">
         <span class="section__tag">Sign Up</span>
         <h2 class="section__title">How to Register</h2>
-        <p class="section__subtitle">Pwn2Play: Core Incursion is hosted on Biterra. Follow our step-by-step guide to create your account, join the event, and form or join a team.</p>
+        <p class="section__subtitle">Pwn2Play: Core Incursion is open to everyone, including students, professionals, and hobbyists. Teams can have up to 6 members. Follow our step-by-step guide to create your account, join the event, and form or join a team.</p>
       </div>
       <div class="cards cards--three p2p-meta-cards">
         <div class="card p2p-meta-card">
@@ -192,7 +192,7 @@
         <div class="card p2p-meta-card">
           <div class="card__icon"><i class="fas fa-people-group"></i></div>
           <h3 class="card__title">Team Up</h3>
-          <p class="card__text">Create or join a team</p>
+          <p class="card__text">Create or join a team of up to 6</p>
         </div>
         <div class="card p2p-meta-card">
           <div class="card__icon"><i class="fas fa-flag-checkered"></i></div>
@@ -303,78 +303,82 @@
     </div>
   </section>
 
-  <!-- Schedule -->
-  <section id="schedule" class="section">
+  <!-- Prizes -->
+  <section id="prizes" class="section">
     <div class="container">
       <div class="section__header">
-        <span class="section__tag">The Day</span>
-        <h2 class="section__title">Schedule</h2>
+        <span class="section__tag">Rewards</span>
+        <h2 class="section__title">Prizes</h2>
+        <p class="section__subtitle">Top three teams in both tracks receive prizes, with extra rewards available for the in-person podium.</p>
       </div>
-      <div class="schedule-grid">
-        <div class="schedule-card">
-          <span class="schedule-card__time">08:20</span>
-          <div class="schedule-card__line"></div>
-          <div class="schedule-card__content">
-            <i class="fas fa-door-open schedule-card__icon"></i>
-            <span class="schedule-card__label">Doors Open</span>
+      <div class="prizes-layout">
+        <article class="prize-track">
+          <div class="prize-track__header">
+            <div class="prize-track__icon"><i class="fas fa-laptop-code"></i></div>
+            <div>
+              <h3 class="prize-track__title">Online</h3>
+              <p class="prize-track__intro">Remote teams on the podium each receive certificates for every team member.</p>
+            </div>
           </div>
-        </div>
-        <div class="schedule-card">
-          <span class="schedule-card__time">09:00</span>
-          <div class="schedule-card__line"></div>
-          <div class="schedule-card__content">
-            <i class="fas fa-flag-checkered schedule-card__icon"></i>
-            <span class="schedule-card__label">CTF Start</span>
+
+          <div class="prize-tier">
+            <span class="prize-tier__place">1st Place</span>
+            <ul class="prize-tier__perks">
+              <li>Certificate for each team member</li>
+            </ul>
           </div>
-        </div>
-        <div class="schedule-card">
-          <span class="schedule-card__time">12:00</span>
-          <div class="schedule-card__line"></div>
-          <div class="schedule-card__content">
-            <i class="fas fa-utensils schedule-card__icon"></i>
-            <span class="schedule-card__label">Lunch Break</span>
+
+          <div class="prize-tier">
+            <span class="prize-tier__place">2nd Place</span>
+            <ul class="prize-tier__perks">
+              <li>Certificate for each team member</li>
+            </ul>
           </div>
-        </div>
-        <div class="schedule-card">
-          <span class="schedule-card__time">13:00</span>
-          <div class="schedule-card__line"></div>
-          <div class="schedule-card__content">
-            <i class="fas fa-play schedule-card__icon"></i>
-            <span class="schedule-card__label">CTF Resumed</span>
+
+          <div class="prize-tier">
+            <span class="prize-tier__place">3rd Place</span>
+            <ul class="prize-tier__perks">
+              <li>Certificate for each team member</li>
+            </ul>
           </div>
-        </div>
-        <div class="schedule-card">
-          <span class="schedule-card__time">18:00</span>
-          <div class="schedule-card__line"></div>
-          <div class="schedule-card__content">
-            <i class="fas fa-flag schedule-card__icon"></i>
-            <span class="schedule-card__label">CTF End</span>
+        </article>
+
+        <article class="prize-track prize-track--featured">
+          <div class="prize-track__header">
+            <div class="prize-track__icon"><i class="fas fa-building-columns"></i></div>
+            <div>
+              <h3 class="prize-track__title">In-Person</h3>
+              <p class="prize-track__intro">On-campus winners receive certificates, custom challenge coins, and TryHackMe Premium vouchers.</p>
+            </div>
           </div>
-        </div>
-        <div class="schedule-card">
-          <span class="schedule-card__time">18:40</span>
-          <div class="schedule-card__line"></div>
-          <div class="schedule-card__content">
-            <i class="fas fa-door-open schedule-card__icon"></i>
-            <span class="schedule-card__label">Awards Doors Open</span>
+
+          <div class="prize-tier">
+            <span class="prize-tier__place">1st Place</span>
+            <ul class="prize-tier__perks">
+              <li>Certificate for each team member</li>
+              <li>Custom challenge coin for each team member</li>
+              <li>4x 6-month TryHackMe Premium vouchers</li>
+            </ul>
           </div>
-        </div>
-        <div class="schedule-card">
-          <span class="schedule-card__time">19:00</span>
-          <div class="schedule-card__line"></div>
-          <div class="schedule-card__content">
-            <i class="fas fa-trophy schedule-card__icon"></i>
-            <span class="schedule-card__label">Awards Ceremony</span>
+
+          <div class="prize-tier">
+            <span class="prize-tier__place">2nd Place</span>
+            <ul class="prize-tier__perks">
+              <li>Certificate for each team member</li>
+              <li>Custom challenge coin for each team member</li>
+              <li>4x 3-month TryHackMe Premium vouchers</li>
+            </ul>
           </div>
-        </div>
-        <div class="schedule-card">
-          <span class="schedule-card__time">20:30</span>
-          <div class="schedule-card__line"></div>
-          <div class="schedule-card__content">
-            <i class="fas fa-champagne-glasses schedule-card__icon"></i>
-            <span class="schedule-card__label">After Party</span>
+
+          <div class="prize-tier">
+            <span class="prize-tier__place">3rd Place</span>
+            <ul class="prize-tier__perks">
+              <li>Certificate for each team member</li>
+              <li>Custom challenge coin for each team member</li>
+              <li>4x 1-month TryHackMe Premium vouchers</li>
+            </ul>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -576,15 +580,6 @@
         <h2 class="section__title">Sponsors</h2>
       </div>
 
-      <!-- Powered by Biterra -->
-      <div class="p2p-powered">
-        <a href="https://pwn2play.biterra.co" class="p2p-powered__badge" target="_blank" rel="noopener noreferrer">
-          <span class="p2p-powered__label">Hosted on</span>
-          <img src="img/branding/biterra/biterra-logo.png" alt="Biterra" class="p2p-powered__logo" loading="lazy">
-        </a>
-        <p class="p2p-powered__text">Pwn2Play: Core Incursion is hosted on <a href="https://pwn2play.biterra.co" target="_blank" rel="noopener noreferrer">Biterra</a> — a gamified CTF platform built by a DMU Hackers alumni.</p>
-      </div>
-
       <div class="sponsors-cta">
         <p>Want to sponsor Pwn2Play or get involved?</p>
         <a href="sponsors.html" class="btn btn--primary"><i class="fas fa-handshake"></i> Become a Sponsor</a>
@@ -628,7 +623,7 @@
             <a href="index.html">Home</a>
             <a href="#p2p-hero">Pwn2Play</a>
             <a href="#key-info">Key Info</a>
-            <a href="#schedule">Schedule</a>
+              <a href="#prizes">Prizes</a>
           </nav>
         </div>
         <div class="footer__col">

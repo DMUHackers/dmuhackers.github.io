@@ -330,19 +330,25 @@ html.light .hero-results__place--1 {
   background: rgba(255,215,0,.08);
 }
 
-/* Schedule cards */
-html.light .schedule-card {
+/* Prize tracks */
+html.light .prize-track {
+  background: rgba(255,255,255,.8);
   border-color: rgba(0,0,0,.06);
 }
-html.light .schedule-card:nth-child(even) {
-  background: rgba(255,255,255,.6);
+html.light .prize-track--featured {
+  border-color: rgba(200,16,46,.14);
+  box-shadow: inset 0 0 0 1px rgba(200,16,46,.04);
 }
-html.light .schedule-card:nth-child(odd) {
-  background: rgba(255,255,255,.85);
+html.light .prize-track__icon {
+  background: rgba(200,16,46,.06);
+  border-color: rgba(200,16,46,.12);
 }
-html.light .schedule-card:hover {
-  border-color: rgba(200,16,46,.15);
-  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+html.light .prize-tier {
+  border-top-color: rgba(0,0,0,.06);
+}
+html.light .prize-tier__place {
+  border-color: rgba(200,16,46,.12);
+  background: rgba(200,16,46,.06);
 }
 
 /* Connect buttons */
@@ -403,16 +409,6 @@ html.light .podium-nav__btn {
 html.light .podium-nav__btn:hover {
   border-color: rgba(200,16,46,.2);
   background: rgba(200,16,46,.04);
-}
-
-/* Powered by Biterra badge */
-html.light .p2p-powered__badge {
-  background: rgba(255,255,255,.8);
-  border-color: rgba(0,0,0,.06);
-}
-html.light .p2p-powered__badge:hover {
-  border-color: rgba(200,16,46,.2);
-  box-shadow: 0 8px 24px rgba(0,0,0,.06);
 }
 
 /* P2P Sponsor cards */

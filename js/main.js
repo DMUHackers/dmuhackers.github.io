@@ -105,13 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
       var d = Math.floor(totalHours / 24);
       var h = totalHours % 24;
       var m = Math.floor((diff % 3600000) / 60000);
+      var targetDate = new Date(target);
+      targetDate.setHours(0, 0, 0, 0);
+      var nowDate = new Date(now);
+      nowDate.setHours(0, 0, 0, 0);
+      var calendarDaysUntil = Math.round((targetDate - nowDate) / 86400000);
 
-      // Pick a friendly label
-      if (d === 0) {
+      // Pick a friendly label based on the target calendar date.
+      if (calendarDaysUntil === 0) {
         nextSessionEl.textContent = 'Today in ' + h + 'h ' + m + 'm';
-      } else if (d === 1 && h === 0 && m === 0) {
-        nextSessionEl.textContent = 'Tomorrow at ' + sessionStart + ':00';
-      } else if (d === 1) {
+      } else if (calendarDaysUntil === 1) {
         nextSessionEl.textContent = 'Tomorrow at ' + sessionStart + ':00';
       } else {
         nextSessionEl.textContent = 'Next Thursday in ' + d + 'd ' + h + 'h';
