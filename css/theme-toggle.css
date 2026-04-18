@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Light Mode Toggle — Overrides for Terminal Noir theme
+   Light Mode Toggle - Overrides for Terminal Noir theme
    Loaded after main.css and page-specific styles on all pages.
    Dark = default (no class). Light = html.light
    ========================================================================== */
@@ -48,12 +48,12 @@ html.light .nav__theme-toggle .fa-sun   { display: none; }
 
 /* ---------- Base & Overlays ---------- */
 html.light body::before {
-  /* Film grain — hide on light backgrounds */
+  /* Film grain - hide on light backgrounds */
   display: none;
 }
 
 html.light .hero::after {
-  /* CRT scanlines — hide on light */
+  /* CRT scanlines - hide on light */
   display: none;
 }
 
@@ -261,7 +261,7 @@ html.light .member__social {
 }
 
 /* ---------- Section CTA ---------- */
-/* .section-cta is a centering wrapper, not a card — no border/background needed */
+/* .section-cta is a centering wrapper, not a card - no border/background needed */
 
 /* ---------- P2P Split Image ---------- */
 html.light .p2p-split__img img {
@@ -351,16 +351,6 @@ html.light .prize-tier__place {
   background: rgba(200,16,46,.06);
 }
 
-/* Connect buttons */
-html.light .p2p-connect__btn {
-  background: rgba(255,255,255,.7);
-  border-color: rgba(0,0,0,.06);
-}
-html.light .p2p-connect__btn:hover {
-  border-color: rgba(200,16,46,.2);
-  background: rgba(200,16,46,.04);
-}
-
 /* After party */
 html.light .afterparty__detail {
   background: rgba(255,255,255,.7);
@@ -411,14 +401,45 @@ html.light .podium-nav__btn:hover {
   background: rgba(200,16,46,.04);
 }
 
-/* P2P Sponsor cards */
-html.light .p2p-sponsor {
+/* P2P event wall */
+html.light .p2p-event-tile {
   background: rgba(255,255,255,.8);
   border-color: rgba(0,0,0,.06);
+  box-shadow: inset 0 1px 0 rgba(0,0,0,.02);
 }
-html.light .p2p-sponsor:hover {
-  border-color: rgba(200,16,46,.15);
-  box-shadow: 0 12px 32px rgba(0,0,0,.06);
+html.light .p2p-event-tile > span:not(.p2p-event-tile__eyebrow),
+html.light .p2p-event-tile > p {
+  color: var(--text-muted);
+}
+html.light .p2p-event-tile strong,
+html.light .p2p-event-tile h3,
+html.light .p2p-event-tile .hero__title {
+  color: var(--text);
+}
+html.light .p2p-event-tile--headline .hero-countdown__unit {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.012)),
+    rgba(18,18,20,.9);
+  border-color: rgba(255,255,255,.08);
+}
+
+/* P2P Sponsor cards */
+html.light .p2p-sponsor-band {
+  background:
+    linear-gradient(135deg, rgba(200,16,46,.04), transparent 34%),
+    rgba(255,255,255,.72);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .p2p-sponsor-band__header {
+  border-bottom-color: rgba(0,0,0,.08);
+}
+html.light .p2p-sponsor-card {
+  background: rgba(255,255,255,.78);
+  border-color: rgba(0,0,0,.06);
+}
+html.light .p2p-sponsor-card:hover {
+  border-color: rgba(200,16,46,.16);
+  box-shadow: 0 14px 34px rgba(0,0,0,.08);
 }
 
 /* ---------- Register (register.css) ---------- */

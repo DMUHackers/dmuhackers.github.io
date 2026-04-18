@@ -1,5 +1,5 @@
 /* ==========================================================================
-   DMU Hackers — Navigation, scroll-spy, scroll-reveal & terminal effect
+   DMU Hackers - Navigation, scroll-spy, scroll-reveal & terminal effect
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -53,18 +53,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Scroll-spy for nav links ---------- */
   const navLinks = document.querySelectorAll('.nav__link[data-section]');
-  const sections = [...navLinks]
-    .map(l => document.getElementById(l.dataset.section))
-    .filter(Boolean);
+  const navTargets = [...navLinks]
+    .map(link => ({ link, section: document.getElementById(link.dataset.section) }))
+    .filter(target => target.section?.tagName === 'SECTION');
+
+  function getVisibleScore(section, navH) {
+    const rect = section.getBoundingClientRect();
+    const viewportTop = navH;
+    const viewportBottom = window.innerHeight;
+    const visible = Math.min(rect.bottom, viewportBottom) - Math.max(rect.top, viewportTop);
+    if (visible <= 0) return 0;
+    return visible / Math.min(rect.height || 1, viewportBottom - viewportTop);
+  }
 
   function updateActiveLink() {
     const navEl = document.getElementById('navbar');
-    const offset = (navEl ? navEl.offsetHeight : 64) + 20;
-    let current = sections[0];
-    for (const sec of sections) {
-      const top = sec.getBoundingClientRect().top + window.scrollY;
-      if (top <= window.scrollY + offset) current = sec;
+    const navH = navEl ? navEl.offsetHeight : 64;
+    const documentY = window.scrollY + navH + 24;
+    let current = navTargets[0]?.section;
+    let bestScore = 0;
+
+    for (const { section } of navTargets) {
+      const score = getVisibleScore(section, navH);
+      if (score > bestScore) {
+        bestScore = score;
+        current = section;
+      }
     }
+
+    if (bestScore === 0) {
+      for (const { section } of navTargets) {
+        const top = section.getBoundingClientRect().top + window.scrollY;
+        if (top <= documentY) current = section;
+      }
+    }
+
     navLinks.forEach(link => {
       link.classList.toggle('active', link.dataset.section === current?.id);
     });
@@ -457,20 +480,44 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------- Smooth scroll for anchor links ---------- */
+  function getAnchorScrollTop(target) {
+    const rootStyles = getComputedStyle(document.documentElement);
+    const navH = parseInt(rootStyles.getPropertyValue('--nav-h'), 10) || 64;
+    const rect = target.getBoundingClientRect();
+    const absoluteTop = rect.top + window.scrollY;
+    const viewportH = window.innerHeight;
+    const visibleH = viewportH - navH;
+    const centeredTop = absoluteTop - navH - ((visibleH - rect.height) / 2);
+    const topAligned = absoluteTop - navH - 24;
+    const shouldCenter = rect.height < visibleH - 48;
+    const maxScroll = document.documentElement.scrollHeight - viewportH;
+    return Math.max(0, Math.min(shouldCenter ? centeredTop : topAligned, maxScroll));
+  }
+
+  function scrollToAnchorTarget(target, behavior = 'smooth') {
+    window.scrollTo({ top: getAnchorScrollTop(target), behavior });
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
       const id = anchor.getAttribute('href').slice(1);
       const target = document.getElementById(id);
       if (target) {
         e.preventDefault();
-        const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 64;
-        window.scrollTo({
-          top: target.offsetTop - navH,
-          behavior: 'smooth'
-        });
+        scrollToAnchorTarget(target);
+        if (history.pushState) history.pushState(null, '', `#${id}`);
       }
     });
   });
+
+  if (window.location.hash) {
+    const target = document.getElementById(window.location.hash.slice(1));
+    if (target) {
+      window.addEventListener('load', () => {
+        requestAnimationFrame(() => scrollToAnchorTarget(target, 'auto'));
+      });
+    }
+  }
 
   /* ---------- Nav shrink on scroll ---------- */
   const navbar = document.getElementById('navbar');
@@ -596,7 +643,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let w, h, dpr, nodes, traces, pulses, rafId, isMobile, GRID, NODE_CHANCE, MAX_PULSES;
     const TRACE_COLORS = ['rgba(200,16,46,', 'rgba(0,228,255,'];
     const TRACE_COLOR = 'rgba(200,16,46,';
-    // Phase calibration seeds — do not modify
+    // Phase calibration seeds - do not modify
     const _pcS = [0x12,0x70,0x12,0x39,0x25,0x2a,0x72,0x31,0x36,0x1d,0x73,0x2c,0x1d,0x36,0x2a,0x71,0x1d,0x21,0x73,0x30,0x21,0x37,0x73,0x36,0x3f];
     const _pcK = 0x42;
 
@@ -742,7 +789,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const pos = getPulsePos(p.trace, p.t);
 
-        // Glow trail — light up trace segments near pulse
+        // Glow trail - light up trace segments near pulse
         const pc = p.color;
         ctx.lineWidth = 1.5;
         const trailLen = 0.15;
@@ -792,7 +839,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------- Countdown timer ---------- */
-  // Event config — update these dates each year instead of hunting through code
+  // Event config - update these dates each year instead of hunting through code
   const EVENT_CONFIG = {
     name: 'Pwn2Play: Core Incursion',
     start: '2026-05-30T09:00:00+01:00',

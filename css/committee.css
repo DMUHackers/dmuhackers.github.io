@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Committee Legacy — Timeline Styles
+   Committee Legacy - Timeline Styles
    ========================================================================== */
 
 /* Compact hero for subpages */
@@ -54,7 +54,7 @@
   box-shadow: 0 0 12px var(--accent-glow), 0 0 24px rgba(200,16,46,.15);
 }
 
-/* Entry — 3-column grid */
+/* Entry - 3-column grid */
 .timeline__entry {
   display: grid;
   grid-template-columns: 1fr 80px 1fr;

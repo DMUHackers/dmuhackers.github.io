@@ -98,7 +98,7 @@
           </div>
           <div class="venue__details">
             <span class="venue__tag">09:00 &ndash; 18:00</span>
-            <h3 class="venue__name">Gateway House &mdash; CTF Venue</h3>
+            <h3 class="venue__name">Gateway House: CTF Venue</h3>
             <p class="venue__address">Gateway House, Floor 5<br>De Montfort University<br>The Gateway, Leicester LE1 9BH</p>
             <ul class="venue__notes">
               <li><i class="fas fa-door-open"></i> Doors open at 08:20</li>
@@ -123,7 +123,7 @@
           </div>
           <div class="venue__details">
             <span class="venue__tag">19:00 &ndash; 20:30</span>
-            <h3 class="venue__name">DSU &mdash; Awards Ceremony</h3>
+            <h3 class="venue__name">DSU: Awards Ceremony</h3>
             <p class="venue__address">De Montfort Students' Union<br>Campus Centre Building<br>Mill Ln, Leicester LE2 7DR</p>
             <ul class="venue__notes">
               <li><i class="fas fa-door-open"></i> Doors open at 18:40</li>
@@ -148,7 +148,7 @@
           </div>
           <div class="venue__details">
             <span class="venue__tag">20:30 onwards</span>
-            <h3 class="venue__name">After Party &mdash; Social Route</h3>
+            <h3 class="venue__name">After Party: Social Route</h3>
             <p class="venue__address">Various venues<br>Leicester City Centre</p>
             <ul class="venue__notes">
               <li><i class="fas fa-route"></i> Social route with multiple stops</li>
@@ -194,7 +194,7 @@
       </div>
       <div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:32px;">
         <a href="P2P.html" class="btn btn--primary"><i class="fas fa-arrow-left"></i> Back to Pwn2Play</a>
-        <a href="register.html" class="btn btn--ghost"><i class="fas fa-user-plus"></i> Register</a>
+        <a href="P2P.html#register" class="btn btn--ghost"><i class="fas fa-user-plus"></i> Register</a>
       </div>
     </div>
   </section>
@@ -296,7 +296,7 @@
         return m;
       }
 
-      /* Overview map — all 3 venues */
+      /* Overview map - all 3 venues */
       var overview = initMap('overviewMap', { zoomControl: true });
       venues.forEach(function (v) {
         L.marker([v.lat, v.lng], { icon: makeIcon(v, true), title: v.title })

@@ -31,14 +31,14 @@
   {
     "@context": "https://schema.org",
     "@type": "Event",
-    "name": "Pwn2Play — Core Incursion",
+    "name": "Pwn2Play: Core Incursion",
     "description": "DMU Hackers' flagship Capture The Flag competition. Web exploitation, cryptography, reverse engineering and more.",
     "startDate": "2026-05-30T09:00:00+01:00",
     "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
     "eventStatus": "https://schema.org/EventScheduled",
     "location": {
       "@type": "Place",
-      "name": "De Montfort University — Gateway House",
+      "name": "De Montfort University Gateway House",
       "address": { "@type": "PostalAddress", "addressLocality": "Leicester", "addressCountry": "GB" }
     },
     "organizer": {
@@ -51,10 +51,10 @@
   </script>
 </head>
 
-<body>
+<body class="p2p-page">
 
   <!-- Skip to content -->
-  <a href="#event" class="skip-link">Skip to content</a>
+  <a href="#p2p-hero" class="skip-link">Skip to content</a>
 
   <!-- Navigation -->
   <nav class="nav" id="navbar">
@@ -65,16 +65,12 @@
       <ul class="nav__links" id="navLinks">
         <li><a href="index.html" class="nav__link">Home</a></li>
         <li><a href="#p2p-hero" class="nav__link active" data-section="p2p-hero">Pwn2Play</a></li>
-        <li><a href="#register" class="nav__link" data-section="register">Register</a></li>
         <li><a href="#categories" class="nav__link" data-section="categories">Categories</a></li>
-        <li><a href="map.html" class="nav__link">Map</a></li>
         <li><a href="#prizes" class="nav__link" data-section="prizes">Prizes</a></li>
         <li><a href="#rules" class="nav__link" data-section="rules">Rules</a></li>
         <li><a href="#sponsors" class="nav__link" data-section="sponsors">Sponsors</a></li>
-        <li class="nav__mobile-cta"><a href="register.html" class="nav__link nav__link--cta"><i class="fas fa-user-plus"></i> Register</a></li>
       </ul>
       <div class="nav__actions">
-        <a href="register.html" class="nav__link nav__link--cta"><i class="fas fa-user-plus"></i> Register</a>
         <button class="nav__theme-toggle" id="themeToggle" aria-label="Toggle light mode" type="button"><i class="fas fa-sun"></i><i class="fas fa-moon"></i></button>
         <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
           <span></span><span></span><span></span>
@@ -84,125 +80,95 @@
   </nav>
 
   <!-- Hero -->
-  <section id="p2p-hero" class="hero">
+  <section id="p2p-hero" class="hero p2p-event-hero">
     <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
     <div class="hero__bg hero__bg--p2p"></div>
-    <div class="hero__content">
-      <p class="hero__tag">DMU Hackers presents</p>
-      <h1 class="hero__title">Pwn<span class="hero__accent">2</span>Play</h1>
-      <p class="hero__sub">Our flagship Capture The Flag competition. Open to everyone with teams of up to 6. Exploit, decrypt, reverse-engineer. Prove you've got what it takes.</p>
+    <div class="hero__content p2p-event-hero__content">
+      <div class="p2p-event-grid p2p-event-grid--hero">
+        <div class="p2p-event-primary">
+          <article class="p2p-event-tile p2p-event-tile--headline">
+            <span class="p2p-event-tile__eyebrow">Core Incursion</span>
+            <h1 class="hero__title">Pwn<span class="hero__accent">2</span>Play CTF</h1>
 
-      <!-- Countdown -->
-      <div class="hero-countdown" id="countdown">
-        <p class="hero-countdown__until">Core Incursion begins in</p>
-        <div class="hero-countdown__timer">
-          <div class="hero-countdown__unit">
-            <span class="hero-countdown__num" id="cdDays">--</span>
-            <span class="hero-countdown__label">Days</span>
-          </div>
-          <span class="hero-countdown__sep"></span>
-          <div class="hero-countdown__unit">
-            <span class="hero-countdown__num" id="cdHours">--</span>
-            <span class="hero-countdown__label">Hours</span>
-          </div>
-          <span class="hero-countdown__sep"></span>
-          <div class="hero-countdown__unit">
-            <span class="hero-countdown__num" id="cdMins">--</span>
-            <span class="hero-countdown__label">Mins</span>
-          </div>
-          <span class="hero-countdown__sep"></span>
-          <div class="hero-countdown__unit">
-            <span class="hero-countdown__num" id="cdSecs">--</span>
-            <span class="hero-countdown__label">Secs</span>
-          </div>
-        </div>
-      </div>
+            <!-- Countdown -->
+            <div class="hero-countdown" id="countdown">
+              <p class="hero-countdown__until">Core Incursion begins in</p>
+              <div class="hero-countdown__timer">
+                <div class="hero-countdown__unit">
+                  <span class="hero-countdown__num" id="cdDays">--</span>
+                  <span class="hero-countdown__label">Days</span>
+                </div>
+                <span class="hero-countdown__sep"></span>
+                <div class="hero-countdown__unit">
+                  <span class="hero-countdown__num" id="cdHours">--</span>
+                  <span class="hero-countdown__label">Hours</span>
+                </div>
+                <span class="hero-countdown__sep"></span>
+                <div class="hero-countdown__unit">
+                  <span class="hero-countdown__num" id="cdMins">--</span>
+                  <span class="hero-countdown__label">Mins</span>
+                </div>
+                <span class="hero-countdown__sep"></span>
+                <div class="hero-countdown__unit">
+                  <span class="hero-countdown__num" id="cdSecs">--</span>
+                  <span class="hero-countdown__label">Secs</span>
+                </div>
+              </div>
+            </div>
+          </article>
 
-      <div class="hero__actions">
-        <a href="register.html" class="btn btn--primary"><i class="fas fa-user-plus"></i> Register Now</a>
-        <a href="https://discord.gg/ZUqTWNy7c9" class="btn btn--ghost" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Discord</a>
-        <a href="sponsors.html" class="btn btn--ghost"><i class="fas fa-handshake"></i> Become a Sponsor</a>
-      </div>
-    </div>
-    <div class="hero__scroll">
-      <span>Scroll</span>
-      <div class="hero__scroll-line"></div>
-    </div>
-  </section>
+          <div id="register" class="p2p-luma p2p-luma--hero">
+            <iframe
+              src="https://luma.com/embed/event/evt-9baefgwD4wSfcBc/simple"
+              width="600"
+              height="450"
+              frameborder="0"
+              allow="fullscreen; payment"
+              aria-hidden="false"
+              tabindex="0"
+              title="Register for Pwn2Play: Core Incursion on Luma"></iframe>
+          </div>
+        </div>
 
-  <!-- Event Overview -->
-  <section id="event" class="section">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">The Event</span>
-        <h2 class="section__title">Pwn2Play: Core Incursion</h2>
-      </div>
-      <div class="cards cards--three p2p-meta-cards">
-        <div class="card p2p-meta-card">
-          <div class="card__icon"><i class="fas fa-calendar-alt"></i></div>
-          <h3 class="card__title">Date</h3>
-          <p class="card__text">Saturday 30th May 2026</p>
-        </div>
-        <div class="card p2p-meta-card">
-          <div class="card__icon"><i class="fas fa-clock"></i></div>
-          <h3 class="card__title">Time</h3>
-          <p class="card__text">09:00 &ndash; 18:00</p>
-        </div>
-        <div class="card p2p-meta-card">
-          <div class="card__icon"><i class="fas fa-map-marker-alt"></i></div>
-          <h3 class="card__title">Location</h3>
-          <p class="card__text">Virtual &amp; DMU Campus</p>
-        </div>
-      </div>
-      <div class="calendar-actions">
-        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Pwn2Play%3A+Core+Incursion+-+DMU+Hackers+CTF&dates=20260530T080000Z/20260530T170000Z&details=DMU+Hackers%27+flagship+Capture+The+Flag+competition.+Register%3A+https%3A%2F%2Fpwn2play.biterra.co&location=Gateway+House+Floor+5%2C+De+Montfort+University%2C+The+Gateway%2C+Leicester+LE1+9BH" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-google"></i> Google Calendar</a>
-        <a href="data/p2p-core-incursion.ics" class="btn btn--ghost btn--sm" download><i class="fas fa-calendar-plus"></i> Download .ics</a>
-        <a href="map.html" class="btn btn--ghost btn--sm"><i class="fas fa-map-location-dot"></i> Campus Map</a>
-      </div>
-      <div class="p2p-connect">
-        <h3 class="p2p-connect__title">Connect with us</h3>
-        <div class="p2p-connect__links">
-          <a href="https://discord.gg/Vvrk4kK" class="p2p-connect__btn" target="_blank" rel="noopener noreferrer">
-            <i class="fab fa-discord"></i>
-            <span>Discord</span>
-          </a>
-          <a href="register.html" class="p2p-connect__btn">
-            <i class="fas fa-user-plus"></i>
-            <span>Register</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+        <div class="p2p-event-details">
+          <article class="p2p-event-tile p2p-event-tile--brief">
+            <span class="p2p-event-tile__eyebrow">Pwn2Play: Core Incursion</span>
+            <h3>Hybrid CTF for teams of up to 6</h3>
+            <p>Open to students, professionals and hobbyists. Compete online or in person across web, crypto, reversing, OSINT, pwn and more.</p>
+          </article>
 
-  <!-- How to Register -->
-  <section id="register" class="section section--alt">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">Sign Up</span>
-        <h2 class="section__title">How to Register</h2>
-        <p class="section__subtitle">Pwn2Play: Core Incursion is open to everyone, including students, professionals, and hobbyists. Teams can have up to 6 members. Follow our step-by-step guide to create your account, join the event, and form or join a team.</p>
-      </div>
-      <div class="cards cards--three p2p-meta-cards">
-        <div class="card p2p-meta-card">
-          <div class="card__icon"><i class="fas fa-user-plus"></i></div>
-          <h3 class="card__title">Register</h3>
-          <p class="card__text">Create a free account on Biterra</p>
+          <article class="p2p-event-tile p2p-event-tile--stat p2p-event-tile--date">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Date &amp; Time</span>
+            <strong>Saturday 30th May 2026</strong>
+            <p>09:00 &ndash; 18:00</p>
+          </article>
+
+          <article class="p2p-event-tile p2p-event-tile--stat p2p-event-tile--location">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Location</span>
+            <strong>Virtual &amp; DMU Campus</strong>
+            <p>In-person competitors will be based at Gateway House, Floor 5.</p>
+          </article>
+
+          <article class="p2p-event-tile p2p-event-tile--stat p2p-event-tile--format">
+            <i class="fas fa-users"></i>
+            <span>Format</span>
+            <strong>Up to 6 members</strong>
+            <p>Compete online or in person.</p>
+          </article>
         </div>
-        <div class="card p2p-meta-card">
-          <div class="card__icon"><i class="fas fa-people-group"></i></div>
-          <h3 class="card__title">Team Up</h3>
-          <p class="card__text">Create or join a team of up to 6</p>
-        </div>
-        <div class="card p2p-meta-card">
-          <div class="card__icon"><i class="fas fa-flag-checkered"></i></div>
-          <h3 class="card__title">Compete</h3>
-          <p class="card__text">Hack your way to the top</p>
-        </div>
-      </div>
-      <div class="calendar-actions" style="margin-top: 36px;">
-        <a href="register.html" class="btn btn--primary"><i class="fas fa-arrow-right"></i> View Registration Guide</a>
-        <a href="https://pwn2play.biterra.co" class="btn btn--ghost" target="_blank" rel="noopener noreferrer"><i class="fas fa-arrow-up-right-from-square"></i> Go to Biterra</a>
+
+        <article class="p2p-event-tile p2p-event-tile--actions">
+          <span class="p2p-event-tile__eyebrow">Plan the day</span>
+          <div class="p2p-event-actions">
+            <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Pwn2Play%3A+Core+Incursion+-+DMU+Hackers+CTF&dates=20260530T080000Z/20260530T170000Z&details=DMU+Hackers%27+flagship+Capture+The+Flag+competition.+Register%3A+https%3A%2F%2Fluma.com%2Fembed%2Fevent%2Fevt-9baefgwD4wSfcBc%2Fsimple&location=Gateway+House+Floor+5%2C+De+Montfort+University%2C+The+Gateway%2C+Leicester+LE1+9BH" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-google"></i> Google Calendar</a>
+            <a href="data/p2p-core-incursion.ics" class="btn btn--ghost btn--sm" download><i class="fas fa-calendar-plus"></i> .ics</a>
+            <a href="https://pwn2play.biterra.co" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer"><i class="fas fa-flag"></i> Biterra</a>
+            <a href="map.html" class="btn btn--ghost btn--sm"><i class="fas fa-map-location-dot"></i> Map</a>
+            <a href="https://discord.gg/Vvrk4kK" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Discord</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -419,7 +385,7 @@
               <h3 class="rule__title">Server &amp; Network Use</h3>
             </div>
             <ul class="rule__list">
-              <li>Only interact with CTF challenges and infrastructure &mdash; do not target other participants or university systems.</li>
+              <li>Only interact with CTF challenges and infrastructure. Do not target other participants or university systems.</li>
               <li>Denial of Service (DoS/DDoS) attacks against the server, network, or participants are strictly prohibited.</li>
               <li>Scanning outside the designated CTF scope is forbidden.</li>
             </ul>
@@ -454,7 +420,7 @@
             </div>
             <ul class="rule__list">
               <li>Maintain a stable internet connection and avoid using VPNs/proxies unless required for a challenge.</li>
-              <li>Keep your credentials secure &mdash; do not share your access keys or login information.</li>
+              <li>Keep your credentials secure. Do not share your access keys or login information.</li>
               <li>Follow organiser instructions in the event of technical issues.</li>
             </ul>
           </div>
@@ -578,6 +544,93 @@
       <div class="section__header">
         <span class="section__tag">Partners</span>
         <h2 class="section__title">Sponsors</h2>
+        <p class="section__subtitle">Prize providers and challenge creators supporting Pwn2Play: Core Incursion.</p>
+      </div>
+
+      <div class="p2p-sponsor-showcase">
+        <div class="p2p-sponsor-band">
+          <div class="p2p-sponsor-band__header">
+            <span class="p2p-sponsor-band__eyebrow">Prize Providers</span>
+            <p>Supporting the winners with prizes that make the competition worth chasing.</p>
+          </div>
+
+          <div class="p2p-sponsor-grid p2p-sponsor-grid--prizes">
+            <article class="p2p-sponsor-card p2p-sponsor-card--featured">
+              <a href="https://kit365.co.uk/" class="p2p-sponsor-card__logo" target="_blank" rel="noopener noreferrer">
+                <img src="img/branding/Kit365/kit365.png" alt="Kit365" loading="lazy">
+              </a>
+              <div class="p2p-sponsor-card__body">
+                <div class="p2p-sponsor-card__meta">
+                  <span><i class="fas fa-trophy"></i> Main Sponsor</span>
+                  <span><i class="fas fa-gift"></i> Prize Provider</span>
+                </div>
+                <h3>Kit365</h3>
+                <p>Kit365 is the primary sponsor of Pwn2Play, providing prizes for the winning teams. Their support helps make our flagship CTF a stronger event for cybersecurity talent.</p>
+              </div>
+            </article>
+
+            <article class="p2p-sponsor-card">
+              <a href="https://tryhackme.com/" class="p2p-sponsor-card__logo" target="_blank" rel="noopener noreferrer">
+                <img src="img/branding/THM/thm.png" alt="TryHackMe" loading="lazy">
+              </a>
+              <div class="p2p-sponsor-card__body">
+                <div class="p2p-sponsor-card__meta">
+                  <span><i class="fas fa-gift"></i> Prize Provider</span>
+                </div>
+                <h3>TryHackMe</h3>
+                <p>TryHackMe is supporting Pwn2Play by providing prizes for our event, helping us reward standout performances and make the competition more exciting for participants.</p>
+              </div>
+            </article>
+
+            <article class="p2p-sponsor-card">
+              <a href="https://www.immersivelabs.com/" class="p2p-sponsor-card__logo" target="_blank" rel="noopener noreferrer">
+                <img src="img/branding/ImmersiveLabs/immersive-logo.svg" alt="Immersive Labs" loading="lazy">
+              </a>
+              <div class="p2p-sponsor-card__body">
+                <div class="p2p-sponsor-card__meta">
+                  <span><i class="fas fa-gift"></i> Prize Provider</span>
+                </div>
+                <h3>Immersive Labs</h3>
+                <p>Immersive Labs is supporting Pwn2Play as a prize provider, helping us reward standout teams while backing practical cyber skills development through realistic, hands-on learning.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="p2p-sponsor-band p2p-sponsor-band--challenge">
+          <div class="p2p-sponsor-band__header">
+            <span class="p2p-sponsor-band__eyebrow">Challenge Creators</span>
+            <p>Building realistic problems and scenarios for competitors to solve under pressure.</p>
+          </div>
+
+          <div class="p2p-sponsor-grid p2p-sponsor-grid--challenge">
+            <article class="p2p-sponsor-card">
+              <a href="https://www.northquayholdings.com/" class="p2p-sponsor-card__logo" target="_blank" rel="noopener noreferrer">
+                <img src="img/branding/NQ/nq-logo-main.webp" alt="North Quay Holdings" loading="lazy">
+              </a>
+              <div class="p2p-sponsor-card__body">
+                <div class="p2p-sponsor-card__meta">
+                  <span><i class="fas fa-flag"></i> Challenge Creator</span>
+                </div>
+                <h3>North Quay Holdings</h3>
+                <p>North Quay Holdings is a private sector company specialising in all-source intelligence and OSINT. They create challenges for Pwn2Play, helping deliver realistic and engaging CTF experiences.</p>
+              </div>
+            </article>
+
+            <article class="p2p-sponsor-card">
+              <a href="https://www.redcentricplc.com/" class="p2p-sponsor-card__logo" target="_blank" rel="noopener noreferrer">
+                <img src="img/branding/Redcentric/logo.png" alt="Redcentric" loading="lazy">
+              </a>
+              <div class="p2p-sponsor-card__body">
+                <div class="p2p-sponsor-card__meta">
+                  <span><i class="fas fa-flag"></i> Challenge Creator</span>
+                </div>
+                <h3>Redcentric</h3>
+                <p>Redcentric is a managed IT services provider delivering network, cloud, and security solutions. They create challenges for Pwn2Play, bringing industry expertise and real-world scenarios.</p>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
 
       <div class="sponsors-cta">

@@ -100,11 +100,6 @@
   gap: 12px;
 }
 
-.btn--sm {
-  font-size: .82rem;
-  padding: 8px 18px;
-}
-
 /* ---------- Contact CTA ---------- */
 .partner-contact {
   display: flex;
