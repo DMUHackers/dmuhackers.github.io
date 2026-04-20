@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
 <head>
+  <script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>How to Register - Pwn2Play CTF - DMU Hackers</title>
@@ -214,8 +214,8 @@
               <i class="fas fa-calendar-check flow__icon"></i>
               <h3 class="flow__title">Save the Date</h3>
             </div>
-            <p class="flow__text">Pwn2Play: Core Incursion takes place <strong>Saturday 30th May 2026</strong>, 09:00&ndash;18:00. Add it to your calendar so you don't miss it.</p>
-            <div class="flow__actions">
+            <p class="flow__text" data-p2p-event-summary>Pwn2Play: Core Incursion takes place <strong>Saturday 30th May 2026</strong>, 09:00&ndash;18:00. Add it to your calendar so you don't miss it.</p>
+            <div class="flow__actions" data-p2p-calendar-links>
               <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Pwn2Play%3A+Core+Incursion+-+DMU+Hackers+CTF&dates=20260530T080000Z/20260530T170000Z&details=DMU+Hackers%27+flagship+Capture+The+Flag+competition.+Register%3A+https%3A%2F%2Fluma.com%2Fembed%2Fevent%2Fevt-9baefgwD4wSfcBc%2Fsimple&location=Gateway+House+Floor+5%2C+De+Montfort+University%2C+The+Gateway%2C+Leicester+LE1+9BH" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-google"></i> Google Calendar</a>
               <a href="data/p2p-core-incursion.ics" class="btn btn--ghost btn--sm" download><i class="fas fa-calendar-plus"></i> Download .ics</a>
             </div>
@@ -316,6 +316,7 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
+  <script src="data/site-content.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 

@@ -1695,6 +1695,38 @@ a.card--link:hover .card__arrow {
   transform: translateY(0);
 }
 
+/* Mobile content should be immediately readable; delayed reveal fades can hide
+   tall sections while they are already in the viewport. */
+@media (max-width: 768px) {
+  .section__header,
+  .card,
+  .member,
+  .info-bar,
+  .p2p-split__img,
+  .p2p-split__content,
+  .step,
+  .faq,
+  .getting-started__cta,
+  .section-cta,
+  .rule,
+  .timeline__entry,
+  .early-years__entry,
+  .flow__step,
+  .flow__split,
+  .flow__merge,
+  .flow__branch,
+  .venue,
+  .map-overview {
+    opacity: 1 !important;
+    transform: none !important;
+    transition-delay: 0s !important;
+  }
+
+  .timeline__year-badge {
+    transform: scale(1) !important;
+  }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

@@ -418,9 +418,128 @@ html.light .p2p-event-tile .hero__title {
 }
 html.light .p2p-event-tile--headline .hero-countdown__unit {
   background:
-    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.012)),
-    rgba(18,18,20,.9);
-  border-color: rgba(255,255,255,.08);
+    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.74)),
+    rgba(255,255,255,.88);
+  border-color: rgba(0,0,0,.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.82),
+    0 8px 18px rgba(0,0,0,.07);
+}
+html.light .p2p-event-tile--headline .hero-countdown__num {
+  color: var(--text);
+}
+html.light .p2p-event-tile--headline .hero-countdown__label {
+  color: var(--text-muted);
+}
+html.light .p2p-event-tile--headline .hero-countdown__unit:hover {
+  border-color: rgba(200,16,46,.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.88),
+    0 10px 22px rgba(0,0,0,.08),
+    0 0 18px rgba(200,16,46,.035);
+}
+html.light .p2p-event-tile--headline .hero-countdown__timer--message {
+  background: rgba(255,255,255,.84);
+  border-color: rgba(0,0,0,.08);
+}
+html.light .p2p-luma iframe {
+  border-color: rgba(0,0,0,.1);
+  box-shadow: 0 14px 34px rgba(0,0,0,.08);
+}
+
+/* P2P prize podium */
+html.light .prizes-showcase__intro {
+  border-top-color: rgba(0,0,0,.08);
+  border-bottom-color: rgba(0,0,0,.08);
+}
+html.light .prize-podium__place {
+  background:
+    linear-gradient(145deg, rgba(200,16,46,.035), transparent 42%),
+    rgba(255,255,255,.82);
+  border-color: rgba(0,0,0,.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.72),
+    0 12px 28px rgba(0,0,0,.06);
+}
+html.light .prize-podium__place--first {
+  border-color: rgba(180,132,18,.24);
+  background:
+    linear-gradient(145deg, rgba(244,201,93,.18), transparent 44%),
+    rgba(255,255,255,.9);
+}
+html.light .prize-podium__place::before {
+  background: rgba(0,0,0,.12);
+}
+html.light .prize-podium__place--first::before {
+  background: #b48412;
+}
+html.light .prize-podium__place--second::before {
+  background: #8a96a3;
+}
+html.light .prize-podium__place--third::before {
+  background: #a9683f;
+}
+html.light .prize-podium__rank {
+  background: rgba(200,16,46,.08);
+  border-color: rgba(200,16,46,.16);
+}
+html.light .prize-note {
+  background: rgba(0,148,168,.055);
+  border-color: rgba(0,148,168,.16);
+}
+
+/* P2P scoreboard tracks */
+html.light .scoreboard-track {
+  background: rgba(255,255,255,.82);
+  border-color: rgba(0,0,0,.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.72),
+    0 10px 24px rgba(0,0,0,.055);
+}
+html.light .scoreboard-track__icon {
+  background: rgba(200,16,46,.075);
+  border-color: rgba(200,16,46,.15);
+}
+
+/* P2P sponsor recruitment CTA */
+html.light .sponsor-recruitment {
+  background:
+    linear-gradient(135deg, rgba(0,148,168,.075), transparent 38%),
+    rgba(255,255,255,.82);
+  border-color: rgba(0,148,168,.17);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.72),
+    0 12px 28px rgba(0,0,0,.055);
+}
+html.light .sponsor-recruitment__points li {
+  background: rgba(255,255,255,.56);
+  border-color: rgba(0,0,0,.08);
+}
+
+/* P2P critical AI rule */
+html.light .rule--critical .rule__num {
+  color: #1a1a1e;
+  background: #f4c95d;
+  border-color: rgba(180,132,18,.36);
+  box-shadow: 0 0 22px rgba(180,132,18,.12);
+}
+html.light .rule--critical .rule__line {
+  background: linear-gradient(to bottom, rgba(180,132,18,.28), rgba(200,16,46,.08));
+}
+html.light .rule--critical .rule__body {
+  background:
+    linear-gradient(135deg, rgba(244,201,93,.2), rgba(200,16,46,.06) 46%, transparent),
+    rgba(255,255,255,.86);
+  border-color: rgba(180,132,18,.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.76),
+    0 14px 30px rgba(0,0,0,.07);
+}
+html.light .rule--critical .rule__icon {
+  color: #b48412;
+}
+html.light .rule--critical .rule__list li::before {
+  background: #b48412;
 }
 
 /* P2P Sponsor cards */

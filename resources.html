@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
 <head>
+  <script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Resources - DMU Hackers</title>
@@ -77,7 +77,7 @@
         <h2 class="section__title">CTF Platforms</h2>
         <p class="section__subtitle">The best places to practice your skills, from beginner-friendly guided challenges to competitive ranked arenas.</p>
       </div>
-      <div class="resource-grid">
+      <div class="resource-grid" data-resource-group="platforms">
         <a href="https://tryhackme.com/" class="resource-card" target="_blank" rel="noopener noreferrer">
           <div class="resource-card__icon"><i class="fas fa-graduation-cap"></i></div>
           <div class="resource-card__body">
@@ -163,7 +163,7 @@
         <h2 class="section__title">Essential Tools</h2>
         <p class="section__subtitle">The tools we use in sessions and competitions. All free and open source.</p>
       </div>
-      <div class="tools-grid">
+      <div class="tools-grid" data-resource-group="tools">
         <div class="tool-card">
           <h3 class="tool-card__name"><i class="fab fa-linux"></i> Kali Linux</h3>
           <p class="tool-card__desc">Debian-based distro pre-loaded with hundreds of security tools. The industry standard for penetration testing.</p>
@@ -231,7 +231,7 @@
         <h2 class="section__title">Learning Material</h2>
         <p class="section__subtitle">Videos, courses and reading material to build your foundations.</p>
       </div>
-      <div class="resource-grid">
+      <div class="resource-grid" data-resource-group="learning">
         <a href="https://www.youtube.com/@_JohnHammond" class="resource-card" target="_blank" rel="noopener noreferrer">
           <div class="resource-card__icon"><i class="fab fa-youtube"></i></div>
           <div class="resource-card__body">
@@ -299,7 +299,7 @@
         <h2 class="section__title">Certifications</h2>
         <p class="section__subtitle">Industry-recognised certifications to boost your career. Many offer student discounts.</p>
       </div>
-      <div class="resource-grid">
+      <div class="resource-grid" data-resource-group="certs">
         <a href="https://www.zeropointsecurity.co.uk/course/red-team-ops" class="resource-card" target="_blank" rel="noopener noreferrer">
           <div class="resource-card__icon"><i class="fas fa-crosshairs"></i></div>
           <div class="resource-card__body">
@@ -438,6 +438,7 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
+  <script src="data/site-content.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 

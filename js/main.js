@@ -3,8 +3,798 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const siteContent = window.DMU_SITE_CONTENT || {};
+
+  function el(tag, className, text) {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+
+  function appendIcon(parent, className) {
+    const icon = el('i', className);
+    parent.appendChild(icon);
+    return icon;
+  }
+
+  function clear(node) {
+    while (node.firstChild) node.removeChild(node.firstChild);
+  }
+
+  function currentPageName() {
+    const page = window.location.pathname.split('/').pop();
+    return page || 'index.html';
+  }
+
+  function isExternalUrl(href) {
+    return /^https?:\/\//.test(href);
+  }
+
+  function renderLink(link, className) {
+    const anchor = el('a', className || '');
+    anchor.href = link.href;
+    if (link.section) anchor.dataset.section = link.section;
+    if (link.active) anchor.classList.add('active');
+    if (link.cta) anchor.classList.add('nav__link--cta');
+    if (isExternalUrl(link.href)) {
+      anchor.target = '_blank';
+      anchor.rel = 'noopener noreferrer';
+    }
+    if (link.icon) {
+      appendIcon(anchor, link.icon);
+      anchor.appendChild(document.createTextNode(' ' + link.text));
+    } else {
+      anchor.textContent = link.text;
+    }
+    return anchor;
+  }
+
+  function renderSharedNavigation() {
+    const navLinks = document.getElementById('navLinks');
+    const navData = siteContent.site?.navigation;
+    if (!navLinks || !navData) return;
+
+    const page = currentPageName();
+    const links = navData[page] || navData.default || [];
+    clear(navLinks);
+    links.forEach(link => {
+      const item = el('li', link.mobileOnly ? 'nav__mobile-cta' : '');
+      const anchor = renderLink(link, 'nav__link');
+      if (!link.active && !link.section && !isExternalUrl(link.href) && link.href.split('#')[0] === page) {
+        anchor.classList.add('active');
+      }
+      item.appendChild(anchor);
+      navLinks.appendChild(item);
+    });
+
+    const desktopCta = document.querySelector('.nav__actions > .nav__link--cta');
+    if (desktopCta && siteContent.site?.discordUrl) {
+      desktopCta.href = siteContent.site.discordUrl;
+    }
+  }
+
+  function renderSharedFooter() {
+    const footer = siteContent.site?.footer;
+    const footerTop = document.querySelector('.footer__top');
+    if (!footer || !footerTop) return;
+
+    const columns = footerTop.querySelectorAll('.footer__col');
+    const brandCol = columns[0];
+    if (!brandCol) return;
+
+    const desc = brandCol.querySelector('.footer__desc');
+    if (desc && footer.description) desc.textContent = footer.description;
+
+    const socials = brandCol.querySelector('.footer__socials');
+    if (socials && footer.socials?.length) {
+      clear(socials);
+      footer.socials.forEach(social => {
+        const link = el('a');
+        link.href = social.href;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.setAttribute('aria-label', social.label);
+        appendIcon(link, social.icon);
+        socials.appendChild(link);
+      });
+    }
+
+    columns.forEach((column, index) => {
+      if (index > 0) column.remove();
+    });
+
+    (footer.columns || []).forEach(column => {
+      const col = el('div', 'footer__col');
+      col.appendChild(el('h4', 'footer__heading', column.heading));
+      const nav = el('nav', 'footer__nav');
+      nav.setAttribute('aria-label', column.label || column.heading);
+      (column.links || []).forEach(item => {
+        const link = el('a', null, item.text);
+        link.href = item.href;
+        if (isExternalUrl(item.href)) {
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+        }
+        nav.appendChild(link);
+      });
+      col.appendChild(nav);
+      footerTop.appendChild(col);
+    });
+  }
+
+  function renderMemberImage(icon, sizeClass) {
+    const classes = ['member__img', 'member__img--placeholder'];
+    if (sizeClass) classes.push(sizeClass);
+    const image = el('div', classes.join(' '));
+    appendIcon(image, icon || 'fas fa-user-secret');
+    return image;
+  }
+
+  function renderCurrentCommittee() {
+    const data = siteContent.committee;
+    const container = document.querySelector('[data-committee-current]');
+    if (!container || !data?.currentMembers?.length) return;
+
+    const section = container.closest('section');
+    const tag = section?.querySelector('.section__tag');
+    if (tag && data.currentTag) tag.textContent = data.currentTag;
+
+    clear(container);
+    data.currentMembers.forEach(member => {
+      const card = el('div', 'member');
+      card.appendChild(renderMemberImage(member.icon));
+      card.appendChild(el('h4', 'member__name', member.name));
+      card.appendChild(el('p', 'member__role', member.role));
+
+      if (member.linkedin) {
+        const link = el('a', 'member__social');
+        link.href = member.linkedin;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.setAttribute('aria-label', (member.name || member.fullName) + "'s LinkedIn profile");
+        appendIcon(link, 'fab fa-linkedin-in');
+        card.appendChild(link);
+      } else {
+        const disabled = el('span', 'member__social member__social--disabled');
+        disabled.setAttribute('aria-label', 'LinkedIn coming soon');
+        appendIcon(disabled, 'fab fa-linkedin-in');
+        card.appendChild(disabled);
+      }
+
+      container.appendChild(card);
+    });
+  }
+
+  function renderTimelineMember(member, type) {
+    const item = el('div', type === 'chair' ? 'member member--chairman' : 'member member--sm');
+    item.appendChild(renderMemberImage(member.icon, type === 'chair' ? 'member__img--lg' : 'member__img--mini'));
+
+    if (type === 'chair') {
+      item.appendChild(el('h3', 'member__name', member.name));
+      item.appendChild(el('span', 'member__role', member.role));
+      return item;
+    }
+
+    const info = el('div', 'member--sm__info');
+    info.appendChild(el('span', 'member__name', member.name));
+    info.appendChild(el('span', 'member__role', member.role));
+    item.appendChild(info);
+    return item;
+  }
+
+  function renderCommitteeTimeline() {
+    const data = siteContent.committee;
+    const container = document.querySelector('[data-committee-timeline]');
+    if (!container || !data?.timeline?.length) return;
+
+    clear(container);
+    data.timeline.forEach(entry => {
+      const timelineEntry = el('div', 'timeline__entry timeline__entry--' + (entry.side || 'left'));
+
+      const chairSide = el('div', 'timeline__side timeline__side--chairman');
+      chairSide.appendChild(renderTimelineMember(entry.chair, 'chair'));
+
+      const centre = el('div', 'timeline__centre');
+      centre.appendChild(el('div', 'timeline__year-badge', entry.year));
+
+      const rolesSide = el('div', 'timeline__side timeline__side--roles');
+      const roleList = el('div', 'timeline__role-list');
+      (entry.roles || []).forEach(role => roleList.appendChild(renderTimelineMember(role, 'role')));
+      rolesSide.appendChild(roleList);
+
+      if (entry.side === 'right') {
+        timelineEntry.appendChild(rolesSide);
+        timelineEntry.appendChild(centre);
+        timelineEntry.appendChild(chairSide);
+      } else {
+        timelineEntry.appendChild(chairSide);
+        timelineEntry.appendChild(centre);
+        timelineEntry.appendChild(rolesSide);
+      }
+
+      container.appendChild(timelineEntry);
+    });
+  }
+
+  function renderP2PCategories() {
+    const categories = siteContent.p2p?.categories;
+    const container = document.querySelector('[data-p2p-categories]');
+    if (!container || !categories?.length) return;
+
+    const section = container.closest('section');
+    const tag = section?.querySelector('.section__tag');
+    const total = categories.reduce((sum, category) => sum + Number(category.count || 0), 0);
+    if (tag) tag.textContent = categories.length + ' Categories, ' + total + ' Challenges';
+
+    clear(container);
+    categories.forEach(category => {
+      const card = el('div', 'card p2p-cat-card');
+      const top = el('div', 'p2p-cat-card__top');
+      const icon = el('div', 'card__icon');
+      appendIcon(icon, category.icon || 'fas fa-flag');
+      top.appendChild(icon);
+      top.appendChild(el('span', 'p2p-cat-card__count', String(category.count)));
+      card.appendChild(top);
+      card.appendChild(el('h3', 'card__title', category.title));
+      card.appendChild(el('p', 'card__text', category.text));
+      container.appendChild(card);
+    });
+  }
+
+  function rankLabel(rank) {
+    return rank === 1 ? '1st' : rank === 2 ? '2nd' : rank === 3 ? '3rd' : rank + 'th';
+  }
+
+  function renderP2PPrizes() {
+    const prizes = siteContent.p2p?.prizes;
+    const container = document.querySelector('[data-p2p-prizes]');
+    if (!container || !prizes) return;
+
+    const section = container.closest('section');
+    const tag = section?.querySelector('.section__tag');
+    const title = section?.querySelector('.section__title');
+    const subtitle = section?.querySelector('.section__subtitle');
+    if (tag && prizes.tag) tag.textContent = prizes.tag;
+    if (title && prizes.title) title.textContent = prizes.title;
+    if (subtitle && prizes.subtitle) subtitle.textContent = prizes.subtitle;
+
+    clear(container);
+    const intro = el('div', 'prizes-showcase__intro');
+    intro.appendChild(el('span', 'prizes-showcase__kicker', prizes.kicker));
+    intro.appendChild(el('p', null, prizes.intro));
+    container.appendChild(intro);
+
+    const podium = el('div', 'prize-podium');
+    podium.setAttribute('aria-label', 'Pwn2Play in-person prize rewards by placement');
+    (prizes.placements || []).forEach(place => {
+      const rankClass = place.rank === 1 ? 'first' : place.rank === 2 ? 'second' : 'third';
+      const article = el('article', 'prize-podium__place prize-podium__place--' + rankClass);
+      article.appendChild(el('span', 'prize-podium__rank', rankLabel(place.rank)));
+      article.appendChild(el('h3', null, place.title));
+
+      const rewards = el('ul', 'prize-podium__rewards');
+      (place.rewards || []).forEach(reward => {
+        const item = el('li');
+        appendIcon(item, reward.icon || 'fas fa-award');
+        item.appendChild(document.createTextNode(reward.text));
+        rewards.appendChild(item);
+      });
+      article.appendChild(rewards);
+      podium.appendChild(article);
+    });
+    container.appendChild(podium);
+
+    const note = el('p', 'prize-note');
+    appendIcon(note, 'fas fa-award');
+    note.appendChild(document.createTextNode(prizes.note));
+    container.appendChild(note);
+  }
+
+  function renderP2PRules() {
+    const rules = siteContent.p2p?.rules;
+    const container = document.querySelector('[data-p2p-rules]');
+    if (!container || !rules?.length) return;
+
+    clear(container);
+    rules.forEach((rule, index) => {
+      const row = el('div', 'rule' + (rule.critical ? ' rule--critical' : ''));
+      const marker = el('div', 'rule__marker');
+      marker.appendChild(el('span', 'rule__num', String(index + 1).padStart(2, '0')));
+      if (index !== rules.length - 1) marker.appendChild(el('div', 'rule__line'));
+      row.appendChild(marker);
+
+      const body = el('div', 'rule__body');
+      const header = el('div', 'rule__header');
+      appendIcon(header, (rule.icon || 'fas fa-circle-info') + ' rule__icon');
+      header.appendChild(el('h3', 'rule__title', rule.title));
+      body.appendChild(header);
+
+      const list = el('ul', 'rule__list');
+      (rule.items || []).forEach(text => list.appendChild(el('li', null, text)));
+      body.appendChild(list);
+      row.appendChild(body);
+      container.appendChild(row);
+    });
+  }
+
+  function formatDisplayDate(dateString) {
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) return dateString;
+    return date.toLocaleDateString('en-GB', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+  }
+
+  function formatShortDate(dateString) {
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) return dateString;
+    return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  function formatClock(dateString) {
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) return '';
+    return date.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false });
+  }
+
+  function compactUtc(dateString) {
+    const date = new Date(dateString);
+    if (Number.isNaN(date.getTime())) return '';
+    return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+  }
+
+  function buildGoogleCalendarUrl() {
+    const p2p = siteContent.p2p;
+    if (!p2p?.event) return '#';
+    const venue = p2p.venues?.[0];
+    const params = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: p2p.event.name + ' - DMU Hackers CTF',
+      dates: compactUtc(p2p.event.start) + '/' + compactUtc(p2p.event.end),
+      details: 'DMU Hackers flagship Capture The Flag competition. Register: ' + (p2p.links?.luma || ''),
+      location: venue ? venue.addressLines.join(', ') : ''
+    });
+    return 'https://www.google.com/calendar/render?' + params.toString();
+  }
+
+  function renderActionLink(link) {
+    const anchor = el('a', 'btn btn--ghost btn--sm');
+    anchor.href = link.href;
+    if (link.download) anchor.setAttribute('download', '');
+    if (isExternalUrl(link.href)) {
+      anchor.target = '_blank';
+      anchor.rel = 'noopener noreferrer';
+    }
+    appendIcon(anchor, link.icon);
+    anchor.appendChild(document.createTextNode(' ' + link.text));
+    return anchor;
+  }
+
+  function renderP2PKeyInfo() {
+    const p2p = siteContent.p2p;
+    const container = document.querySelector('[data-p2p-key-info]');
+    if (!container || !p2p?.venues?.length) return;
+
+    const ctf = p2p.venues[0];
+    const awards = p2p.venues[1];
+    const cards = [
+      {
+        icon: 'fas fa-shield-halved',
+        title: 'Core Incursion // CTF Venue',
+        text: ctf.addressLines.join('<br>')
+      },
+      {
+        icon: 'fas fa-wifi',
+        title: 'WiFi',
+        text: 'Student & Guest WiFi will be available. Please bring your own machine. Computers will not be provided.'
+      },
+      {
+        icon: 'fas fa-trophy',
+        title: 'Awards Event Venue',
+        text: awards.addressLines.join('<br>')
+      },
+      {
+        icon: 'fas fa-utensils',
+        title: 'Food & Drink',
+        text: 'The bar opens after the event from 18:00 onwards for you to purchase drinks.'
+      }
+    ];
+
+    clear(container);
+    cards.forEach(card => {
+      const node = el('div', 'card card--horizontal');
+      const icon = el('div', 'card__icon');
+      appendIcon(icon, card.icon);
+      node.appendChild(icon);
+      const body = el('div');
+      body.appendChild(el('h3', 'card__title', card.title));
+      const text = el('p', 'card__text');
+      text.innerHTML = card.text;
+      body.appendChild(text);
+      node.appendChild(body);
+      container.appendChild(node);
+    });
+  }
+
+  function renderP2PActionLinks() {
+    const p2p = siteContent.p2p;
+    const containers = document.querySelectorAll('[data-p2p-action-links]');
+    if (!containers.length || !p2p?.links) return;
+
+    const links = [
+      { text: 'Google Calendar', href: buildGoogleCalendarUrl(), icon: 'fab fa-google' },
+      { text: '.ics', href: p2p.links.ics, icon: 'fas fa-calendar-plus', download: true },
+      { text: 'Biterra', href: p2p.links.biterra, icon: 'fas fa-flag' },
+      { text: 'Map', href: p2p.links.map, icon: 'fas fa-map-location-dot' },
+      { text: 'Discord', href: p2p.links.discord, icon: 'fab fa-discord' }
+    ];
+
+    containers.forEach(container => {
+      clear(container);
+      links.forEach(link => container.appendChild(renderActionLink(link)));
+    });
+
+    const heroActions = document.querySelector('.p2p-event-actions');
+    if (heroActions) {
+      clear(heroActions);
+      links.forEach(link => heroActions.appendChild(renderActionLink(link)));
+    }
+  }
+
+  function renderP2PCalendarLinks() {
+    const containers = document.querySelectorAll('[data-p2p-calendar-links]');
+    const p2p = siteContent.p2p;
+    if (!containers.length || !p2p?.links) return;
+    const links = [
+      { text: 'Google Calendar', href: buildGoogleCalendarUrl(), icon: 'fab fa-google' },
+      { text: 'Download .ics', href: p2p.links.ics, icon: 'fas fa-calendar-plus', download: true }
+    ];
+    containers.forEach(container => {
+      clear(container);
+      links.forEach(link => container.appendChild(renderActionLink(link)));
+    });
+  }
+
+  function updateP2PGlobalLinks() {
+    const links = siteContent.p2p?.links;
+    if (!links) return;
+
+    document.querySelectorAll('a[href="https://pwn2play.biterra.co"]').forEach(anchor => {
+      anchor.href = links.biterra;
+    });
+    document.querySelectorAll('a[href="https://biterra.co"]').forEach(anchor => {
+      anchor.href = links.biterraHome;
+    });
+    document.querySelectorAll('a[href^="https://discord.gg/"]').forEach(anchor => {
+      anchor.href = links.discord;
+    });
+    document.querySelectorAll('a[href="https://forms.gle/YPQaL6gwLK24S6ms8"]').forEach(anchor => {
+      anchor.href = links.attendanceForm;
+    });
+    document.querySelectorAll('a[href="data/p2p-core-incursion.ics"]').forEach(anchor => {
+      anchor.href = links.ics;
+    });
+
+    const summary = document.querySelector('[data-p2p-event-summary]');
+    const event = siteContent.p2p?.event;
+    if (summary && event) {
+      clear(summary);
+      summary.appendChild(document.createTextNode(event.name + ' takes place '));
+      summary.appendChild(el('strong', null, formatDisplayDate(event.start)));
+      summary.appendChild(document.createTextNode(', ' + formatClock(event.start) + '-' + formatClock(event.end) + '. Add it to your calendar so you do not miss it.'));
+    }
+  }
+
+  function updateP2PEventDetails() {
+    const p2p = siteContent.p2p;
+    if (!p2p?.event) return;
+
+    const dateTile = document.querySelector('.p2p-event-tile--date');
+    if (dateTile) {
+      const strong = dateTile.querySelector('strong');
+      const text = dateTile.querySelector('p');
+      if (strong) strong.textContent = formatDisplayDate(p2p.event.start);
+      if (text) text.textContent = formatClock(p2p.event.start) + ' - ' + formatClock(p2p.event.end);
+    }
+
+    const locationTile = document.querySelector('.p2p-event-tile--location');
+    if (locationTile && p2p.venues?.[0]) {
+      const strong = locationTile.querySelector('strong');
+      const text = locationTile.querySelector('p');
+      if (strong) strong.textContent = 'Virtual & DMU Campus';
+      if (text) text.textContent = 'In-person competitors will be based at ' + p2p.venues[0].addressLines[0] + '.';
+    }
+
+    const luma = document.querySelector('.p2p-luma iframe');
+    if (luma && p2p.links?.luma) luma.src = p2p.links.luma;
+  }
+
+  function renderP2PScoreboards() {
+    const tracks = siteContent.p2p?.scoreboardTracks;
+    const container = document.querySelector('[data-p2p-scoreboards]');
+    if (!container || !tracks?.length) return;
+
+    clear(container);
+    tracks.forEach(track => {
+      const card = el('article', 'scoreboard-track');
+      const icon = el('div', 'scoreboard-track__icon');
+      appendIcon(icon, track.icon);
+      card.appendChild(icon);
+      const body = el('div', 'scoreboard-track__body');
+      body.appendChild(el('span', 'scoreboard-track__tag', track.tag));
+      body.appendChild(el('h3', 'scoreboard-track__title', track.title));
+      body.appendChild(el('p', 'scoreboard-track__text', track.text));
+      card.appendChild(body);
+      container.appendChild(card);
+    });
+  }
+
+  function renderP2PLastUpdated() {
+    const target = document.querySelector('[data-p2p-last-updated]');
+    const lastUpdated = siteContent.p2p?.lastUpdated;
+    if (!target || !lastUpdated) return;
+    target.textContent = 'Rules last updated: ' + formatShortDate(lastUpdated) + '.';
+  }
+
+  function renderP2PSponsorCta() {
+    const cta = siteContent.p2p?.sponsorCta;
+    const container = document.querySelector('[data-p2p-sponsor-cta]');
+    if (!container || !cta) return;
+
+    clear(container);
+    const body = el('div', 'sponsor-recruitment__body');
+    body.appendChild(el('span', 'sponsor-recruitment__eyebrow', cta.eyebrow));
+    body.appendChild(el('h3', 'sponsor-recruitment__title', cta.title));
+    body.appendChild(el('p', 'sponsor-recruitment__text', cta.text));
+
+    const points = el('ul', 'sponsor-recruitment__points');
+    (cta.points || []).forEach(point => points.appendChild(el('li', null, point)));
+    body.appendChild(points);
+    container.appendChild(body);
+
+    const actions = el('div', 'sponsor-recruitment__actions');
+    (cta.actions || []).forEach(action => {
+      const link = el('a', 'btn btn--' + (action.style || 'ghost'));
+      link.href = action.href;
+      if (isExternalUrl(action.href) || action.href.startsWith('mailto:')) {
+        if (!action.href.startsWith('mailto:')) link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+      }
+      appendIcon(link, action.icon);
+      link.appendChild(document.createTextNode(' ' + action.text));
+      actions.appendChild(link);
+    });
+    container.appendChild(actions);
+  }
+
+  function renderP2PSponsors() {
+    const sponsors = siteContent.sponsors || [];
+    const container = document.querySelector('[data-p2p-sponsors]');
+    if (!container || !sponsors.length) return;
+
+    const bands = [
+      { key: 'prize', title: 'Prize Providers', text: 'Supporting in-person winners with prizes that make the competition worth chasing.' },
+      { key: 'platform', title: 'Platform Partner', text: 'Powering the event experience and challenge platform for competitors.' },
+      { key: 'challenge', title: 'Challenge Creators', text: 'Building realistic problems and scenarios for competitors to solve under pressure.' }
+    ];
+
+    clear(container);
+    bands.forEach(band => {
+      const items = sponsors.filter(sponsor => sponsor.groups?.includes(band.key));
+      if (!items.length) return;
+      const bandEl = el('div', 'p2p-sponsor-band' + (band.key === 'challenge' ? ' p2p-sponsor-band--challenge' : ''));
+      const header = el('div', 'p2p-sponsor-band__header');
+      header.appendChild(el('span', 'p2p-sponsor-band__eyebrow', band.title));
+      header.appendChild(el('p', null, band.text));
+      bandEl.appendChild(header);
+      const grid = el('div', 'p2p-sponsor-grid p2p-sponsor-grid--' + (band.key === 'challenge' ? 'challenge' : 'prizes'));
+      items.forEach(sponsor => grid.appendChild(renderP2PSponsorCard(sponsor)));
+      bandEl.appendChild(grid);
+      container.appendChild(bandEl);
+    });
+  }
+
+  function renderP2PSponsorCard(sponsor) {
+    const article = el('article', 'p2p-sponsor-card' + (sponsor.featured ? ' p2p-sponsor-card--featured' : ''));
+    const logoLink = el('a', 'p2p-sponsor-card__logo');
+    logoLink.href = sponsor.website;
+    logoLink.target = '_blank';
+    logoLink.rel = 'noopener noreferrer';
+    const img = el('img');
+    img.src = sponsor.logo;
+    img.alt = sponsor.alt || sponsor.name;
+    img.loading = 'lazy';
+    if (sponsor.logoStyle) img.setAttribute('style', sponsor.logoStyle);
+    logoLink.appendChild(img);
+    article.appendChild(logoLink);
+
+    const body = el('div', 'p2p-sponsor-card__body');
+    const meta = el('div', 'p2p-sponsor-card__meta');
+    (sponsor.tags || []).forEach(tag => {
+      const item = el('span');
+      appendIcon(item, tag.icon);
+      item.appendChild(document.createTextNode(' ' + tag.text));
+      meta.appendChild(item);
+    });
+    body.appendChild(meta);
+    body.appendChild(el('h3', null, sponsor.name));
+    body.appendChild(el('p', null, sponsor.description));
+    article.appendChild(body);
+    return article;
+  }
+
+  function renderSponsorsPage() {
+    const sponsors = siteContent.sponsors || [];
+    const container = document.querySelector('[data-sponsors-list]');
+    if (!container || !sponsors.length) return;
+
+    const header = container.querySelector('.section__header');
+    clear(container);
+    if (header) container.appendChild(header);
+
+    sponsors.forEach(sponsor => {
+      const card = el('div', 'sponsor-card');
+      const logoLink = el('a', 'sponsor-card__logo-wrap');
+      logoLink.href = sponsor.website;
+      logoLink.target = '_blank';
+      logoLink.rel = 'noopener noreferrer';
+      const img = el('img', 'sponsor-card__logo');
+      img.src = sponsor.logo;
+      img.alt = sponsor.alt || sponsor.name;
+      img.loading = 'lazy';
+      if (sponsor.logoStyle) img.setAttribute('style', sponsor.logoStyle);
+      logoLink.appendChild(img);
+      card.appendChild(logoLink);
+
+      const body = el('div', 'sponsor-card__body');
+      const title = el('h3', 'sponsor-card__name');
+      const titleLink = el('a', null, sponsor.name);
+      titleLink.href = sponsor.website;
+      titleLink.target = '_blank';
+      titleLink.rel = 'noopener noreferrer';
+      title.appendChild(titleLink);
+      body.appendChild(title);
+      body.appendChild(el('p', 'sponsor-card__desc', sponsor.description));
+      const tags = el('div', 'sponsor-card__tags');
+      (sponsor.tags || []).forEach(tag => {
+        const item = el('span', 'sponsor-card__tag');
+        appendIcon(item, tag.icon);
+        item.appendChild(document.createTextNode(' ' + tag.text));
+        tags.appendChild(item);
+      });
+      body.appendChild(tags);
+      card.appendChild(body);
+      container.appendChild(card);
+    });
+  }
+
+  function renderResourceCard(resource) {
+    const card = el('a', 'resource-card');
+    card.href = resource.href;
+    card.target = '_blank';
+    card.rel = 'noopener noreferrer';
+    const icon = el('div', 'resource-card__icon');
+    appendIcon(icon, resource.icon);
+    card.appendChild(icon);
+    const body = el('div', 'resource-card__body');
+    body.appendChild(el('h3', 'resource-card__name', resource.name));
+    body.appendChild(el('p', 'resource-card__desc', resource.description));
+    body.appendChild(el('span', 'resource-card__tag', resource.tag));
+    card.appendChild(body);
+    appendIcon(card, 'fas fa-arrow-right resource-card__arrow');
+    return card;
+  }
+
+  function renderToolCard(tool) {
+    const card = el('div', 'tool-card');
+    const title = el('h3', 'tool-card__name');
+    appendIcon(title, tool.icon);
+    title.appendChild(document.createTextNode(' ' + tool.name));
+    card.appendChild(title);
+    card.appendChild(el('p', 'tool-card__desc', tool.description));
+    const link = el('a', 'tool-card__link', tool.label + ' ');
+    link.href = tool.href;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    appendIcon(link, 'fas fa-external-link-alt');
+    card.appendChild(link);
+    return card;
+  }
+
+  function renderResources() {
+    const resources = siteContent.resources;
+    if (!resources) return;
+    document.querySelectorAll('[data-resource-group]').forEach(container => {
+      const key = container.dataset.resourceGroup;
+      const items = resources[key];
+      if (!items?.length) return;
+      clear(container);
+      items.forEach(item => container.appendChild(key === 'tools' ? renderToolCard(item) : renderResourceCard(item)));
+    });
+  }
+
+  function renderVenueCards() {
+    const venues = siteContent.p2p?.venues;
+    const container = document.querySelector('[data-p2p-venues]');
+    if (!container || !venues?.length) return;
+
+    clear(container);
+    venues.forEach((venue, index) => {
+      const card = el('div', 'venue' + (index % 2 ? ' venue--reverse' : ''));
+      card.id = venue.id;
+      const info = el('div', 'venue__info');
+      const marker = el('div', 'venue__marker venue__marker--' + venue.marker);
+      appendIcon(marker, venue.iconFull);
+      info.appendChild(marker);
+      const details = el('div', 'venue__details');
+      details.appendChild(el('span', 'venue__tag', venue.time));
+      details.appendChild(el('h3', 'venue__name', venue.title));
+      const address = el('p', 'venue__address');
+      address.innerHTML = venue.addressLines.join('<br>');
+      details.appendChild(address);
+      const notes = el('ul', 'venue__notes');
+      (venue.notes || []).forEach(note => {
+        const item = el('li');
+        appendIcon(item, note.icon);
+        item.appendChild(document.createTextNode(' ' + note.text));
+        notes.appendChild(item);
+      });
+      details.appendChild(notes);
+      const directions = el('a', 'btn btn--ghost btn--sm');
+      directions.href = venue.directions;
+      directions.target = '_blank';
+      directions.rel = 'noopener noreferrer';
+      appendIcon(directions, 'fas fa-diamond-turn-right');
+      directions.appendChild(document.createTextNode(' Get Directions'));
+      details.appendChild(directions);
+      info.appendChild(details);
+      card.appendChild(info);
+      const map = el('div', 'venue__map');
+      const embed = el('div', 'map-embed');
+      const mapTarget = el('div', 'venue-leaflet');
+      mapTarget.id = venue.mapId;
+      mapTarget.style.height = '320px';
+      embed.appendChild(mapTarget);
+      map.appendChild(embed);
+      card.appendChild(map);
+      container.appendChild(card);
+    });
+  }
+
+  function attachPrintRules() {
+    const btn = document.querySelector('[data-print-rules]');
+    if (btn) btn.addEventListener('click', () => window.print());
+  }
+
+  function renderMaintainableContent() {
+    renderCurrentCommittee();
+    renderCommitteeTimeline();
+    updateP2PEventDetails();
+    updateP2PGlobalLinks();
+    renderP2PKeyInfo();
+    renderP2PActionLinks();
+    renderP2PCalendarLinks();
+    renderP2PCategories();
+    renderP2PPrizes();
+    renderP2PScoreboards();
+    renderP2PLastUpdated();
+    renderP2PRules();
+    renderP2PSponsorCta();
+    renderP2PSponsors();
+    renderSponsorsPage();
+    renderResources();
+    renderVenueCards();
+    attachPrintRules();
+  }
 
   /* ---------- Footer year ---------- */
+  renderSharedNavigation();
+  renderSharedFooter();
+
   const fy = document.getElementById('footerYear');
   if (fy) fy.textContent = new Date().getFullYear();
 
@@ -50,6 +840,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  renderMaintainableContent();
 
   /* ---------- Scroll-spy for nav links ---------- */
   const navLinks = document.querySelectorAll('.nav__link[data-section]');
@@ -162,7 +954,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       },
-      { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.01, rootMargin: '0px 0px 18% 0px' }
     );
 
     revealEls.forEach(el => observer.observe(el));
@@ -550,27 +1342,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const placeIcons = { 1: 'fas fa-crown', 2: 'fas fa-medal', 3: 'fas fa-medal' };
     const ordinal = n => n === 1 ? '1st' : n === 2 ? '2nd' : n === 3 ? '3rd' : n + 'th';
-    const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
     function renderPodium(event) {
       podiumTag.textContent = event.year + ' Results';
       podiumTitle.textContent = event.name + ' ' + event.subtitle;
 
       const displayOrder = [2, 1, 3];
-      podiumContainer.innerHTML = displayOrder.map(rank => {
+      clear(podiumContainer);
+      displayOrder.forEach(rank => {
         const place = event.places.find(p => p.rank === rank);
-        if (!place) return '';
-        return `<div class="podium__place podium__place--${rank}">
-          <div class="podium__icon"><i class="${placeIcons[rank] || 'fas fa-medal'}"></i></div>
-          <span class="podium__rank">${ordinal(rank)}</span>
-          <h3 class="podium__team">${esc(place.team)}</h3>
-          <div class="podium__bar"></div>
-        </div>`;
-      }).join('');
+        if (!place) return;
+
+        const podiumPlace = el('div', 'podium__place podium__place--' + rank);
+        const iconWrap = el('div', 'podium__icon');
+        appendIcon(iconWrap, placeIcons[rank] || 'fas fa-medal');
+        podiumPlace.appendChild(iconWrap);
+        podiumPlace.appendChild(el('span', 'podium__rank', ordinal(rank)));
+        podiumPlace.appendChild(el('h3', 'podium__team', place.team));
+        podiumPlace.appendChild(el('div', 'podium__bar'));
+        podiumContainer.appendChild(podiumPlace);
+      });
     }
 
     function switchEvent(idx) {
-      if (idx === currentIdx && podiumContainer.innerHTML !== '') return;
+      if (idx === currentIdx && podiumContainer.childElementCount) return;
       currentIdx = idx;
       podiumNav.querySelectorAll('.podium-nav__btn').forEach((btn, i) => {
         btn.classList.toggle('podium-nav__btn--active', i === idx);
@@ -583,28 +1378,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderNav() {
+      clear(podiumNav);
       if (events.length <= 1) return;
-      podiumNav.innerHTML = events.map((ev, i) =>
-        `<button class="podium-nav__btn${i === 0 ? ' podium-nav__btn--active' : ''}" type="button">${ev.year}</button>`
-      ).join('');
-      podiumNav.querySelectorAll('.podium-nav__btn').forEach((btn, i) => {
+      events.forEach((ev, i) => {
+        const btn = el('button', 'podium-nav__btn' + (i === 0 ? ' podium-nav__btn--active' : ''), String(ev.year));
+        btn.type = 'button';
         btn.addEventListener('click', () => switchEvent(i));
+        podiumNav.appendChild(btn);
       });
     }
 
-    fetch('data/p2p-results.json')
-      .then(res => res.json())
-      .then(data => {
-        events = data.events;
-        if (!events.length) return;
-        renderNav();
-        renderPodium(events[0]);
-      })
-      .catch(() => {
-        podiumTag.textContent = 'Results';
-        podiumTitle.textContent = 'Past Results';
-        podiumContainer.innerHTML = '<p style="text-align:center;color:var(--text-muted);font-size:.9rem;">Results could not be loaded. Check back later.</p>';
-      });
+    function showPodiumError() {
+      podiumTag.textContent = 'Results';
+      podiumTitle.textContent = 'Past Results';
+      clear(podiumContainer);
+      const msg = el('p', 'podium__message', 'Results could not be loaded. Check back later.');
+      podiumContainer.appendChild(msg);
+    }
+
+    function loadPodium(data) {
+      events = data?.events || [];
+      if (!events.length) return;
+      renderNav();
+      renderPodium(events[0]);
+    }
+
+    if (siteContent.p2p?.results?.events?.length) {
+      loadPodium(siteContent.p2p.results);
+    } else {
+      showPodiumError();
+    }
   }
 
   /* ---------- Animated stat counters ---------- */
@@ -839,23 +1642,39 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ---------- Countdown timer ---------- */
-  // Event config - update these dates each year instead of hunting through code
-  const EVENT_CONFIG = {
+  // Event config lives in data/site-content.js, with this object as a fallback.
+  const EVENT_CONFIG = Object.assign({
     name: 'Pwn2Play: Core Incursion',
     start: '2026-05-30T09:00:00+01:00',
     end:   '2026-05-30T18:00:00+01:00',
-  };
+  }, siteContent.p2p?.event || {});
 
   const cdDays = document.getElementById('cdDays');
   if (cdDays) {
     const eventStart = new Date(EVENT_CONFIG.start).getTime();
     const eventEnd   = new Date(EVENT_CONFIG.end).getTime();
+    let countdownState = 'countdown';
+    const countdown = document.getElementById('countdown');
 
     const cdHours = document.getElementById('cdHours');
     const cdMins  = document.getElementById('cdMins');
     const cdSecs  = document.getElementById('cdSecs');
+    let countdownStatus;
 
-    function showCountdownMessage(label, msg, accent) {
+    if (countdown) {
+      countdown.setAttribute('aria-live', 'off');
+      countdown.setAttribute('aria-label', EVENT_CONFIG.name + ' countdown');
+      const staticTime = el('span', 'sr-only', EVENT_CONFIG.name + ' starts ' + formatDisplayDate(EVENT_CONFIG.start) + ' at ' + formatClock(EVENT_CONFIG.start) + '.');
+      countdownStatus = el('span', 'sr-only');
+      countdownStatus.setAttribute('aria-live', 'polite');
+      countdownStatus.setAttribute('aria-atomic', 'true');
+      countdown.appendChild(staticTime);
+      countdown.appendChild(countdownStatus);
+    }
+
+    function showCountdownMessage(label, msg, accent, state) {
+      if (countdownState === state) return;
+      countdownState = state;
       const cd = document.getElementById('countdown');
       if (!cd) return;
       const timer = cd.querySelector('.hero-countdown__timer');
@@ -864,7 +1683,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         if (until) until.textContent = label;
         if (timer) {
-          timer.innerHTML = '';
+          clear(timer);
           timer.classList.add('hero-countdown__timer--message');
           const el = document.createElement('span');
           el.className = 'hero-countdown__msg';
@@ -872,6 +1691,7 @@ document.addEventListener('DOMContentLoaded', () => {
           el.textContent = msg;
           timer.appendChild(el);
         }
+        if (countdownStatus) countdownStatus.textContent = label + ': ' + msg;
         cd.style.opacity = '1';
       }, 400);
     }
@@ -879,13 +1699,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function tick() {
       const now = Date.now();
       if (now >= eventEnd) {
-        showCountdownMessage(EVENT_CONFIG.name, 'The event has ended. See you next year!', false);
+        showCountdownMessage(EVENT_CONFIG.name, 'The event has ended. See you next year!', false, 'ended');
         return;
       }
       if (now >= eventStart) {
-        showCountdownMessage(EVENT_CONFIG.name + ' is happening now', 'The CTF is live!', true);
+        showCountdownMessage(EVENT_CONFIG.name + ' is happening now', 'The CTF is live!', true, 'live');
         return;
       }
+      countdownState = 'countdown';
       const diff = eventStart - now;
       const d = Math.floor(diff / 86400000);
       const h = Math.floor((diff % 86400000) / 3600000);
@@ -904,21 +1725,53 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroBg = document.querySelector('.hero__bg');
   const heroContent = document.querySelector('.hero__content');
   if (heroBg && heroContent) {
+    const hero = heroContent.closest('.hero');
     let ticking = false;
-    window.addEventListener('scroll', () => {
+
+    function updateHeroParallax() {
+      const y = window.scrollY;
+      const viewportH = window.innerHeight;
+      const compactViewport = window.matchMedia('(max-width: 768px), (max-height: 680px)').matches;
+      const tallHero = heroContent.scrollHeight > viewportH * 0.88;
+
+      if (compactViewport || tallHero) {
+        heroBg.style.transform = y < viewportH ? `translateY(${y * 0.12}px)` : '';
+        heroContent.style.transform = '';
+        heroContent.style.opacity = '';
+        return;
+      }
+
+      if (hero && hero.getBoundingClientRect().bottom <= 0) {
+        heroBg.style.transform = '';
+        heroContent.style.transform = '';
+        heroContent.style.opacity = '';
+        return;
+      }
+
+      if (y < viewportH) {
+        heroBg.style.transform = `translateY(${y * 0.3}px)`;
+        heroContent.style.transform = `translateY(${y * 0.15}px)`;
+        heroContent.style.opacity = Math.max(0, 1 - y / (viewportH * 0.7));
+      } else {
+        heroBg.style.transform = '';
+        heroContent.style.transform = '';
+        heroContent.style.opacity = '';
+      }
+    }
+
+    function requestHeroParallaxUpdate() {
       if (!ticking) {
         requestAnimationFrame(() => {
-          const y = window.scrollY;
-          if (y < window.innerHeight) {
-            heroBg.style.transform = `translateY(${y * 0.3}px)`;
-            heroContent.style.transform = `translateY(${y * 0.15}px)`;
-            heroContent.style.opacity = Math.max(0, 1 - y / (window.innerHeight * 0.7));
-          }
+          updateHeroParallax();
           ticking = false;
         });
         ticking = true;
       }
-    }, { passive: true });
+    }
+
+    window.addEventListener('scroll', requestHeroParallaxUpdate, { passive: true });
+    window.addEventListener('resize', requestHeroParallaxUpdate);
+    requestHeroParallaxUpdate();
   }
 
 

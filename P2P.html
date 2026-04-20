@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
 <head>
+  <script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pwn2Play CTF - DMU Hackers Capture The Flag Competition</title>
-  <meta name="description" content="Pwn2Play is DMU Hackers' flagship Capture The Flag competition. Web exploitation, cryptography, reverse engineering and more. Open to everyone.">
+  <meta name="description" content="Pwn2Play: Core Incursion is DMU Hackers' flagship student CTF on 30 May 2026, bridging technical challenge practice with industry sponsor visibility.">
   <meta property="og:title" content="Pwn2Play CTF - DMU Hackers">
-  <meta property="og:description" content="DMU Hackers' flagship CTF competition. Exploit, decrypt, reverse-engineer. Prove you've got what it takes.">
+  <meta property="og:description" content="A Jeopardy-style CTF for students to validate practical cyber skills and connect with industry sponsors.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dmuhackers.com/P2P.html">
   <meta property="og:image" content="https://dmuhackers.com/img/site-content/logo/1200x630.png">
@@ -15,7 +15,7 @@
   <meta name="twitter:image" content="https://dmuhackers.com/img/site-content/logo/1200x628.png">
   <meta name="twitter:site" content="@dmuhackers">
   <meta name="twitter:title" content="Pwn2Play CTF - DMU Hackers">
-  <meta name="twitter:description" content="DMU Hackers' flagship CTF competition. Exploit, decrypt, reverse-engineer. Prove you've got what it takes.">
+  <meta name="twitter:description" content="A Jeopardy-style CTF for students to validate practical cyber skills and connect with industry sponsors.">
   <link rel="canonical" href="https://dmuhackers.com/P2P.html">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="img/site-content/logo/180x180.png">
@@ -27,24 +27,49 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/P2P.css">
   <link rel="stylesheet" href="css/theme-toggle.css">
-  <script type="application/ld+json">
+  <script id="p2p-event-schema" type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Event",
     "name": "Pwn2Play: Core Incursion",
-    "description": "DMU Hackers' flagship Capture The Flag competition. Web exploitation, cryptography, reverse engineering and more.",
+    "description": "DMU Hackers' flagship student Capture The Flag competition, designed to validate practical cyber skills and give participants visibility with industry sponsors.",
     "startDate": "2026-05-30T09:00:00+01:00",
+    "endDate": "2026-05-30T18:00:00+01:00",
     "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
     "eventStatus": "https://schema.org/EventScheduled",
     "location": {
       "@type": "Place",
-      "name": "De Montfort University Gateway House",
-      "address": { "@type": "PostalAddress", "addressLocality": "Leicester", "addressCountry": "GB" }
+      "name": "Gateway House",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Gateway House, Floor 5, De Montfort University, The Gateway, Leicester LE1 9BH",
+        "addressLocality": "Leicester",
+        "postalCode": "LE1 9BH",
+        "addressCountry": "GB"
+      }
+    },
+    "virtualLocation": {
+      "@type": "VirtualLocation",
+      "url": "https://pwn2play.biterra.co"
     },
     "organizer": {
       "@type": "Organization",
       "name": "DMU Hackers",
-      "url": "https://dmuhackers.com"
+      "url": "https://dmuhackers.com",
+      "sameAs": [
+        "https://twitter.com/dmuhackers",
+        "https://github.com/DMUHackers",
+        "https://www.instagram.com/hackers.dmu",
+        "https://www.linkedin.com/company/dmu-hackers/",
+        "https://discord.gg/Vvrk4kK"
+      ]
+    },
+    "offers": {
+      "@type": "Offer",
+      "url": "https://luma.com/embed/event/evt-9baefgwD4wSfcBc/simple",
+      "price": "0",
+      "priceCurrency": "GBP",
+      "availability": "https://schema.org/InStock"
     },
     "isAccessibleForFree": true
   }
@@ -133,8 +158,8 @@
         <div class="p2p-event-details">
           <article class="p2p-event-tile p2p-event-tile--brief">
             <span class="p2p-event-tile__eyebrow">Pwn2Play: Core Incursion</span>
-            <h3>Hybrid CTF for teams of up to 6</h3>
-            <p>Open to students, professionals and hobbyists. Compete online or in person across web, crypto, reversing, OSINT, pwn and more.</p>
+            <h3>Hybrid student CTF for teams of up to 6</h3>
+            <p>A rigorous Jeopardy-style competition built to validate practical skills and connect emerging cyber talent with industry sponsors.</p>
           </article>
 
           <article class="p2p-event-tile p2p-event-tile--stat p2p-event-tile--date">
@@ -177,50 +202,106 @@
   <section id="categories" class="section">
     <div class="container">
       <div class="section__header">
-        <span class="section__tag">8 Categories</span>
+        <span class="section__tag">12 Categories, 50 Challenges</span>
         <h2 class="section__title">Challenge Categories</h2>
-        <p class="section__subtitle">Something for every skill set. From binary exploitation to open-source intelligence.</p>
+        <p class="section__subtitle">A broad challenge set weighted toward web exploitation, with room for reversing, forensics, OSINT, scripting, crypto and fundamentals.</p>
       </div>
-      <div class="cards cards--four p2p-cat-cards">
+      <div class="cards cards--four p2p-cat-cards" data-p2p-categories>
         <div class="card p2p-cat-card">
-          <div class="card__icon"><i class="fas fa-skull-crossbones"></i></div>
-          <h3 class="card__title">Full Pwn</h3>
-          <p class="card__text">Complete system takeover. Combine multiple attack vectors to go from zero to root.</p>
+          <div class="p2p-cat-card__top">
+            <div class="card__icon"><i class="fas fa-globe"></i></div>
+            <span class="p2p-cat-card__count">15</span>
+          </div>
+          <h3 class="card__title">Web Exploitation</h3>
+          <p class="card__text">SQL injection, XSS, SSRF, authentication bypasses and web logic flaws.</p>
         </div>
         <div class="card p2p-cat-card">
-          <div class="card__icon"><i class="fas fa-terminal"></i></div>
-          <h3 class="card__title">Pwn</h3>
-          <p class="card__text">Binary exploitation. Buffer overflows, format strings, ROP chains - break the binary, get the flag.</p>
+          <div class="p2p-cat-card__top">
+            <div class="card__icon"><i class="fas fa-microchip"></i></div>
+            <span class="p2p-cat-card__count">7</span>
+          </div>
+          <h3 class="card__title">Reverse Engineering</h3>
+          <p class="card__text">Disassemble, decompile and decode binaries to uncover hidden logic.</p>
         </div>
         <div class="card p2p-cat-card">
-          <div class="card__icon"><i class="fas fa-microchip"></i></div>
-          <h3 class="card__title">Rev</h3>
-          <p class="card__text">Reverse engineering. Disassemble, decompile, and decode binaries to uncover hidden logic.</p>
+          <div class="p2p-cat-card__top">
+            <div class="card__icon"><i class="fas fa-puzzle-piece"></i></div>
+            <span class="p2p-cat-card__count">7</span>
+          </div>
+          <h3 class="card__title">Miscellaneous</h3>
+          <p class="card__text">Unexpected formats, strange clues and challenge ideas that refuse one label.</p>
         </div>
         <div class="card p2p-cat-card">
-          <div class="card__icon"><i class="fas fa-puzzle-piece"></i></div>
-          <h3 class="card__title">Misc</h3>
-          <p class="card__text">Anything goes. Steganography, forensics, encoding schemes, or something completely unexpected.</p>
+          <div class="p2p-cat-card__top">
+            <div class="card__icon"><i class="fas fa-fingerprint"></i></div>
+            <span class="p2p-cat-card__count">5</span>
+          </div>
+          <h3 class="card__title">Forensics</h3>
+          <p class="card__text">Recover evidence from captures, filesystems, memory, logs and hidden artefacts.</p>
         </div>
         <div class="card p2p-cat-card">
-          <div class="card__icon"><i class="fas fa-magnifying-glass"></i></div>
+          <div class="p2p-cat-card__top">
+            <div class="card__icon"><i class="fas fa-magnifying-glass"></i></div>
+            <span class="p2p-cat-card__count">4</span>
+          </div>
           <h3 class="card__title">OSINT</h3>
-          <p class="card__text">Open-source intelligence. Track down information using publicly available data and digital footprints.</p>
+          <p class="card__text">Track down answers through public records, digital footprints and careful research.</p>
         </div>
         <div class="card p2p-cat-card">
-          <div class="card__icon"><i class="fas fa-code"></i></div>
+          <div class="p2p-cat-card__top">
+            <div class="card__icon"><i class="fas fa-scroll"></i></div>
+            <span class="p2p-cat-card__count">3</span>
+          </div>
+          <h3 class="card__title">Scripting</h3>
+          <p class="card__text">Automate parsing, brute force paths and transform data under time pressure.</p>
+        </div>
+        <div class="card p2p-cat-card">
+          <div class="p2p-cat-card__top">
+            <div class="card__icon"><i class="fas fa-lock"></i></div>
+            <span class="p2p-cat-card__count">3</span>
+          </div>
+          <h3 class="card__title">Cryptography</h3>
+          <p class="card__text">Break ciphers, exploit weak implementations and reason about flawed secrecy.</p>
+        </div>
+        <div class="card p2p-cat-card">
+          <div class="p2p-cat-card__top">
+            <div class="card__icon"><i class="fab fa-linux"></i></div>
+            <span class="p2p-cat-card__count">2</span>
+          </div>
+          <h3 class="card__title">Linux</h3>
+          <p class="card__text">Navigate shells, permissions, processes and system clues like an operator.</p>
+        </div>
+        <div class="card p2p-cat-card">
+          <div class="p2p-cat-card__top">
+            <div class="card__icon"><i class="fas fa-terminal"></i></div>
+            <span class="p2p-cat-card__count">1</span>
+          </div>
+          <h3 class="card__title">Binary Exploitation</h3>
+          <p class="card__text">Break compiled targets with memory corruption, control flow and exploit craft.</p>
+        </div>
+        <div class="card p2p-cat-card">
+          <div class="p2p-cat-card__top">
+            <div class="card__icon"><i class="fas fa-skull-crossbones"></i></div>
+            <span class="p2p-cat-card__count">1</span>
+          </div>
+          <h3 class="card__title">Full-Pwn</h3>
+          <p class="card__text">Chain attack paths from initial access to deeper compromise.</p>
+        </div>
+        <div class="card p2p-cat-card">
+          <div class="p2p-cat-card__top">
+            <div class="card__icon"><i class="fas fa-code"></i></div>
+            <span class="p2p-cat-card__count">1</span>
+          </div>
           <h3 class="card__title">Code</h3>
-          <p class="card__text">Programming challenges. Solve algorithmic problems or write scripts under time pressure.</p>
+          <p class="card__text">Solve a focused programming problem with clean logic and fast execution.</p>
         </div>
         <div class="card p2p-cat-card">
-          <div class="card__icon"><i class="fas fa-globe"></i></div>
-          <h3 class="card__title">Web</h3>
-          <p class="card__text">Web exploitation. SQL injection, XSS, SSRF, authentication bypasses - hack the web app.</p>
-        </div>
-        <div class="card p2p-cat-card">
-          <div class="card__icon"><i class="fas fa-lock"></i></div>
-          <h3 class="card__title">Crypto</h3>
-          <p class="card__text">Cryptography. Break ciphers, exploit weak implementations, and crack the code.</p>
+          <div class="p2p-cat-card__top">
+            <div class="card__icon"><i class="fas fa-flag-checkered"></i></div>
+            <span class="p2p-cat-card__count">1</span>
+          </div>
+          <h3 class="card__title">Intro</h3>
+          <p class="card__text">A first flag to get teams settled into the platform and event flow.</p>
         </div>
       </div>
     </div>
@@ -233,7 +314,7 @@
         <span class="section__tag">Important</span>
         <h2 class="section__title">Key Information</h2>
       </div>
-      <div class="cards cards--two">
+      <div class="cards cards--two" data-p2p-key-info>
         <div class="card card--horizontal">
           <div class="card__icon"><i class="fas fa-shield-halved"></i></div>
           <div>
@@ -263,7 +344,7 @@
           </div>
         </div>
       </div>
-      <div class="calendar-actions" style="margin-top: 32px;">
+      <div class="calendar-actions" style="margin-top: 32px;" data-p2p-action-links>
         <a href="map.html" class="btn btn--ghost"><i class="fas fa-map-location-dot"></i> View Campus Map</a>
       </div>
     </div>
@@ -274,89 +355,76 @@
     <div class="container">
       <div class="section__header">
         <span class="section__tag">Rewards</span>
-        <h2 class="section__title">Prizes</h2>
-        <p class="section__subtitle">Top three teams in both tracks receive prizes, with extra rewards available for the in-person podium.</p>
+        <h2 class="section__title">In-Person Prizes</h2>
+        <p class="section__subtitle">Challenge Coins and TryHackMe Premium vouchers are reserved for the in-person podium.</p>
       </div>
-      <div class="prizes-layout">
-        <article class="prize-track">
-          <div class="prize-track__header">
-            <div class="prize-track__icon"><i class="fas fa-laptop-code"></i></div>
-            <div>
-              <h3 class="prize-track__title">Online</h3>
-              <p class="prize-track__intro">Remote teams on the podium each receive certificates for every team member.</p>
-            </div>
-          </div>
+      <div class="prizes-showcase" data-p2p-prizes>
+        <div class="prizes-showcase__intro">
+          <span class="prizes-showcase__kicker">In-person rewards</span>
+          <p>In-person podium teams receive formal recognition, a P2P Challenge Coin and TryHackMe Premium time for four team members.</p>
+        </div>
 
-          <div class="prize-tier">
-            <span class="prize-tier__place">1st Place</span>
-            <ul class="prize-tier__perks">
-              <li>Certificate for each team member</li>
+        <div class="prize-podium" aria-label="Pwn2Play in-person prize rewards by placement">
+          <article class="prize-podium__place prize-podium__place--second">
+            <span class="prize-podium__rank">2nd</span>
+            <h3>Second Place</h3>
+            <ul class="prize-podium__rewards">
+              <li><i class="fas fa-certificate"></i> Faculty-signed Certificate</li>
+              <li><i class="fas fa-coins"></i> P2P Challenge Coin</li>
+              <li><i class="fas fa-user-shield"></i> 4x 3-month TryHackMe Premium vouchers</li>
             </ul>
-          </div>
+          </article>
 
-          <div class="prize-tier">
-            <span class="prize-tier__place">2nd Place</span>
-            <ul class="prize-tier__perks">
-              <li>Certificate for each team member</li>
+          <article class="prize-podium__place prize-podium__place--first">
+            <span class="prize-podium__rank">1st</span>
+            <h3>First Place</h3>
+            <ul class="prize-podium__rewards">
+              <li><i class="fas fa-certificate"></i> Faculty-signed Certificate</li>
+              <li><i class="fas fa-coins"></i> P2P Challenge Coin</li>
+              <li><i class="fas fa-user-shield"></i> 4x 6-month TryHackMe Premium vouchers</li>
             </ul>
-          </div>
+          </article>
 
-          <div class="prize-tier">
-            <span class="prize-tier__place">3rd Place</span>
-            <ul class="prize-tier__perks">
-              <li>Certificate for each team member</li>
+          <article class="prize-podium__place prize-podium__place--third">
+            <span class="prize-podium__rank">3rd</span>
+            <h3>Third Place</h3>
+            <ul class="prize-podium__rewards">
+              <li><i class="fas fa-certificate"></i> Faculty-signed Certificate</li>
+              <li><i class="fas fa-coins"></i> P2P Challenge Coin</li>
+              <li><i class="fas fa-user-shield"></i> 4x 1-month TryHackMe Premium vouchers</li>
             </ul>
-          </div>
-        </article>
+          </article>
+        </div>
 
-        <article class="prize-track prize-track--featured">
-          <div class="prize-track__header">
-            <div class="prize-track__icon"><i class="fas fa-building-columns"></i></div>
-            <div>
-              <h3 class="prize-track__title">In-Person</h3>
-              <p class="prize-track__intro">On-campus winners receive certificates, custom challenge coins, and TryHackMe Premium vouchers.</p>
-            </div>
-          </div>
-
-          <div class="prize-tier">
-            <span class="prize-tier__place">1st Place</span>
-            <ul class="prize-tier__perks">
-              <li>Certificate for each team member</li>
-              <li>Custom challenge coin for each team member</li>
-              <li>4x 6-month TryHackMe Premium vouchers</li>
-            </ul>
-          </div>
-
-          <div class="prize-tier">
-            <span class="prize-tier__place">2nd Place</span>
-            <ul class="prize-tier__perks">
-              <li>Certificate for each team member</li>
-              <li>Custom challenge coin for each team member</li>
-              <li>4x 3-month TryHackMe Premium vouchers</li>
-            </ul>
-          </div>
-
-          <div class="prize-tier">
-            <span class="prize-tier__place">3rd Place</span>
-            <ul class="prize-tier__perks">
-              <li>Certificate for each team member</li>
-              <li>Custom challenge coin for each team member</li>
-              <li>4x 1-month TryHackMe Premium vouchers</li>
-            </ul>
-          </div>
-        </article>
+        <p class="prize-note"><i class="fas fa-award"></i> Online and in-person winners receive a Certificate of Achievement signed by DMU Faculty for LinkedIn and professional portfolios. Challenge Coins and TryHackMe vouchers are awarded to in-person podium teams.</p>
       </div>
     </div>
   </section>
 
+  <!-- Scoreboards -->
+  <section id="scoreboards" class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">Tracks</span>
+        <h2 class="section__title">Scoreboard Rules</h2>
+        <p class="section__subtitle">Choose the right track before you start solving.</p>
+      </div>
+      <div class="scoreboard-tracks" data-p2p-scoreboards></div>
+    </div>
+  </section>
+
   <!-- Server Rules -->
-  <section id="rules" class="section section--alt">
+  <section id="rules" class="section">
     <div class="container">
       <div class="section__header">
         <span class="section__tag">Read the Rules</span>
         <h2 class="section__title">CTF Server Rules</h2>
+        <p class="section__subtitle" data-p2p-last-updated></p>
+        <div class="calendar-actions">
+          <button class="btn btn--ghost btn--sm" type="button" data-print-rules><i class="fas fa-print"></i> Print Rules</button>
+        </div>
       </div>
-      <div class="rules-stack">
+      <div class="rules-stack" data-p2p-rules>
         <div class="rule">
           <div class="rule__marker">
             <span class="rule__num">01</span>
@@ -374,9 +442,26 @@
             </ul>
           </div>
         </div>
-        <div class="rule">
+        <div class="rule rule--critical">
           <div class="rule__marker">
             <span class="rule__num">02</span>
+            <div class="rule__line"></div>
+          </div>
+          <div class="rule__body">
+            <div class="rule__header">
+              <i class="fas fa-triangle-exclamation rule__icon"></i>
+              <h3 class="rule__title">AI Usage Policy</h3>
+            </div>
+            <ul class="rule__list">
+              <li>AI usage is strictly forbidden in the main event.</li>
+              <li>Teams found using AI in the main event will be disqualified.</li>
+              <li>A separate AI-only scoreboard will be available on the Pwn2Play platform for teams who choose to use AI.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="rule">
+          <div class="rule__marker">
+            <span class="rule__num">03</span>
             <div class="rule__line"></div>
           </div>
           <div class="rule__body">
@@ -393,7 +478,7 @@
         </div>
         <div class="rule">
           <div class="rule__marker">
-            <span class="rule__num">03</span>
+            <span class="rule__num">04</span>
             <div class="rule__line"></div>
           </div>
           <div class="rule__body">
@@ -410,7 +495,7 @@
         </div>
         <div class="rule">
           <div class="rule__marker">
-            <span class="rule__num">04</span>
+            <span class="rule__num">05</span>
             <div class="rule__line"></div>
           </div>
           <div class="rule__body">
@@ -427,7 +512,7 @@
         </div>
         <div class="rule">
           <div class="rule__marker">
-            <span class="rule__num">05</span>
+            <span class="rule__num">06</span>
             <div class="rule__line"></div>
           </div>
           <div class="rule__body">
@@ -444,7 +529,7 @@
         </div>
         <div class="rule">
           <div class="rule__marker">
-            <span class="rule__num">06</span>
+            <span class="rule__num">07</span>
             <div class="rule__line"></div>
           </div>
           <div class="rule__body">
@@ -455,13 +540,12 @@
             <ul class="rule__list">
               <li>No social engineering, phishing, or attacking other teams' setups.</li>
               <li>No modifying, deleting, or tampering with challenge infrastructure.</li>
-              <li>No use of AI-generated solutions unless explicitly allowed.</li>
             </ul>
           </div>
         </div>
         <div class="rule">
           <div class="rule__marker">
-            <span class="rule__num">07</span>
+            <span class="rule__num">08</span>
             <div class="rule__line"></div>
           </div>
           <div class="rule__body">
@@ -477,7 +561,7 @@
         </div>
         <div class="rule">
           <div class="rule__marker">
-            <span class="rule__num">08</span>
+            <span class="rule__num">09</span>
             <div class="rule__line"></div>
           </div>
           <div class="rule__body">
@@ -493,7 +577,7 @@
         </div>
         <div class="rule">
           <div class="rule__marker">
-            <span class="rule__num">09</span>
+            <span class="rule__num">10</span>
           </div>
           <div class="rule__body">
             <div class="rule__header">
@@ -547,7 +631,9 @@
         <p class="section__subtitle">Prize providers and challenge creators supporting Pwn2Play: Core Incursion.</p>
       </div>
 
-      <div class="p2p-sponsor-showcase">
+      <div class="sponsor-recruitment" data-p2p-sponsor-cta></div>
+
+      <div class="p2p-sponsor-showcase" data-p2p-sponsors>
         <div class="p2p-sponsor-band">
           <div class="p2p-sponsor-band__header">
             <span class="p2p-sponsor-band__eyebrow">Prize Providers</span>
@@ -709,6 +795,7 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
+  <script src="data/site-content.js" defer></script>
   <script src="js/main.js" defer></script>
 </body>
 

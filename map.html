@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
 <head>
+  <script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Campus Map - Pwn2Play CTF - DMU Hackers</title>
@@ -90,6 +90,7 @@
   <section class="section section--alt">
     <div class="container">
 
+      <div data-p2p-venues>
       <!-- Venue 1: Gateway House -->
       <div class="venue" id="ctf-venue">
         <div class="venue__info">
@@ -165,6 +166,7 @@
         </div>
       </div>
 
+      </div>
     </div>
   </section>
 
@@ -256,6 +258,7 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
+  <script src="data/site-content.js" defer></script>
   <script src="js/main.js" defer></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
@@ -263,10 +266,10 @@
       var tileUrl = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
       var attr = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>';
 
-      var venues = [
-        { lat: 52.6294, lng: -1.1381, title: 'Gateway House', sub: 'CTF Venue', icon: 'fa-flag-checkered', color: '#c8102e', glow: 'rgba(200,16,46,.4)' },
-        { lat: 52.6297, lng: -1.1383, title: 'DSU', sub: 'Awards Ceremony', icon: 'fa-trophy', color: '#ffd700', glow: 'rgba(255,215,0,.35)' },
-        { lat: 52.6364, lng: -1.1331, title: 'After Party', sub: 'Social Route', icon: 'fa-champagne-glasses', color: '#00e4ff', glow: 'rgba(0,228,255,.35)' }
+      var venues = (window.DMU_SITE_CONTENT && window.DMU_SITE_CONTENT.p2p && window.DMU_SITE_CONTENT.p2p.venues) || [
+        { lat: 52.6294, lng: -1.1381, shortTitle: 'Gateway House', title: 'Gateway House', sub: 'CTF Venue', icon: 'fa-flag-checkered', color: '#c8102e', glow: 'rgba(200,16,46,.4)', mapId: 'mapGateway', zoom: 17 },
+        { lat: 52.6297, lng: -1.1383, shortTitle: 'DSU', title: 'DSU', sub: 'Awards Ceremony', icon: 'fa-trophy', color: '#ffd700', glow: 'rgba(255,215,0,.35)', mapId: 'mapDSU', zoom: 17 },
+        { lat: 52.6364, lng: -1.1331, shortTitle: 'After Party', title: 'After Party', sub: 'Social Route', icon: 'fa-champagne-glasses', color: '#00e4ff', glow: 'rgba(0,228,255,.35)', mapId: 'mapAfterParty', zoom: 16 }
       ];
 
       function makeIcon(v, large) {
@@ -277,7 +280,7 @@
           html: '<div class="map-pin__pulse" style="background:' + v.glow + ';"></div>' +
                 '<div class="map-pin__dot" style="width:' + s + 'px;height:' + s + 'px;background:' + v.color + ';box-shadow:0 0 16px ' + v.glow + ', 0 2px 8px rgba(0,0,0,.5);">' +
                 '<i class="fas ' + v.icon + '" style="font-size:' + fs + 'px;color:#fff;"></i></div>' +
-                (large ? '<span class="map-pin__label" style="border-color:' + v.color + ';">' + v.title + '</span>' : ''),
+                (large ? '<span class="map-pin__label" style="border-color:' + v.color + ';">' + (v.shortTitle || v.title) + '</span>' : ''),
           iconSize: [s, s],
           iconAnchor: [s / 2, s / 2],
           popupAnchor: [0, -(s / 2) - 4]
@@ -299,19 +302,17 @@
       /* Overview map - all 3 venues */
       var overview = initMap('overviewMap', { zoomControl: true });
       venues.forEach(function (v) {
-        L.marker([v.lat, v.lng], { icon: makeIcon(v, true), title: v.title })
+        L.marker([v.lat, v.lng], { icon: makeIcon(v, true), title: v.shortTitle || v.title })
           .addTo(overview)
           .bindPopup(makePopup(v));
       });
       overview.fitBounds(venues.map(function (v) { return [v.lat, v.lng]; }), { padding: [50, 50] });
 
       /* Individual venue maps */
-      var ids = ['mapGateway', 'mapDSU', 'mapAfterParty'];
-      var zooms = [17, 17, 16];
       venues.forEach(function (v, i) {
-        var m = initMap(ids[i], { zoomControl: false });
-        m.setView([v.lat, v.lng], zooms[i]);
-        L.marker([v.lat, v.lng], { icon: makeIcon(v, false), title: v.title })
+        var m = initMap(v.mapId, { zoomControl: false });
+        m.setView([v.lat, v.lng], v.zoom || 17);
+        L.marker([v.lat, v.lng], { icon: makeIcon(v, false), title: v.shortTitle || v.title })
           .addTo(m)
           .bindPopup(makePopup(v));
       });
