@@ -267,7 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const podium = el('div', 'prize-podium');
     podium.setAttribute('aria-label', 'Pwn2Play in-person prize rewards by placement');
-    (prizes.placements || []).forEach(place => {
+    const placements = [...(prizes.placements || [])].sort((a, b) => Number(a.rank) - Number(b.rank));
+    placements.forEach(place => {
       const rankClass = place.rank === 1 ? 'first' : place.rank === 2 ? 'second' : 'third';
       const article = el('article', 'prize-podium__place prize-podium__place--' + rankClass);
       article.appendChild(el('span', 'prize-podium__rank', rankLabel(place.rank)));

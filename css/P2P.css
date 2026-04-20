@@ -723,6 +723,10 @@
   box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
 }
 
+.prize-podium__place--second {
+  order: 1;
+}
+
 .prize-podium__place::before {
   content: '';
   position: absolute;
@@ -732,6 +736,7 @@
 }
 
 .prize-podium__place--first {
+  order: 2;
   transform: translateY(-8px);
   border-color: rgba(244,201,93,.28);
   background:
@@ -749,6 +754,10 @@
 
 .prize-podium__place--third::before {
   background: #c98756;
+}
+
+.prize-podium__place--third {
+  order: 3;
 }
 
 .prize-podium__rank {
@@ -1581,7 +1590,16 @@
   }
 
   .prize-podium__place--first {
+    order: 1;
     transform: none;
+  }
+
+  .prize-podium__place--second {
+    order: 2;
+  }
+
+  .prize-podium__place--third {
+    order: 3;
   }
 
   .hero-countdown__timer { gap: 8px; }
