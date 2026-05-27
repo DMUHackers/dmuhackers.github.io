@@ -33,7 +33,7 @@ const pages = [
       podium: document.querySelectorAll('#podiumContainer .podium__place').length
     }),
     lightChecks: [
-      '.p2p-event-tile--headline .hero-countdown__unit',
+      '.p2p-poster__countdown .hero-countdown__unit',
       '.p2p-pulse__tile',
       '.p2p-breakdown-card',
       '.prize-podium__place',
