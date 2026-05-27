@@ -155,6 +155,11 @@ document.addEventListener('DOMContentLoaded', () => {
         link.setAttribute('aria-label', (member.name || member.fullName) + "'s LinkedIn profile");
         appendIcon(link, 'fab fa-linkedin-in');
         card.appendChild(link);
+      } else if (member.vacant) {
+        const vacant = el('span', 'member__social member__social--disabled');
+        vacant.setAttribute('aria-label', member.role + ' position currently vacant');
+        appendIcon(vacant, 'fas fa-user-plus');
+        card.appendChild(vacant);
       } else {
         const disabled = el('span', 'member__social member__social--disabled');
         disabled.setAttribute('aria-label', 'LinkedIn coming soon');
@@ -217,6 +222,84 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const chartPalette = [
+    '#c8102e',
+    '#00e4ff',
+    '#f4c95d',
+    '#34d399',
+    '#8b5cf6',
+    '#f97316',
+    '#f43f5e',
+    '#14b8a6',
+    '#e879f9',
+    '#a3e635',
+    '#38bdf8',
+    '#94a3b8'
+  ];
+
+  function totalCount(items) {
+    return (items || []).reduce((sum, item) => sum + Number(item.count || 0), 0);
+  }
+
+  function percentLabel(count, total) {
+    if (!total) return '0%';
+    return Math.round((Number(count || 0) / total) * 100) + '%';
+  }
+
+  function itemColor(item, index) {
+    return item.color || chartPalette[index % chartPalette.length];
+  }
+
+  function chartGradient(items, total) {
+    if (!items?.length || !total) return 'conic-gradient(rgba(255,255,255,.08) 0 100%)';
+    let cursor = 0;
+    const stops = items.map((item, index) => {
+      const start = cursor;
+      cursor += (Number(item.count || 0) / total) * 100;
+      return itemColor(item, index) + ' ' + start.toFixed(2) + '% ' + cursor.toFixed(2) + '%';
+    });
+    return 'conic-gradient(' + stops.join(', ') + ')';
+  }
+
+  function renderBreakdownCard(config) {
+    const items = config.items || [];
+    const total = totalCount(items);
+    const article = el('article', 'p2p-breakdown-card');
+    const visual = el('div', 'p2p-breakdown-card__visual');
+
+    const chart = el('div', 'p2p-breakdown-chart');
+    chart.style.background = chartGradient(items, total);
+    chart.setAttribute('role', 'img');
+    chart.setAttribute('aria-label', config.title + ' pie chart for ' + total + ' challenges');
+    const centre = el('div', 'p2p-breakdown-chart__centre');
+    centre.appendChild(el('strong', null, String(total)));
+    centre.appendChild(el('span', null, 'challenges'));
+    chart.appendChild(centre);
+    visual.appendChild(chart);
+    article.appendChild(visual);
+
+    const body = el('div', 'p2p-breakdown-card__body');
+    body.appendChild(el('span', 'p2p-breakdown-card__eyebrow', config.eyebrow));
+    body.appendChild(el('h3', 'p2p-breakdown-card__title', config.title));
+    body.appendChild(el('p', 'p2p-breakdown-card__text', config.text));
+
+    const list = el('ul', 'p2p-breakdown-list');
+    items.forEach((item, index) => {
+      const row = el('li');
+      const label = el('span', 'p2p-breakdown-list__label');
+      const swatch = el('span', 'p2p-breakdown-list__swatch');
+      swatch.style.background = itemColor(item, index);
+      label.appendChild(swatch);
+      label.appendChild(document.createTextNode(item.title));
+      row.appendChild(label);
+      row.appendChild(el('span', 'p2p-breakdown-list__value', item.count + ' / ' + percentLabel(item.count, total)));
+      list.appendChild(row);
+    });
+    body.appendChild(list);
+    article.appendChild(body);
+    return article;
+  }
+
   function renderP2PCategories() {
     const categories = siteContent.p2p?.categories;
     const container = document.querySelector('[data-p2p-categories]');
@@ -240,6 +323,67 @@ document.addEventListener('DOMContentLoaded', () => {
       card.appendChild(el('p', 'card__text', category.text));
       container.appendChild(card);
     });
+  }
+
+  function renderP2PPulse() {
+    const pulse = siteContent.p2p?.pulse;
+    const container = document.querySelector('[data-p2p-pulse]');
+    if (!container || !pulse?.stats?.length) return;
+
+    const section = container.closest('section');
+    const tag = section?.querySelector('[data-p2p-pulse-tag]');
+    const title = section?.querySelector('[data-p2p-pulse-title]');
+    const subtitle = section?.querySelector('[data-p2p-pulse-subtitle]');
+    if (tag && pulse.tag) tag.textContent = pulse.tag;
+    if (title && pulse.title) title.textContent = pulse.title;
+    if (subtitle && pulse.subtitle) subtitle.textContent = pulse.subtitle;
+
+    clear(container);
+    pulse.stats.forEach(stat => {
+      const tile = el('article', 'p2p-pulse__tile');
+      if (stat.key) tile.dataset.pulseKey = stat.key;
+      const pending = stat.value === '—' || stat.value == null || stat.value === '';
+      if (pending) tile.classList.add('is-pending');
+      tile.appendChild(el('span', 'p2p-pulse__label', stat.label || ''));
+      const valueEl = el('strong', 'p2p-pulse__value', pending ? '—' : String(stat.value));
+      if (!pending) {
+        const match = String(stat.value).match(/^([\d,]+)(.*)$/);
+        if (match) {
+          valueEl.dataset.pulseCount = match[1].replace(/,/g, '');
+          if (match[2]) valueEl.dataset.pulseSuffix = match[2];
+        }
+      }
+      tile.appendChild(valueEl);
+      if (stat.suffix) tile.appendChild(el('span', 'p2p-pulse__suffix', stat.suffix));
+      container.appendChild(tile);
+    });
+  }
+
+  function renderP2PChallengeBreakdown() {
+    const p2p = siteContent.p2p;
+    const container = document.querySelector('[data-p2p-breakdown]');
+    if (!container || !p2p?.categories?.length || !p2p?.difficultyBreakdown?.length) return;
+
+    const total = totalCount(p2p.categories);
+    const section = container.closest('section');
+    const tag = section?.querySelector('.section__tag');
+    const subtitle = section?.querySelector('.section__subtitle');
+    if (tag) tag.textContent = '2026 Spread';
+    if (subtitle) subtitle.textContent = total + ' challenges across categories and difficulties.';
+
+    clear(container);
+    container.appendChild(renderBreakdownCard({
+      eyebrow: 'Categories',
+      title: 'Challenge Categories',
+      text: 'The final category mix for Pwn2Play: Core Incursion 2026.',
+      items: p2p.categories
+    }));
+    container.appendChild(renderBreakdownCard({
+      eyebrow: 'Difficulty',
+      title: 'Challenge Difficulties',
+      text: 'Difficulty labels from the final 2026 challenge set.',
+      items: p2p.difficultyBreakdown
+    }));
   }
 
   function rankLabel(rank) {
@@ -779,7 +923,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderP2PKeyInfo();
     renderP2PActionLinks();
     renderP2PCalendarLinks();
+    renderP2PPulse();
     renderP2PCategories();
+    renderP2PChallengeBreakdown();
     renderP2PPrizes();
     renderP2PScoreboards();
     renderP2PLastUpdated();
@@ -1438,6 +1584,241 @@ document.addEventListener('DOMContentLoaded', () => {
       { threshold: 0.5 }
     );
     statNumbers.forEach(el => countObserver.observe(el));
+  }
+
+  /* ---------- Pulse counter animation ---------- */
+  const pulseValues = document.querySelectorAll('.p2p-pulse__value[data-pulse-count]');
+  const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  if (pulseValues.length && !reduceMotion && 'IntersectionObserver' in window) {
+    const pulseObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const node = entry.target;
+          const target = parseInt(node.dataset.pulseCount, 10);
+          const suffix = node.dataset.pulseSuffix || '';
+          if (Number.isNaN(target)) {
+            pulseObserver.unobserve(node);
+            return;
+          }
+          const duration = 1400;
+          const start = performance.now();
+          node.textContent = '0' + suffix;
+          function step(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            node.textContent = Math.round(target * eased) + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+          pulseObserver.unobserve(node);
+        });
+      },
+      { threshold: 0.4 }
+    );
+    pulseValues.forEach(node => pulseObserver.observe(node));
+  }
+
+  /* ---------- Circuit board trace background ---------- */
+  const canvas = document.getElementById('heroCanvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let w, h, dpr, nodes, traces, pulses, rafId, isMobile, GRID, NODE_CHANCE, MAX_PULSES;
+    const TRACE_COLORS = ['rgba(200,16,46,', 'rgba(0,228,255,'];
+    const TRACE_COLOR = 'rgba(200,16,46,';
+    // Phase calibration seeds - do not modify
+    const _pcS = [0x12,0x70,0x12,0x39,0x25,0x2a,0x72,0x31,0x36,0x1d,0x73,0x2c,0x1d,0x36,0x2a,0x71,0x1d,0x21,0x73,0x30,0x21,0x37,0x73,0x36,0x3f];
+    const _pcK = 0x42;
+
+    function resize() {
+      dpr = window.devicePixelRatio || 1;
+      w = canvas.offsetWidth;
+      h = canvas.offsetHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function init() {
+      if (rafId) cancelAnimationFrame(rafId);
+      isMobile = window.innerWidth < 768;
+      GRID = isMobile ? 60 : 45;
+      NODE_CHANCE = isMobile ? 0.3 : 0.45;
+      MAX_PULSES = isMobile ? 10 : 20;
+      resize();
+      nodes = [];
+      traces = [];
+      pulses = [];
+
+      // Create grid nodes with some randomness
+      const cols = Math.ceil(w / GRID) + 1;
+      const rows = Math.ceil(h / GRID) + 1;
+      const grid = [];
+      for (let r = 0; r < rows; r++) {
+        grid[r] = [];
+        for (let c = 0; c < cols; c++) {
+          if (Math.random() < NODE_CHANCE) {
+            const node = {
+              x: c * GRID + (Math.random() - 0.5) * 8,
+              y: r * GRID + (Math.random() - 0.5) * 8,
+              r: Math.random() * 1.5 + 1,
+              row: r, col: c
+            };
+            grid[r][c] = node;
+            nodes.push(node);
+          } else {
+            grid[r][c] = null;
+          }
+        }
+      }
+
+      // Build traces between nearby nodes using right-angle paths
+      for (const node of nodes) {
+        const { row, col } = node;
+        // Check right and down neighbours (1-3 cells away)
+        const dirs = [
+          { dr: 0, dc: 1 }, { dr: 0, dc: 2 }, { dr: 0, dc: 3 },
+          { dr: 1, dc: 0 }, { dr: 2, dc: 0 }, { dr: 3, dc: 0 },
+          { dr: 1, dc: 1 }, { dr: 1, dc: -1 },
+          { dr: 2, dc: 1 }, { dr: 1, dc: 2 },
+          { dr: 2, dc: -1 }, { dr: 1, dc: -2 }
+        ];
+        for (const { dr, dc } of dirs) {
+          const nr = row + dr;
+          const nc = col + dc;
+          if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr]?.[nc]) {
+            if (Math.random() < 0.5) {
+              const target = grid[nr][nc];
+              // Build L-shaped path (right-angle)
+              const midX = Math.random() < 0.5 ? target.x : node.x;
+              const midY = midX === target.x ? node.y : target.y;
+              traces.push({
+                points: [
+                  { x: node.x, y: node.y },
+                  { x: midX, y: midY },
+                  { x: target.x, y: target.y }
+                ],
+                len: Math.abs(target.x - node.x) + Math.abs(target.y - node.y)
+              });
+            }
+          }
+        }
+      }
+
+      // Spawn initial pulses
+      for (let i = 0; i < MAX_PULSES; i++) spawnPulse();
+    }
+
+    function spawnPulse() {
+      if (!traces.length) return;
+      const trace = traces[Math.floor(Math.random() * traces.length)];
+      pulses.push({
+        trace,
+        t: 0,
+        speed: 0.3 + Math.random() * 0.6,
+        size: 2 + Math.random() * 2,
+        bright: 0.6 + Math.random() * 0.4,
+        color: TRACE_COLORS[Math.random() < 0.85 ? 0 : 1]
+      });
+    }
+
+    function getPulsePos(trace, t) {
+      // t = 0..1 along total trace length
+      const totalLen = trace.len;
+      let dist = t * totalLen;
+      for (let i = 0; i < trace.points.length - 1; i++) {
+        const a = trace.points[i];
+        const b = trace.points[i + 1];
+        const segLen = Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
+        if (dist <= segLen) {
+          const frac = segLen > 0 ? dist / segLen : 0;
+          return { x: a.x + (b.x - a.x) * frac, y: a.y + (b.y - a.y) * frac };
+        }
+        dist -= segLen;
+      }
+      return trace.points[trace.points.length - 1];
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+
+      // Draw traces (dim)
+      ctx.lineWidth = 0.8;
+      for (const trace of traces) {
+        ctx.strokeStyle = TRACE_COLOR + '0.06)';
+        ctx.beginPath();
+        ctx.moveTo(trace.points[0].x, trace.points[0].y);
+        for (let i = 1; i < trace.points.length; i++) {
+          ctx.lineTo(trace.points[i].x, trace.points[i].y);
+        }
+        ctx.stroke();
+      }
+
+      // Draw nodes
+      for (const node of nodes) {
+        ctx.fillStyle = TRACE_COLOR + '0.12)';
+        ctx.fillRect(node.x - node.r, node.y - node.r, node.r * 2, node.r * 2);
+      }
+
+      // Animate pulses
+      for (let i = pulses.length - 1; i >= 0; i--) {
+        const p = pulses[i];
+        p.t += p.speed / p.trace.len;
+        if (p.t > 1) {
+          pulses.splice(i, 1);
+          spawnPulse();
+          continue;
+        }
+
+        const pos = getPulsePos(p.trace, p.t);
+
+        // Glow trail - light up trace segments near pulse
+        const pc = p.color;
+        ctx.lineWidth = 1.5;
+        const trailLen = 0.15;
+        const tStart = Math.max(0, p.t - trailLen);
+        const steps = 8;
+        for (let s = 0; s < steps; s++) {
+          const st = tStart + (p.t - tStart) * (s / steps);
+          const et = tStart + (p.t - tStart) * ((s + 1) / steps);
+          const sp = getPulsePos(p.trace, st);
+          const ep = getPulsePos(p.trace, et);
+          const fade = (s / steps) * p.bright;
+          ctx.strokeStyle = pc + (fade * 0.4).toFixed(3) + ')';
+          ctx.beginPath();
+          ctx.moveTo(sp.x, sp.y);
+          ctx.lineTo(ep.x, ep.y);
+          ctx.stroke();
+        }
+
+        // Pulse head glow
+        ctx.shadowColor = pc + '0.8)';
+        ctx.shadowBlur = isMobile ? 4 : 12;
+        ctx.fillStyle = pc + p.bright + ')';
+        ctx.beginPath();
+        ctx.arc(pos.x, pos.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+
+      rafId = requestAnimationFrame(draw);
+    }
+
+    // Respect prefers-reduced-motion
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!prefersReducedMotion.matches) {
+      init();
+      rafId = requestAnimationFrame(draw);
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (rafId) cancelAnimationFrame(rafId);
+          init();
+          rafId = requestAnimationFrame(draw);
+        }, 150);
+      }, { passive: true });
+    }
   }
 
   /* ---------- Countdown timer ---------- */

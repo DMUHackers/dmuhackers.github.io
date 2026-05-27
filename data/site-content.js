@@ -32,7 +32,9 @@ window.DMU_SITE_CONTENT = {
       "P2P.html": [
         { text: "Home", href: "index.html" },
         { text: "Pwn2Play", href: "#p2p-hero", section: "p2p-hero", active: true },
+        { text: "Pulse", href: "#event-pulse", section: "event-pulse" },
         { text: "Categories", href: "#categories", section: "categories" },
+        { text: "Breakdown", href: "#challenge-spread", section: "challenge-spread" },
         { text: "Prizes", href: "#prizes", section: "prizes" },
         { text: "Rules", href: "#rules", section: "rules" },
         { text: "Sponsors", href: "#sponsors", section: "sponsors" }
@@ -87,21 +89,21 @@ window.DMU_SITE_CONTENT = {
     }
   },
   committee: {
-    currentYear: "2025/26",
-    currentTag: "25/26 Committee",
+    currentYear: "2026/27",
+    currentTag: "26/27 Committee",
     currentMembers: [
-      {
-        name: "Adam",
-        fullName: "Adam Welbourne",
-        role: "Chairman",
-        icon: "fas fa-user-secret"
-      },
       {
         name: "Josh",
         fullName: "Josh Lloyd",
-        role: "Secretary",
+        role: "Chairman",
         icon: "fas fa-terminal",
         linkedin: "https://www.linkedin.com/in/josh-lloyd-227583366/"
+      },
+      {
+        name: "Nikita",
+        fullName: "Nikita Borodins",
+        role: "Secretary",
+        icon: "fas fa-keyboard"
       },
       {
         name: "Amara",
@@ -111,25 +113,23 @@ window.DMU_SITE_CONTENT = {
         linkedin: "https://www.linkedin.com/in/amara-g-98ab2a270/"
       },
       {
-        name: "Abbey",
-        fullName: "Abbey Rhodes",
+        name: "Deniz",
+        fullName: "Deniz Turgut",
         role: "Wellbeing Officer",
-        icon: "fas fa-shield-halved",
-        linkedin: "https://www.linkedin.com/in/abigailvr/"
+        icon: "fas fa-heart-pulse"
       },
       {
-        name: "Charlie",
-        fullName: "Charlie Burrows",
+        name: "Vacant",
+        fullName: "Vacant",
         role: "CTF Officer",
-        icon: "fas fa-flag",
-        linkedin: "https://www.linkedin.com/in/charlie-burrows-07108a336"
+        icon: "fas fa-user-plus",
+        vacant: true
       },
       {
-        name: "Ethan",
-        fullName: "Ethan Bauer",
+        name: "Ashley",
+        fullName: "Ashley Ray",
         role: "CTF Mentor",
-        icon: "fas fa-chalkboard-user",
-        linkedin: "https://www.linkedin.com/in/ethan-bauer-842124368/"
+        icon: "fas fa-graduation-cap"
       }
     ],
     timeline: [
@@ -139,9 +139,9 @@ window.DMU_SITE_CONTENT = {
         chair: { name: "Josh Lloyd", role: "Chairman", icon: "fas fa-terminal" },
         roles: [
           { name: "Nikita Borodins", role: "Secretary", icon: "fas fa-keyboard" },
-          { name: "Jade Mensah", role: "Treasurer", icon: "fas fa-coins" },
+          { name: "Amara Gouldbourne-Beckford", role: "Treasurer", icon: "fas fa-coins" },
           { name: "Deniz Turgut", role: "Wellbeing Officer", icon: "fas fa-heart-pulse" },
-          { name: "Amara Gouldbourne-Beckford", role: "CTF Officer", icon: "fas fa-flag" },
+          { name: "Vacant", role: "CTF Officer", icon: "fas fa-user-plus", vacant: true },
           { name: "Ashley Ray", role: "CTF Mentor", icon: "fas fa-graduation-cap" }
         ]
       },
@@ -270,18 +270,36 @@ window.DMU_SITE_CONTENT = {
     },
     categories: [
       { title: "Web Exploitation", count: 15, icon: "fas fa-globe", text: "SQL injection, XSS, SSRF, authentication bypasses and web logic flaws." },
-      { title: "Reverse Engineering", count: 7, icon: "fas fa-microchip", text: "Disassemble, decompile and decode binaries to uncover hidden logic." },
-      { title: "Miscellaneous", count: 7, icon: "fas fa-puzzle-piece", text: "Unexpected formats, strange clues and challenge ideas that refuse one label." },
+      { title: "Miscellaneous", count: 8, icon: "fas fa-puzzle-piece", text: "Unexpected formats, strange clues and challenge ideas that refuse one label." },
       { title: "Forensics", count: 5, icon: "fas fa-fingerprint", text: "Recover evidence from captures, filesystems, memory, logs and hidden artefacts." },
-      { title: "OSINT", count: 4, icon: "fas fa-magnifying-glass", text: "Track down answers through public records, digital footprints and careful research." },
+      { title: "OSINT", count: 5, icon: "fas fa-magnifying-glass", text: "Track down answers through public records, digital footprints and careful research." },
+      { title: "Reverse Engineering", count: 5, icon: "fas fa-microchip", text: "Disassemble, decompile and decode binaries to uncover hidden logic." },
+      { title: "Cryptography", count: 4, icon: "fas fa-lock", text: "Break ciphers, exploit weak implementations and reason about flawed secrecy." },
+      { title: "Binary Exploitation", count: 3, icon: "fas fa-terminal", text: "Break compiled targets with memory corruption, control flow and exploit craft." },
       { title: "Scripting", count: 3, icon: "fas fa-scroll", text: "Automate parsing, brute force paths and transform data under time pressure." },
-      { title: "Cryptography", count: 3, icon: "fas fa-lock", text: "Break ciphers, exploit weak implementations and reason about flawed secrecy." },
-      { title: "Linux", count: 2, icon: "fab fa-linux", text: "Navigate shells, permissions, processes and system clues like an operator." },
-      { title: "Binary Exploitation", count: 1, icon: "fas fa-terminal", text: "Break compiled targets with memory corruption, control flow and exploit craft." },
-      { title: "Full-Pwn", count: 1, icon: "fas fa-skull-crossbones", text: "Chain attack paths from initial access to deeper compromise." },
+      { title: "Full-Pwn", count: 4, icon: "fas fa-skull-crossbones", text: "Chain attack paths from initial access to deeper compromise." },
       { title: "Code", count: 1, icon: "fas fa-code", text: "Solve a focused programming problem with clean logic and fast execution." },
-      { title: "Intro", count: 1, icon: "fas fa-flag-checkered", text: "A first flag to get teams settled into the platform and event flow." }
+      { title: "Intro", count: 1, icon: "fas fa-flag-checkered", text: "A first flag to get teams settled into the platform and event flow." },
+      { title: "Linux", count: 1, icon: "fab fa-linux", text: "Navigate shells, permissions, processes and system clues like an operator." }
     ],
+    difficultyBreakdown: [
+      { title: "Easy", count: 25, color: "#34d399" },
+      { title: "Medium", count: 15, color: "#00e4ff" },
+      { title: "Hard", count: 8, color: "#f4c95d" },
+      { title: "Trivial", count: 4, color: "#8b5cf6" },
+      { title: "Extra Hard", count: 3, color: "#c8102e" }
+    ],
+    pulse: {
+      tag: "Live Pulse",
+      title: "Core Incursion at a Glance",
+      subtitle: "Live as the event unfolds — updated by the committee on the day.",
+      stats: [
+        { key: "signups", label: "Signups", value: "300+", suffix: "members on Biterra" },
+        { key: "teams", label: "Teams", value: "150+", suffix: "registered" },
+        { key: "challenges", label: "Challenges", value: "55", suffix: "across 12 categories" },
+        { key: "flags", label: "Flags Pwned", value: "—", suffix: "Live on 30 May" }
+      ]
+    },
     prizes: {
       tag: "Rewards",
       title: "In-Person Prizes",

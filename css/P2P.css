@@ -640,6 +640,237 @@
   margin-top: auto;
 }
 
+/* ---------- Live Event Pulse ---------- */
+.p2p-pulse {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.p2p-pulse__tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 26px 24px;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.05), transparent 42%),
+    rgba(20,20,24,.72);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+  overflow: hidden;
+}
+
+.p2p-pulse__tile::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: .55;
+}
+
+.p2p-pulse__label {
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.p2p-pulse__value {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.4vw, 2.8rem);
+  line-height: 1;
+}
+
+.p2p-pulse__suffix {
+  color: var(--text-muted);
+  font-size: .82rem;
+  line-height: 1.4;
+}
+
+.p2p-pulse__tile.is-pending .p2p-pulse__value {
+  color: var(--text-muted);
+}
+
+.p2p-pulse__tile.is-pending .p2p-pulse__label {
+  position: relative;
+  padding-left: 16px;
+}
+
+.p2p-pulse__tile.is-pending .p2p-pulse__label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateY(-50%);
+  box-shadow: 0 0 10px var(--accent);
+  animation: p2p-pulse-dot 1.8s ease-in-out infinite;
+}
+
+@keyframes p2p-pulse-dot {
+  0%, 100% { opacity: .35; transform: translateY(-50%) scale(.9); }
+  50%      { opacity: 1;   transform: translateY(-50%) scale(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p2p-pulse__tile.is-pending .p2p-pulse__label::before {
+    animation: none;
+  }
+}
+
+/* ---------- Challenge Breakdown ---------- */
+.p2p-breakdown {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.p2p-breakdown-card {
+  display: grid;
+  grid-template-columns: minmax(180px, .48fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: center;
+  min-height: 100%;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 8px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.05), transparent 42%),
+    rgba(20,20,24,.72);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+}
+
+.p2p-breakdown-card__visual {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+.p2p-breakdown-chart {
+  position: relative;
+  width: min(220px, 100%);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.08),
+    0 20px 45px rgba(0,0,0,.3),
+    inset 0 0 28px rgba(0,0,0,.28);
+}
+
+.p2p-breakdown-chart__centre {
+  position: absolute;
+  inset: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 50%;
+  background: rgba(10,10,14,.88);
+  box-shadow: inset 0 0 20px rgba(0,0,0,.45);
+  text-align: center;
+}
+
+.p2p-breakdown-chart__centre strong {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  line-height: 1;
+}
+
+.p2p-breakdown-chart__centre span {
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.p2p-breakdown-card__body {
+  min-width: 0;
+}
+
+.p2p-breakdown-card__eyebrow {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.p2p-breakdown-card__title {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  margin-bottom: 8px;
+}
+
+.p2p-breakdown-card__text {
+  color: var(--text-muted);
+  font-size: .9rem;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.p2p-breakdown-list {
+  display: grid;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.p2p-breakdown-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--text);
+  font-size: .82rem;
+  line-height: 1.3;
+}
+
+.p2p-breakdown-list__label {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.p2p-breakdown-list__swatch {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  box-shadow: 0 0 14px currentColor;
+}
+
+.p2p-breakdown-list__value {
+  flex: 0 0 auto;
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: .74rem;
+  white-space: nowrap;
+}
+
 /* ---------- Shared action rows ---------- */
 .calendar-actions {
   display: flex;
@@ -1558,9 +1789,26 @@
 
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
+  .p2p-breakdown,
+  .p2p-breakdown-card,
   .scoreboard-tracks,
   .prizes-showcase__intro,
   .prize-podium {
+    grid-template-columns: 1fr;
+  }
+
+  .p2p-pulse {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .p2p-breakdown-card {
+    padding: 24px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .p2p-pulse {
     grid-template-columns: 1fr;
   }
 
