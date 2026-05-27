@@ -498,8 +498,8 @@ window.DMU_SITE_CONTENT = {
         icon: "fa-champagne-glasses",
         iconFull: "fas fa-champagne-glasses",
         marker: "cyan",
-        color: "#00e4ff",
-        glow: "rgba(0,228,255,.35)",
+        color: "#6ab7c4",
+        glow: "rgba(106,183,196,.35)",
         directions: "https://www.openstreetmap.org/?mlat=52.6364&mlon=-1.1331#map=17/52.6364/-1.1331",
         notes: [
           { icon: "fas fa-route", text: "Social route with multiple stops" },

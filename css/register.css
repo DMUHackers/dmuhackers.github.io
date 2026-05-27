@@ -1,15 +1,6 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    Registration Guide - Page-specific styles (extends main.css Terminal Noir)
    ========================================================================== */
-
-/* ---------- Register Hero gradient ---------- */
-.hero--register .hero__bg {
-  background:
-    radial-gradient(ellipse 65% 50% at 50% -5%, rgba(0,228,255,.15) 0%, transparent 50%),
-    radial-gradient(ellipse 45% 40% at 20% 100%, rgba(200,16,46,.1) 0%, transparent 50%),
-    radial-gradient(ellipse 35% 35% at 85% 75%, rgba(0,228,255,.06) 0%, transparent 50%);
-  animation: heroBreathe 12s ease-in-out infinite;
-}
 
 /* ---------- Flow (shared vertical timeline) ---------- */
 .flow {
@@ -75,13 +66,13 @@
 
 .flow__num--member {
   color: var(--cyan);
-  background: rgba(0,228,255,.06);
-  border-color: rgba(0,228,255,.15);
+  background: rgba(106,183,196,.06);
+  border-color: rgba(106,183,196,.15);
 }
 .flow__step:hover .flow__num--member {
-  background: rgba(0,228,255,.12);
-  border-color: rgba(0,228,255,.35);
-  box-shadow: 0 0 16px rgba(0,228,255,.1);
+  background: rgba(106,183,196,.12);
+  border-color: rgba(106,183,196,.35);
+  box-shadow: 0 0 16px rgba(106,183,196,.1);
 }
 
 .flow__num--final {
@@ -246,10 +237,10 @@
 }
 
 .flow__branch--member {
-  border-color: rgba(0,228,255,.1);
+  border-color: rgba(106,183,196,.1);
 }
 .flow__branch--member:hover {
-  border-color: rgba(0,228,255,.2);
+  border-color: rgba(106,183,196,.2);
 }
 
 .flow__branch-header {
@@ -284,7 +275,7 @@
   background: linear-gradient(to bottom, rgba(255,215,0,.2), rgba(255,215,0,.04));
 }
 .flow__branch--member .flow__line {
-  background: linear-gradient(to bottom, rgba(0,228,255,.2), rgba(0,228,255,.04));
+  background: linear-gradient(to bottom, rgba(106,183,196,.2), rgba(106,183,196,.04));
 }
 
 /* Branch-internal icon hover */

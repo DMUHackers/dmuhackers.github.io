@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    Committee Legacy - Timeline Styles
    ========================================================================== */
 
@@ -146,7 +146,7 @@
   font-size: 2.4rem;
   background:
     radial-gradient(ellipse at 30% 30%, rgba(200,16,46,.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 70%, rgba(0,228,255,.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(106,183,196,.06) 0%, transparent 60%),
     var(--surface);
   border: 2px solid rgba(200,16,46,.2);
   color: var(--text-muted);

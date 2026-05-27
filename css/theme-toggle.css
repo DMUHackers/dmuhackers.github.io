@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    Light Mode Toggle - Overrides for Terminal Noir theme
    Loaded after main.css and page-specific styles on all pages.
    Dark = default (no class). Light = html.light
@@ -47,11 +47,6 @@ html.light .nav__theme-toggle .fa-moon  { display: inline; }
 html.light .nav__theme-toggle .fa-sun   { display: none; }
 
 /* ---------- Base & Overlays ---------- */
-html.light body::before {
-  /* Film grain - hide on light backgrounds */
-  display: none;
-}
-
 html.light .hero::after {
   /* CRT scanlines - hide on light */
   display: none;
@@ -63,8 +58,7 @@ html.light .nav {
   border-bottom-color: rgba(0,0,0,.06);
 }
 html.light .nav--scrolled {
-  background: rgba(244,244,246,.97);
-  box-shadow: 0 4px 30px rgba(0,0,0,.08), 0 1px 0 rgba(200,16,46,.06);
+  background: rgba(244,244,246,.96);
 }
 html.light .nav__link:hover,
 html.light .nav__link.active {
@@ -75,31 +69,20 @@ html.light .nav__link.active {
 html.light .hero {
   background: var(--bg);
 }
-html.light .hero__bg {
-  opacity: .3;
-}
-html.light .hero__canvas {
-  opacity: .3;
-}
 html.light .hero__tag {
   border-color: rgba(0,148,168,.2);
   background: rgba(0,148,168,.06);
-  text-shadow: none;
 }
 
 /* Hero terminal */
 html.light .hero-term {
   background: rgba(255,255,255,.95);
   border-color: rgba(0,0,0,.12);
-  box-shadow: 0 8px 40px rgba(0,0,0,.08);
-}
-html.light .hero-term::before {
-  /* Kill the shimmer gradient border */
-  display: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
 }
 html.light .hero-term:hover,
 html.light .hero-term--focused {
-  box-shadow: 0 8px 40px rgba(0,0,0,.1);
+  border-color: rgba(0,148,168,.25);
 }
 html.light .hero-term__bar {
   background: rgba(0,0,0,.04);
@@ -162,14 +145,6 @@ html.light .btn--ghost {
 html.light .btn--ghost:hover {
   border-color: rgba(0,0,0,.2);
   background: rgba(0,0,0,.06);
-}
-
-/* ---------- Sections ---------- */
-html.light .section::before {
-  background: linear-gradient(90deg, transparent, rgba(200,16,46,.15), rgba(0,228,255,.1), transparent);
-}
-html.light .section::after {
-  background: radial-gradient(ellipse at center top, rgba(200,16,46,.03) 0%, transparent 100%);
 }
 
 /* ---------- Steps (Getting Started) ---------- */
@@ -275,13 +250,8 @@ html.light .p2p-split__img img:hover {
 
 /* ---------- Footer ---------- */
 html.light .footer {
-  background: linear-gradient(to bottom, var(--bg-alt), #dcdce0);
-}
-html.light .footer::before {
-  background: linear-gradient(90deg, transparent 5%, rgba(200,16,46,.2) 30%, rgba(0,148,168,.15) 70%, transparent 95%);
-}
-html.light .footer::after {
-  background: radial-gradient(ellipse at center top, rgba(200,16,46,.02) 0%, transparent 100%);
+  background: var(--bg-alt);
+  border-top-color: rgba(0,0,0,.08);
 }
 html.light .footer__bottom {
   border-top-color: rgba(0,0,0,.06);

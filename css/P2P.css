@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    Pwn2Play - Page-specific styles (extends main.css Terminal Noir theme)
    ========================================================================== */
 
@@ -14,26 +14,8 @@
   width: 100%;
 }
 
-.p2p-page .section::before {
-  width: min(72%, 620px);
-}
-
-.p2p-page .section--alt {
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.025), inset 0 -1px 0 rgba(255,255,255,.025);
-}
-
 .p2p-page .section__header {
   margin-bottom: clamp(32px, 4vh, 46px);
-}
-
-/* ---------- P2P Hero gradient ---------- */
-.hero__bg--p2p {
-  background:
-    radial-gradient(ellipse 75% 55% at 50% -5%, rgba(200,16,46,.3) 0%, transparent 50%),
-    radial-gradient(ellipse 45% 40% at 20% 100%, rgba(200,16,46,.12) 0%, transparent 50%),
-    radial-gradient(ellipse 35% 35% at 85% 75%, rgba(0,228,255,.06) 0%, transparent 50%),
-    radial-gradient(ellipse 25% 20% at 65% 25%, rgba(200,16,46,.06) 0%, transparent 50%);
-  animation: heroBreathe 12s ease-in-out infinite;
 }
 
 /* ---------- Hero Countdown ---------- */
@@ -630,16 +612,16 @@
 .p2p-cat-card__count {
   min-width: 52px;
   padding: 6px 10px;
-  border: 1px solid rgba(0,228,255,.2);
+  border: 1px solid rgba(106,183,196,.2);
   border-radius: 8px;
-  background: rgba(0,228,255,.06);
+  background: rgba(106,183,196,.06);
   color: var(--text);
   font-family: var(--font-display);
   font-size: 1.05rem;
   font-weight: 700;
   line-height: 1;
   text-align: center;
-  box-shadow: inset 0 0 18px rgba(0,228,255,.04);
+  box-shadow: inset 0 0 18px rgba(106,183,196,.04);
 }
 .p2p-cat-card__count::after {
   content: 'challenges';
@@ -818,9 +800,9 @@
   gap: 12px;
   margin: 0;
   padding: 16px 18px;
-  border: 1px solid rgba(0,228,255,.16);
+  border: 1px solid rgba(106,183,196,.16);
   border-radius: 8px;
-  background: rgba(0,228,255,.045);
+  background: rgba(106,183,196,.045);
   color: var(--text-muted);
   line-height: 1.65;
 }
@@ -896,10 +878,10 @@
   max-width: 1100px;
   margin: 0 auto 28px;
   padding: 26px;
-  border: 1px solid rgba(0,228,255,.16);
+  border: 1px solid rgba(106,183,196,.16);
   border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(0,228,255,.06), transparent 38%),
+    linear-gradient(135deg, rgba(106,183,196,.06), transparent 38%),
     rgba(14,14,18,.7);
 }
 
@@ -974,7 +956,7 @@
   position: absolute;
   inset: 0 auto 0 0;
   width: 3px;
-  background: linear-gradient(to bottom, var(--accent), rgba(0,228,255,.45), transparent);
+  background: linear-gradient(to bottom, var(--accent), rgba(106,183,196,.45), transparent);
   opacity: .8;
 }
 
@@ -1078,8 +1060,8 @@
   gap: 5px;
   padding: 4px 9px;
   border-radius: 999px;
-  border: 1px solid rgba(0,228,255,.13);
-  background: rgba(0,228,255,.05);
+  border: 1px solid rgba(106,183,196,.13);
+  background: rgba(106,183,196,.05);
   color: var(--cyan);
   font-family: var(--font-mono);
   font-size: .66rem;

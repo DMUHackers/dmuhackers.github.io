@@ -25,16 +25,7 @@
     }
 
     .error-page__bg {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(200, 16, 46, .12) 0%, transparent 60%),
-        radial-gradient(ellipse 30% 30% at 80% 70%, rgba(0, 228, 255, .04) 0%, transparent 50%),
-        linear-gradient(rgba(200, 16, 46, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(200, 16, 46, 0.02) 1px, transparent 1px);
-      background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
-      pointer-events: none;
-      animation: heroBreathe 10s ease-in-out infinite;
+      display: none;
     }
 
     .error-page__content {
@@ -44,17 +35,16 @@
       max-width: 600px;
     }
 
-    /* Glitch 404 */
+    /* 404 */
     .error-page__code {
       position: relative;
       font-family: var(--font-display);
       font-size: clamp(7rem, 22vw, 14rem);
       font-weight: 700;
       color: var(--text);
-      letter-spacing: .1em;
+      letter-spacing: -.01em;
       line-height: 1;
       margin-bottom: 24px;
-      text-shadow: 0 0 40px var(--accent-glow);
     }
 
     .error-page__code::before,
