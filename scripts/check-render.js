@@ -24,7 +24,9 @@ const pages = [
   {
     file: 'P2P.html',
     checks: () => ({
+      pulse: document.querySelectorAll('[data-p2p-pulse] .p2p-pulse__tile').length,
       categories: document.querySelectorAll('[data-p2p-categories] .p2p-cat-card').length,
+      breakdown: document.querySelectorAll('[data-p2p-breakdown] .p2p-breakdown-card').length,
       prizes: document.querySelectorAll('[data-p2p-prizes] .prize-podium__place').length,
       rules: document.querySelectorAll('[data-p2p-rules] .rule').length,
       scoreboards: document.querySelectorAll('[data-p2p-scoreboards] .scoreboard-track').length,
@@ -32,6 +34,8 @@ const pages = [
     }),
     lightChecks: [
       '.p2p-event-tile--headline .hero-countdown__unit',
+      '.p2p-pulse__tile',
+      '.p2p-breakdown-card',
       '.prize-podium__place',
       '.scoreboard-track',
       '.sponsor-recruitment',
