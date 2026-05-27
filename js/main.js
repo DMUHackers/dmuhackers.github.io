@@ -1901,60 +1901,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(tick, 1000);
   }
 
-  /* ---------- Hero parallax on scroll ---------- */
-  const heroBg = document.querySelector('.hero__bg');
-  const heroContent = document.querySelector('.hero__content');
-  if (heroBg && heroContent) {
-    const hero = heroContent.closest('.hero');
-    let ticking = false;
-
-    function updateHeroParallax() {
-      const y = window.scrollY;
-      const viewportH = window.innerHeight;
-      const compactViewport = window.matchMedia('(max-width: 768px), (max-height: 680px)').matches;
-      const tallHero = heroContent.scrollHeight > viewportH * 0.88;
-
-      if (compactViewport || tallHero) {
-        heroBg.style.transform = y < viewportH ? `translateY(${y * 0.12}px)` : '';
-        heroContent.style.transform = '';
-        heroContent.style.opacity = '';
-        return;
-      }
-
-      if (hero && hero.getBoundingClientRect().bottom <= 0) {
-        heroBg.style.transform = '';
-        heroContent.style.transform = '';
-        heroContent.style.opacity = '';
-        return;
-      }
-
-      if (y < viewportH) {
-        heroBg.style.transform = `translateY(${y * 0.3}px)`;
-        heroContent.style.transform = `translateY(${y * 0.15}px)`;
-        heroContent.style.opacity = Math.max(0, 1 - y / (viewportH * 0.7));
-      } else {
-        heroBg.style.transform = '';
-        heroContent.style.transform = '';
-        heroContent.style.opacity = '';
-      }
-    }
-
-    function requestHeroParallaxUpdate() {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          updateHeroParallax();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }
-
-    window.addEventListener('scroll', requestHeroParallaxUpdate, { passive: true });
-    window.addEventListener('resize', requestHeroParallaxUpdate);
-    requestHeroParallaxUpdate();
-  }
-
-
   console.log(
     '%c\ud83c\udff4 DMU Hackers %c\n' +
     'Nice, you found the console. Curious minds are always welcome.\n' +

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
@@ -54,8 +54,6 @@
 
   <!-- Hero -->
   <section class="hero hero--compact hero--map">
-    <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
-    <div class="hero__bg"></div>
     <div class="hero__content">
       <span class="section__tag">Find Your Way</span>
       <h1 class="hero__title">Campus <span class="hero__accent">Map</span></h1>
@@ -269,7 +267,7 @@
       var venues = (window.DMU_SITE_CONTENT && window.DMU_SITE_CONTENT.p2p && window.DMU_SITE_CONTENT.p2p.venues) || [
         { lat: 52.6294, lng: -1.1381, shortTitle: 'Gateway House', title: 'Gateway House', sub: 'CTF Venue', icon: 'fa-flag-checkered', color: '#c8102e', glow: 'rgba(200,16,46,.4)', mapId: 'mapGateway', zoom: 17 },
         { lat: 52.6297, lng: -1.1383, shortTitle: 'DSU', title: 'DSU', sub: 'Awards Ceremony', icon: 'fa-trophy', color: '#ffd700', glow: 'rgba(255,215,0,.35)', mapId: 'mapDSU', zoom: 17 },
-        { lat: 52.6364, lng: -1.1331, shortTitle: 'After Party', title: 'After Party', sub: 'Social Route', icon: 'fa-champagne-glasses', color: '#00e4ff', glow: 'rgba(0,228,255,.35)', mapId: 'mapAfterParty', zoom: 16 }
+        { lat: 52.6364, lng: -1.1331, shortTitle: 'After Party', title: 'After Party', sub: 'Social Route', icon: 'fa-champagne-glasses', color: '#6ab7c4', glow: 'rgba(106,183,196,.35)', mapId: 'mapAfterParty', zoom: 16 }
       ];
 
       function makeIcon(v, large) {

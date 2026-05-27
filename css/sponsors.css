@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    Sponsors Page
    ========================================================================== */
 
@@ -128,7 +128,7 @@
   font-family: var(--font-mono);
   color: var(--cyan);
   background: var(--cyan-glow);
-  border: 1px solid rgba(0, 228, 255, .15);
+  border: 1px solid rgba(106, 183, 196, .15);
   border-radius: 6px;
   padding: 5px 12px;
   text-transform: uppercase;
