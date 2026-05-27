@@ -4,3 +4,6 @@
 
 public
 bin
+
+# Claude Code local worktrees / session state
+.claude/

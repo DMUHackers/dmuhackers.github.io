@@ -5,9 +5,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pwn2Play CTF - DMU Hackers Capture The Flag Competition</title>
-  <meta name="description" content="Pwn2Play: Core Incursion is DMU Hackers' flagship student CTF on 30 May 2026, bridging technical challenge practice with industry sponsor visibility.">
+  <meta name="description" content="Pwn2Play: Core Incursion — DMU Hackers' flagship student CTF on 30 May 2026. 55 challenges across 12 categories, 300+ competitors in 150+ teams, hybrid in Leicester and online.">
   <meta property="og:title" content="Pwn2Play CTF - DMU Hackers">
-  <meta property="og:description" content="A Jeopardy-style CTF for students to validate practical cyber skills and connect with industry sponsors.">
+  <meta property="og:description" content="55 challenges, 300+ student competitors, 150+ teams. DMU Hackers' flagship Jeopardy-style CTF on 30 May 2026, hybrid in Leicester and online.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dmuhackers.com/P2P.html">
   <meta property="og:image" content="https://dmuhackers.com/img/site-content/logo/1200x630.png">
@@ -15,7 +15,7 @@
   <meta name="twitter:image" content="https://dmuhackers.com/img/site-content/logo/1200x628.png">
   <meta name="twitter:site" content="@dmuhackers">
   <meta name="twitter:title" content="Pwn2Play CTF - DMU Hackers">
-  <meta name="twitter:description" content="A Jeopardy-style CTF for students to validate practical cyber skills and connect with industry sponsors.">
+  <meta name="twitter:description" content="55 challenges, 300+ student competitors, 150+ teams. DMU Hackers' flagship Jeopardy-style CTF on 30 May 2026, hybrid in Leicester and online.">
   <link rel="canonical" href="https://dmuhackers.com/P2P.html">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="img/site-content/logo/180x180.png">
@@ -90,7 +90,9 @@
       <ul class="nav__links" id="navLinks">
         <li><a href="index.html" class="nav__link">Home</a></li>
         <li><a href="#p2p-hero" class="nav__link active" data-section="p2p-hero">Pwn2Play</a></li>
+        <li><a href="#event-pulse" class="nav__link" data-section="event-pulse">Pulse</a></li>
         <li><a href="#categories" class="nav__link" data-section="categories">Categories</a></li>
+        <li><a href="#challenge-spread" class="nav__link" data-section="challenge-spread">Breakdown</a></li>
         <li><a href="#prizes" class="nav__link" data-section="prizes">Prizes</a></li>
         <li><a href="#rules" class="nav__link" data-section="rules">Rules</a></li>
         <li><a href="#sponsors" class="nav__link" data-section="sponsors">Sponsors</a></li>
@@ -198,13 +200,46 @@
     </div>
   </section>
 
+  <!-- Live Event Pulse -->
+  <section id="event-pulse" class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag" data-p2p-pulse-tag>Live Pulse</span>
+        <h2 class="section__title" data-p2p-pulse-title>Core Incursion at a Glance</h2>
+        <p class="section__subtitle" data-p2p-pulse-subtitle>Live as the event unfolds &mdash; updated by the committee on the day.</p>
+      </div>
+      <div class="p2p-pulse" data-p2p-pulse>
+        <article class="p2p-pulse__tile" data-pulse-key="signups">
+          <span class="p2p-pulse__label">Signups</span>
+          <strong class="p2p-pulse__value">300+</strong>
+          <span class="p2p-pulse__suffix">members on Biterra</span>
+        </article>
+        <article class="p2p-pulse__tile" data-pulse-key="teams">
+          <span class="p2p-pulse__label">Teams</span>
+          <strong class="p2p-pulse__value">150+</strong>
+          <span class="p2p-pulse__suffix">registered</span>
+        </article>
+        <article class="p2p-pulse__tile" data-pulse-key="challenges">
+          <span class="p2p-pulse__label">Challenges</span>
+          <strong class="p2p-pulse__value">55</strong>
+          <span class="p2p-pulse__suffix">across 12 categories</span>
+        </article>
+        <article class="p2p-pulse__tile is-pending" data-pulse-key="flags">
+          <span class="p2p-pulse__label">Flags Pwned</span>
+          <strong class="p2p-pulse__value">&mdash;</strong>
+          <span class="p2p-pulse__suffix">Live on 30 May</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Challenge Categories -->
   <section id="categories" class="section">
     <div class="container">
       <div class="section__header">
-        <span class="section__tag">12 Categories, 50 Challenges</span>
+        <span class="section__tag">12 Categories, 55 Challenges</span>
         <h2 class="section__title">Challenge Categories</h2>
-        <p class="section__subtitle">A broad challenge set weighted toward web exploitation, with room for reversing, forensics, OSINT, scripting, crypto and fundamentals.</p>
+        <p class="section__subtitle">A broad 2026 challenge set weighted toward web exploitation, with room for reversing, forensics, OSINT, scripting, crypto and fundamentals.</p>
       </div>
       <div class="cards cards--four p2p-cat-cards" data-p2p-categories>
         <div class="card p2p-cat-card">
@@ -218,7 +253,7 @@
         <div class="card p2p-cat-card">
           <div class="p2p-cat-card__top">
             <div class="card__icon"><i class="fas fa-microchip"></i></div>
-            <span class="p2p-cat-card__count">7</span>
+            <span class="p2p-cat-card__count">5</span>
           </div>
           <h3 class="card__title">Reverse Engineering</h3>
           <p class="card__text">Disassemble, decompile and decode binaries to uncover hidden logic.</p>
@@ -226,7 +261,7 @@
         <div class="card p2p-cat-card">
           <div class="p2p-cat-card__top">
             <div class="card__icon"><i class="fas fa-puzzle-piece"></i></div>
-            <span class="p2p-cat-card__count">7</span>
+            <span class="p2p-cat-card__count">8</span>
           </div>
           <h3 class="card__title">Miscellaneous</h3>
           <p class="card__text">Unexpected formats, strange clues and challenge ideas that refuse one label.</p>
@@ -242,7 +277,7 @@
         <div class="card p2p-cat-card">
           <div class="p2p-cat-card__top">
             <div class="card__icon"><i class="fas fa-magnifying-glass"></i></div>
-            <span class="p2p-cat-card__count">4</span>
+            <span class="p2p-cat-card__count">5</span>
           </div>
           <h3 class="card__title">OSINT</h3>
           <p class="card__text">Track down answers through public records, digital footprints and careful research.</p>
@@ -258,7 +293,7 @@
         <div class="card p2p-cat-card">
           <div class="p2p-cat-card__top">
             <div class="card__icon"><i class="fas fa-lock"></i></div>
-            <span class="p2p-cat-card__count">3</span>
+            <span class="p2p-cat-card__count">4</span>
           </div>
           <h3 class="card__title">Cryptography</h3>
           <p class="card__text">Break ciphers, exploit weak implementations and reason about flawed secrecy.</p>
@@ -266,7 +301,7 @@
         <div class="card p2p-cat-card">
           <div class="p2p-cat-card__top">
             <div class="card__icon"><i class="fab fa-linux"></i></div>
-            <span class="p2p-cat-card__count">2</span>
+            <span class="p2p-cat-card__count">1</span>
           </div>
           <h3 class="card__title">Linux</h3>
           <p class="card__text">Navigate shells, permissions, processes and system clues like an operator.</p>
@@ -274,7 +309,7 @@
         <div class="card p2p-cat-card">
           <div class="p2p-cat-card__top">
             <div class="card__icon"><i class="fas fa-terminal"></i></div>
-            <span class="p2p-cat-card__count">1</span>
+            <span class="p2p-cat-card__count">3</span>
           </div>
           <h3 class="card__title">Binary Exploitation</h3>
           <p class="card__text">Break compiled targets with memory corruption, control flow and exploit craft.</p>
@@ -282,7 +317,7 @@
         <div class="card p2p-cat-card">
           <div class="p2p-cat-card__top">
             <div class="card__icon"><i class="fas fa-skull-crossbones"></i></div>
-            <span class="p2p-cat-card__count">1</span>
+            <span class="p2p-cat-card__count">2</span>
           </div>
           <h3 class="card__title">Full-Pwn</h3>
           <p class="card__text">Chain attack paths from initial access to deeper compromise.</p>
@@ -307,8 +342,73 @@
     </div>
   </section>
 
+  <!-- Challenge Spread -->
+  <section id="challenge-spread" class="section section--alt">
+    <div class="container">
+      <div class="section__header">
+        <span class="section__tag">2026 Spread</span>
+        <h2 class="section__title">Challenge Breakdown</h2>
+        <p class="section__subtitle">55 challenges across categories and difficulties.</p>
+      </div>
+      <div class="p2p-breakdown" data-p2p-breakdown>
+        <article class="p2p-breakdown-card">
+          <div class="p2p-breakdown-card__visual">
+            <div class="p2p-breakdown-chart" style="background: conic-gradient(#c8102e 0% 28.30%, #00e4ff 28.30% 43.40%, #f4c95d 43.40% 52.83%, #34d399 52.83% 62.26%, #8b5cf6 62.26% 71.70%, #f97316 71.70% 79.25%, #f43f5e 79.25% 84.91%, #14b8a6 84.91% 90.57%, #e879f9 90.57% 94.34%, #a3e635 94.34% 96.23%, #38bdf8 96.23% 98.11%, #94a3b8 98.11% 100%)" role="img" aria-label="Challenge Categories pie chart for 55 challenges">
+              <div class="p2p-breakdown-chart__centre">
+                <strong>55</strong>
+                <span>challenges</span>
+              </div>
+            </div>
+          </div>
+          <div class="p2p-breakdown-card__body">
+            <span class="p2p-breakdown-card__eyebrow">Categories</span>
+            <h3 class="p2p-breakdown-card__title">Challenge Categories</h3>
+            <p class="p2p-breakdown-card__text">The final category mix for Pwn2Play: Core Incursion 2026.</p>
+            <ul class="p2p-breakdown-list">
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#c8102e"></span>Web Exploitation</span><span class="p2p-breakdown-list__value">15 / 28%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#00e4ff"></span>Miscellaneous</span><span class="p2p-breakdown-list__value">8 / 15%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#f4c95d"></span>Forensics</span><span class="p2p-breakdown-list__value">5 / 9%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#34d399"></span>OSINT</span><span class="p2p-breakdown-list__value">5 / 9%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#8b5cf6"></span>Reverse Engineering</span><span class="p2p-breakdown-list__value">5 / 9%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#f97316"></span>Cryptography</span><span class="p2p-breakdown-list__value">4 / 8%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#f43f5e"></span>Binary Exploitation</span><span class="p2p-breakdown-list__value">3 / 6%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#14b8a6"></span>Scripting</span><span class="p2p-breakdown-list__value">3 / 6%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#e879f9"></span>Full-Pwn</span><span class="p2p-breakdown-list__value">2 / 4%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#a3e635"></span>Code</span><span class="p2p-breakdown-list__value">1 / 2%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#38bdf8"></span>Intro</span><span class="p2p-breakdown-list__value">1 / 2%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#94a3b8"></span>Linux</span><span class="p2p-breakdown-list__value">1 / 2%</span></li>
+            </ul>
+          </div>
+        </article>
+        <article class="p2p-breakdown-card">
+          <div class="p2p-breakdown-card__visual">
+            <div class="p2p-breakdown-chart" style="background: conic-gradient(#34d399 0% 45.28%, #00e4ff 45.28% 73.58%, #f4c95d 73.58% 84.91%, #8b5cf6 84.91% 92.45%, #c8102e 92.45% 98.11%, #71717a 98.11% 100%)" role="img" aria-label="Challenge Difficulties pie chart for 55 challenges">
+              <div class="p2p-breakdown-chart__centre">
+                <strong>55</strong>
+                <span>challenges</span>
+              </div>
+            </div>
+          </div>
+          <div class="p2p-breakdown-card__body">
+            <span class="p2p-breakdown-card__eyebrow">Difficulty</span>
+            <h3 class="p2p-breakdown-card__title">Challenge Difficulties</h3>
+            <p class="p2p-breakdown-card__text">Difficulty labels from the final 2026 challenge set.</p>
+            <ul class="p2p-breakdown-list">
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#34d399"></span>Easy</span><span class="p2p-breakdown-list__value">24 / 45%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#00e4ff"></span>Medium</span><span class="p2p-breakdown-list__value">15 / 28%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#f4c95d"></span>Hard</span><span class="p2p-breakdown-list__value">6 / 11%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#8b5cf6"></span>Trivial</span><span class="p2p-breakdown-list__value">4 / 8%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#c8102e"></span>Extra Hard</span><span class="p2p-breakdown-list__value">3 / 6%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#71717a"></span>Unspecified</span><span class="p2p-breakdown-list__value">1 / 2%</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Key Info -->
-  <section id="key-info" class="section section--alt">
+  <section id="key-info" class="section">
     <div class="container">
       <div class="section__header">
         <span class="section__tag">Important</span>

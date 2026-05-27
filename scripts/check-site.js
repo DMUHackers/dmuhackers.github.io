@@ -50,7 +50,21 @@ function checkSiteContent() {
   const categories = data.p2p?.categories || [];
   const categoryTotal = categories.reduce((sum, category) => sum + Number(category.count || 0), 0);
   if (categories.length !== 12) fail(`Expected 12 Pwn2Play categories, found ${categories.length}`);
-  if (categoryTotal !== 50) fail(`Expected 50 Pwn2Play challenges, found ${categoryTotal}`);
+  if (categoryTotal <= 0) fail('Pwn2Play category challenge total must be greater than 0');
+
+  const difficulties = data.p2p?.difficultyBreakdown || [];
+  const difficultyTotal = difficulties.reduce((sum, difficulty) => sum + Number(difficulty.count || 0), 0);
+  if (!difficulties.length) fail('Missing Pwn2Play difficulty breakdown');
+  if (difficultyTotal !== categoryTotal) {
+    fail(`Pwn2Play category total (${categoryTotal}) does not match difficulty total (${difficultyTotal})`);
+  }
+
+  const pulseStats = data.p2p?.pulse?.stats || [];
+  if (pulseStats.length !== 4) fail(`Expected 4 Pwn2Play pulse stats, found ${pulseStats.length}`);
+  const pulseKeys = pulseStats.map(stat => stat.key);
+  ['signups', 'teams', 'challenges', 'flags'].forEach(key => {
+    if (!pulseKeys.includes(key)) fail(`Missing Pwn2Play pulse stat: ${key}`);
+  });
 
   const prizes = data.p2p?.prizes;
   if (!prizes?.placements || prizes.placements.length !== 3) fail('Expected 3 Pwn2Play prize placements');

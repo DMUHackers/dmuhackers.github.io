@@ -46,6 +46,8 @@ Update:
 - `p2p.event.end`
 - `p2p.lastUpdated`
 - `p2p.categories`
+- `p2p.difficultyBreakdown`
+- `p2p.pulse`
 - `p2p.prizes`
 - `p2p.rules`
 - `p2p.schedule`

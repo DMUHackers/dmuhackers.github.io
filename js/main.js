@@ -155,6 +155,11 @@ document.addEventListener('DOMContentLoaded', () => {
         link.setAttribute('aria-label', (member.name || member.fullName) + "'s LinkedIn profile");
         appendIcon(link, 'fab fa-linkedin-in');
         card.appendChild(link);
+      } else if (member.vacant) {
+        const vacant = el('span', 'member__social member__social--disabled');
+        vacant.setAttribute('aria-label', member.role + ' position currently vacant');
+        appendIcon(vacant, 'fas fa-user-plus');
+        card.appendChild(vacant);
       } else {
         const disabled = el('span', 'member__social member__social--disabled');
         disabled.setAttribute('aria-label', 'LinkedIn coming soon');
@@ -217,6 +222,84 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const chartPalette = [
+    '#c8102e',
+    '#00e4ff',
+    '#f4c95d',
+    '#34d399',
+    '#8b5cf6',
+    '#f97316',
+    '#f43f5e',
+    '#14b8a6',
+    '#e879f9',
+    '#a3e635',
+    '#38bdf8',
+    '#94a3b8'
+  ];
+
+  function totalCount(items) {
+    return (items || []).reduce((sum, item) => sum + Number(item.count || 0), 0);
+  }
+
+  function percentLabel(count, total) {
+    if (!total) return '0%';
+    return Math.round((Number(count || 0) / total) * 100) + '%';
+  }
+
+  function itemColor(item, index) {
+    return item.color || chartPalette[index % chartPalette.length];
+  }
+
+  function chartGradient(items, total) {
+    if (!items?.length || !total) return 'conic-gradient(rgba(255,255,255,.08) 0 100%)';
+    let cursor = 0;
+    const stops = items.map((item, index) => {
+      const start = cursor;
+      cursor += (Number(item.count || 0) / total) * 100;
+      return itemColor(item, index) + ' ' + start.toFixed(2) + '% ' + cursor.toFixed(2) + '%';
+    });
+    return 'conic-gradient(' + stops.join(', ') + ')';
+  }
+
+  function renderBreakdownCard(config) {
+    const items = config.items || [];
+    const total = totalCount(items);
+    const article = el('article', 'p2p-breakdown-card');
+    const visual = el('div', 'p2p-breakdown-card__visual');
+
+    const chart = el('div', 'p2p-breakdown-chart');
+    chart.style.background = chartGradient(items, total);
+    chart.setAttribute('role', 'img');
+    chart.setAttribute('aria-label', config.title + ' pie chart for ' + total + ' challenges');
+    const centre = el('div', 'p2p-breakdown-chart__centre');
+    centre.appendChild(el('strong', null, String(total)));
+    centre.appendChild(el('span', null, 'challenges'));
+    chart.appendChild(centre);
+    visual.appendChild(chart);
+    article.appendChild(visual);
+
+    const body = el('div', 'p2p-breakdown-card__body');
+    body.appendChild(el('span', 'p2p-breakdown-card__eyebrow', config.eyebrow));
+    body.appendChild(el('h3', 'p2p-breakdown-card__title', config.title));
+    body.appendChild(el('p', 'p2p-breakdown-card__text', config.text));
+
+    const list = el('ul', 'p2p-breakdown-list');
+    items.forEach((item, index) => {
+      const row = el('li');
+      const label = el('span', 'p2p-breakdown-list__label');
+      const swatch = el('span', 'p2p-breakdown-list__swatch');
+      swatch.style.background = itemColor(item, index);
+      label.appendChild(swatch);
+      label.appendChild(document.createTextNode(item.title));
+      row.appendChild(label);
+      row.appendChild(el('span', 'p2p-breakdown-list__value', item.count + ' / ' + percentLabel(item.count, total)));
+      list.appendChild(row);
+    });
+    body.appendChild(list);
+    article.appendChild(body);
+    return article;
+  }
+
   function renderP2PCategories() {
     const categories = siteContent.p2p?.categories;
     const container = document.querySelector('[data-p2p-categories]');
@@ -240,6 +323,67 @@ document.addEventListener('DOMContentLoaded', () => {
       card.appendChild(el('p', 'card__text', category.text));
       container.appendChild(card);
     });
+  }
+
+  function renderP2PPulse() {
+    const pulse = siteContent.p2p?.pulse;
+    const container = document.querySelector('[data-p2p-pulse]');
+    if (!container || !pulse?.stats?.length) return;
+
+    const section = container.closest('section');
+    const tag = section?.querySelector('[data-p2p-pulse-tag]');
+    const title = section?.querySelector('[data-p2p-pulse-title]');
+    const subtitle = section?.querySelector('[data-p2p-pulse-subtitle]');
+    if (tag && pulse.tag) tag.textContent = pulse.tag;
+    if (title && pulse.title) title.textContent = pulse.title;
+    if (subtitle && pulse.subtitle) subtitle.textContent = pulse.subtitle;
+
+    clear(container);
+    pulse.stats.forEach(stat => {
+      const tile = el('article', 'p2p-pulse__tile');
+      if (stat.key) tile.dataset.pulseKey = stat.key;
+      const pending = stat.value === '—' || stat.value == null || stat.value === '';
+      if (pending) tile.classList.add('is-pending');
+      tile.appendChild(el('span', 'p2p-pulse__label', stat.label || ''));
+      const valueEl = el('strong', 'p2p-pulse__value', pending ? '—' : String(stat.value));
+      if (!pending) {
+        const match = String(stat.value).match(/^([\d,]+)(.*)$/);
+        if (match) {
+          valueEl.dataset.pulseCount = match[1].replace(/,/g, '');
+          if (match[2]) valueEl.dataset.pulseSuffix = match[2];
+        }
+      }
+      tile.appendChild(valueEl);
+      if (stat.suffix) tile.appendChild(el('span', 'p2p-pulse__suffix', stat.suffix));
+      container.appendChild(tile);
+    });
+  }
+
+  function renderP2PChallengeBreakdown() {
+    const p2p = siteContent.p2p;
+    const container = document.querySelector('[data-p2p-breakdown]');
+    if (!container || !p2p?.categories?.length || !p2p?.difficultyBreakdown?.length) return;
+
+    const total = totalCount(p2p.categories);
+    const section = container.closest('section');
+    const tag = section?.querySelector('.section__tag');
+    const subtitle = section?.querySelector('.section__subtitle');
+    if (tag) tag.textContent = '2026 Spread';
+    if (subtitle) subtitle.textContent = total + ' challenges across categories and difficulties.';
+
+    clear(container);
+    container.appendChild(renderBreakdownCard({
+      eyebrow: 'Categories',
+      title: 'Challenge Categories',
+      text: 'The final category mix for Pwn2Play: Core Incursion 2026.',
+      items: p2p.categories
+    }));
+    container.appendChild(renderBreakdownCard({
+      eyebrow: 'Difficulty',
+      title: 'Challenge Difficulties',
+      text: 'Difficulty labels from the final 2026 challenge set.',
+      items: p2p.difficultyBreakdown
+    }));
   }
 
   function rankLabel(rank) {
@@ -779,7 +923,9 @@ document.addEventListener('DOMContentLoaded', () => {
     renderP2PKeyInfo();
     renderP2PActionLinks();
     renderP2PCalendarLinks();
+    renderP2PPulse();
     renderP2PCategories();
+    renderP2PChallengeBreakdown();
     renderP2PPrizes();
     renderP2PScoreboards();
     renderP2PLastUpdated();
@@ -1438,6 +1584,39 @@ document.addEventListener('DOMContentLoaded', () => {
       { threshold: 0.5 }
     );
     statNumbers.forEach(el => countObserver.observe(el));
+  }
+
+  /* ---------- Pulse counter animation ---------- */
+  const pulseValues = document.querySelectorAll('.p2p-pulse__value[data-pulse-count]');
+  const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  if (pulseValues.length && !reduceMotion && 'IntersectionObserver' in window) {
+    const pulseObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const node = entry.target;
+          const target = parseInt(node.dataset.pulseCount, 10);
+          const suffix = node.dataset.pulseSuffix || '';
+          if (Number.isNaN(target)) {
+            pulseObserver.unobserve(node);
+            return;
+          }
+          const duration = 1400;
+          const start = performance.now();
+          node.textContent = '0' + suffix;
+          function step(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            node.textContent = Math.round(target * eased) + suffix;
+            if (progress < 1) requestAnimationFrame(step);
+          }
+          requestAnimationFrame(step);
+          pulseObserver.unobserve(node);
+        });
+      },
+      { threshold: 0.4 }
+    );
+    pulseValues.forEach(node => pulseObserver.observe(node));
   }
 
   /* ---------- Circuit board trace background ---------- */
