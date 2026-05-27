@@ -583,11 +583,6 @@ document.addEventListener('DOMContentLoaded', () => {
       links.forEach(link => container.appendChild(renderActionLink(link)));
     });
 
-    const heroActions = document.querySelector('.p2p-event-actions');
-    if (heroActions) {
-      clear(heroActions);
-      links.forEach(link => heroActions.appendChild(renderActionLink(link)));
-    }
   }
 
   function renderP2PCalendarLinks() {
@@ -632,30 +627,6 @@ document.addEventListener('DOMContentLoaded', () => {
       summary.appendChild(el('strong', null, formatDisplayDate(event.start)));
       summary.appendChild(document.createTextNode(', ' + formatClock(event.start) + '-' + formatClock(event.end) + '. Add it to your calendar so you do not miss it.'));
     }
-  }
-
-  function updateP2PEventDetails() {
-    const p2p = siteContent.p2p;
-    if (!p2p?.event) return;
-
-    const dateTile = document.querySelector('.p2p-event-tile--date');
-    if (dateTile) {
-      const strong = dateTile.querySelector('strong');
-      const text = dateTile.querySelector('p');
-      if (strong) strong.textContent = formatDisplayDate(p2p.event.start);
-      if (text) text.textContent = formatClock(p2p.event.start) + ' - ' + formatClock(p2p.event.end);
-    }
-
-    const locationTile = document.querySelector('.p2p-event-tile--location');
-    if (locationTile && p2p.venues?.[0]) {
-      const strong = locationTile.querySelector('strong');
-      const text = locationTile.querySelector('p');
-      if (strong) strong.textContent = 'Virtual & DMU Campus';
-      if (text) text.textContent = 'In-person competitors will be based at ' + p2p.venues[0].addressLines[0] + '.';
-    }
-
-    const luma = document.querySelector('.p2p-luma iframe');
-    if (luma && p2p.links?.luma) luma.src = p2p.links.luma;
   }
 
   function renderP2PScoreboards() {
@@ -918,7 +889,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderMaintainableContent() {
     renderCurrentCommittee();
     renderCommitteeTimeline();
-    updateP2PEventDetails();
     updateP2PGlobalLinks();
     renderP2PKeyInfo();
     renderP2PActionLinks();

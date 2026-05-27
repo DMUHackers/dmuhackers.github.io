@@ -3,7 +3,7 @@
    ========================================================================== */
 
 /* ---------- Custom Properties ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300..700&display=swap');
 
 :root {
   --bg:          #0b0c10;
@@ -20,8 +20,8 @@
   --radius:      12px;
   --nav-h:       64px;
   --max-w:       1120px;
-  --font:        'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: var(--font);
+  --font:        'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
   --font-mono:   'JetBrains Mono', monospace;
 
   --noise-sample-0: #127012;
@@ -237,7 +237,7 @@ ul  { list-style: none; }
 
 .hero__tag {
   display: inline-block;
-  font-family: var(--font-display);
+  font-family: var(--font);
   font-size: .78rem;
   font-weight: 600;
   letter-spacing: .18em;
@@ -254,10 +254,11 @@ ul  { list-style: none; }
   font-family: var(--font-display);
   font-size: clamp(3rem, 10vw, 5.5rem);
   font-weight: 700;
-  letter-spacing: .01em;
+  letter-spacing: -.015em;
   color: var(--text);
   line-height: 1.05;
   margin-bottom: 28px;
+  font-optical-sizing: auto;
 }
 
 .hero__accent {
@@ -615,7 +616,7 @@ ul  { list-style: none; }
 
 .section__tag {
   display: inline-block;
-  font-family: var(--font-display);
+  font-family: var(--font);
   font-size: .72rem;
   font-weight: 600;
   letter-spacing: .16em;
@@ -628,8 +629,9 @@ ul  { list-style: none; }
   font-family: var(--font-display);
   font-size: clamp(1.9rem, 4.5vw, 2.8rem);
   font-weight: 700;
-  letter-spacing: -.005em;
+  letter-spacing: -.015em;
   color: var(--text);
+  font-optical-sizing: auto;
 }
 
 .section__subtitle {

@@ -371,50 +371,39 @@ html.light .podium-nav__btn:hover {
   background: rgba(200,16,46,.04);
 }
 
-/* P2P event wall */
-html.light .p2p-event-tile {
+/* P2P poster hero */
+html.light .p2p-poster__eyebrow {
+  color: var(--text-muted);
+}
+html.light .p2p-poster__eyebrow::before,
+html.light .p2p-poster__eyebrow::after {
+  background: linear-gradient(90deg, transparent, rgba(0,0,0,.25), transparent);
+}
+html.light .p2p-poster__wordmark {
+  color: var(--text);
+}
+html.light .p2p-poster__digit {
+  color: #a00d24;
+}
+html.light .p2p-poster__subhead {
+  color: var(--text-muted);
+}
+html.light .p2p-poster__billing {
+  border-top-color: rgba(0,0,0,.1);
+  border-bottom-color: rgba(0,0,0,.1);
+}
+html.light .p2p-poster__billing dt {
+  color: var(--text-muted);
+}
+html.light .p2p-poster__billing dd {
+  color: var(--text);
+}
+html.light .p2p-poster__countdown .hero-countdown__unit {
   background: rgba(255,255,255,.8);
-  border-color: rgba(0,0,0,.06);
-  box-shadow: inset 0 1px 0 rgba(0,0,0,.02);
-}
-html.light .p2p-event-tile > span:not(.p2p-event-tile__eyebrow),
-html.light .p2p-event-tile > p {
-  color: var(--text-muted);
-}
-html.light .p2p-event-tile strong,
-html.light .p2p-event-tile h3,
-html.light .p2p-event-tile .hero__title {
-  color: var(--text);
-}
-html.light .p2p-event-tile--headline .hero-countdown__unit {
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.74)),
-    rgba(255,255,255,.88);
-  border-color: rgba(0,0,0,.08);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.82),
-    0 8px 18px rgba(0,0,0,.07);
-}
-html.light .p2p-event-tile--headline .hero-countdown__num {
-  color: var(--text);
-}
-html.light .p2p-event-tile--headline .hero-countdown__label {
-  color: var(--text-muted);
-}
-html.light .p2p-event-tile--headline .hero-countdown__unit:hover {
-  border-color: rgba(200,16,46,.18);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.88),
-    0 10px 22px rgba(0,0,0,.08),
-    0 0 18px rgba(200,16,46,.035);
-}
-html.light .p2p-event-tile--headline .hero-countdown__timer--message {
-  background: rgba(255,255,255,.84);
   border-color: rgba(0,0,0,.08);
 }
-html.light .p2p-luma iframe {
-  border-color: rgba(0,0,0,.1);
-  box-shadow: 0 14px 34px rgba(0,0,0,.08);
+html.light .p2p-poster__countdown .hero-countdown__num {
+  color: var(--text);
 }
 
 /* P2P live event pulse */
