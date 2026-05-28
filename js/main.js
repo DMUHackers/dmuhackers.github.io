@@ -441,12 +441,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('[data-p2p-rules]');
     if (!container || !rules?.length) return;
 
-    clear(container);
-    rules.forEach((rule, index) => {
+    function buildRuleRow(rule, index, isLast) {
       const row = el('div', 'rule' + (rule.critical ? ' rule--critical' : ''));
       const marker = el('div', 'rule__marker');
       marker.appendChild(el('span', 'rule__num', String(index + 1).padStart(2, '0')));
-      if (index !== rules.length - 1) marker.appendChild(el('div', 'rule__line'));
+      if (!isLast) marker.appendChild(el('div', 'rule__line'));
       row.appendChild(marker);
 
       const body = el('div', 'rule__body');
@@ -459,8 +458,38 @@ document.addEventListener('DOMContentLoaded', () => {
       (rule.items || []).forEach(text => list.appendChild(el('li', null, text)));
       body.appendChild(list);
       row.appendChild(body);
-      container.appendChild(row);
+      return row;
+    }
+
+    clear(container);
+    const totalRules = rules.length;
+    rules.slice(0, 1).forEach((rule, index) => {
+      container.appendChild(buildRuleRow(rule, index, totalRules === 1));
     });
+
+    const remaining = rules.slice(1);
+    if (!remaining.length) return;
+
+    const details = el('details', 'rules-stack__more');
+    const summary = el('summary', 'rules-stack__toggle');
+    const showLabel = el('span', 'rules-stack__toggle-label rules-stack__toggle-label--show');
+    showLabel.appendChild(document.createTextNode('Show ' + remaining.length + ' more rule' + (remaining.length === 1 ? '' : 's')));
+    const hideLabel = el('span', 'rules-stack__toggle-label rules-stack__toggle-label--hide');
+    hideLabel.appendChild(document.createTextNode('Hide additional rules'));
+    summary.appendChild(showLabel);
+    summary.appendChild(hideLabel);
+    const chevron = el('i', 'fas fa-chevron-down rules-stack__toggle-chevron');
+    chevron.setAttribute('aria-hidden', 'true');
+    summary.appendChild(chevron);
+    details.appendChild(summary);
+
+    const more = el('div', 'rules-stack__more-list');
+    remaining.forEach((rule, idx) => {
+      const realIndex = idx + 1;
+      more.appendChild(buildRuleRow(rule, realIndex, realIndex === totalRules - 1));
+    });
+    details.appendChild(more);
+    container.appendChild(details);
   }
 
   function formatDisplayDate(dateString) {
@@ -702,14 +731,33 @@ document.addEventListener('DOMContentLoaded', () => {
       const items = sponsors.filter(sponsor => sponsor.groups?.includes(band.key));
       if (!items.length) return;
       const bandEl = el('div', 'p2p-sponsor-band p2p-sponsor-band--' + band.key);
+      const gridKey = band.key === 'challenge' ? 'challenge' : (band.key === 'platform' ? 'platform' : 'prizes');
+
+      const details = el('details', 'p2p-sponsor-band__collapse');
+      const summary = el('summary', 'p2p-sponsor-band__summary');
       const header = el('div', 'p2p-sponsor-band__header');
       header.appendChild(el('span', 'p2p-sponsor-band__eyebrow', band.title));
       header.appendChild(el('p', null, band.text));
-      bandEl.appendChild(header);
-      const gridKey = band.key === 'challenge' ? 'challenge' : (band.key === 'platform' ? 'platform' : 'prizes');
+      summary.appendChild(header);
+
+      const indicator = el('span', 'p2p-sponsor-band__indicator');
+      indicator.setAttribute('aria-hidden', 'true');
+      const showLabel = el('span', 'p2p-sponsor-band__indicator-label p2p-sponsor-band__indicator-label--show');
+      showLabel.appendChild(document.createTextNode('Show ' + items.length + ' sponsor' + (items.length === 1 ? '' : 's')));
+      const hideLabel = el('span', 'p2p-sponsor-band__indicator-label p2p-sponsor-band__indicator-label--hide');
+      hideLabel.appendChild(document.createTextNode('Hide sponsors'));
+      indicator.appendChild(showLabel);
+      indicator.appendChild(hideLabel);
+      const chevron = el('i', 'fas fa-chevron-down p2p-sponsor-band__indicator-chevron');
+      indicator.appendChild(chevron);
+      summary.appendChild(indicator);
+      details.appendChild(summary);
+
       const grid = el('div', 'p2p-sponsor-grid p2p-sponsor-grid--' + gridKey);
       items.forEach(sponsor => grid.appendChild(renderP2PSponsorCard(sponsor)));
-      bandEl.appendChild(grid);
+      details.appendChild(grid);
+
+      bandEl.appendChild(details);
       container.appendChild(bandEl);
     });
   }

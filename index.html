@@ -114,14 +114,24 @@
         <span class="hero-featured__arrow"><i class="fas fa-arrow-right" aria-hidden="true"></i></span>
       </a>
 
-      <div class="hero__manifest" aria-label="Next meetup">
-        <span class="hero__manifest-line">
-          <span class="hero__manifest-prompt" aria-hidden="true">$</span>
-          <span class="hero__manifest-cmd">grep ^THU sessions.txt</span>
-        </span>
-        <span class="hero__manifest-line hero__manifest-line--out">
-          <strong>THU</strong>&nbsp;&nbsp;<strong>18:00</strong>&nbsp;&nbsp;<strong>GH5.53</strong>
-        </span>
+      <div class="hero__schedule" aria-label="Next meetup">
+        <div class="hero__schedule-item">
+          <i class="fas fa-calendar-day hero__schedule-icon" aria-hidden="true"></i>
+          <span class="hero__schedule-value">THU</span>
+          <span class="hero__schedule-label">Day</span>
+        </div>
+        <span class="hero__schedule-sep" aria-hidden="true"></span>
+        <div class="hero__schedule-item">
+          <i class="fas fa-clock hero__schedule-icon" aria-hidden="true"></i>
+          <span class="hero__schedule-value">18:00</span>
+          <span class="hero__schedule-label">Time</span>
+        </div>
+        <span class="hero__schedule-sep" aria-hidden="true"></span>
+        <div class="hero__schedule-item">
+          <i class="fas fa-location-dot hero__schedule-icon" aria-hidden="true"></i>
+          <span class="hero__schedule-value">GH5.53</span>
+          <span class="hero__schedule-label">Room</span>
+        </div>
       </div>
       <div class="hero__socials hero__socials--compact">
         <a href="https://twitter.com/dmuhackers" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
