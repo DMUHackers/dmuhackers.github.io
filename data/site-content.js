@@ -601,16 +601,22 @@ window.DMU_SITE_CONTENT = {
     },
     {
       name: "Biterra",
-      website: "https://biterra.co/",
-      logo: "img/branding/biterra/biterra-logo.png",
+      website: "https://pwn2play.biterra.co",
+      logo: "img/branding/biterra/biterra-main.png",
       alt: "Biterra",
-      description: "Biterra is a gamified learning platform that brings the competitive spirit of CTFs to any subject. Built by a DMU Hackers alumni, Biterra hosts Pwn2Play and provides merchandise for our event.",
+      description: "Biterra is a gamified learning platform built by a DMU Hackers alumnus. It hosts every Pwn2Play challenge, scoreboard, and team — and provides event merchandise. The CTF lives permanently at pwn2play.biterra.co.",
       groups: ["platform"],
+      featured: true,
       logoStyle: "max-height:200px; width:auto",
       tags: [
         { icon: "fas fa-server", text: "Hosting Platform" },
         { icon: "fas fa-gift", text: "Merchandise" }
-      ]
+      ],
+      cta: {
+        text: "Open Pwn2Play on Biterra",
+        href: "https://pwn2play.biterra.co",
+        icon: "fas fa-arrow-up-right-from-square"
+      }
     },
     {
       name: "North Quay Holdings",
