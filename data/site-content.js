@@ -35,7 +35,6 @@ window.DMU_SITE_CONTENT = {
         { text: "Pulse", href: "#event-pulse", section: "event-pulse" },
         { text: "Categories", href: "#categories", section: "categories" },
         { text: "Breakdown", href: "#challenge-spread", section: "challenge-spread" },
-        { text: "Prizes", href: "#prizes", section: "prizes" },
         { text: "Rules", href: "#rules", section: "rules" },
         { text: "Sponsors", href: "#sponsors", section: "sponsors" }
       ],
@@ -298,43 +297,6 @@ window.DMU_SITE_CONTENT = {
         { key: "teams", label: "Teams", value: "150+", suffix: "registered" },
         { key: "challenges", label: "Challenges", value: "55", suffix: "across 12 categories" },
         { key: "flags", label: "Flags Pwned", value: "—", suffix: "Live on 30 May" }
-      ]
-    },
-    prizes: {
-      tag: "Rewards",
-      title: "In-Person Prizes",
-      subtitle: "Challenge Coins and TryHackMe Premium vouchers are reserved for the in-person podium.",
-      kicker: "In-person rewards",
-      intro: "In-person podium teams receive formal recognition, a P2P Challenge Coin and TryHackMe Premium time for four team members.",
-      note: "Online and in-person winners receive a Certificate of Achievement signed by DMU Faculty for LinkedIn and professional portfolios. Challenge Coins and TryHackMe vouchers are awarded to in-person podium teams.",
-      placements: [
-        {
-          rank: 2,
-          title: "Second Place",
-          rewards: [
-            { icon: "fas fa-certificate", text: "Faculty-signed Certificate" },
-            { icon: "fas fa-coins", text: "P2P Challenge Coin" },
-            { icon: "fas fa-user-shield", text: "4x 3-month TryHackMe Premium vouchers" }
-          ]
-        },
-        {
-          rank: 1,
-          title: "First Place",
-          rewards: [
-            { icon: "fas fa-certificate", text: "Faculty-signed Certificate" },
-            { icon: "fas fa-coins", text: "P2P Challenge Coin" },
-            { icon: "fas fa-user-shield", text: "4x 6-month TryHackMe Premium vouchers" }
-          ]
-        },
-        {
-          rank: 3,
-          title: "Third Place",
-          rewards: [
-            { icon: "fas fa-certificate", text: "Faculty-signed Certificate" },
-            { icon: "fas fa-coins", text: "P2P Challenge Coin" },
-            { icon: "fas fa-user-shield", text: "4x 1-month TryHackMe Premium vouchers" }
-          ]
-        }
       ]
     },
     rules: [
