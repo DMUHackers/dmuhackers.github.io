@@ -694,7 +694,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const bands = [
       { key: 'prize', title: 'Prize Providers', text: 'Supporting in-person winners with prizes that make the competition worth chasing.' },
-      { key: 'platform', title: 'Platform Partner', text: 'Powering the event experience and challenge platform for competitors.' },
       { key: 'challenge', title: 'Challenge Creators', text: 'Building realistic problems and scenarios for competitors to solve under pressure.' }
     ];
 
@@ -702,12 +701,13 @@ document.addEventListener('DOMContentLoaded', () => {
     bands.forEach(band => {
       const items = sponsors.filter(sponsor => sponsor.groups?.includes(band.key));
       if (!items.length) return;
-      const bandEl = el('div', 'p2p-sponsor-band' + (band.key === 'challenge' ? ' p2p-sponsor-band--challenge' : ''));
+      const bandEl = el('div', 'p2p-sponsor-band p2p-sponsor-band--' + band.key);
       const header = el('div', 'p2p-sponsor-band__header');
       header.appendChild(el('span', 'p2p-sponsor-band__eyebrow', band.title));
       header.appendChild(el('p', null, band.text));
       bandEl.appendChild(header);
-      const grid = el('div', 'p2p-sponsor-grid p2p-sponsor-grid--' + (band.key === 'challenge' ? 'challenge' : 'prizes'));
+      const gridKey = band.key === 'challenge' ? 'challenge' : (band.key === 'platform' ? 'platform' : 'prizes');
+      const grid = el('div', 'p2p-sponsor-grid p2p-sponsor-grid--' + gridKey);
       items.forEach(sponsor => grid.appendChild(renderP2PSponsorCard(sponsor)));
       bandEl.appendChild(grid);
       container.appendChild(bandEl);
@@ -739,6 +739,15 @@ document.addEventListener('DOMContentLoaded', () => {
     body.appendChild(meta);
     body.appendChild(el('h3', null, sponsor.name));
     body.appendChild(el('p', null, sponsor.description));
+    if (sponsor.cta && sponsor.cta.text && sponsor.cta.href) {
+      const cta = el('a', 'btn btn--primary btn--sm p2p-sponsor-card__cta');
+      cta.href = sponsor.cta.href;
+      cta.target = '_blank';
+      cta.rel = 'noopener noreferrer';
+      if (sponsor.cta.icon) appendIcon(cta, sponsor.cta.icon);
+      cta.appendChild(document.createTextNode(' ' + sponsor.cta.text));
+      body.appendChild(cta);
+    }
     article.appendChild(body);
     return article;
   }
@@ -1175,10 +1184,12 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       if (base === 'flag') { appendOutput('Nice try. Earn it at Pwn2Play.\nHint: real hackers don\'t just run commands... they chain them.'); return; }
-      if (base === 'ls') { appendOutput('about.txt  .flag.txt  getting-started/  pwn2play/  facilities/  committee/'); return; }
+      if (base === 'ls') { appendOutput('about.txt  sessions.txt  .flag.txt  getting-started/  pwn2play/  facilities/  committee/'); return; }
       if (base === 'cat') {
         if (parts.includes('about.txt')) {
           appendOutput('DMU Hackers is De Montfort University\'s cyber security society.\nWeekly meetups, CTF competitions, and hands-on hacking.\nAll skill levels welcome. Est. 2015.');
+        } else if (parts.includes('sessions.txt')) {
+          appendOutput('# weekly sessions (DMU Hackers)\nTHU 18:00  GH5.53  open invite\n# last updated 2026-01-09');
         } else if (parts.includes('.flag.txt')) {
           appendOutput('cat: .flag.txt: Permission denied');
         } else {
@@ -1191,6 +1202,22 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
       if (base === 'when') { appendOutput('Every Thursday at 18:00 \u2014 Gateway House 5.53'); return; }
+      if (base === 'grep') {
+        var grepPattern = parts[1];
+        var grepFile = parts[2];
+        if (!grepPattern || !grepFile) { appendOutput('usage: grep <pattern> <file>'); return; }
+        if (grepFile !== 'sessions.txt') { appendOutput('grep: ' + grepFile + ': No such file or directory'); return; }
+        var sessionLines = [
+          '# weekly sessions (DMU Hackers)',
+          'THU 18:00  GH5.53  open invite',
+          '# last updated 2026-01-09'
+        ];
+        var grepRx;
+        try { grepRx = new RegExp(grepPattern, 'i'); } catch (e) { appendOutput('grep: invalid pattern'); return; }
+        var grepHits = sessionLines.filter(function (l) { return grepRx.test(l); });
+        if (grepHits.length) appendOutput(grepHits.join('\n'));
+        return;
+      }
       if (base === 'sudo') { appendOutput('Permission denied. You\'re not root... yet.'); return; }
       if (base === 'cd') { appendOutput('Nice try. This is a single-page terminal.'); return; }
       if (base === 'rm') { appendOutput('rm: permission denied. No destroying the website.'); return; }

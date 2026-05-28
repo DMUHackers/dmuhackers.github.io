@@ -485,6 +485,43 @@ ul  { list-style: none; }
   line-height: 1.7;
 }
 
+.hero__manifest {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto 32px;
+  padding: 0;
+  font-family: var(--font-mono);
+  font-size: .95rem;
+  color: var(--text-muted);
+  user-select: text;
+}
+.hero__manifest-line {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.hero__manifest-line--out {
+  padding-left: 1.6ch;
+  color: var(--text-muted);
+  letter-spacing: .02em;
+  gap: 0;
+}
+.hero__manifest-prompt {
+  color: var(--accent);
+  font-weight: 700;
+}
+.hero__manifest-cmd {
+  color: var(--text);
+}
+.hero__manifest-line--out strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
 .hero__actions {
   display: flex;
   gap: 14px;
@@ -1623,6 +1660,7 @@ a.card--link:hover .card__arrow {
   .hero-stat__number { font-size: 1.6rem; }
   .info-bar { flex-direction: column; align-items: center; }
   .hero__actions { flex-direction: column; align-items: center; }
+  .hero__manifest { font-size: .82rem; gap: 8px; }
   .footer__top { grid-template-columns: 1fr; }
   .hero-term__body { max-height: 200px; }
 }
