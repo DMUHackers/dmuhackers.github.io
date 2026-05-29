@@ -125,6 +125,32 @@ html.light .hero__title {
   text-shadow: none;
 }
 
+/* Committee hero title uses a gradient that includes white — kill the
+   gradient in light mode so the text fills with --text instead of hazing out */
+html.light .hero--compact .hero__title {
+  background: none;
+  -webkit-text-fill-color: var(--text);
+  background-clip: initial;
+  -webkit-background-clip: initial;
+}
+
+/* Sponsor hero pillar dividers use a white gradient — flip to a dark
+   gradient in light mode so they stay visible */
+html.light .hero-pillar__divider {
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,.12), transparent);
+}
+@media (max-width: 768px) {
+  html.light .hero-pillar__divider {
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,.12), transparent);
+  }
+}
+
+/* P2P schedule timeline — dot ring sits on light-mode background */
+html.light .p2p-schedule__dot {
+  background: #fff;
+  box-shadow: 0 0 0 4px var(--bg);
+}
+
 /* Hero stats bar */
 html.light .hero-stats {
   border-top-color: rgba(0,0,0,.06);
@@ -644,47 +670,6 @@ html.light .timeline__year-badge {
 /* ---------- Resources (resources.css) ---------- */
 html.light .resource-card__tag--accent {
   background: rgba(200,16,46,.06);
-}
-
-/* ---------- Map Page (map.css) ---------- */
-html.light .map-embed {
-  border-color: rgba(0,0,0,.1);
-  box-shadow: 0 4px 24px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.04);
-}
-html.light .map-embed--large {
-  border-color: rgba(200,16,46,.1);
-  box-shadow: 0 8px 40px rgba(0,0,0,.1), 0 0 60px rgba(200,16,46,.04);
-}
-html.light .venue__tag {
-  background: rgba(200,16,46,.06);
-  border-color: rgba(200,16,46,.1);
-}
-html.light .map-pin__label {
-  background: rgba(255,255,255,.92);
-  color: #1a1a1e;
-}
-html.light .leaflet-popup-content-wrapper {
-  background: rgba(255,255,255,.95) !important;
-  color: #1a1a1e !important;
-  border-color: rgba(0,0,0,.08);
-}
-html.light .leaflet-popup-tip {
-  background: rgba(255,255,255,.95) !important;
-}
-html.light .leaflet-popup-close-button {
-  color: rgba(0,0,0,.4) !important;
-}
-html.light .leaflet-control-zoom a {
-  background: rgba(255,255,255,.9) !important;
-  color: #1a1a1e !important;
-  border-color: rgba(0,0,0,.1) !important;
-}
-html.light .leaflet-control-attribution {
-  background: rgba(255,255,255,.7) !important;
-  color: rgba(0,0,0,.4) !important;
-}
-html.light .leaflet-control-attribution a {
-  color: rgba(0,0,0,.5) !important;
 }
 
 /* ---------- Mobile Nav ---------- */

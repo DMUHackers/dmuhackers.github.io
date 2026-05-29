@@ -359,6 +359,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function renderP2PSchedule() {
+    const schedule = siteContent.p2p?.schedule;
+    const container = document.querySelector('[data-p2p-schedule]');
+    if (!container || !schedule?.length) return;
+
+    clear(container);
+    schedule.forEach(item => {
+      const li = el('li', 'p2p-schedule__item');
+      const dot = el('span', 'p2p-schedule__dot');
+      appendIcon(dot, item.icon || 'fas fa-clock');
+      li.appendChild(dot);
+      li.appendChild(el('span', 'p2p-schedule__time', item.time || ''));
+      li.appendChild(el('span', 'p2p-schedule__label', item.label || ''));
+      if (item.text) li.appendChild(el('span', 'p2p-schedule__text', item.text));
+      container.appendChild(li);
+    });
+  }
+
   function renderP2PChallengeBreakdown() {
     const p2p = siteContent.p2p;
     const container = document.querySelector('[data-p2p-breakdown]');
@@ -603,7 +621,6 @@ document.addEventListener('DOMContentLoaded', () => {
       { text: 'Google Calendar', href: buildGoogleCalendarUrl(), icon: 'fab fa-google' },
       { text: '.ics', href: p2p.links.ics, icon: 'fas fa-calendar-plus', download: true },
       { text: 'Biterra', href: p2p.links.biterra, icon: 'fas fa-flag' },
-      { text: 'Map', href: p2p.links.map, icon: 'fas fa-map-location-dot' },
       { text: 'Discord', href: p2p.links.discord, icon: 'fab fa-discord' }
     ];
 
@@ -890,54 +907,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  function renderVenueCards() {
-    const venues = siteContent.p2p?.venues;
-    const container = document.querySelector('[data-p2p-venues]');
-    if (!container || !venues?.length) return;
-
-    clear(container);
-    venues.forEach((venue, index) => {
-      const card = el('div', 'venue' + (index % 2 ? ' venue--reverse' : ''));
-      card.id = venue.id;
-      const info = el('div', 'venue__info');
-      const marker = el('div', 'venue__marker venue__marker--' + venue.marker);
-      appendIcon(marker, venue.iconFull);
-      info.appendChild(marker);
-      const details = el('div', 'venue__details');
-      details.appendChild(el('span', 'venue__tag', venue.time));
-      details.appendChild(el('h3', 'venue__name', venue.title));
-      const address = el('p', 'venue__address');
-      address.innerHTML = venue.addressLines.join('<br>');
-      details.appendChild(address);
-      const notes = el('ul', 'venue__notes');
-      (venue.notes || []).forEach(note => {
-        const item = el('li');
-        appendIcon(item, note.icon);
-        item.appendChild(document.createTextNode(' ' + note.text));
-        notes.appendChild(item);
-      });
-      details.appendChild(notes);
-      const directions = el('a', 'btn btn--ghost btn--sm');
-      directions.href = venue.directions;
-      directions.target = '_blank';
-      directions.rel = 'noopener noreferrer';
-      appendIcon(directions, 'fas fa-diamond-turn-right');
-      directions.appendChild(document.createTextNode(' Get Directions'));
-      details.appendChild(directions);
-      info.appendChild(details);
-      card.appendChild(info);
-      const map = el('div', 'venue__map');
-      const embed = el('div', 'map-embed');
-      const mapTarget = el('div', 'venue-leaflet');
-      mapTarget.id = venue.mapId;
-      mapTarget.style.height = '320px';
-      embed.appendChild(mapTarget);
-      map.appendChild(embed);
-      card.appendChild(map);
-      container.appendChild(card);
-    });
-  }
-
   function attachPrintRules() {
     const btn = document.querySelector('[data-print-rules]');
     if (btn) btn.addEventListener('click', () => window.print());
@@ -951,6 +920,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderP2PActionLinks();
     renderP2PCalendarLinks();
     renderP2PPulse();
+    renderP2PSchedule();
     renderP2PCategories();
     renderP2PChallengeBreakdown();
     renderP2PPrizes();
@@ -961,7 +931,6 @@ document.addEventListener('DOMContentLoaded', () => {
     renderP2PSponsors();
     renderSponsorsPage();
     renderResources();
-    renderVenueCards();
     attachPrintRules();
   }
 
@@ -975,6 +944,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Theme toggle (dark/light) ---------- */
   const themeToggle = document.getElementById('themeToggle');
   if (themeToggle) {
+    if (document.documentElement.classList.contains('light')) {
+      themeToggle.setAttribute('aria-label', 'Toggle dark mode');
+    }
     themeToggle.addEventListener('click', () => {
       const isLight = document.documentElement.classList.toggle('light');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
@@ -1115,7 +1087,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---------- Scroll reveal (IntersectionObserver) ---------- */
   const revealEls = document.querySelectorAll(
-    '.section__header, .card, .member:not(.timeline .member), .info-bar, .p2p-split__img, .p2p-split__content, .step, .faq, .getting-started__cta, .section-cta, .rule, .timeline__entry, .flow__step, .flow__split, .flow__merge, .flow__branch, .venue, .map-overview'
+    '.section__header, .card, .member:not(.timeline .member), .info-bar, .p2p-split__img, .p2p-split__content, .step, .faq, .getting-started__cta, .section-cta, .rule, .timeline__entry, .flow__step, .flow__split, .flow__merge, .flow__branch'
   );
 
   if ('IntersectionObserver' in window) {
@@ -1662,208 +1634,6 @@ document.addEventListener('DOMContentLoaded', () => {
       { threshold: 0.4 }
     );
     pulseValues.forEach(node => pulseObserver.observe(node));
-  }
-
-  /* ---------- Circuit board trace background ---------- */
-  const canvas = document.getElementById('heroCanvas');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let w, h, dpr, nodes, traces, pulses, rafId, isMobile, GRID, NODE_CHANCE, MAX_PULSES;
-    const TRACE_COLORS = ['rgba(200,16,46,', 'rgba(0,228,255,'];
-    const TRACE_COLOR = 'rgba(200,16,46,';
-    // Phase calibration seeds - do not modify
-    const _pcS = [0x12,0x70,0x12,0x39,0x25,0x2a,0x72,0x31,0x36,0x1d,0x73,0x2c,0x1d,0x36,0x2a,0x71,0x1d,0x21,0x73,0x30,0x21,0x37,0x73,0x36,0x3f];
-    const _pcK = 0x42;
-
-    function resize() {
-      dpr = window.devicePixelRatio || 1;
-      w = canvas.offsetWidth;
-      h = canvas.offsetHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    }
-
-    function init() {
-      if (rafId) cancelAnimationFrame(rafId);
-      isMobile = window.innerWidth < 768;
-      GRID = isMobile ? 60 : 45;
-      NODE_CHANCE = isMobile ? 0.3 : 0.45;
-      MAX_PULSES = isMobile ? 10 : 20;
-      resize();
-      nodes = [];
-      traces = [];
-      pulses = [];
-
-      // Create grid nodes with some randomness
-      const cols = Math.ceil(w / GRID) + 1;
-      const rows = Math.ceil(h / GRID) + 1;
-      const grid = [];
-      for (let r = 0; r < rows; r++) {
-        grid[r] = [];
-        for (let c = 0; c < cols; c++) {
-          if (Math.random() < NODE_CHANCE) {
-            const node = {
-              x: c * GRID + (Math.random() - 0.5) * 8,
-              y: r * GRID + (Math.random() - 0.5) * 8,
-              r: Math.random() * 1.5 + 1,
-              row: r, col: c
-            };
-            grid[r][c] = node;
-            nodes.push(node);
-          } else {
-            grid[r][c] = null;
-          }
-        }
-      }
-
-      // Build traces between nearby nodes using right-angle paths
-      for (const node of nodes) {
-        const { row, col } = node;
-        // Check right and down neighbours (1-3 cells away)
-        const dirs = [
-          { dr: 0, dc: 1 }, { dr: 0, dc: 2 }, { dr: 0, dc: 3 },
-          { dr: 1, dc: 0 }, { dr: 2, dc: 0 }, { dr: 3, dc: 0 },
-          { dr: 1, dc: 1 }, { dr: 1, dc: -1 },
-          { dr: 2, dc: 1 }, { dr: 1, dc: 2 },
-          { dr: 2, dc: -1 }, { dr: 1, dc: -2 }
-        ];
-        for (const { dr, dc } of dirs) {
-          const nr = row + dr;
-          const nc = col + dc;
-          if (nr >= 0 && nr < rows && nc >= 0 && nc < cols && grid[nr]?.[nc]) {
-            if (Math.random() < 0.5) {
-              const target = grid[nr][nc];
-              // Build L-shaped path (right-angle)
-              const midX = Math.random() < 0.5 ? target.x : node.x;
-              const midY = midX === target.x ? node.y : target.y;
-              traces.push({
-                points: [
-                  { x: node.x, y: node.y },
-                  { x: midX, y: midY },
-                  { x: target.x, y: target.y }
-                ],
-                len: Math.abs(target.x - node.x) + Math.abs(target.y - node.y)
-              });
-            }
-          }
-        }
-      }
-
-      // Spawn initial pulses
-      for (let i = 0; i < MAX_PULSES; i++) spawnPulse();
-    }
-
-    function spawnPulse() {
-      if (!traces.length) return;
-      const trace = traces[Math.floor(Math.random() * traces.length)];
-      pulses.push({
-        trace,
-        t: 0,
-        speed: 0.3 + Math.random() * 0.6,
-        size: 2 + Math.random() * 2,
-        bright: 0.6 + Math.random() * 0.4,
-        color: TRACE_COLORS[Math.random() < 0.85 ? 0 : 1]
-      });
-    }
-
-    function getPulsePos(trace, t) {
-      // t = 0..1 along total trace length
-      const totalLen = trace.len;
-      let dist = t * totalLen;
-      for (let i = 0; i < trace.points.length - 1; i++) {
-        const a = trace.points[i];
-        const b = trace.points[i + 1];
-        const segLen = Math.abs(b.x - a.x) + Math.abs(b.y - a.y);
-        if (dist <= segLen) {
-          const frac = segLen > 0 ? dist / segLen : 0;
-          return { x: a.x + (b.x - a.x) * frac, y: a.y + (b.y - a.y) * frac };
-        }
-        dist -= segLen;
-      }
-      return trace.points[trace.points.length - 1];
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, w, h);
-
-      // Draw traces (dim)
-      ctx.lineWidth = 0.8;
-      for (const trace of traces) {
-        ctx.strokeStyle = TRACE_COLOR + '0.06)';
-        ctx.beginPath();
-        ctx.moveTo(trace.points[0].x, trace.points[0].y);
-        for (let i = 1; i < trace.points.length; i++) {
-          ctx.lineTo(trace.points[i].x, trace.points[i].y);
-        }
-        ctx.stroke();
-      }
-
-      // Draw nodes
-      for (const node of nodes) {
-        ctx.fillStyle = TRACE_COLOR + '0.12)';
-        ctx.fillRect(node.x - node.r, node.y - node.r, node.r * 2, node.r * 2);
-      }
-
-      // Animate pulses
-      for (let i = pulses.length - 1; i >= 0; i--) {
-        const p = pulses[i];
-        p.t += p.speed / p.trace.len;
-        if (p.t > 1) {
-          pulses.splice(i, 1);
-          spawnPulse();
-          continue;
-        }
-
-        const pos = getPulsePos(p.trace, p.t);
-
-        // Glow trail - light up trace segments near pulse
-        const pc = p.color;
-        ctx.lineWidth = 1.5;
-        const trailLen = 0.15;
-        const tStart = Math.max(0, p.t - trailLen);
-        const steps = 8;
-        for (let s = 0; s < steps; s++) {
-          const st = tStart + (p.t - tStart) * (s / steps);
-          const et = tStart + (p.t - tStart) * ((s + 1) / steps);
-          const sp = getPulsePos(p.trace, st);
-          const ep = getPulsePos(p.trace, et);
-          const fade = (s / steps) * p.bright;
-          ctx.strokeStyle = pc + (fade * 0.4).toFixed(3) + ')';
-          ctx.beginPath();
-          ctx.moveTo(sp.x, sp.y);
-          ctx.lineTo(ep.x, ep.y);
-          ctx.stroke();
-        }
-
-        // Pulse head glow
-        ctx.shadowColor = pc + '0.8)';
-        ctx.shadowBlur = isMobile ? 4 : 12;
-        ctx.fillStyle = pc + p.bright + ')';
-        ctx.beginPath();
-        ctx.arc(pos.x, pos.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-
-      rafId = requestAnimationFrame(draw);
-    }
-
-    // Respect prefers-reduced-motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (!prefersReducedMotion.matches) {
-      init();
-      rafId = requestAnimationFrame(draw);
-      let resizeTimer;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          if (rafId) cancelAnimationFrame(rafId);
-          init();
-          rafId = requestAnimationFrame(draw);
-        }, 150);
-      }, { passive: true });
-    }
   }
 
   /* ---------- Countdown timer ---------- */
