@@ -3,8 +3,6 @@
    ========================================================================== */
 
 /* ---------- Custom Properties ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300..700&display=swap');
-
 :root {
   --bg:          #0b0c10;
   --bg-alt:      #11131a;
@@ -582,7 +580,7 @@ ul  { list-style: none; }
   border: 1px solid rgba(255,255,255,.08);
   color: var(--text-muted);
   font-size: 1rem;
-  transition: all .3s cubic-bezier(.4,0,.2,1);
+  transition: background-color .3s cubic-bezier(.4,0,.2,1), border-color .3s cubic-bezier(.4,0,.2,1), color .3s cubic-bezier(.4,0,.2,1), transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s cubic-bezier(.4,0,.2,1);
   position: relative;
 }
 .hero__socials a:hover {
@@ -641,7 +639,7 @@ ul  { list-style: none; }
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  transition: all .3s cubic-bezier(.4,0,.2,1);
+  transition: background-color .3s cubic-bezier(.4,0,.2,1), border-color .3s cubic-bezier(.4,0,.2,1), color .3s cubic-bezier(.4,0,.2,1), transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s cubic-bezier(.4,0,.2,1);
   white-space: nowrap;
   letter-spacing: .01em;
   position: relative;
@@ -767,7 +765,7 @@ ul  { list-style: none; }
   font-family: var(--font-display);
   font-size: 1.2rem;
   font-weight: 700;
-  transition: all .4s;
+  transition: background-color .4s, border-color .4s, color .4s, transform .4s, box-shadow .4s;
 }
 .step:hover .step__number {
   background: rgba(200,16,46,.16);
@@ -923,7 +921,7 @@ ul  { list-style: none; }
   color: var(--accent);
   font-size: 1.15rem;
   margin-bottom: 22px;
-  transition: all .4s cubic-bezier(.4,0,.2,1);
+  transition: background-color .4s cubic-bezier(.4,0,.2,1), border-color .4s cubic-bezier(.4,0,.2,1), color .4s cubic-bezier(.4,0,.2,1), transform .4s cubic-bezier(.4,0,.2,1), box-shadow .4s cubic-bezier(.4,0,.2,1);
   position: relative;
 }
 .card:hover .card__icon {
@@ -1321,7 +1319,7 @@ a.card--link:hover .card__arrow {
   border: 1px solid rgba(255,255,255,.08);
   color: var(--text-muted);
   font-size: .85rem;
-  transition: all .3s cubic-bezier(.4,0,.2,1);
+  transition: background-color .3s cubic-bezier(.4,0,.2,1), border-color .3s cubic-bezier(.4,0,.2,1), color .3s cubic-bezier(.4,0,.2,1), transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s cubic-bezier(.4,0,.2,1);
 }
 .member__social:hover {
   color: #fff;
@@ -1386,7 +1384,7 @@ a.card--link:hover .card__arrow {
   border: 1px solid var(--border);
   color: var(--text-muted);
   font-size: .85rem;
-  transition: all .25s;
+  transition: background-color .25s, border-color .25s, color .25s, transform .25s, box-shadow .25s;
 }
 .footer__socials a:hover {
   color: var(--text);
@@ -1536,9 +1534,7 @@ a.card--link:hover .card__arrow {
   .flow__step,
   .flow__split,
   .flow__merge,
-  .flow__branch,
-  .venue,
-  .map-overview {
+  .flow__branch {
     opacity: 1 !important;
     transform: none !important;
     transition-delay: 0s !important;

@@ -427,6 +427,119 @@
 }
 
 
+/* ---------- Schedule (horizontal timeline) ---------- */
+.p2p-schedule {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  position: relative;
+}
+.p2p-schedule::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(200,16,46,.45) 12%, rgba(200,16,46,.45) 88%, transparent 100%);
+  z-index: 0;
+}
+.p2p-schedule__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 8px;
+  z-index: 1;
+}
+.p2p-schedule__dot {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  border: 1px solid rgba(200,16,46,.35);
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .95rem;
+  margin-bottom: 14px;
+  box-shadow: 0 0 0 4px var(--bg);
+}
+.p2p-schedule__time {
+  font-family: var(--font-mono);
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+.p2p-schedule__label {
+  margin-top: 4px;
+  font-family: var(--font);
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.p2p-schedule__text {
+  margin-top: 8px;
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  max-width: 220px;
+}
+@media (max-width: 760px) {
+  .p2p-schedule {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .p2p-schedule::before {
+    top: 0;
+    bottom: 0;
+    left: 19px;
+    right: auto;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, transparent 0%, rgba(200,16,46,.45) 6%, rgba(200,16,46,.45) 94%, transparent 100%);
+  }
+  .p2p-schedule__item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: auto auto auto;
+    column-gap: 16px;
+    row-gap: 2px;
+    align-items: start;
+    text-align: left;
+    padding: 0;
+  }
+  .p2p-schedule__dot {
+    grid-row: 1 / span 3;
+    align-self: start;
+    margin-bottom: 0;
+  }
+  .p2p-schedule__time {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .p2p-schedule__label {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 0;
+  }
+  .p2p-schedule__text {
+    grid-column: 2;
+    grid-row: 3;
+    margin-top: 4px;
+    max-width: none;
+  }
+}
+
 /* ---------- Challenge Category Cards ---------- */
 .p2p-cat-cards {
   align-items: stretch;
@@ -1310,7 +1423,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: all .3s;
+  transition: background-color .3s, border-color .3s, color .3s, transform .3s, box-shadow .3s;
 }
 .rule:hover .rule__num {
   background: rgba(200,16,46,.18);
@@ -1539,7 +1652,7 @@
   background: rgba(24, 24, 27, .6);
   color: var(--text-muted);
   cursor: pointer;
-  transition: all .25s;
+  transition: background-color .25s, border-color .25s, color .25s, transform .25s, box-shadow .25s;
 }
 .podium-nav__btn:hover {
   border-color: rgba(200,16,46,.35);
