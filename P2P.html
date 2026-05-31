@@ -4,18 +4,18 @@
   <script>if(localStorage.getItem('theme')==='light')document.documentElement.classList.add('light');</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Pwn2Play CTF - DMU Hackers Capture The Flag Competition</title>
-  <meta name="description" content="Pwn2Play: Core Incursion — DMU Hackers' flagship student CTF on 30 May 2026. 55 challenges across 12 categories, 300+ competitors in 150+ teams, hybrid in Leicester and online.">
-  <meta property="og:title" content="Pwn2Play CTF - DMU Hackers">
-  <meta property="og:description" content="55 challenges, 300+ student competitors, 150+ teams. DMU Hackers' flagship Jeopardy-style CTF on 30 May 2026, hybrid in Leicester and online.">
+  <title>Pwn2Play 2026 Results - DMU Hackers CTF</title>
+  <meta name="description" content="Pwn2Play: Core Incursion 2026 results: 200 teams, 332 participants, 52 public challenges, and the official in-person podium.">
+  <meta property="og:title" content="Pwn2Play 2026 Results - DMU Hackers">
+  <meta property="og:description" content="Pwn2Play: Core Incursion 2026 results, public challenge breakdown, and official in-person podium.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dmuhackers.com/P2P.html">
   <meta property="og:image" content="https://dmuhackers.com/img/site-content/logo/1200x630.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://dmuhackers.com/img/site-content/logo/1200x628.png">
   <meta name="twitter:site" content="@dmuhackers">
-  <meta name="twitter:title" content="Pwn2Play CTF - DMU Hackers">
-  <meta name="twitter:description" content="55 challenges, 300+ student competitors, 150+ teams. DMU Hackers' flagship Jeopardy-style CTF on 30 May 2026, hybrid in Leicester and online.">
+  <meta name="twitter:title" content="Pwn2Play 2026 Results - DMU Hackers">
+  <meta name="twitter:description" content="Pwn2Play: Core Incursion 2026 results, public challenge breakdown, and official in-person podium.">
   <link rel="canonical" href="https://dmuhackers.com/P2P.html">
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="apple-touch-icon" sizes="180x180" href="img/site-content/logo/180x180.png">
@@ -36,7 +36,7 @@
     "startDate": "2026-05-30T09:00:00+01:00",
     "endDate": "2026-05-30T18:00:00+01:00",
     "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
-    "eventStatus": "https://schema.org/EventScheduled",
+    "eventStatus": "https://schema.org/EventCompleted",
     "location": {
       "@type": "Place",
       "name": "Gateway House",
@@ -64,13 +64,6 @@
         "https://discord.gg/Vvrk4kK"
       ]
     },
-    "offers": {
-      "@type": "Offer",
-      "url": "https://luma.com/embed/event/evt-9baefgwD4wSfcBc/simple",
-      "price": "0",
-      "priceCurrency": "GBP",
-      "availability": "https://schema.org/InStock"
-    },
     "isAccessibleForFree": true
   }
   </script>
@@ -90,7 +83,7 @@
       <ul class="nav__links" id="navLinks">
         <li><a href="index.html" class="nav__link">Home</a></li>
         <li><a href="#p2p-hero" class="nav__link active" data-section="p2p-hero">Pwn2Play</a></li>
-        <li><a href="#event-pulse" class="nav__link" data-section="event-pulse">Pulse</a></li>
+        <li><a href="#event-pulse" class="nav__link" data-section="event-pulse">Stats</a></li>
         <li><a href="#categories" class="nav__link" data-section="categories">Categories</a></li>
         <li><a href="#challenge-spread" class="nav__link" data-section="challenge-spread">Breakdown</a></li>
         <li><a href="#rules" class="nav__link" data-section="rules">Rules</a></li>
@@ -114,35 +107,20 @@
         <span class="p2p-poster__word">Pwn</span><span class="p2p-poster__digit">2</span><span class="p2p-poster__word">Play</span>
       </h1>
 
-      <p class="p2p-poster__subhead">Core Incursion &mdash; a hybrid student CTF.</p>
+      <p class="p2p-poster__subhead">Core Incursion 2026 results and event retrospective.</p>
 
-      <div class="hero-countdown p2p-poster__countdown" id="countdown">
-        <div class="hero-countdown__timer">
-          <div class="hero-countdown__unit">
-            <span class="hero-countdown__num" id="cdDays">--</span>
-            <span class="hero-countdown__label">Days</span>
-          </div>
-          <span class="hero-countdown__sep"></span>
-          <div class="hero-countdown__unit">
-            <span class="hero-countdown__num" id="cdHours">--</span>
-            <span class="hero-countdown__label">Hours</span>
-          </div>
-          <span class="hero-countdown__sep"></span>
-          <div class="hero-countdown__unit">
-            <span class="hero-countdown__num" id="cdMins">--</span>
-            <span class="hero-countdown__label">Mins</span>
-          </div>
-          <span class="hero-countdown__sep"></span>
-          <div class="hero-countdown__unit">
-            <span class="hero-countdown__num" id="cdSecs">--</span>
-            <span class="hero-countdown__label">Secs</span>
-          </div>
+      <div class="hero-results" data-p2p-hero-results>
+        <p class="hero-results__label">2026 Official In-Person Podium</p>
+        <div class="hero-results__podium">
+          <span class="hero-results__place hero-results__place--1"><i class="fas fa-crown"></i> 1st R0073R5</span>
+          <span class="hero-results__place hero-results__place--2"><i class="fas fa-medal"></i> 2nd H4ck3rs0NF1r3</span>
+          <span class="hero-results__place hero-results__place--3"><i class="fas fa-medal"></i> 3rd AFNOM</span>
         </div>
       </div>
 
       <div class="p2p-poster__actions">
-        <a href="register.html" class="btn btn--primary"><i class="fas fa-ticket"></i> Register</a>
-        <a href="https://discord.gg/Vvrk4kK" class="btn btn--ghost" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Discord</a>
+        <a href="#podium" class="btn btn--primary"><i class="fas fa-trophy"></i> View Results</a>
+        <a href="#event-pulse" class="btn btn--ghost"><i class="fas fa-chart-simple"></i> Event Stats</a>
       </div>
     </div>
   </section>
@@ -166,34 +144,29 @@
     </div>
   </section>
 
-  <!-- Live Event Pulse -->
+  <!-- Event Results -->
   <section id="event-pulse" class="section section--alt">
     <div class="container">
       <div class="section__header">
-        <span class="section__tag" data-p2p-pulse-tag>Live Pulse</span>
-        <h2 class="section__title" data-p2p-pulse-title>Core Incursion at a Glance</h2>
-        <p class="section__subtitle" data-p2p-pulse-subtitle>Live as the event unfolds &mdash; updated by the committee on the day.</p>
+        <span class="section__tag" data-p2p-pulse-tag>2026 Results</span>
+        <h2 class="section__title" data-p2p-pulse-title>Core Incursion by the Numbers</h2>
+        <p class="section__subtitle" data-p2p-pulse-subtitle>Final public stats from the completed Pwn2Play 2026 event.</p>
       </div>
       <div class="p2p-pulse" data-p2p-pulse>
-        <article class="p2p-pulse__tile" data-pulse-key="signups">
-          <span class="p2p-pulse__label">Signups</span>
-          <strong class="p2p-pulse__value">300+</strong>
-          <span class="p2p-pulse__suffix">members on Biterra</span>
-        </article>
         <article class="p2p-pulse__tile" data-pulse-key="teams">
           <span class="p2p-pulse__label">Teams</span>
-          <strong class="p2p-pulse__value">150+</strong>
+          <strong class="p2p-pulse__value">200</strong>
           <span class="p2p-pulse__suffix">registered</span>
         </article>
-        <article class="p2p-pulse__tile" data-pulse-key="challenges">
-          <span class="p2p-pulse__label">Challenges</span>
-          <strong class="p2p-pulse__value">55</strong>
-          <span class="p2p-pulse__suffix">across 12 categories</span>
+        <article class="p2p-pulse__tile" data-pulse-key="participants">
+          <span class="p2p-pulse__label">Participants</span>
+          <strong class="p2p-pulse__value">332</strong>
+          <span class="p2p-pulse__suffix">total competitors</span>
         </article>
-        <article class="p2p-pulse__tile is-pending" data-pulse-key="flags">
-          <span class="p2p-pulse__label">Flags Pwned</span>
-          <strong class="p2p-pulse__value">&mdash;</strong>
-          <span class="p2p-pulse__suffix">Live on 30 May</span>
+        <article class="p2p-pulse__tile" data-pulse-key="publicChallenges">
+          <span class="p2p-pulse__label">Public Challenges</span>
+          <strong class="p2p-pulse__value">52</strong>
+          <span class="p2p-pulse__suffix">excluding Part 2 form checks</span>
         </article>
       </div>
     </div>
@@ -203,15 +176,15 @@
   <section id="categories" class="section">
     <div class="container">
       <div class="section__header">
-        <span class="section__tag">12 Categories, 55 Challenges</span>
+        <span class="section__tag">11 Categories, 52 Public Challenges</span>
         <h2 class="section__title">Challenge Categories</h2>
-        <p class="section__subtitle">A broad 2026 challenge set weighted toward web exploitation, with room for reversing, forensics, OSINT, scripting, crypto and fundamentals.</p>
+        <p class="section__subtitle">The final public 2026 challenge set, excluding the two Part 2 form verification rows.</p>
       </div>
       <div class="cards cards--four p2p-cat-cards" data-p2p-categories>
         <div class="card p2p-cat-card">
           <div class="p2p-cat-card__top">
             <div class="card__icon"><i class="fas fa-globe"></i></div>
-            <span class="p2p-cat-card__count">15</span>
+            <span class="p2p-cat-card__count">14</span>
           </div>
           <h3 class="card__title">Web Exploitation</h3>
           <p class="card__text">SQL injection, XSS, SSRF, authentication bypasses and web logic flaws.</p>
@@ -227,7 +200,7 @@
         <div class="card p2p-cat-card">
           <div class="p2p-cat-card__top">
             <div class="card__icon"><i class="fas fa-puzzle-piece"></i></div>
-            <span class="p2p-cat-card__count">8</span>
+            <span class="p2p-cat-card__count">9</span>
           </div>
           <h3 class="card__title">Miscellaneous</h3>
           <p class="card__text">Unexpected formats, strange clues and challenge ideas that refuse one label.</p>
@@ -290,14 +263,6 @@
         </div>
         <div class="card p2p-cat-card">
           <div class="p2p-cat-card__top">
-            <div class="card__icon"><i class="fas fa-code"></i></div>
-            <span class="p2p-cat-card__count">1</span>
-          </div>
-          <h3 class="card__title">Code</h3>
-          <p class="card__text">Solve a focused programming problem with clean logic and fast execution.</p>
-        </div>
-        <div class="card p2p-cat-card">
-          <div class="p2p-cat-card__top">
             <div class="card__icon"><i class="fas fa-flag-checkered"></i></div>
             <span class="p2p-cat-card__count">1</span>
           </div>
@@ -314,14 +279,14 @@
       <div class="section__header">
         <span class="section__tag">2026 Spread</span>
         <h2 class="section__title">Challenge Breakdown</h2>
-        <p class="section__subtitle">55 challenges across categories and difficulties.</p>
+        <p class="section__subtitle">52 public challenges across categories and difficulties.</p>
       </div>
       <div class="p2p-breakdown" data-p2p-breakdown>
         <article class="p2p-breakdown-card">
           <div class="p2p-breakdown-card__visual">
-            <div class="p2p-breakdown-chart" style="background: conic-gradient(#c8102e 0% 28.30%, #00e4ff 28.30% 43.40%, #f4c95d 43.40% 52.83%, #34d399 52.83% 62.26%, #8b5cf6 62.26% 71.70%, #f97316 71.70% 79.25%, #f43f5e 79.25% 84.91%, #14b8a6 84.91% 90.57%, #e879f9 90.57% 94.34%, #a3e635 94.34% 96.23%, #38bdf8 96.23% 98.11%, #94a3b8 98.11% 100%)" role="img" aria-label="Challenge Categories pie chart for 55 challenges">
+            <div class="p2p-breakdown-chart" style="background: conic-gradient(#c8102e 0% 26.92%, #00e4ff 26.92% 44.23%, #f4c95d 44.23% 53.85%, #34d399 53.85% 63.46%, #8b5cf6 63.46% 73.08%, #f97316 73.08% 80.77%, #f43f5e 80.77% 86.54%, #14b8a6 86.54% 92.31%, #e879f9 92.31% 96.15%, #a3e635 96.15% 98.08%, #38bdf8 98.08% 100%)" role="img" aria-label="Challenge Categories pie chart for 52 challenges">
               <div class="p2p-breakdown-chart__centre">
-                <strong>55</strong>
+                <strong>52</strong>
                 <span>challenges</span>
               </div>
             </div>
@@ -331,8 +296,8 @@
             <h3 class="p2p-breakdown-card__title">Challenge Categories</h3>
             <p class="p2p-breakdown-card__text">The final category mix for Pwn2Play: Core Incursion 2026.</p>
             <ul class="p2p-breakdown-list">
-              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#c8102e"></span>Web Exploitation</span><span class="p2p-breakdown-list__value">15 / 28%</span></li>
-              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#00e4ff"></span>Miscellaneous</span><span class="p2p-breakdown-list__value">8 / 15%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#c8102e"></span>Web Exploitation</span><span class="p2p-breakdown-list__value">14 / 27%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#00e4ff"></span>Miscellaneous</span><span class="p2p-breakdown-list__value">9 / 17%</span></li>
               <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#f4c95d"></span>Forensics</span><span class="p2p-breakdown-list__value">5 / 9%</span></li>
               <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#34d399"></span>OSINT</span><span class="p2p-breakdown-list__value">5 / 9%</span></li>
               <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#8b5cf6"></span>Reverse Engineering</span><span class="p2p-breakdown-list__value">5 / 9%</span></li>
@@ -340,17 +305,16 @@
               <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#f43f5e"></span>Binary Exploitation</span><span class="p2p-breakdown-list__value">3 / 6%</span></li>
               <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#14b8a6"></span>Scripting</span><span class="p2p-breakdown-list__value">3 / 6%</span></li>
               <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#e879f9"></span>Full-Pwn</span><span class="p2p-breakdown-list__value">2 / 4%</span></li>
-              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#a3e635"></span>Code</span><span class="p2p-breakdown-list__value">1 / 2%</span></li>
-              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#38bdf8"></span>Intro</span><span class="p2p-breakdown-list__value">1 / 2%</span></li>
-              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#94a3b8"></span>Linux</span><span class="p2p-breakdown-list__value">1 / 2%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#a3e635"></span>Intro</span><span class="p2p-breakdown-list__value">1 / 2%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#38bdf8"></span>Linux</span><span class="p2p-breakdown-list__value">1 / 2%</span></li>
             </ul>
           </div>
         </article>
         <article class="p2p-breakdown-card">
           <div class="p2p-breakdown-card__visual">
-            <div class="p2p-breakdown-chart" style="background: conic-gradient(#34d399 0% 45.28%, #00e4ff 45.28% 73.58%, #f4c95d 73.58% 84.91%, #8b5cf6 84.91% 92.45%, #c8102e 92.45% 98.11%, #71717a 98.11% 100%)" role="img" aria-label="Challenge Difficulties pie chart for 55 challenges">
+            <div class="p2p-breakdown-chart" style="background: conic-gradient(#34d399 0% 44.23%, #00e4ff 44.23% 75.00%, #f4c95d 75.00% 88.46%, #c8102e 88.46% 94.23%, #8b5cf6 94.23% 100%)" role="img" aria-label="Challenge Difficulties pie chart for 52 challenges">
               <div class="p2p-breakdown-chart__centre">
-                <strong>55</strong>
+                <strong>52</strong>
                 <span>challenges</span>
               </div>
             </div>
@@ -360,12 +324,11 @@
             <h3 class="p2p-breakdown-card__title">Challenge Difficulties</h3>
             <p class="p2p-breakdown-card__text">Difficulty labels from the final 2026 challenge set.</p>
             <ul class="p2p-breakdown-list">
-              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#34d399"></span>Easy</span><span class="p2p-breakdown-list__value">24 / 45%</span></li>
-              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#00e4ff"></span>Medium</span><span class="p2p-breakdown-list__value">15 / 28%</span></li>
-              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#f4c95d"></span>Hard</span><span class="p2p-breakdown-list__value">6 / 11%</span></li>
-              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#8b5cf6"></span>Trivial</span><span class="p2p-breakdown-list__value">4 / 8%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#34d399"></span>Easy</span><span class="p2p-breakdown-list__value">23 / 44%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#00e4ff"></span>Medium</span><span class="p2p-breakdown-list__value">16 / 31%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#f4c95d"></span>Hard</span><span class="p2p-breakdown-list__value">7 / 13%</span></li>
               <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#c8102e"></span>Extra Hard</span><span class="p2p-breakdown-list__value">3 / 6%</span></li>
-              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#71717a"></span>Unspecified</span><span class="p2p-breakdown-list__value">1 / 2%</span></li>
+              <li><span class="p2p-breakdown-list__label"><span class="p2p-breakdown-list__swatch" style="background:#8b5cf6"></span>Trivial</span><span class="p2p-breakdown-list__value">3 / 6%</span></li>
             </ul>
           </div>
         </article>
@@ -392,7 +355,7 @@
           <div class="card__icon"><i class="fas fa-wifi"></i></div>
           <div>
             <h3 class="card__title">WiFi</h3>
-            <p class="card__text">Student &amp; Guest WiFi will be available. Please bring your own machine. Computers will not be provided.</p>
+            <p class="card__text">Student &amp; Guest WiFi was available for the 2026 event. Competitors brought their own machines.</p>
           </div>
         </div>
         <div class="card card--horizontal">
@@ -406,12 +369,15 @@
           <div class="card__icon"><i class="fas fa-utensils"></i></div>
           <div>
             <h3 class="card__title">Food &amp; Drink</h3>
-            <p class="card__text">The bar opens after the event from 18:00 onwards for you to purchase drinks.</p>
+            <p class="card__text">The bar opened after the event for competitors and guests attending the awards.</p>
           </div>
         </div>
       </div>
       <div class="calendar-actions" style="margin-top: 32px;" data-p2p-action-links>
-        <a href="map.html" class="btn btn--ghost"><i class="fas fa-map-location-dot"></i> View Campus Map</a>
+        <a href="#podium" class="btn btn--ghost btn--sm"><i class="fas fa-trophy"></i> Results</a>
+        <a href="https://pwn2play.biterra.co" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer"><i class="fas fa-flag"></i> Biterra</a>
+        <a href="map.html" class="btn btn--ghost btn--sm"><i class="fas fa-map-location-dot"></i> Map</a>
+        <a href="https://discord.gg/Vvrk4kK" class="btn btn--ghost btn--sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Discord</a>
       </div>
     </div>
   </section>
@@ -422,9 +388,34 @@
       <div class="section__header">
         <span class="section__tag">Tracks</span>
         <h2 class="section__title">Scoreboard Rules</h2>
-        <p class="section__subtitle">Choose the right track before you start solving.</p>
+        <p class="section__subtitle">The 2026 result scope is the official in-person podium from the main scoreboard.</p>
       </div>
-      <div class="scoreboard-tracks" data-p2p-scoreboards></div>
+      <div class="scoreboard-tracks" data-p2p-scoreboards>
+        <article class="scoreboard-track">
+          <div class="scoreboard-track__icon"><i class="fas fa-shield-halved"></i></div>
+          <div class="scoreboard-track__body">
+            <span class="scoreboard-track__tag">No AI</span>
+            <h3 class="scoreboard-track__title">Main scoreboard</h3>
+            <p class="scoreboard-track__text">AI usage was forbidden. This was the official competitive track used for main event standings.</p>
+          </div>
+        </article>
+        <article class="scoreboard-track">
+          <div class="scoreboard-track__icon"><i class="fas fa-robot"></i></div>
+          <div class="scoreboard-track__body">
+            <span class="scoreboard-track__tag">AI permitted</span>
+            <h3 class="scoreboard-track__title">AI-only scoreboard</h3>
+            <p class="scoreboard-track__text">Teams who chose to use AI competed on a separate scoreboard on Pwn2Play.</p>
+          </div>
+        </article>
+        <article class="scoreboard-track">
+          <div class="scoreboard-track__icon"><i class="fas fa-trophy"></i></div>
+          <div class="scoreboard-track__body">
+            <span class="scoreboard-track__tag">In-person podium</span>
+            <h3 class="scoreboard-track__title">Prize eligibility</h3>
+            <p class="scoreboard-track__text">The published 2026 results list the official in-person podium only.</p>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -741,15 +732,34 @@
     </div>
   </section>
 
-  <!-- Past Results -->
+  <!-- Results -->
   <section id="podium" class="section">
     <div class="container">
       <div class="section__header">
-        <span class="section__tag" id="podiumTag">Results</span>
-        <h2 class="section__title" id="podiumTitle">Pwn2Play Results</h2>
+        <span class="section__tag" id="podiumTag">2026 Results</span>
+        <h2 class="section__title" id="podiumTitle">Core Incursion Official In-Person Podium</h2>
       </div>
       <nav class="podium-nav" id="podiumNav" aria-label="Event results navigation"></nav>
-      <div class="podium" id="podiumContainer"></div>
+      <div class="podium" id="podiumContainer">
+        <div class="podium__place podium__place--2">
+          <div class="podium__icon"><i class="fas fa-medal"></i></div>
+          <span class="podium__rank">2nd</span>
+          <h3 class="podium__team">H4ck3rs0NF1r3</h3>
+          <div class="podium__bar"></div>
+        </div>
+        <div class="podium__place podium__place--1">
+          <div class="podium__icon"><i class="fas fa-crown"></i></div>
+          <span class="podium__rank">1st</span>
+          <h3 class="podium__team">R0073R5</h3>
+          <div class="podium__bar"></div>
+        </div>
+        <div class="podium__place podium__place--3">
+          <div class="podium__icon"><i class="fas fa-medal"></i></div>
+          <span class="podium__rank">3rd</span>
+          <h3 class="podium__team">AFNOM</h3>
+          <div class="podium__bar"></div>
+        </div>
+      </div>
     </div>
   </section>
 

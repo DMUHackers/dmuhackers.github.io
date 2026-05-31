@@ -20,6 +20,9 @@ function escapeIcs(value) {
 
 const venue = p2p.venues[0];
 const now = compactUtc(new Date().toISOString());
+const description = p2p.event.status === 'completed'
+  ? 'DMU Hackers flagship Capture The Flag competition. Results: https://dmuhackers.com/P2P.html#podium'
+  : 'DMU Hackers flagship Capture The Flag competition. Register: ' + p2p.links.luma;
 const lines = [
   'BEGIN:VCALENDAR',
   'VERSION:2.0',
@@ -32,7 +35,7 @@ const lines = [
   `DTSTART:${compactUtc(p2p.event.start)}`,
   `DTEND:${compactUtc(p2p.event.end)}`,
   `SUMMARY:${escapeIcs(p2p.event.name + ' - DMU Hackers CTF')}`,
-  `DESCRIPTION:${escapeIcs('DMU Hackers flagship Capture The Flag competition. Register: ' + p2p.links.luma)}`,
+  `DESCRIPTION:${escapeIcs(description)}`,
   `LOCATION:${escapeIcs(venue.addressLines.join(', '))}`,
   'END:VEVENT',
   'END:VCALENDAR',

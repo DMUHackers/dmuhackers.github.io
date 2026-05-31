@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const section = container.closest('section');
     const tag = section?.querySelector('.section__tag');
     const total = categories.reduce((sum, category) => sum + Number(category.count || 0), 0);
-    if (tag) tag.textContent = categories.length + ' Categories, ' + total + ' Challenges';
+    if (tag) tag.textContent = categories.length + ' Categories, ' + total + ' Public Challenges';
 
     clear(container);
     categories.forEach(category => {
@@ -342,10 +342,10 @@ document.addEventListener('DOMContentLoaded', () => {
     pulse.stats.forEach(stat => {
       const tile = el('article', 'p2p-pulse__tile');
       if (stat.key) tile.dataset.pulseKey = stat.key;
-      const pending = stat.value === '—' || stat.value == null || stat.value === '';
+      const pending = stat.value == null || stat.value === '' || String(stat.value) === '\u2014';
       if (pending) tile.classList.add('is-pending');
       tile.appendChild(el('span', 'p2p-pulse__label', stat.label || ''));
-      const valueEl = el('strong', 'p2p-pulse__value', pending ? '—' : String(stat.value));
+      const valueEl = el('strong', 'p2p-pulse__value', pending ? '\u2014' : String(stat.value));
       if (!pending) {
         const match = String(stat.value).match(/^([\d,]+)(.*)$/);
         if (match) {
@@ -369,7 +369,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tag = section?.querySelector('.section__tag');
     const subtitle = section?.querySelector('.section__subtitle');
     if (tag) tag.textContent = '2026 Spread';
-    if (subtitle) subtitle.textContent = total + ' challenges across categories and difficulties.';
+    if (subtitle) subtitle.textContent = total + ' public challenges across categories and difficulties.';
 
     clear(container);
     container.appendChild(renderBreakdownCard({
@@ -388,6 +388,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function rankLabel(rank) {
     return rank === 1 ? '1st' : rank === 2 ? '2nd' : rank === 3 ? '3rd' : rank + 'th';
+  }
+
+  function renderP2PHeroResults() {
+    const container = document.querySelector('[data-p2p-hero-results]');
+    const event = siteContent.p2p?.results?.events?.[0];
+    if (!container || !event?.places?.length) return;
+
+    const label = container.querySelector('.hero-results__label');
+    const podium = container.querySelector('.hero-results__podium') || el('div', 'hero-results__podium');
+    if (label) label.textContent = event.year + ' ' + (event.subtitle || 'Results');
+
+    clear(podium);
+    [...event.places]
+      .sort((a, b) => Number(a.rank) - Number(b.rank))
+      .forEach(place => {
+        const item = el('span', 'hero-results__place hero-results__place--' + place.rank);
+        appendIcon(item, place.rank === 1 ? 'fas fa-crown' : 'fas fa-medal');
+        item.appendChild(document.createTextNode(' ' + rankLabel(place.rank) + ' ' + place.team));
+        podium.appendChild(item);
+      });
+
+    if (!podium.parentElement) container.appendChild(podium);
   }
 
   function renderP2PPrizes() {
@@ -535,6 +557,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return 'https://www.google.com/calendar/render?' + params.toString();
   }
 
+  function p2pEventCompleted() {
+    return siteContent.p2p?.event?.status === 'completed';
+  }
+
   function renderActionLink(link) {
     const anchor = el('a', 'btn btn--ghost btn--sm');
     anchor.href = link.href;
@@ -553,6 +579,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('[data-p2p-key-info]');
     if (!container || !p2p?.venues?.length) return;
 
+    const completed = p2pEventCompleted();
     const ctf = p2p.venues[0];
     const awards = p2p.venues[1];
     const cards = [
@@ -564,7 +591,9 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         icon: 'fas fa-wifi',
         title: 'WiFi',
-        text: 'Student & Guest WiFi will be available. Please bring your own machine. Computers will not be provided.'
+        text: completed
+          ? 'Student & Guest WiFi was available for the 2026 event. Competitors brought their own machines.'
+          : 'Student & Guest WiFi will be available. Please bring your own machine. Computers will not be provided.'
       },
       {
         icon: 'fas fa-trophy',
@@ -574,7 +603,9 @@ document.addEventListener('DOMContentLoaded', () => {
       {
         icon: 'fas fa-utensils',
         title: 'Food & Drink',
-        text: 'The bar opens after the event from 18:00 onwards for you to purchase drinks.'
+        text: completed
+          ? 'The bar opened after the event for competitors and guests attending the awards.'
+          : 'The bar opens after the event from 18:00 onwards for you to purchase drinks.'
       }
     ];
 
@@ -599,13 +630,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const containers = document.querySelectorAll('[data-p2p-action-links]');
     if (!containers.length || !p2p?.links) return;
 
-    const links = [
-      { text: 'Google Calendar', href: buildGoogleCalendarUrl(), icon: 'fab fa-google' },
-      { text: '.ics', href: p2p.links.ics, icon: 'fas fa-calendar-plus', download: true },
-      { text: 'Biterra', href: p2p.links.biterra, icon: 'fas fa-flag' },
-      { text: 'Map', href: p2p.links.map, icon: 'fas fa-map-location-dot' },
-      { text: 'Discord', href: p2p.links.discord, icon: 'fab fa-discord' }
-    ];
+    const links = p2pEventCompleted()
+      ? [
+          { text: 'Results', href: '#podium', icon: 'fas fa-trophy' },
+          { text: 'Biterra', href: p2p.links.biterra, icon: 'fas fa-flag' },
+          { text: 'Map', href: p2p.links.map, icon: 'fas fa-map-location-dot' },
+          { text: 'Discord', href: p2p.links.discord, icon: 'fab fa-discord' }
+        ]
+      : [
+          { text: 'Google Calendar', href: buildGoogleCalendarUrl(), icon: 'fab fa-google' },
+          { text: '.ics', href: p2p.links.ics, icon: 'fas fa-calendar-plus', download: true },
+          { text: 'Biterra', href: p2p.links.biterra, icon: 'fas fa-flag' },
+          { text: 'Map', href: p2p.links.map, icon: 'fas fa-map-location-dot' },
+          { text: 'Discord', href: p2p.links.discord, icon: 'fab fa-discord' }
+        ];
+
+    if (p2p.links.writeups) {
+      links.push({ text: 'Writeups', href: p2p.links.writeups, icon: 'fab fa-github' });
+    }
 
     containers.forEach(container => {
       clear(container);
@@ -618,10 +660,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const containers = document.querySelectorAll('[data-p2p-calendar-links]');
     const p2p = siteContent.p2p;
     if (!containers.length || !p2p?.links) return;
-    const links = [
-      { text: 'Google Calendar', href: buildGoogleCalendarUrl(), icon: 'fab fa-google' },
-      { text: 'Download .ics', href: p2p.links.ics, icon: 'fas fa-calendar-plus', download: true }
-    ];
+    const links = p2pEventCompleted()
+      ? [
+          { text: 'View 2026 Results', href: 'P2P.html#podium', icon: 'fas fa-trophy' },
+          { text: 'Event Retrospective', href: 'P2P.html', icon: 'fas fa-flag' }
+        ]
+      : [
+          { text: 'Google Calendar', href: buildGoogleCalendarUrl(), icon: 'fab fa-google' },
+          { text: 'Download .ics', href: p2p.links.ics, icon: 'fas fa-calendar-plus', download: true }
+        ];
     containers.forEach(container => {
       clear(container);
       links.forEach(link => container.appendChild(renderActionLink(link)));
@@ -652,9 +699,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const event = siteContent.p2p?.event;
     if (summary && event) {
       clear(summary);
-      summary.appendChild(document.createTextNode(event.name + ' takes place '));
+      summary.appendChild(document.createTextNode(event.name + (p2pEventCompleted() ? ' took place ' : ' takes place ')));
       summary.appendChild(el('strong', null, formatDisplayDate(event.start)));
-      summary.appendChild(document.createTextNode(', ' + formatClock(event.start) + '-' + formatClock(event.end) + '. Add it to your calendar so you do not miss it.'));
+      if (p2pEventCompleted()) {
+        summary.appendChild(document.createTextNode(', ' + formatClock(event.start) + '-' + formatClock(event.end) + '. View the official in-person podium on the Pwn2Play results page.'));
+      } else {
+        summary.appendChild(document.createTextNode(', ' + formatClock(event.start) + '-' + formatClock(event.end) + '. Add it to your calendar so you do not miss it.'));
+      }
     }
   }
 
@@ -953,6 +1004,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderP2PPulse();
     renderP2PCategories();
     renderP2PChallengeBreakdown();
+    renderP2PHeroResults();
     renderP2PPrizes();
     renderP2PScoreboards();
     renderP2PLastUpdated();
@@ -1551,6 +1603,9 @@ document.addEventListener('DOMContentLoaded', () => {
         podiumPlace.appendChild(iconWrap);
         podiumPlace.appendChild(el('span', 'podium__rank', ordinal(rank)));
         podiumPlace.appendChild(el('h3', 'podium__team', place.team));
+        if (place.affiliation) {
+          podiumPlace.appendChild(el('p', 'podium__affiliation', place.affiliation));
+        }
         podiumPlace.appendChild(el('div', 'podium__bar'));
         podiumContainer.appendChild(podiumPlace);
       });

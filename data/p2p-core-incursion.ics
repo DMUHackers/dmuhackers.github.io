@@ -5,11 +5,11 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 BEGIN:VEVENT
 UID:p2p-core-incursion-2026@dmuhackers.com
-DTSTAMP:20260420T083637Z
+DTSTAMP:20260531T102318Z
 DTSTART:20260530T080000Z
 DTEND:20260530T170000Z
 SUMMARY:Pwn2Play: Core Incursion - DMU Hackers CTF
-DESCRIPTION:DMU Hackers flagship Capture The Flag competition. Register: https://luma.com/embed/event/evt-9baefgwD4wSfcBc/simple
+DESCRIPTION:DMU Hackers flagship Capture The Flag competition. Results: https://dmuhackers.com/P2P.html#podium
 LOCATION:Gateway House\, Floor 5\, De Montfort University\, The Gateway\, Leicester LE1 9BH
 END:VEVENT
 END:VCALENDAR

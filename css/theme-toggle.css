@@ -405,6 +405,14 @@ html.light .p2p-poster__countdown .hero-countdown__unit {
 html.light .p2p-poster__countdown .hero-countdown__num {
   color: var(--text);
 }
+html.light .hero-results__place {
+  background: rgba(255,255,255,.82);
+  border-color: rgba(0,0,0,.08);
+}
+html.light .hero-results__place--1 {
+  background: rgba(244,201,93,.18);
+  border-color: rgba(180,132,18,.24);
+}
 
 /* P2P live event pulse */
 html.light .p2p-pulse__tile {

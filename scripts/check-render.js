@@ -1,6 +1,8 @@
 const path = require('path');
 
-process.env.NODE_PATH = process.env.NODE_PATH || path.join(process.env.USERPROFILE || '', '.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules');
+const runtimeNodeModules = path.join(process.env.USERPROFILE || '', '.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules');
+const runtimePnpmNodeModules = path.join(runtimeNodeModules, '.pnpm/node_modules');
+process.env.NODE_PATH = [process.env.NODE_PATH, runtimeNodeModules, runtimePnpmNodeModules].filter(Boolean).join(path.delimiter);
 require('module').Module._initPaths();
 
 const { chromium } = require('playwright');
@@ -27,16 +29,14 @@ const pages = [
       pulse: document.querySelectorAll('[data-p2p-pulse] .p2p-pulse__tile').length,
       categories: document.querySelectorAll('[data-p2p-categories] .p2p-cat-card').length,
       breakdown: document.querySelectorAll('[data-p2p-breakdown] .p2p-breakdown-card').length,
-      prizes: document.querySelectorAll('[data-p2p-prizes] .prize-podium__place').length,
       rules: document.querySelectorAll('[data-p2p-rules] .rule').length,
       scoreboards: document.querySelectorAll('[data-p2p-scoreboards] .scoreboard-track').length,
       podium: document.querySelectorAll('#podiumContainer .podium__place').length
     }),
     lightChecks: [
-      '.p2p-poster__countdown .hero-countdown__unit',
+      '.hero-results__place',
       '.p2p-pulse__tile',
       '.p2p-breakdown-card',
-      '.prize-podium__place',
       '.scoreboard-track',
       '.sponsor-recruitment',
       '.rule--critical .rule__body'
@@ -102,21 +102,6 @@ const revealSelectors = [
       if (result.footerCols && result.footerCols !== 4) failures.push(`${spec.file} rendered ${result.footerCols} footer columns`);
       for (const [key, value] of Object.entries(result.checks)) {
         if (!value) failures.push(`${spec.file} rendered ${key}=0 at ${viewport.width}px`);
-      }
-      if (spec.file === 'P2P.html' && viewport.width <= 480) {
-        const prizeOrder = await page.evaluate(() => [...document.querySelectorAll('[data-p2p-prizes] .prize-podium__place')]
-          .map(node => ({
-            rank: node.querySelector('.prize-podium__rank')?.textContent?.trim(),
-            top: node.getBoundingClientRect().top,
-            left: node.getBoundingClientRect().left
-          }))
-          .sort((a, b) => a.top - b.top || a.left - b.left)
-          .map(item => item.rank)
-          .join(','));
-
-        if (prizeOrder !== '1st,2nd,3rd') {
-          failures.push(`P2P.html mobile prize order is ${prizeOrder || 'empty'}, expected 1st,2nd,3rd`);
-        }
       }
       if (viewport.width <= 480) {
         const maxScroll = await page.evaluate(() => document.documentElement.scrollHeight - window.innerHeight);

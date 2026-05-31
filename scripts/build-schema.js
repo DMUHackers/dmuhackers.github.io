@@ -6,6 +6,12 @@ const root = path.resolve(__dirname, '..');
 const data = loadSiteContent(root);
 const p2p = data.p2p;
 const venue = p2p.venues[0];
+const eventStatus = {
+  completed: 'https://schema.org/EventCompleted',
+  cancelled: 'https://schema.org/EventCancelled',
+  postponed: 'https://schema.org/EventPostponed'
+}[p2p.event.status] || 'https://schema.org/EventScheduled';
+const isCompleted = p2p.event.status === 'completed';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -15,7 +21,7 @@ const schema = {
   startDate: p2p.event.start,
   endDate: p2p.event.end,
   eventAttendanceMode: 'https://schema.org/MixedEventAttendanceMode',
-  eventStatus: 'https://schema.org/EventScheduled',
+  eventStatus,
   location: {
     '@type': 'Place',
     name: venue.shortTitle,
@@ -37,7 +43,7 @@ const schema = {
     url: 'https://dmuhackers.com',
     sameAs: data.site.footer.socials.map(social => social.href)
   },
-  offers: {
+  offers: isCompleted ? undefined : {
     '@type': 'Offer',
     url: p2p.links.luma,
     price: '0',

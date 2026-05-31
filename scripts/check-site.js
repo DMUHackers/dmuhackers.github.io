@@ -49,8 +49,9 @@ function checkSiteContent() {
 
   const categories = data.p2p?.categories || [];
   const categoryTotal = categories.reduce((sum, category) => sum + Number(category.count || 0), 0);
-  if (categories.length !== 12) fail(`Expected 12 Pwn2Play categories, found ${categories.length}`);
+  if (categories.length !== 11) fail(`Expected 11 Pwn2Play public categories, found ${categories.length}`);
   if (categoryTotal <= 0) fail('Pwn2Play category challenge total must be greater than 0');
+  if (categoryTotal !== 52) fail(`Expected 52 Pwn2Play public challenges, found ${categoryTotal}`);
 
   const difficulties = data.p2p?.difficultyBreakdown || [];
   const difficultyTotal = difficulties.reduce((sum, difficulty) => sum + Number(difficulty.count || 0), 0);
@@ -60,15 +61,11 @@ function checkSiteContent() {
   }
 
   const pulseStats = data.p2p?.pulse?.stats || [];
-  if (pulseStats.length !== 4) fail(`Expected 4 Pwn2Play pulse stats, found ${pulseStats.length}`);
+  if (pulseStats.length !== 3) fail(`Expected 3 Pwn2Play result stats, found ${pulseStats.length}`);
   const pulseKeys = pulseStats.map(stat => stat.key);
-  ['signups', 'teams', 'challenges', 'flags'].forEach(key => {
+  ['teams', 'participants', 'publicChallenges'].forEach(key => {
     if (!pulseKeys.includes(key)) fail(`Missing Pwn2Play pulse stat: ${key}`);
   });
-
-  const prizes = data.p2p?.prizes;
-  if (!prizes?.placements || prizes.placements.length !== 3) fail('Expected 3 Pwn2Play prize placements');
-  if (!/in-person/i.test(prizes?.subtitle || '')) fail('Pwn2Play prize subtitle should mention in-person scope');
 
   const aiRule = (data.p2p?.rules || []).find(rule => /AI Usage Policy/i.test(rule.title || ''));
   if (!aiRule) fail('Missing Pwn2Play AI Usage Policy rule');
@@ -81,8 +78,22 @@ function checkSiteContent() {
 
   const results = data.p2p?.results?.events || [];
   if (!results.length) fail('Missing Pwn2Play results data');
+  const latestResult = results[0];
+  const expectedPodium = ['R0073R5', 'H4ck3rs0NF1r3', 'AFNOM'];
+  if (latestResult?.year !== 2026) fail('Expected 2026 Pwn2Play results to be listed first');
+  expectedPodium.forEach((team, index) => {
+    const place = latestResult?.places?.find(item => Number(item.rank) === index + 1);
+    if (place?.team !== team) fail(`Expected 2026 rank ${index + 1} to be ${team}`);
+  });
 
+  if (data.p2p?.event?.status !== 'completed') fail('Pwn2Play event status should be completed');
   if (!data.p2p?.links?.ics) fail('Missing Pwn2Play ICS link');
+  if (!Object.prototype.hasOwnProperty.call(data.p2p?.links || {}, 'writeups')) {
+    fail('Missing Pwn2Play writeups link metadata');
+  }
+  if (data.p2p?.links?.writeups && !/^https?:\/\//.test(data.p2p.links.writeups)) {
+    fail('Pwn2Play writeups link should be empty or a real URL');
+  }
   if (!data.p2p?.venues?.length) fail('Missing Pwn2Play venue data');
   if (!data.p2p?.scoreboardTracks?.length) fail('Missing Pwn2Play scoreboard track data');
   if (!data.p2p?.lastUpdated) fail('Missing Pwn2Play lastUpdated date');
