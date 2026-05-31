@@ -45,7 +45,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: all .3s;
+  transition: background-color .3s, border-color .3s, color .3s, transform .3s, box-shadow .3s;
 }
 .flow__step:hover .flow__num {
   background: rgba(200,16,46,.18);

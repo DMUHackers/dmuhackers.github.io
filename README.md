@@ -139,7 +139,6 @@ Before publishing, manually check:
 - `index.html`
 - `P2P.html`
 - `register.html`
-- `map.html`
 - `sponsors.html`
 - `resources.html`
 

@@ -32,7 +32,8 @@ window.DMU_SITE_CONTENT = {
       "P2P.html": [
         { text: "Home", href: "index.html" },
         { text: "Pwn2Play", href: "#p2p-hero", section: "p2p-hero", active: true },
-        { text: "Stats", href: "#event-pulse", section: "event-pulse" },
+        { text: "Pulse", href: "#event-pulse", section: "event-pulse" },
+        { text: "Schedule", href: "#schedule", section: "schedule" },
         { text: "Categories", href: "#categories", section: "categories" },
         { text: "Breakdown", href: "#challenge-spread", section: "challenge-spread" },
         { text: "Rules", href: "#rules", section: "rules" },
@@ -277,33 +278,35 @@ window.DMU_SITE_CONTENT = {
       status: "completed"
     },
     categories: [
-      { title: "Web Exploitation", count: 14, icon: "fas fa-globe", text: "SQL injection, XSS, SSRF, authentication bypasses and web logic flaws." },
-      { title: "Miscellaneous", count: 9, icon: "fas fa-puzzle-piece", text: "Unexpected formats, strange clues and challenge ideas that refuse one label." },
-      { title: "Forensics", count: 5, icon: "fas fa-fingerprint", text: "Recover evidence from captures, filesystems, memory, logs and hidden artefacts." },
-      { title: "OSINT", count: 5, icon: "fas fa-magnifying-glass", text: "Track down answers through public records, digital footprints and careful research." },
-      { title: "Reverse Engineering", count: 5, icon: "fas fa-microchip", text: "Disassemble, decompile and decode binaries to uncover hidden logic." },
-      { title: "Cryptography", count: 4, icon: "fas fa-lock", text: "Break ciphers, exploit weak implementations and reason about flawed secrecy." },
-      { title: "Binary Exploitation", count: 3, icon: "fas fa-terminal", text: "Break compiled targets with memory corruption, control flow and exploit craft." },
-      { title: "Scripting", count: 3, icon: "fas fa-scroll", text: "Automate parsing, brute force paths and transform data under time pressure." },
-      { title: "Full-Pwn", count: 2, icon: "fas fa-skull-crossbones", text: "Chain attack paths from initial access to deeper compromise." },
-      { title: "Intro", count: 1, icon: "fas fa-flag-checkered", text: "A first flag to get teams settled into the platform and event flow." },
-      { title: "Linux", count: 1, icon: "fab fa-linux", text: "Navigate shells, permissions, processes and system clues like an operator." }
+      { title: "Web Exploitation", count: 12, color: "#c8102e", icon: "fas fa-globe", text: "SQL injection, XSS, SSRF, authentication bypasses and web logic flaws." },
+      { title: "Miscellaneous", count: 8, color: "#00e4ff", icon: "fas fa-puzzle-piece", text: "Unexpected formats, strange clues and challenge ideas that refuse one label." },
+      { title: "Forensics", count: 5, color: "#f4c95d", icon: "fas fa-fingerprint", text: "Recover evidence from captures, filesystems, memory, logs and hidden artefacts." },
+      { title: "Full-Pwn", count: 5, color: "#e879f9", icon: "fas fa-skull-crossbones", text: "Chain attack paths from initial access to deeper compromise." },
+      { title: "OSINT", count: 5, color: "#34d399", icon: "fas fa-magnifying-glass", text: "Track down answers through public records, digital footprints and careful research." },
+      { title: "Reverse Engineering", count: 5, color: "#8b5cf6", icon: "fas fa-microchip", text: "Disassemble, decompile and decode binaries to uncover hidden logic." },
+      { title: "Cryptography", count: 4, color: "#f97316", icon: "fas fa-lock", text: "Break ciphers, exploit weak implementations and reason about flawed secrecy." },
+      { title: "Binary Exploitation", count: 3, color: "#f43f5e", icon: "fas fa-terminal", text: "Break compiled targets with memory corruption, control flow and exploit craft." },
+      { title: "Scripting", count: 3, color: "#14b8a6", icon: "fas fa-scroll", text: "Automate parsing, brute force paths and transform data under time pressure." },
+      { title: "Code", count: 1, color: "#a3e635", icon: "fas fa-code", text: "Solve a focused programming problem with clean logic and fast execution." },
+      { title: "Intro", count: 1, color: "#38bdf8", icon: "fas fa-flag-checkered", text: "A first flag to get teams settled into the platform and event flow." },
+      { title: "Linux", count: 1, color: "#94a3b8", icon: "fab fa-linux", text: "Navigate shells, permissions, processes and system clues like an operator." }
     ],
     difficultyBreakdown: [
-      { title: "Easy", count: 23, color: "#34d399" },
-      { title: "Medium", count: 16, color: "#00e4ff" },
-      { title: "Hard", count: 7, color: "#f4c95d" },
+      { title: "Easy", count: 24, color: "#34d399" },
+      { title: "Medium", count: 15, color: "#00e4ff" },
+      { title: "Hard", count: 9, color: "#f4c95d" },
       { title: "Extra Hard", count: 3, color: "#c8102e" },
-      { title: "Trivial", count: 3, color: "#8b5cf6" }
+      { title: "Trivial", count: 2, color: "#8b5cf6" }
     ],
     pulse: {
       tag: "2026 Results",
       title: "Core Incursion by the Numbers",
       subtitle: "Final public stats from the completed Pwn2Play 2026 event.",
       stats: [
-        { key: "teams", label: "Teams", value: "200", suffix: "registered" },
-        { key: "participants", label: "Participants", value: "332", suffix: "total competitors" },
-        { key: "publicChallenges", label: "Public Challenges", value: "52", suffix: "excluding Part 2 form checks" }
+        { key: "signups", label: "Signups", value: "300+", suffix: "members on Biterra" },
+        { key: "teams", label: "Teams", value: "200+", suffix: "registered" },
+        { key: "challenges", label: "Challenges", value: "50+", suffix: "across 12 categories" },
+        { key: "flags", label: "Flags Pwned", value: "—", suffix: "Live on 30 May" }
       ]
     },
     rules: [
@@ -424,16 +427,15 @@ window.DMU_SITE_CONTENT = {
       biterra: "https://pwn2play.biterra.co",
       biterraHome: "https://biterra.co",
       discord: "https://discord.gg/Vvrk4kK",
-      map: "map.html",
       attendanceForm: "https://forms.gle/YPQaL6gwLK24S6ms8",
       ics: "data/p2p-core-incursion.ics",
       writeups: null
     },
     schedule: [
-      { label: "Doors open", time: "08:20", text: "Arrive early, connect to WiFi, and settle your team." },
-      { label: "CTF live", time: "09:00 - 18:00", text: "Main no-AI scoreboard and separate AI-only scoreboard run on Pwn2Play." },
-      { label: "Awards", time: "19:00 - 20:30", text: "Podium, prizes, certificates, and sponsor recognition at DSU." },
-      { label: "After party", time: "20:30 onwards", text: "Social route across Leicester with other DMU societies." }
+      { label: "Doors open", time: "08:20", icon: "fas fa-door-open", text: "Arrive early, connect to WiFi, and settle your team." },
+      { label: "CTF live", time: "09:00 - 18:00", icon: "fas fa-flag-checkered", text: "Main no-AI scoreboard and separate AI-only scoreboard run on Pwn2Play." },
+      { label: "Awards", time: "19:00 - 20:30", icon: "fas fa-trophy", text: "Podium, prizes, certificates, and sponsor recognition at DSU." },
+      { label: "After party", time: "21:30 onwards", icon: "fas fa-champagne-glasses", text: "Social route across Leicester with other DMU societies." }
     ],
     venues: [
       {
@@ -488,7 +490,7 @@ window.DMU_SITE_CONTENT = {
         title: "After Party: Social Route",
         shortTitle: "After Party",
         sub: "Social Route",
-        time: "20:30 onwards",
+        time: "21:30 onwards",
         addressLines: ["Various venues", "Leicester City Centre"],
         lat: 52.6364,
         lng: -1.1331,
@@ -509,7 +511,7 @@ window.DMU_SITE_CONTENT = {
     scoreboardTracks: [
       {
         title: "Main scoreboard",
-        tag: "No AI",
+        tag: "AI Prohibited",
         icon: "fas fa-shield-halved",
         text: "AI usage was forbidden. This was the official competitive track used for main event standings."
       },
@@ -532,7 +534,7 @@ window.DMU_SITE_CONTENT = {
       text: "Pwn2Play gives sponsors direct visibility with students proving real technical ability under pressure.",
       actions: [
         { text: "Sponsor Pwn2Play", href: "sponsors.html#get-involved", icon: "fas fa-handshake", style: "primary" },
-        { text: "Email DMU Hackers", href: "mailto:contact@dmuhackers.com", icon: "fas fa-envelope", style: "ghost" }
+        { text: "Email DMU Hackers", href: "mailto:dmuhackers@gmail.com", icon: "fas fa-envelope", style: "ghost" }
       ],
       points: [
         "Support hands-on challenge delivery",
@@ -584,7 +586,7 @@ window.DMU_SITE_CONTENT = {
       website: "https://pwn2play.biterra.co",
       logo: "img/branding/biterra/biterra-main.png",
       alt: "Biterra",
-      description: "Biterra is a gamified learning platform built by a DMU Hackers alumnus. It hosts every Pwn2Play challenge, scoreboard, and team — and provides event merchandise. The CTF lives permanently at pwn2play.biterra.co.",
+      description: "Biterra is a gamified learning platform built by a DMU Hackers alumnus. It hosts every Pwn2Play challenge, scoreboard, and team. The CTF lives permanently at pwn2play.biterra.co.",
       groups: ["platform"],
       featured: true,
       logoStyle: "max-height:200px; width:auto",

@@ -75,9 +75,7 @@ const revealSelectors = [
   '.flow__step',
   '.flow__split',
   '.flow__merge',
-  '.flow__branch',
-  '.venue',
-  '.map-overview'
+  '.flow__branch'
 ].join(',');
 
 (async () => {
