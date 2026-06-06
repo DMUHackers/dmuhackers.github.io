@@ -126,13 +126,6 @@ window.DMU_SITE_CONTENT = {
         vacant: true
       },
       {
-        name: "Vacant",
-        fullName: "Vacant",
-        role: "CTF Officer",
-        icon: "fas fa-user-plus",
-        vacant: true
-      },
-      {
         name: "Utreia",
         fullName: "Utreia Prior",
         role: "Social Secretary",
@@ -149,7 +142,6 @@ window.DMU_SITE_CONTENT = {
           { name: "Amara Gouldbourne-Beckford", role: "Treasurer", icon: "fas fa-coins" },
           { name: "Deniz Turgut", role: "Wellbeing Officer", icon: "fas fa-heart-pulse" },
           { name: "Vacant", role: "CTF Mentor", icon: "fas fa-user-plus", vacant: true },
-          { name: "Vacant", role: "CTF Officer", icon: "fas fa-user-plus", vacant: true },
           { name: "Utreia Prior", role: "Social Secretary", icon: "fas fa-champagne-glasses" }
         ]
       },
